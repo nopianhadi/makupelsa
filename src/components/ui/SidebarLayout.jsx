@@ -20,7 +20,6 @@ const SidebarLayout = ({ children }) => {
     { path: '/app/promotions', label: 'Promo', icon: 'Tag' },
     { path: '/app/leads', label: 'Prospek', icon: 'UserPlus' },
     { path: '/app/booking', label: 'Booking', icon: 'CalendarCheck' },
-    { path: '/app/gallery', label: 'Gallery', icon: 'Image' },
     { path: '/app/testimonials', label: 'Testimoni', icon: 'MessageSquare' },
     { path: '/app/team', label: 'Tim', icon: 'Users' },
     { path: '/app/settings', label: 'Pengaturan', icon: 'Settings' },

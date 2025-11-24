@@ -23,8 +23,6 @@ import Profile from "./pages/profile";
 import PublicLeadForm from "./pages/leads/PublicLeadForm";
 import Booking from "./pages/booking";
 import PublicBookingForm from "./pages/booking/PublicBookingForm";
-import Gallery from "./pages/gallery";
-import PublicGallery from "./pages/gallery/PublicGallery";
 import Pricelist from "./pages/pricelist";
 import PublicPricelist from "./pages/pricelist/PublicPricelist";
 import ProjectManagement from "./pages/project-management";
@@ -103,7 +101,6 @@ function App() {
                     <Route path="/public-lead-form" element={<PublicLeadForm />} />
                     <Route path="/booking/public" element={<PublicBookingForm />} />
                     <Route path="/packages/public" element={<PublicPackages />} />
-                    <Route path="/gallery/public/:publicId" element={<PublicGallery />} />
                     <Route path="/pricelist/public/:publicId" element={<PublicPricelist />} />
                     <Route path="/client/public/:publicId" element={<PublicClient />} />
                     <Route path="/portal-klien/:clientId" element={<ClientPortal />} />
@@ -123,7 +120,6 @@ function App() {
                         <Route path="service-packages" element={<ServicePackages />} />
                         <Route path="settings" element={<Settings />} />
                         <Route path="booking" element={<Booking />} />
-                        <Route path="gallery" element={<Gallery />} />
                         <Route path="pricelist" element={<Pricelist />} />
                         <Route path="project-management" element={<ProjectManagement />} />
                         <Route path="team" element={<Team />} />

@@ -48,10 +48,6 @@ export const DataSyncEvents = {
   LEAD_UPDATED: 'leadUpdated',
   LEAD_DELETED: 'leadDeleted',
   
-  // Gallery events
-  GALLERY_ADDED: 'galleryAdded',
-  GALLERY_UPDATED: 'galleryUpdated',
-  GALLERY_DELETED: 'galleryDeleted',
   
   // Global sync event
   DATA_UPDATED: 'dataUpdated'
