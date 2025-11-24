@@ -45,19 +45,19 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
                 onClick={onToggle}
             >
                 <div className={`w-10 h-10 rounded-lg ${iconBg} flex items-center justify-center`}>
-                    <Icon name={icon} size={20} className={iconColor} />
+                    <Icon name={icon} size={16} sm:size={20} className={iconColor} />
                 </div>
                 <div className="flex-1">
                     <h2 className="text-lg font-bold text-foreground">{title}</h2>
                     <p className="text-xs text-muted-foreground">{description}</p>
                 </div>
-                <span className={`px-3 py-1 rounded-full ${badgeBg} ${badgeColor} text-sm font-bold`}>
+                <span className={`px-3 py-1 rounded-full ${badgeBg} ${badgeColor} text-xs sm:text-sm font-bold`}>
                     {leads.length}
                 </span>
                 <button className="p-2 hover:bg-muted rounded-lg transition-colors">
                     <Icon 
                         name={isCollapsed ? "ChevronDown" : "ChevronUp"} 
-                        size={20} 
+                        size={16} sm:size={20} 
                         className="text-muted-foreground"
                     />
                 </button>
@@ -84,7 +84,7 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
                             {hasMore && (
                                 <button
                                     onClick={() => setShowAll(!showAll)}
-                                    className="w-full py-3 text-sm font-medium text-primary hover:bg-muted rounded-lg border border-border transition-colors"
+                                    className="w-full py-2 sm:py-3 text-xs sm:text-sm font-medium text-primary hover:bg-muted rounded-lg border border-border transition-colors"
                                 >
                                     {showAll ? (
                                         <>
@@ -128,7 +128,7 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
                          lead.status === 'Lost' ? 'Lost' : lead.status}
                     </span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                         <Icon name="Phone" size={14} />
                         <span>{lead.phone}</span>
@@ -148,7 +148,7 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
             <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
                 <button
                     onClick={() => onFollowUp(lead)}
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition-colors"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-2 bg-green-600 text-white rounded-lg text-xs sm:text-sm hover:bg-green-700 transition-colors"
                 >
                     <Icon name="Send" size={16} />
                     <span className="hidden sm:inline">Kirim</span>
@@ -156,7 +156,7 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
                 {lead.status !== 'Converted' && lead.status !== 'Lost' && (
                     <button
                         onClick={() => onConvert(lead)}
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:bg-primary/90 transition-colors"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-2 bg-primary text-primary-foreground rounded-lg text-xs sm:text-sm hover:bg-primary/90 transition-colors"
                     >
                         <Icon name="UserCheck" size={16} />
                         <span className="hidden sm:inline">Jadi Klien</span>
@@ -362,7 +362,7 @@ const Leads = () => {
                 <title>Prospek - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+                <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
                     <div className="mb-6">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                             <div className="flex items-center gap-3">
@@ -370,10 +370,10 @@ const Leads = () => {
                                     <Icon name="Users" size={24} color="var(--color-primary)" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+                                    <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                                         Prospek
                                     </h1>
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="text-xs sm:text-sm text-muted-foreground">
                                         Kelola calon klien potensial Anda
                                     </p>
                                 </div>
@@ -381,7 +381,7 @@ const Leads = () => {
                             <div className="flex gap-2">
                                 <button
                                     onClick={copyPublicLink}
-                                    className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-lg font-medium text-sm"
+                                    className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-lg font-medium text-xs sm:text-sm"
                                 >
                                     <Icon name="Link" size={18} />
                                     Link Publik
@@ -398,13 +398,13 @@ const Leads = () => {
                         {/* Tabs */}
                         <div className="flex border-b border-border mb-6 overflow-x-auto">
                             <button
-                                className={`px-4 py-2 font-medium text-sm whitespace-nowrap ${activeTab === 'list' ? 'border-b-2 border-primary text-primary' : 'text-muted-foreground'}`}
+                                className={`px-4 py-2 font-medium text-xs sm:text-sm whitespace-nowrap ${activeTab === 'list' ? 'border-b-2 border-primary text-primary' : 'text-muted-foreground'}`}
                                 onClick={() => setActiveTab('list')}
                             >
                                 Daftar Prospek
                             </button>
                             <button
-                                className={`px-4 py-2 font-medium text-sm whitespace-nowrap ${activeTab === 'templates' ? 'border-b-2 border-primary text-primary' : 'text-muted-foreground'}`}
+                                className={`px-4 py-2 font-medium text-xs sm:text-sm whitespace-nowrap ${activeTab === 'templates' ? 'border-b-2 border-primary text-primary' : 'text-muted-foreground'}`}
                                 onClick={() => setActiveTab('templates')}
                             >
                                 Template Chat
@@ -477,7 +477,7 @@ const Leads = () => {
                                 <div className="flex gap-2 overflow-x-auto pb-2">
                                     <button
                                         onClick={() => handleQuickDateFilter('all')}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                                             quickDateFilter === 'all'
                                                 ? 'bg-primary text-primary-foreground'
                                                 : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
@@ -487,7 +487,7 @@ const Leads = () => {
                                     </button>
                                     <button
                                         onClick={() => handleQuickDateFilter('today')}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                                             quickDateFilter === 'today'
                                                 ? 'bg-primary text-primary-foreground'
                                                 : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
@@ -497,7 +497,7 @@ const Leads = () => {
                                     </button>
                                     <button
                                         onClick={() => handleQuickDateFilter('week')}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                                             quickDateFilter === 'week'
                                                 ? 'bg-primary text-primary-foreground'
                                                 : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
@@ -507,7 +507,7 @@ const Leads = () => {
                                     </button>
                                     <button
                                         onClick={() => handleQuickDateFilter('month')}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                                             quickDateFilter === 'month'
                                                 ? 'bg-primary text-primary-foreground'
                                                 : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
@@ -528,7 +528,7 @@ const Leads = () => {
                                                 <select
                                                     value={filterSource}
                                                     onChange={(e) => setFilterSource(e.target.value)}
-                                                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm"
+                                                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-xs sm:text-sm"
                                                 >
                                                     <option value="all">Semua Sumber</option>
                                                     {sources.map(source => (
@@ -547,7 +547,7 @@ const Leads = () => {
                                                         setFilterDateFrom(e.target.value);
                                                         setQuickDateFilter('all');
                                                     }}
-                                                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm"
+                                                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-xs sm:text-sm"
                                                 />
                                             </div>
                                             <div>
@@ -561,7 +561,7 @@ const Leads = () => {
                                                         setFilterDateTo(e.target.value);
                                                         setQuickDateFilter('all');
                                                     }}
-                                                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm"
+                                                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-xs sm:text-sm"
                                                 />
                                             </div>
                                         </div>
@@ -573,7 +573,7 @@ const Leads = () => {
                                                     setFilterDateTo('');
                                                     setQuickDateFilter('all');
                                                 }}
-                                                className="px-3 py-1.5 text-sm rounded-lg border border-input hover:bg-muted"
+                                                className="px-3 py-1.5 text-xs sm:text-sm rounded-lg border border-input hover:bg-muted"
                                             >
                                                 Reset Filter
                                             </button>

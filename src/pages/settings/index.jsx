@@ -134,17 +134,17 @@ const Settings = () => {
                 <title>Pengaturan - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+                <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
                     <div className="mb-6">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                                 <Icon name="Settings" size={24} color="var(--color-primary)" strokeWidth={2.5} />
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+                                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                                     Pengaturan
                                 </h1>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-xs sm:text-sm text-muted-foreground">
                                     Sesuaikan preferensi aplikasi Anda
                                 </p>
                             </div>
@@ -162,9 +162,9 @@ const Settings = () => {
                         
                         <StatusManagement />
 
-                        <div className="bg-card border border-border rounded-2xl p-6">
+                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <Icon name="Palette" size={20} color="var(--color-primary)" />
+                                <Icon name="Palette" size={16} sm:size={20} color="var(--color-primary)" />
                                 <h3 className="font-bold text-lg">Tampilan</h3>
                             </div>
                             <div className="space-y-3">
@@ -187,9 +187,9 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="bg-card border border-border rounded-2xl p-6">
+                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <Icon name="Bell" size={20} color="var(--color-primary)" />
+                                <Icon name="Bell" size={16} sm:size={20} color="var(--color-primary)" />
                                 <h3 className="font-bold text-lg">Notifikasi</h3>
                             </div>
                             <div className="space-y-3">
@@ -228,9 +228,9 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="bg-card border border-border rounded-2xl p-6">
+                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <Icon name="Database" size={20} color="var(--color-primary)" />
+                                <Icon name="Database" size={16} sm:size={20} color="var(--color-primary)" />
                                 <h3 className="font-bold text-lg">Data & Penyimpanan</h3>
                             </div>
                             <div className="space-y-3">

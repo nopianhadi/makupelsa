@@ -160,11 +160,11 @@ const Team = () => {
         <title>Manajemen Tim - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6">
           {/* Header */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+          <div className="mb-4 sm:mb-6">
+            <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                 Manajemen Tim
               </h1>
               <QuickActionButton
@@ -177,91 +177,93 @@ const Team = () => {
                 }}
               />
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-xs sm:text-sm text-muted-foreground">
               Kelola tim makeup artist dan performa mereka
             </p>
           </div>
 
           {/* Team Stats - Enhanced */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-            <div className="bg-card border border-border rounded-lg p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Total Anggota</span>
-                <Icon name="Users" size={20} color="var(--color-primary)" />
+                <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Anggota</span>
+                <Icon name="Users" size={16} color="var(--color-primary)" />
               </div>
-              <div className="text-3xl font-bold text-foreground">{stats.total}</div>
+              <div className="text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stats.total}</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-6">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Aktif</span>
-                <Icon name="CheckCircle2" size={20} color="rgb(34 197 94)" />
+                <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Aktif</span>
+                <Icon name="CheckCircle2" size={16} color="rgb(34 197 94)" />
               </div>
-              <div className="text-3xl font-bold text-foreground">{stats.active}</div>
+              <div className="text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stats.active}</div>
               <div className="text-xs text-muted-foreground mt-1">{Math.round((stats.active / stats.total) * 100)}%</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-6">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Pembayaran Lunas</span>
-                <Icon name="CheckCircle" size={20} color="rgb(34 197 94)" />
+                <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran Lunas</span>
+                <Icon name="CheckCircle" size={16} color="rgb(34 197 94)" />
               </div>
-              <div className="text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsPaid / 1000000).toFixed(1)} Jt</div>
+              <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsPaid / 1000000).toFixed(1)} Jt</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-6">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Pembayaran Tertunda</span>
-                <Icon name="Clock" size={20} color="rgb(234 179 8)" />
+                <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran Tertunda</span>
+                <Icon name="Clock" size={16} color="rgb(234 179 8)" />
               </div>
-              <div className="text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsUnpaid / 1000000).toFixed(1)} Jt</div>
+              <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsUnpaid / 1000000).toFixed(1)} Jt</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-6">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Total Pembayaran</span>
-                <Icon name="Wallet" size={20} color="var(--color-primary)" />
+                <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Pembayaran</span>
+                <Icon name="Wallet" size={16} color="var(--color-primary)" />
               </div>
-              <div className="text-2xl font-bold text-foreground">Rp {(stats.totalPayments / 1000000).toFixed(1)} Jt</div>
+              <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPayments / 1000000).toFixed(1)} Jt</div>
             </div>
           </div>
 
           {/* Search & Filter - Enhanced */}
-          <div className="mb-6 flex flex-col sm:flex-row gap-4">
+          <div className="mb-4 sm:mb-6 flex flex-col gap-2 sm:gap-3">
             <div className="flex-1 relative">
-              <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Cari nama, role, atau speciality..."
+                placeholder="Cari nama, role..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full pl-9 pr-3 py-2 sm:py-2 sm:py-3 text-xs sm:text-sm sm:text-base bg-surface border border-input rounded-lg sm:rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-            <select
-              value={filterRole}
-              onChange={(e) => setFilterRole(e.target.value)}
-              className="px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="all">Semua Role</option>
-              {uniqueRoles.map(role => (
-                <option key={role} value={role}>{role}</option>
-              ))}
-            </select>
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="all">Semua Status</option>
-              <option value="active">Aktif</option>
-              <option value="inactive">Nonaktif</option>
-            </select>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="name">Nama</option>
-              <option value="rating">Rating</option>
-              <option value="jobs">Pekerjaan</option>
-            </select>
+            <div className="flex gap-2 sm:gap-3">
+              <select
+                value={filterRole}
+                onChange={(e) => setFilterRole(e.target.value)}
+                className="flex-1 px-2 sm:px-4 py-2 sm:py-2 sm:py-3 text-xs sm:text-xs sm:text-sm bg-surface border border-input rounded-lg sm:rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="all">Semua Role</option>
+                {uniqueRoles.map(role => (
+                  <option key={role} value={role}>{role}</option>
+                ))}
+              </select>
+              <select
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                className="flex-1 px-2 sm:px-4 py-2 sm:py-2 sm:py-3 text-xs sm:text-xs sm:text-sm bg-surface border border-input rounded-lg sm:rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="all">Semua Status</option>
+                <option value="active">Aktif</option>
+                <option value="inactive">Nonaktif</option>
+              </select>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="flex-1 px-2 sm:px-4 py-2 sm:py-2 sm:py-3 text-xs sm:text-xs sm:text-sm bg-surface border border-input rounded-lg sm:rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="name">Nama</option>
+                <option value="rating">Rating</option>
+                <option value="jobs">Pekerjaan</option>
+              </select>
+            </div>
           </div>
 
           {/* Team Members Grid - Enhanced */}
@@ -275,7 +277,7 @@ const Team = () => {
               </div>
             ) : (
               filteredMembers.map(member => (
-                <div key={member.id} className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow group">
+                <div key={member.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow group">
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -295,21 +297,21 @@ const Team = () => {
                     />
                     <div className="flex-1">
                       <h3 className="font-semibold text-foreground">{member.name}</h3>
-                      <p className="text-sm text-muted-foreground">{member.role}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{member.role}</p>
                       <div className="flex items-center gap-1 mt-1">
                         <Icon name="Star" size={14} color="var(--color-warning)" />
-                        <span className="text-sm font-medium">{member.rating}</span>
+                        <span className="text-xs sm:text-sm font-medium">{member.rating}</span>
                         <span className="text-xs text-muted-foreground">({member.completedJobs} jobs)</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm">
                       <Icon name="Mail" size={16} color="var(--color-muted-foreground)" />
                       <span className="text-muted-foreground truncate">{member.email}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm">
                       <Icon name="Phone" size={16} color="var(--color-muted-foreground)" />
                       <span className="text-muted-foreground">{member.phone}</span>
                     </div>
@@ -338,7 +340,7 @@ const Team = () => {
                   <div className="flex gap-2">
                     <button 
                       onClick={() => setSelectedMember(member)}
-                      className="flex-1 px-3 py-2 bg-muted text-foreground rounded-md text-sm font-medium hover:bg-muted/80 transition-colors"
+                      className="flex-1 px-3 py-2 bg-muted text-foreground rounded-md text-xs sm:text-sm font-medium hover:bg-muted/80 transition-colors"
                     >
                       <Icon name="Eye" size={14} className="inline mr-1" />
                       Detail
@@ -348,14 +350,14 @@ const Team = () => {
                         setEditingMember(member);
                         setIsAddModalOpen(true);
                       }}
-                      className="flex-1 px-3 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
+                      className="flex-1 px-3 py-2 bg-primary text-primary-foreground rounded-md text-xs sm:text-sm font-medium hover:bg-primary/90 transition-colors"
                     >
                       <Icon name="Edit" size={14} className="inline mr-1" />
                       Edit
                     </button>
                     <button 
                       onClick={() => handleToggleStatus(member.id, member.status)}
-                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      className={`px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors ${
                         member.status === 'active' 
                           ? 'bg-amber-600 text-white hover:bg-amber-700' 
                           : 'bg-green-600 text-white hover:bg-green-700'
@@ -372,13 +374,13 @@ const Team = () => {
           {/* Member Detail Modal */}
           {selectedMember && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+              <div className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-3 sm:p-4 lg:p-6">
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex-1">
                     <h2 className="text-2xl font-heading font-bold text-foreground mb-2">
                       {selectedMember.name}
                     </h2>
-                    <p className="text-sm text-muted-foreground">{selectedMember.role}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{selectedMember.role}</p>
                   </div>
                   <button 
                     onClick={() => setSelectedMember(null)}
@@ -390,7 +392,7 @@ const Team = () => {
 
                 <div className="space-y-6">
                   {/* Profile */}
-                  <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-3 sm:p-4 lg:p-6">
                     <img 
                       src={selectedMember.avatar} 
                       alt={selectedMember.name}
@@ -398,7 +400,7 @@ const Team = () => {
                     />
                     <div>
                       <div className="mb-2">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                        <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-semibold ${
                           selectedMember.status === 'active' 
                             ? 'bg-green-500/10 text-green-600' 
                             : 'bg-gray-500/10 text-gray-600'
@@ -424,7 +426,7 @@ const Team = () => {
 
                   {/* Contact Info */}
                   <div>
-                    <h3 className="text-sm font-semibold text-muted-foreground mb-3">INFORMASI KONTAK</h3>
+                    <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">INFORMASI KONTAK</h3>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Icon name="Mail" size={16} color="var(--color-primary)" />
@@ -439,10 +441,10 @@ const Team = () => {
 
                   {/* Specialties */}
                   <div>
-                    <h3 className="text-sm font-semibold text-muted-foreground mb-3">KEAHLIAN</h3>
+                    <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">KEAHLIAN</h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedMember.specialties.map((specialty, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                        <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs sm:text-sm">
                           {specialty}
                         </span>
                       ))}
@@ -451,10 +453,10 @@ const Team = () => {
 
                   {/* Performance */}
                   <div>
-                    <h3 className="text-sm font-semibold text-muted-foreground mb-3">PERFORMA</h3>
+                    <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">PERFORMA</h3>
                     <div className="bg-surface rounded-lg p-4 space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Rating</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground">Rating</span>
                         <div className="flex items-center gap-2">
                           <div className="w-32 h-2 bg-muted rounded-full">
                             <div className="h-2 bg-yellow-500 rounded-full" style={{ width: `${(selectedMember.rating / 5) * 100}%` }} />
@@ -463,7 +465,7 @@ const Team = () => {
                         </div>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Pekerjaan</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground">Pekerjaan</span>
                         <span className="font-semibold text-foreground">{selectedMember.completedJobs} projects</span>
                       </div>
                     </div>

@@ -114,33 +114,33 @@ const Testimonials = () => {
         <title>Testimoni - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
           <div className="mb-6">
-            <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground mb-2">
+            <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
               Testimoni Klien
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Kelola testimoni dari klien Anda
             </p>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
             <div className="bg-card border border-border rounded-lg p-4">
               <div className="text-2xl font-bold text-foreground">{testimonials.length}</div>
-              <div className="text-sm text-muted-foreground">Total Testimoni</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Total Testimoni</div>
             </div>
             <div className="bg-card border border-border rounded-lg p-4">
               <div className="text-2xl font-bold text-warning">
                 {testimonials.filter(t => t.status === 'pending').length}
               </div>
-              <div className="text-sm text-muted-foreground">Menunggu Review</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Menunggu Review</div>
             </div>
             <div className="bg-card border border-border rounded-lg p-4">
               <div className="text-2xl font-bold text-success">
                 {testimonials.filter(t => t.status === 'approved').length}
               </div>
-              <div className="text-sm text-muted-foreground">Disetujui</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Disetujui</div>
             </div>
             <div className="bg-card border border-border rounded-lg p-4">
               <div className="text-2xl font-bold text-foreground">
@@ -149,7 +149,7 @@ const Testimonials = () => {
                   : '0.0'
                 }
               </div>
-              <div className="text-sm text-muted-foreground">Rating Rata-rata</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Rating Rata-rata</div>
             </div>
           </div>
 
@@ -175,14 +175,14 @@ const Testimonials = () => {
           {/* Testimonials List */}
           <div className="space-y-4">
             {filteredTestimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-card border border-border rounded-lg p-6">
+              <div key={testimonial.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="font-semibold text-foreground">{testimonial.name}</h3>
                       {getStatusBadge(testimonial.status)}
                     </div>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-4 text-xs sm:text-sm text-muted-foreground">
                       <span>{testimonial.email}</span>
                       <span>•</span>
                       <span>{new Date(testimonial.createdAt).toLocaleDateString('id-ID')}</span>
@@ -196,14 +196,14 @@ const Testimonials = () => {
                           className="p-2 hover:bg-success/10 rounded-lg transition-colors"
                           title="Setujui"
                         >
-                          <Icon name="Check" size={20} color="var(--color-success)" />
+                          <Icon name="Check" size={16} sm:size={20} color="var(--color-success)" />
                         </button>
                         <button
                           onClick={() => handleReject(testimonial.id)}
                           className="p-2 hover:bg-destructive/10 rounded-lg transition-colors"
                           title="Tolak"
                         >
-                          <Icon name="X" size={20} color="var(--color-destructive)" />
+                          <Icon name="X" size={16} sm:size={20} color="var(--color-destructive)" />
                         </button>
                       </>
                     )}
@@ -212,7 +212,7 @@ const Testimonials = () => {
                       className="p-2 hover:bg-destructive/10 rounded-lg transition-colors"
                       title="Hapus"
                     >
-                      <Icon name="Trash2" size={20} color="var(--color-destructive)" />
+                      <Icon name="Trash2" size={16} sm:size={20} color="var(--color-destructive)" />
                     </button>
                   </div>
                 </div>
@@ -224,7 +224,7 @@ const Testimonials = () => {
                 <p className="text-foreground mb-3">{testimonial.message}</p>
 
                 {testimonial.service && (
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-xs sm:text-sm text-muted-foreground">
                     Layanan: <span className="font-medium">{testimonial.service}</span>
                   </div>
                 )}

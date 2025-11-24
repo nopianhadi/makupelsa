@@ -135,10 +135,10 @@ const Promotions = () => {
         <title>Manajemen Promo - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                 Manajemen Promo
               </h1>
               <QuickActionButton
@@ -151,7 +151,7 @@ const Promotions = () => {
                 }}
               />
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Kelola promo dan diskon untuk menarik lebih banyak klien
             </p>
           </div>
@@ -161,7 +161,7 @@ const Promotions = () => {
             <div className="flex space-x-8">
               <button
                 onClick={() => setActiveTab('active')}
-                className={`pb-3 px-1 border-b-2 font-medium text-sm ${
+                className={`pb-3 px-1 border-b-2 font-medium text-xs sm:text-sm ${
                   activeTab === 'active'
                     ? 'border-primary text-primary'
                     : 'border-transparent text-muted-foreground'
@@ -171,7 +171,7 @@ const Promotions = () => {
               </button>
               <button
                 onClick={() => setActiveTab('expired')}
-                className={`pb-3 px-1 border-b-2 font-medium text-sm ${
+                className={`pb-3 px-1 border-b-2 font-medium text-xs sm:text-sm ${
                   activeTab === 'expired'
                     ? 'border-primary text-primary'
                     : 'border-transparent text-muted-foreground'
@@ -185,21 +185,21 @@ const Promotions = () => {
           {/* Promo Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {(activeTab === 'active' ? activePromotions : expiredPromotions).map(promo => (
-              <div key={promo.id} className="bg-card border border-border rounded-lg p-6">
+              <div key={promo.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1">{promo.title}</h3>
-                    <p className="text-sm text-muted-foreground">{promo.description}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{promo.description}</p>
                   </div>
-                  <Icon name="Tag" size={20} color="var(--color-primary)" />
+                  <Icon name="Tag" size={16} sm:size={20} color="var(--color-primary)" />
                 </div>
                 
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between text-xs sm:text-sm">
                     <span className="text-muted-foreground">Kode:</span>
                     <span className="font-mono font-semibold text-primary">{promo.code}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between text-xs sm:text-sm">
                     <span className="text-muted-foreground">Diskon:</span>
                     <span className="font-semibold">
                       {promo.discountType === 'percentage' 
@@ -207,11 +207,11 @@ const Promotions = () => {
                         : `Rp ${promo.discountValue.toLocaleString('id-ID')}`}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between text-xs sm:text-sm">
                     <span className="text-muted-foreground">Digunakan:</span>
                     <span>{promo.usageCount} / {promo.maxUsage}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between text-xs sm:text-sm">
                     <span className="text-muted-foreground">Berlaku:</span>
                     <span>{new Date(promo.startDate).toLocaleDateString('id-ID')} - {new Date(promo.endDate).toLocaleDateString('id-ID')}</span>
                   </div>
@@ -223,19 +223,19 @@ const Promotions = () => {
                       setEditingPromo(promo);
                       setIsAddModalOpen(true);
                     }}
-                    className="flex-1 px-3 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium"
+                    className="flex-1 px-3 py-2 bg-primary text-primary-foreground rounded-md text-xs sm:text-sm font-medium"
                   >
                     Edit
                   </button>
                   <button 
                     onClick={() => handleToggleActive(promo.id, promo.isActive)}
-                    className="px-3 py-2 bg-amber-600 text-white rounded-md text-sm font-medium"
+                    className="px-3 py-2 bg-amber-600 text-white rounded-md text-xs sm:text-sm font-medium"
                   >
                     {promo.isActive ? 'Nonaktifkan' : 'Aktifkan'}
                   </button>
                   <button 
                     onClick={() => handleDeletePromotion(promo.id)}
-                    className="px-3 py-2 bg-error text-white rounded-md text-sm font-medium"
+                    className="px-3 py-2 bg-error text-white rounded-md text-xs sm:text-sm font-medium"
                   >
                     Hapus
                   </button>

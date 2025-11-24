@@ -68,25 +68,25 @@ const Profile = () => {
                 <title>Profil - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+                <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
                     <div className="mb-6">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                                 <Icon name="User" size={24} color="var(--color-primary)" strokeWidth={2.5} />
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+                                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                                     Profil Saya
                                 </h1>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-xs sm:text-sm text-muted-foreground">
                                     Kelola informasi akun dan bisnis Anda
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-card border border-border rounded-2xl p-6 mb-6">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-border">
+                    <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6 mb-6">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6 pb-6 border-b border-border">
                             <div className="flex items-center gap-4">
                                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-2xl font-bold text-primary overflow-hidden border-2 border-primary/20">
                                     {profileData.logoUrl ? (
@@ -99,7 +99,7 @@ const Profile = () => {
                                     <h2 className="text-xl font-heading font-bold text-foreground mb-1">
                                         {profileData.name || user?.email || 'Nama Bisnis'}
                                     </h2>
-                                    <p className="text-sm text-muted-foreground">Makeup Artist Professional</p>
+                                    <p className="text-xs sm:text-sm text-muted-foreground">Makeup Artist Professional</p>
                                     {profileData.email && (
                                         <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                                             <Icon name="Mail" size={12} />
@@ -152,7 +152,7 @@ const Profile = () => {
                                 </h3>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
+                                        <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                             Email Akun
                                         </label>
                                         <div className="relative">
@@ -163,14 +163,14 @@ const Profile = () => {
                                                 type="email"
                                                 value={user?.email || ''}
                                                 disabled
-                                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-input bg-muted text-muted-foreground"
+                                                className="w-full pl-10 pr-4 py-2 sm:py-3 rounded-xl border border-input bg-muted text-muted-foreground"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                            <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nama Lengkap / Bisnis *
                                             </label>
                                             <input
@@ -179,14 +179,14 @@ const Profile = () => {
                                                 value={profileData.name || ''}
                                                 onChange={handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full px-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                className={`w-full px-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                     !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                 }`}
                                                 placeholder="Nama Bisnis MUA Anda"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                            <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Email Bisnis
                                             </label>
                                             <input
@@ -195,7 +195,7 @@ const Profile = () => {
                                                 value={profileData.email || ''}
                                                 onChange={handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full px-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                className={`w-full px-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                     !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                 }`}
                                                 placeholder="email@bisnis.com"
@@ -205,7 +205,7 @@ const Profile = () => {
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                            <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Kontak WhatsApp *
                                             </label>
                                             <div className="relative">
@@ -218,7 +218,7 @@ const Profile = () => {
                                                     value={profileData.contact || ''}
                                                     onChange={handleChange}
                                                     readOnly={!isEditing}
-                                                    className={`w-full pl-10 pr-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                    className={`w-full pl-10 pr-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                         !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                     }`}
                                                     placeholder="08xxxxxxxxxx"
@@ -226,7 +226,7 @@ const Profile = () => {
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                            <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Kota
                                             </label>
                                             <div className="relative">
@@ -239,7 +239,7 @@ const Profile = () => {
                                                     value={profileData.city || ''}
                                                     onChange={handleChange}
                                                     readOnly={!isEditing}
-                                                    className={`w-full pl-10 pr-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                    className={`w-full pl-10 pr-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                         !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                     }`}
                                                     placeholder="Jakarta"
@@ -249,7 +249,7 @@ const Profile = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
+                                        <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                             Alamat Lengkap
                                         </label>
                                         <textarea
@@ -258,7 +258,7 @@ const Profile = () => {
                                             onChange={handleChange}
                                             readOnly={!isEditing}
                                             rows={3}
-                                            className={`w-full px-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary resize-none ${
+                                            className={`w-full px-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary resize-none ${
                                                 !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                             }`}
                                             placeholder="Alamat studio atau kantor"
@@ -274,7 +274,7 @@ const Profile = () => {
                                 </h3>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
+                                        <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                             Website / Portfolio
                                         </label>
                                         <div className="relative">
@@ -287,7 +287,7 @@ const Profile = () => {
                                                 value={profileData.website || ''}
                                                 onChange={handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full pl-10 pr-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                className={`w-full pl-10 pr-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                     !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                 }`}
                                                 placeholder="https://website-anda.com"
@@ -296,7 +296,7 @@ const Profile = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
+                                        <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                             Instagram
                                         </label>
                                         <div className="relative">
@@ -309,7 +309,7 @@ const Profile = () => {
                                                 value={profileData.instagram || ''}
                                                 onChange={handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full pl-10 pr-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                className={`w-full pl-10 pr-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                     !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                 }`}
                                                 placeholder="@username_instagram"
@@ -356,7 +356,7 @@ const Profile = () => {
                                 <div className="space-y-4">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                            <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nama Bank
                                             </label>
                                             <input
@@ -365,14 +365,14 @@ const Profile = () => {
                                                 value={profileData.bankName || ''}
                                                 onChange={handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full px-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                className={`w-full px-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                     !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                 }`}
                                                 placeholder="BCA, Mandiri, BNI, dll"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                            <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nomor Rekening
                                             </label>
                                             <input
@@ -381,7 +381,7 @@ const Profile = () => {
                                                 value={profileData.bankAccount || ''}
                                                 onChange={handleChange}
                                                 readOnly={!isEditing}
-                                                className={`w-full px-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                                className={`w-full px-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                     !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                                 }`}
                                                 placeholder="1234567890"
@@ -389,7 +389,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
+                                        <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                             Nama Pemilik Rekening
                                         </label>
                                         <input
@@ -398,7 +398,7 @@ const Profile = () => {
                                             value={profileData.bankAccountName || ''}
                                             onChange={handleChange}
                                             readOnly={!isEditing}
-                                            className={`w-full px-4 py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
+                                            className={`w-full px-4 py-2 sm:py-3 rounded-xl border border-input transition-smooth focus:outline-none focus:ring-2 focus:ring-primary ${
                                                 !isEditing ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-background text-foreground'
                                             }`}
                                             placeholder="Nama sesuai rekening bank"
@@ -413,7 +413,7 @@ const Profile = () => {
                                     Link Publik untuk Klien
                                 </h3>
                                 <div className="space-y-4">
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="text-xs sm:text-sm text-muted-foreground">
                                         Bagikan link ini kepada klien agar mereka bisa melihat paket layanan dan melakukan booking secara langsung.
                                     </p>
                                     
@@ -428,7 +428,7 @@ const Profile = () => {
                                                     type="text"
                                                     value={`${window.location.origin}/packages/public`}
                                                     readOnly
-                                                    className="w-full px-4 py-3 pr-12 rounded-xl border border-input bg-muted text-foreground font-mono text-sm"
+                                                    className="w-full px-4 py-2 sm:py-3 pr-12 rounded-xl border border-input bg-muted text-foreground font-mono text-xs sm:text-sm"
                                                 />
                                                 <button
                                                     type="button"
@@ -465,7 +465,7 @@ const Profile = () => {
                                                     type="text"
                                                     value={`${window.location.origin}/booking/public`}
                                                     readOnly
-                                                    className="w-full px-4 py-3 pr-12 rounded-xl border border-input bg-muted text-foreground font-mono text-sm"
+                                                    className="w-full px-4 py-2 sm:py-3 pr-12 rounded-xl border border-input bg-muted text-foreground font-mono text-xs sm:text-sm"
                                                 />
                                                 <button
                                                     type="button"
@@ -493,8 +493,8 @@ const Profile = () => {
 
                                     <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
                                         <div className="flex items-start gap-3">
-                                            <Icon name="Info" size={20} color="var(--color-primary)" className="flex-shrink-0 mt-0.5" />
-                                            <div className="text-sm">
+                                            <Icon name="Info" size={16} sm:size={20} color="var(--color-primary)" className="flex-shrink-0 mt-0.5" />
+                                            <div className="text-xs sm:text-sm">
                                                 <p className="font-medium text-foreground mb-1">Tips Penggunaan:</p>
                                                 <ul className="text-muted-foreground space-y-1 list-disc list-inside">
                                                     <li><strong>Link Paket Layanan:</strong> Klien bisa melihat semua paket dan langsung booking</li>
@@ -520,7 +520,7 @@ const Profile = () => {
                                         }}
                                         className="w-full"
                                     >
-                                        <Icon name="LogOut" size={20} className="mr-2" />
+                                        <Icon name="LogOut" size={16} sm:size={20} className="mr-2" />
                                         Keluar dari Akun
                                     </Button>
                                 </div>

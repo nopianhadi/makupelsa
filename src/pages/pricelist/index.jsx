@@ -101,17 +101,17 @@ const Pricelist = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Icon name="DollarSign" size={24} color="var(--color-primary)" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                   Pricelist Gallery
                 </h1>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Kelola dan bagikan daftar harga layanan Anda
                 </p>
               </div>
@@ -125,7 +125,7 @@ const Pricelist = () => {
                 return (
                   <div className="mb-4 p-3 bg-warning/10 border border-warning/20 rounded-xl flex items-start gap-2">
                     <Icon name="AlertTriangle" size={18} color="var(--color-warning)" className="flex-shrink-0 mt-0.5" />
-                    <div className="text-sm">
+                    <div className="text-xs sm:text-sm">
                       <p className="font-medium text-warning">Penyimpanan hampir penuh ({storageInfo.percentage}%)</p>
                       <p className="text-muted-foreground text-xs mt-1">
                         Tersisa {storageInfo.availableMB}MB. Hapus pricelist lama atau gunakan gambar lebih kecil.
@@ -192,7 +192,7 @@ const Pricelist = () => {
               )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
               {filteredPricelists.map(pricelist => (
                 <PricelistCard
                   key={pricelist.id}

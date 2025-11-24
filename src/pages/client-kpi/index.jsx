@@ -245,13 +245,13 @@ const KPIPage = () => {
         <title>KPI Bisnis - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground mb-2">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
                 KPI Bisnis
               </h1>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Analisis performa dan manajemen Key Performance Indicators
               </p>
             </div>
@@ -260,7 +260,7 @@ const KPIPage = () => {
                 onClick={() => setIsModalOpen(true)}
                 className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
               >
-                <Icon name="Plus" size={20} />
+                <Icon name="Plus" size={16} sm:size={20} />
                 <span className="hidden sm:inline">Tambah KPI</span>
               </button>
             )}
@@ -271,7 +271,7 @@ const KPIPage = () => {
             <button
               onClick={() => setActiveTab('analytics')}
               className={`
-                px-4 py-3 text-sm font-medium transition-smooth relative whitespace-nowrap
+                px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-smooth relative whitespace-nowrap
                 ${activeTab === 'analytics' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}
               `}
             >
@@ -284,7 +284,7 @@ const KPIPage = () => {
             <button
               onClick={() => setActiveTab('management')}
               className={`
-                px-4 py-3 text-sm font-medium transition-smooth relative whitespace-nowrap
+                px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-smooth relative whitespace-nowrap
                 ${activeTab === 'management' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}
               `}
             >
@@ -301,39 +301,39 @@ const KPIPage = () => {
             <div className="space-y-6 pb-6">
               {/* KPI Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-card border border-border rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground">Total Klien</span>
-                    <Icon name="Users" size={20} color="var(--color-primary)" />
+                    <span className="text-xs sm:text-sm text-muted-foreground">Total Klien</span>
+                    <Icon name="Users" size={16} sm:size={20} color="var(--color-primary)" />
                   </div>
-                  <div className="text-3xl font-bold text-foreground">{kpiData.totalClients}</div>
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpiData.totalClients}</div>
                   <div className="text-xs text-success mt-1">↑ +{kpiData.newClientsThisMonth} bulan ini</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground">Klien Baru</span>
-                    <Icon name="UserPlus" size={20} color="var(--color-accent)" />
+                    <span className="text-xs sm:text-sm text-muted-foreground">Klien Baru</span>
+                    <Icon name="UserPlus" size={16} sm:size={20} color="var(--color-accent)" />
                   </div>
-                  <div className="text-3xl font-bold text-foreground">{kpiData.newClientsThisMonth}</div>
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpiData.newClientsThisMonth}</div>
                   <div className="text-xs text-muted-foreground mt-1">Bulan ini</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground">Retention Rate</span>
-                    <Icon name="TrendingUp" size={20} color="var(--color-success)" />
+                    <span className="text-xs sm:text-sm text-muted-foreground">Retention Rate</span>
+                    <Icon name="TrendingUp" size={16} sm:size={20} color="var(--color-success)" />
                   </div>
-                  <div className="text-3xl font-bold text-foreground">{kpiData.retentionRate}%</div>
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpiData.retentionRate}%</div>
                   <div className="text-xs text-success mt-1">↑ +5% dari bulan lalu</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground">Avg Order Value</span>
-                    <Icon name="Wallet" size={20} color="var(--color-warning)" />
+                    <span className="text-xs sm:text-sm text-muted-foreground">Avg Order Value</span>
+                    <Icon name="Wallet" size={16} sm:size={20} color="var(--color-warning)" />
                   </div>
-                  <div className="text-3xl font-bold text-foreground">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
                     Rp {(kpiData.averageOrderValue / 1000000).toFixed(1)}jt
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">Per transaksi</div>
@@ -341,11 +341,11 @@ const KPIPage = () => {
               </div>
 
               {/* Charts Section */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:p-4 lg:p-6">
                 {/* Top Clients */}
-                <div className="bg-card border border-border rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                   <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                    <Icon name="Award" size={20} color="var(--color-primary)" />
+                    <Icon name="Award" size={16} sm:size={20} color="var(--color-primary)" />
                     Top Klien
                   </h3>
                   <div className="space-y-3">
@@ -371,17 +371,17 @@ const KPIPage = () => {
                 </div>
 
                 {/* Clients by Service */}
-                <div className="bg-card border border-border rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                   <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                    <Icon name="PieChart" size={20} color="var(--color-accent)" />
+                    <Icon name="PieChart" size={16} sm:size={20} color="var(--color-accent)" />
                     Klien per Layanan
                   </h3>
                   <div className="space-y-4">
                     {kpiData.clientsByService.map((item, index) => (
                       <div key={index}>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-foreground">{item.service}</span>
-                          <span className="text-sm text-muted-foreground">{item.count} klien ({item.percentage}%)</span>
+                          <span className="text-xs sm:text-sm font-medium text-foreground">{item.service}</span>
+                          <span className="text-xs sm:text-sm text-muted-foreground">{item.count} klien ({item.percentage}%)</span>
                         </div>
                         <div className="w-full bg-muted rounded-full h-2">
                           <div 
@@ -396,15 +396,15 @@ const KPIPage = () => {
               </div>
 
               {/* Monthly Growth Chart */}
-              <div className="bg-card border border-border rounded-lg p-6">
+              <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                 <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <Icon name="BarChart3" size={20} color="var(--color-success)" />
+                  <Icon name="BarChart3" size={16} sm:size={20} color="var(--color-success)" />
                   Pertumbuhan Klien Bulanan
                 </h3>
                 <div className="flex items-end justify-between gap-4 h-48">
                   {kpiData.monthlyGrowth.map((item, index) => (
                     <div key={index} className="flex-1 flex flex-col items-center gap-2">
-                      <div className="text-sm font-medium text-foreground">{item.clients}</div>
+                      <div className="text-xs sm:text-sm font-medium text-foreground">{item.clients}</div>
                       <div 
                         className="w-full bg-primary rounded-t-lg transition-all"
                         style={{ height: `${(item.clients / 30) * 100}%` }}
@@ -423,7 +423,7 @@ const KPIPage = () => {
               {/* KPI Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {kpis.map((kpi) => (
-                  <div key={kpi.id} className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+                  <div key={kpi.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <h3 className="font-semibold text-foreground mb-1">{kpi.title}</h3>
@@ -447,10 +447,10 @@ const KPIPage = () => {
 
                     <div className="mb-3">
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-3xl font-bold text-foreground">{kpi.value}</span>
-                        <span className="text-sm text-muted-foreground">{kpi.unit}</span>
+                        <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpi.value}</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground">{kpi.unit}</span>
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Target: {kpi.target} {kpi.unit}
                       </div>
                     </div>
@@ -488,19 +488,19 @@ const KPIPage = () => {
           {/* Modal Form */}
           {isModalOpen && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-card border border-border rounded-lg max-w-md w-full p-6">
+              <div className="bg-card border border-border rounded-lg max-w-md w-full p-3 sm:p-4 lg:p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-foreground">
                     {editingKpi ? 'Edit KPI' : 'Tambah KPI Baru'}
                   </h2>
                   <button onClick={resetForm} className="p-1 hover:bg-muted rounded">
-                    <Icon name="X" size={20} />
+                    <Icon name="X" size={16} sm:size={20} />
                   </button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
+                    <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                       Judul KPI
                     </label>
                     <input
@@ -514,7 +514,7 @@ const KPIPage = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1">
+                      <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                         Nilai Saat Ini
                       </label>
                       <input
@@ -527,7 +527,7 @@ const KPIPage = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1">
+                      <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                         Target
                       </label>
                       <input
@@ -541,7 +541,7 @@ const KPIPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
+                    <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                       Unit
                     </label>
                     <input
@@ -555,7 +555,7 @@ const KPIPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
+                    <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                       Kategori
                     </label>
                     <select
@@ -571,7 +571,7 @@ const KPIPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
+                    <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                       Periode
                     </label>
                     <select

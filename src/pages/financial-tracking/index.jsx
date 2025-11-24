@@ -304,7 +304,7 @@ const FinancialTracking = () => {
   return (
     <div className="min-h-screen bg-background">
 
-      <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
         {/* Header Section */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
@@ -315,7 +315,7 @@ const FinancialTracking = () => {
               <h1 className="text-2xl font-heading font-bold text-foreground">
                 Pelacakan Keuangan
               </h1>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Kelola pemasukan dan pengeluaran bisnis makeup Anda
               </p>
             </div>
@@ -373,7 +373,7 @@ const FinancialTracking = () => {
               setShowExpenseForm(false);
             }}
             className={`
-              px-4 py-3 text-sm font-medium transition-smooth relative whitespace-nowrap
+              px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-smooth relative whitespace-nowrap
               ${activeTab === 'income' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}
             `}
           >
@@ -390,7 +390,7 @@ const FinancialTracking = () => {
               setShowExpenseForm(false);
             }}
             className={`
-              px-4 py-3 text-sm font-medium transition-smooth relative whitespace-nowrap
+              px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-smooth relative whitespace-nowrap
               ${activeTab === 'expense' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}
             `}
           >
@@ -407,7 +407,7 @@ const FinancialTracking = () => {
               setShowExpenseForm(false);
             }}
             className={`
-              px-4 py-3 text-sm font-medium transition-smooth relative whitespace-nowrap
+              px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-smooth relative whitespace-nowrap
               ${activeTab === 'report' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}
             `}
           >
@@ -426,7 +426,7 @@ const FinancialTracking = () => {
               {showIncomeForm && (
                 <div className="p-4 rounded-lg bg-card border border-border elevation-3">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-heading font-semibold text-foreground">
+                    <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground">
                       Catat Pemasukan Baru
                     </h3>
                     <button
@@ -444,7 +444,7 @@ const FinancialTracking = () => {
                 </div>
               )}
               <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Menampilkan <span className="font-semibold text-foreground">{filteredIncomes.length}</span> dari {incomes.length} data pemasukan
                 </p>
               </div>
@@ -461,7 +461,7 @@ const FinancialTracking = () => {
               {showExpenseForm && (
                 <div className="p-4 rounded-lg bg-card border border-border elevation-3">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-heading font-semibold text-foreground">
+                    <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground">
                       Tambah Pengeluaran Baru
                     </h3>
                     <button
@@ -479,7 +479,7 @@ const FinancialTracking = () => {
                 </div>
               )}
               <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Menampilkan <span className="font-semibold text-foreground">{filteredExpenses.length}</span> dari {expenses.length} data pengeluaran
                 </p>
               </div>

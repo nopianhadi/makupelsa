@@ -130,7 +130,7 @@ const CalendarScheduling = () => {
   return (
     <div className="min-h-screen bg-background">
 
-      <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
         <CalendarHeader
           currentDate={currentDate}
           onPrevMonth={handlePrevMonth}
@@ -231,7 +231,7 @@ const CalendarScheduling = () => {
       {/* Reminder Manager Modal */}
       {isReminderModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-6">
+          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg:p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-heading font-bold text-foreground">
                 Pengingat Acara
@@ -254,7 +254,7 @@ const CalendarScheduling = () => {
       {/* Google Calendar Sync Modal */}
       {isGoogleSyncModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto">
+          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg:p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-heading font-bold text-foreground">
                 Sinkronisasi Google Calendar

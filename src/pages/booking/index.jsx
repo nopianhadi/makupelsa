@@ -109,7 +109,7 @@ const Booking = () => {
       
       <div className="min-h-screen bg-background">
         
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           <div className="mb-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
@@ -117,10 +117,10 @@ const Booking = () => {
                   <Icon name="Calendar" size={24} color="var(--color-primary)" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+                  <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                     Booking
                   </h1>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Kelola semua booking layanan Anda
                   </p>
                 </div>
@@ -228,7 +228,7 @@ const Booking = () => {
                 <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
                   Belum Ada Booking
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                   Tambahkan booking pertama Anda
                 </p>
                 <QuickActionButton
@@ -270,12 +270,12 @@ const Booking = () => {
               className="bg-card border border-border rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden elevation-12"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-border">
                 <div>
                   <h2 className="text-xl font-heading font-bold text-foreground">
                     Booking Publik Masuk
                   </h2>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                     {publicBookings.length} booking dari form publik
                   </p>
                 </div>
@@ -283,25 +283,25 @@ const Booking = () => {
                   onClick={() => setShowPublicBookings(false)}
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
                 >
-                  <Icon name="X" size={20} />
+                  <Icon name="X" size={16} sm:size={20} />
                 </button>
               </div>
 
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className="p-3 sm:p-4 lg:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
                 <div className="space-y-4">
                   {publicBookings.map((booking, index) => (
                     <div key={index} className="border border-border rounded-xl p-4 bg-muted/30">
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h3 className="font-semibold text-foreground">{booking.clientName}</h3>
-                          <p className="text-sm text-muted-foreground">{booking.clientPhone}</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground">{booking.clientPhone}</p>
                         </div>
                         <span className="px-3 py-1 rounded-full bg-warning/10 text-warning text-xs font-medium">
                           Baru
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3 text-sm mb-3">
+                      <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm mb-3">
                         <div>
                           <span className="text-muted-foreground">Layanan:</span>
                           <span className="ml-2 text-foreground capitalize">{booking.serviceType}</span>
@@ -340,7 +340,7 @@ const Booking = () => {
                             localStorage.setItem('public_bookings', JSON.stringify(publicBookings.filter((_, i) => i !== index)));
                             alert('Booking berhasil ditambahkan ke daftar booking!');
                           }}
-                          className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-smooth text-sm font-medium"
+                          className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-smooth text-xs sm:text-sm font-medium"
                         >
                           Terima Booking
                         </button>
@@ -351,7 +351,7 @@ const Booking = () => {
                               localStorage.setItem('public_bookings', JSON.stringify(publicBookings.filter((_, i) => i !== index)));
                             }
                           }}
-                          className="px-4 py-2 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive/20 transition-smooth text-sm font-medium"
+                          className="px-4 py-2 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive/20 transition-smooth text-xs sm:text-sm font-medium"
                         >
                           Hapus
                         </button>

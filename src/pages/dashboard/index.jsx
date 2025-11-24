@@ -84,19 +84,19 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6 pb-24 lg:pb-6">
         {/* Header Section */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
+        <div className="mb-4 sm:mb-6">
+          <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                 Dashboard
               </h1>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-xs sm:text-sm text-muted-foreground mt-1">
                 Ringkasan bisnis untuk {currentMonth}
               </p>
             </div>
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-1 sm:gap-2">
               <QuickActionButton
                 label="Tambah Klien"
                 icon="UserPlus"
@@ -114,7 +114,7 @@ const Dashboard = () => {
         </div>
 
         {/* Revenue Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
           <RevenueCard
             title="Total Pendapatan"
             amount={revenueData?.totalIncome}
@@ -150,14 +150,14 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6 mb-6">
           {/* Upcoming Schedule Section */}
           <div className="lg:col-span-2">
-            <div className="bg-card border border-border rounded-lg p-6 elevation-1">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Icon name="Calendar" size={20} color="var(--color-primary)" strokeWidth={2.5} />
+                    <Icon name="Calendar" size={16} sm:size={20} color="var(--color-primary)" strokeWidth={2.5} />
                   </div>
                   <div>
                     <h2 className="text-lg font-heading font-semibold text-foreground">
@@ -197,10 +197,10 @@ const Dashboard = () => {
 
           {/* Pending Payments Section */}
           <div className="lg:col-span-1">
-            <div className="bg-card border border-border rounded-lg p-6 elevation-1">
+            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
-                  <Icon name="AlertCircle" size={20} color="var(--color-error)" strokeWidth={2.5} />
+                  <Icon name="AlertCircle" size={16} sm:size={20} color="var(--color-error)" strokeWidth={2.5} />
                 </div>
                 <div>
                   <h2 className="text-lg font-heading font-semibold text-foreground">
@@ -233,10 +233,10 @@ const Dashboard = () => {
         </div>
 
         {/* Key Metrics Section */}
-        <div className="bg-card border border-border rounded-lg p-6 elevation-1">
+        <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-              <Icon name="BarChart3" size={20} color="var(--color-accent)" strokeWidth={2.5} />
+              <Icon name="BarChart3" size={16} sm:size={20} color="var(--color-accent)" strokeWidth={2.5} />
             </div>
             <div>
               <h2 className="text-lg font-heading font-semibold text-foreground">

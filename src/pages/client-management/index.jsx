@@ -526,10 +526,10 @@ const ClientManagement = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
 
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-6">
+        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                 Manajemen Klien
               </h1>
               <QuickActionButton
@@ -541,7 +541,7 @@ const ClientManagement = () => {
                 className="hidden sm:inline-flex" />
 
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Kelola database klien dan tracking layanan makeup
             </p>
           </div>
@@ -556,7 +556,7 @@ const ClientManagement = () => {
           </div>
 
           <div className="mb-4 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Menampilkan {filteredClients?.length} dari {clients?.length} klien
             </p>
             <QuickActionButton
@@ -580,7 +580,7 @@ const ClientManagement = () => {
                 <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
                   Tidak Ada Hasil
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Coba ubah kata kunci pencarian atau filter
                 </p>
               </div> :

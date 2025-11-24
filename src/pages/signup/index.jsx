@@ -91,7 +91,7 @@ export default function Signup() {
           <p className="text-muted-foreground mb-4">
             Akun Anda telah berhasil dibuat. Silakan cek email Anda untuk konfirmasi.
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Anda akan diarahkan ke halaman login...
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function Signup() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl mb-4 shadow-elevation-3">
               <Sparkles className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-heading font-bold text-foreground mb-2">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
               Bergabung dengan Kami
             </h1>
             <p className="text-muted-foreground">
@@ -126,7 +126,7 @@ export default function Signup() {
           {error && (
             <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-xl flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-error">{error}</p>
+              <p className="text-xs sm:text-sm text-error">{error}</p>
             </div>
           )}
 
@@ -136,7 +136,7 @@ export default function Signup() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Full Name */}
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="fullName" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                   Nama Lengkap <span className="text-error">*</span>
                 </label>
                 <div className="relative">
@@ -150,7 +150,7 @@ export default function Signup() {
                     value={formData?.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full pl-12 pr-4 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                    className="w-full pl-12 pr-4 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                     placeholder="Nama lengkap Anda"
                   />
                 </div>
@@ -158,7 +158,7 @@ export default function Signup() {
 
               {/* Business Name */}
               <div>
-                <label htmlFor="businessName" className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="businessName" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                   Nama Bisnis
                 </label>
                 <div className="relative">
@@ -171,7 +171,7 @@ export default function Signup() {
                     name="businessName"
                     value={formData?.businessName}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-4 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                    className="w-full pl-12 pr-4 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                     placeholder="Nama studio/bisnis MUA"
                   />
                 </div>
@@ -180,7 +180,7 @@ export default function Signup() {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Email <span className="text-error">*</span>
               </label>
               <div className="relative">
@@ -194,7 +194,7 @@ export default function Signup() {
                   value={formData?.email}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                  className="w-full pl-12 pr-4 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                   placeholder="nama@email.com"
                 />
               </div>
@@ -204,7 +204,7 @@ export default function Signup() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Phone Number */}
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="phoneNumber" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                   Nomor Telepon
                 </label>
                 <div className="relative">
@@ -217,7 +217,7 @@ export default function Signup() {
                     name="phoneNumber"
                     value={formData?.phoneNumber}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-4 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                    className="w-full pl-12 pr-4 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                     placeholder="08xxxxxxxxxx"
                   />
                 </div>
@@ -225,7 +225,7 @@ export default function Signup() {
 
               {/* Location */}
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="location" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                   Lokasi
                 </label>
                 <div className="relative">
@@ -238,7 +238,7 @@ export default function Signup() {
                     name="location"
                     value={formData?.location}
                     onChange={handleChange}
-                    className="w-full pl-12 pr-4 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                    className="w-full pl-12 pr-4 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                     placeholder="Kota/daerah"
                   />
                 </div>
@@ -247,7 +247,7 @@ export default function Signup() {
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="password" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Password <span className="text-error">*</span>
               </label>
               <div className="relative">
@@ -261,7 +261,7 @@ export default function Signup() {
                   value={formData?.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-12 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                  className="w-full pl-12 pr-12 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                   placeholder="Minimal 6 karakter"
                 />
                 <button
@@ -276,7 +276,7 @@ export default function Signup() {
 
             {/* Confirm Password */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="confirmPassword" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Konfirmasi Password <span className="text-error">*</span>
               </label>
               <div className="relative">
@@ -290,7 +290,7 @@ export default function Signup() {
                   value={formData?.confirmPassword}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-12 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                  className="w-full pl-12 pr-12 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                   placeholder="Ulangi password"
                 />
                 <button
@@ -325,14 +325,14 @@ export default function Signup() {
 
           {/* Email Confirmation Notice */}
           <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-xl">
-            <p className="text-sm text-primary text-center">
+            <p className="text-xs sm:text-sm text-primary text-center">
               Setelah mendaftar, silakan cek email Anda untuk link konfirmasi
             </p>
           </div>
 
           {/* Sign In Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Sudah punya akun?{' '}
               <Link 
                 to="/login" 

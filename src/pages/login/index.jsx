@@ -60,7 +60,7 @@ export default function Login() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl mb-4 shadow-elevation-3">
               <Sparkles className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-heading font-bold text-foreground mb-2">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
               Selamat Datang Kembali
             </h1>
             <p className="text-muted-foreground">
@@ -72,7 +72,7 @@ export default function Login() {
           {error && (
             <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-xl flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-error">{error}</p>
+              <p className="text-xs sm:text-sm text-error">{error}</p>
             </div>
           )}
 
@@ -80,7 +80,7 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Email
               </label>
               <div className="relative">
@@ -94,7 +94,7 @@ export default function Login() {
                   value={formData?.email}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                  className="w-full pl-12 pr-4 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                   placeholder="nama@email.com"
                 />
               </div>
@@ -102,7 +102,7 @@ export default function Login() {
 
             {/* Password Input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="password" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Password
               </label>
               <div className="relative">
@@ -116,7 +116,7 @@ export default function Login() {
                   value={formData?.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-12 py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
+                  className="w-full pl-12 pr-12 py-2 sm:py-3.5 bg-surface border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
                   placeholder="Masukkan password"
                 />
                 <button
@@ -133,7 +133,7 @@ export default function Login() {
             <div className="text-right">
               <Link 
                 to="/reset-password" 
-                className="text-sm text-primary hover:text-primary/80 transition-smooth font-medium"
+                className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-smooth font-medium"
               >
                 Lupa Password?
               </Link>
@@ -186,7 +186,7 @@ export default function Login() {
 
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Belum punya akun?{' '}
               <Link 
                 to="/signup" 
