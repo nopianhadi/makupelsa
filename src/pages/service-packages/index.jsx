@@ -8,9 +8,10 @@ import PackageCard from './components/PackageCard';
 import PackageFormModal from './components/PackageFormModal';
 import PackageTemplates from './components/PackageTemplates';
 import PackageStats from './components/PackageStats';
+import { dataStore } from '../../utils/dataStore';
 
 const ServicePackages = () => {
-  const [packages, setPackages] = useState([]);
+  const [packages, setPackages] = useState(() => dataStore.getServicePackages());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPackage, setEditingPackage] = useState(null);
   const [modalMode, setModalMode] = useState('create');
@@ -20,35 +21,50 @@ const ServicePackages = () => {
   const [showTemplates, setShowTemplates] = useState(false);
 
   useEffect(() => {
-    const mockPackages = [
-      {
-        id: 'pkg_001',
-        name: 'Paket Akad Nikah Premium',
-        serviceType: 'akad',
-        description: 'Paket makeup akad nikah lengkap dengan hairdo dan paes adat untuk pengantin yang menginginkan tampilan elegan dan natural',
-        duration: '3-4 jam',
-        basePrice: 2500000,
-        originalPrice: 3000000,
-        includedServices: [
-          'Makeup pengantin natural & elegan',
-          'Hairdo pengantin dengan aksesoris',
-          'Paes adat Jawa/Sunda',
-          'Touch up makeup 2x',
-          'Konsultasi makeup pre-wedding',
-          'Trial makeup 1x'
-        ],
-        addOns: [
-          { name: 'Makeup keluarga per orang', price: 300000 },
-          { name: 'Hairdo tambahan', price: 200000 },
-          { name: 'Dokumentasi proses makeup', price: 500000 }
-        ],
-        travelFee: 200000,
-        groupDiscount: 10,
-        locationPricing: true,
-        isActive: true,
-        totalBookings: 24,
-        totalRevenue: 60000000
-      },
+    const handlePackageUpdate = () => {
+      setPackages(dataStore.getServicePackages());
+    };
+
+    window.addEventListener('packageAdded', handlePackageUpdate);
+    window.addEventListener('packageUpdated', handlePackageUpdate);
+    window.addEventListener('packageDeleted', handlePackageUpdate);
+
+    return () => {
+      window.removeEventListener('packageAdded', handlePackageUpdate);
+      window.removeEventListener('packageUpdated', handlePackageUpdate);
+      window.removeEventListener('packageDeleted', handlePackageUpdate);
+    };
+  }, []);
+
+  const mockPackages = [
+    {
+      id: 'pkg_001',
+      name: 'Paket Akad Nikah Premium',
+      serviceType: 'akad',
+      description: 'Paket makeup akad nikah lengkap dengan hairdo dan paes adat untuk pengantin yang menginginkan tampilan elegan dan natural',
+      duration: '3-4 jam',
+      basePrice: 2500000,
+      originalPrice: 3000000,
+      includedServices: [
+        'Makeup pengantin natural & elegan',
+        'Hairdo pengantin dengan aksesoris',
+        'Paes adat Jawa/Sunda',
+        'Touch up makeup 2x',
+        'Konsultasi makeup pre-wedding',
+        'Trial makeup 1x'
+      ],
+      addOns: [
+        { name: 'Makeup keluarga per orang', price: 300000 },
+        { name: 'Hairdo tambahan', price: 200000 },
+        { name: 'Dokumentasi proses makeup', price: 500000 }
+      ],
+      travelFee: 200000,
+      groupDiscount: 10,
+      locationPricing: true,
+      isActive: true,
+      totalBookings: 24,
+      totalRevenue: 60000000
+    },
       {
         id: 'pkg_002',
         name: 'Paket Resepsi Glamour',
@@ -183,9 +199,6 @@ const ServicePackages = () => {
       }
     ];
 
-    setPackages(mockPackages);
-  }, []);
-
   const handleCreatePackage = () => {
     setEditingPackage(null);
     setModalMode('create');
@@ -201,35 +214,34 @@ const ServicePackages = () => {
   const handleDuplicatePackage = (packageData) => {
     const duplicatedPackage = {
       ...packageData,
-      id: `pkg_${Date.now()}`,
       name: `${packageData?.name} (Salinan)`,
       totalBookings: 0,
       totalRevenue: 0
     };
-    setPackages(prev => [...prev, duplicatedPackage]);
+    delete duplicatedPackage.id;
+    delete duplicatedPackage.createdAt;
+    dataStore.addServicePackage(duplicatedPackage);
   };
 
   const handleToggleActive = (packageId) => {
-    setPackages(prev => prev?.map(pkg => 
-      pkg?.id === packageId 
-        ? { ...pkg, isActive: !pkg?.isActive }
-        : pkg
-    ));
+    const pkg = packages.find(p => p?.id === packageId);
+    if (pkg) {
+      dataStore.updateServicePackage(packageId, { isActive: !pkg?.isActive });
+    }
   };
 
   const handleDeletePackage = (packageId) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus paket ini?')) {
-      setPackages(prev => prev?.filter(pkg => pkg?.id !== packageId));
+      dataStore.deleteServicePackage(packageId);
     }
   };
 
   const handleSavePackage = (packageData) => {
+    setIsModalOpen(false);
     if (modalMode === 'edit') {
-      setPackages(prev => prev?.map(pkg => 
-        pkg?.id === packageData?.id ? packageData : pkg
-      ));
+      dataStore.updateServicePackage(packageData?.id, packageData);
     } else {
-      setPackages(prev => [...prev, packageData]);
+      dataStore.addServicePackage(packageData);
     }
   };
 

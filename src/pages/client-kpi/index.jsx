@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Icon from '../../components/AppIcon';
+import { dataStore } from '../../utils/dataStore';
 
 const ClientKPI = () => {
   const [kpiData, setKpiData] = useState({
@@ -13,32 +14,126 @@ const ClientKPI = () => {
     monthlyGrowth: []
   });
 
+  const calculateKPI = () => {
+    const clients = dataStore.getClients();
+    const invoices = dataStore.getInvoices();
+    const projects = dataStore.getProjects();
+
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+
+    const newClientsThisMonth = clients.filter(c => {
+      const dateStr = c.registrationDate || c.createdAt;
+      if (!dateStr) return false;
+      const createdDate = new Date(dateStr);
+      if (isNaN(createdDate.getTime())) return false;
+      return createdDate.getMonth() === currentMonth && createdDate.getFullYear() === currentYear;
+    }).length;
+
+    const clientProjectCounts = {};
+    projects.forEach(p => {
+      if (p.clientId) {
+        clientProjectCounts[p.clientId] = (clientProjectCounts[p.clientId] || 0) + 1;
+      }
+    });
+    const repeatClients = Object.values(clientProjectCounts).filter(count => count > 1).length;
+    const retentionRate = clients.length > 0 ? Math.round((repeatClients / clients.length) * 100) : 0;
+
+    const clientRevenue = {};
+    invoices.forEach(inv => {
+      if (inv.clientId && inv.status === 'paid') {
+        clientRevenue[inv.clientId] = (clientRevenue[inv.clientId] || 0) + (inv.grandTotal || 0);
+      }
+    });
+
+    const paidInvoices = invoices.filter(inv => inv.status === 'paid');
+    const totalRevenue = paidInvoices.reduce((sum, inv) => sum + (inv.grandTotal || 0), 0);
+    const averageOrderValue = paidInvoices.length > 0 ? Math.round(totalRevenue / paidInvoices.length) : 0;
+
+    const topClients = Object.entries(clientRevenue)
+      .map(([clientId, totalSpent]) => {
+        const client = clients.find(c => c.id === clientId || c.id === parseInt(clientId) || String(c.id) === String(clientId));
+        const orders = invoices.filter(inv => 
+          (inv.clientId === clientId || String(inv.clientId) === String(clientId)) && 
+          inv.status === 'paid'
+        ).length;
+        return {
+          name: client ? client.name : 'Unknown Client',
+          totalSpent,
+          orders
+        };
+      })
+      .filter(c => c.orders > 0)
+      .sort((a, b) => b.totalSpent - a.totalSpent)
+      .slice(0, 5);
+
+    const serviceCount = {};
+    projects.forEach(p => {
+      const serviceType = p.type || p.serviceType || 'other';
+      serviceCount[serviceType] = (serviceCount[serviceType] || 0) + 1;
+    });
+    const totalProjects = projects.length;
+    const clientsByService = Object.entries(serviceCount).map(([service, count]) => ({
+      service: service.charAt(0).toUpperCase() + service.slice(1),
+      count,
+      percentage: totalProjects > 0 ? Math.round((count / totalProjects) * 100) : 0
+    }));
+
+    const monthlyData = {};
+    clients.forEach(c => {
+      const dateStr = c.registrationDate || c.createdAt;
+      if (!dateStr) return;
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) return;
+      const monthKey = `${date.getFullYear()}-${date.getMonth()}`;
+      monthlyData[monthKey] = (monthlyData[monthKey] || 0) + 1;
+    });
+
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    const last5Months = [];
+    for (let i = 4; i >= 0; i--) {
+      const d = new Date(currentYear, currentMonth - i, 1);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      last5Months.push({
+        month: monthNames[d.getMonth()],
+        clients: monthlyData[key] || 0
+      });
+    }
+
+    setKpiData({
+      totalClients: clients.length,
+      newClientsThisMonth,
+      retentionRate,
+      averageOrderValue,
+      topClients,
+      clientsByService,
+      monthlyGrowth: last5Months
+    });
+  };
+
   useEffect(() => {
-    // Mock KPI data
-    const mockKPI = {
-      totalClients: 156,
-      newClientsThisMonth: 24,
-      retentionRate: 68,
-      averageOrderValue: 3500000,
-      topClients: [
-        { name: "Siti Nurhaliza", totalSpent: 15000000, orders: 5 },
-        { name: "Dewi Lestari", totalSpent: 12000000, orders: 4 },
-        { name: "Ayu Kartika", totalSpent: 10000000, orders: 3 }
-      ],
-      clientsByService: [
-        { service: "Akad", count: 45, percentage: 35 },
-        { service: "Resepsi", count: 58, percentage: 45 },
-        { service: "Wisuda", count: 26, percentage: 20 }
-      ],
-      monthlyGrowth: [
-        { month: "Jul", clients: 12 },
-        { month: "Agu", clients: 18 },
-        { month: "Sep", clients: 22 },
-        { month: "Okt", clients: 20 },
-        { month: "Nov", clients: 24 }
-      ]
+    calculateKPI();
+
+    const handleDataUpdate = () => {
+      calculateKPI();
     };
-    setKpiData(mockKPI);
+
+    window.addEventListener('clientAdded', handleDataUpdate);
+    window.addEventListener('clientUpdated', handleDataUpdate);
+    window.addEventListener('clientDeleted', handleDataUpdate);
+    window.addEventListener('projectAdded', handleDataUpdate);
+    window.addEventListener('projectUpdated', handleDataUpdate);
+    window.addEventListener('projectDeleted', handleDataUpdate);
+
+    return () => {
+      window.removeEventListener('clientAdded', handleDataUpdate);
+      window.removeEventListener('clientUpdated', handleDataUpdate);
+      window.removeEventListener('clientDeleted', handleDataUpdate);
+      window.removeEventListener('projectAdded', handleDataUpdate);
+      window.removeEventListener('projectUpdated', handleDataUpdate);
+      window.removeEventListener('projectDeleted', handleDataUpdate);
+    };
   }, []);
 
   return (

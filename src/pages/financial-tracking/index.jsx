@@ -86,49 +86,9 @@ const FinancialTracking = () => {
     return invoiceIncomes;
   });
 
-  const [expenses, setExpenses] = useState([
-    {
-      id: 1,
-      category: "cosmetics",
-      description: "Pembelian foundation MAC Studio Fix Fluid SPF 15",
-      amount: 650000,
-      vendor: "Sephora Indonesia",
-      paymentMethod: "debit",
-      transactionDate: "2025-11-10",
-      receiptUrl: "https://images.unsplash.com/photo-1600379988761-cbf47c47cbfd",
-      notes: "Stok foundation untuk tone kulit medium"
-    },
-    {
-      id: 2,
-      category: "salary",
-      description: "Gaji asisten makeup bulan November 2025",
-      amount: 2000000,
-      vendor: "Asisten Rina",
-      paymentMethod: "transfer",
-      transactionDate: "2025-11-01",
-      notes: "Gaji bulanan untuk asisten tetap"
-    },
-    {
-      id: 3,
-      category: "transport",
-      description: "Biaya transportasi ke lokasi acara Tangerang",
-      amount: 250000,
-      vendor: "Grab",
-      paymentMethod: "ewallet",
-      transactionDate: "2025-11-18",
-      notes: "Transportasi PP untuk acara resepsi"
-    },
-    {
-      id: 4,
-      category: "equipment",
-      description: "Pembelian brush set professional 12 pieces",
-      amount: 850000,
-      vendor: "Makeup Tools Store",
-      paymentMethod: "transfer",
-      transactionDate: "2025-11-12",
-      notes: "Set brush baru untuk mengganti yang rusak"
-    }
-  ]);
+  const [expenses, setExpenses] = useState(() => {
+    return dataStore.getExpenses();
+  });
 
   const summaryData = {
     totalIncome: incomes?.reduce((sum, item) => sum + item?.amount, 0),
@@ -171,11 +131,7 @@ const FinancialTracking = () => {
   };
 
   const handleExpenseSubmit = (data) => {
-    const newExpense = {
-      id: expenses?.length + 1,
-      ...data
-    };
-    setExpenses([newExpense, ...expenses]);
+    dataStore.addExpense(data);
     setShowExpenseForm(false);
   };
 
@@ -187,9 +143,29 @@ const FinancialTracking = () => {
 
   const handleDeleteExpense = (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus data pengeluaran ini?')) {
-      setExpenses(expenses?.filter((item) => item?.id !== id));
+      dataStore.deleteExpense(id);
     }
   };
+
+  const handleEditExpense = (updatedExpense) => {
+    dataStore.updateExpense(updatedExpense.id, updatedExpense);
+  };
+
+  useEffect(() => {
+    const handleExpenseUpdate = () => {
+      setExpenses(dataStore.getExpenses());
+    };
+
+    window.addEventListener('expenseAdded', handleExpenseUpdate);
+    window.addEventListener('expenseUpdated', handleExpenseUpdate);
+    window.addEventListener('expenseDeleted', handleExpenseUpdate);
+
+    return () => {
+      window.removeEventListener('expenseAdded', handleExpenseUpdate);
+      window.removeEventListener('expenseUpdated', handleExpenseUpdate);
+      window.removeEventListener('expenseDeleted', handleExpenseUpdate);
+    };
+  }, []);
 
   const handleExportReport = () => {
     if (activeTab === 'income') {

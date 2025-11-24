@@ -1,4 +1,3 @@
- 
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import QuickActionButton from '../../components/ui/QuickActionButton';
@@ -6,6 +5,7 @@ import Icon from '../../components/AppIcon';
 import LeadsForm from './LeadsForm';
 import WhatsAppTemplates from './WhatsAppTemplates';
 import SendReminderModal from './components/SendReminderModal';
+import { dataStore } from '../../utils/dataStore';
 
 const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, badgeColor, leads, isCollapsed, onToggle, onFollowUp, onConvert, onEdit, onDelete }) => {
     const [showAll, setShowAll] = useState(false);
@@ -238,21 +238,22 @@ const Leads = () => {
 
     const handleConvertToClient = (lead) => {
         if (window.confirm(`Konversi ${lead.name} menjadi klien?`)) {
-            // Save to clients
-            const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+            // Save to clients using dataStore
             const newClient = {
-                id: Date.now(),
                 name: lead.name,
                 phone: lead.phone,
-                email: '',
+                email: lead.email || '',
                 address: '',
-                notes: lead.notes,
-                createdAt: new Date().toISOString(),
-                source: lead.source
+                notes: lead.notes || `Converted from lead - Source: ${lead.source}`,
+                registrationDate: new Date().toISOString(),
+                source: lead.source,
+                status: 'active',
+                servicePreferences: lead.serviceType ? [lead.serviceType] : []
             };
-            localStorage.setItem('clients', JSON.stringify([...clients, newClient]));
+            dataStore.addClient(newClient);
             
-            // Update lead status
+            // Update lead status in dataStore and local state
+            dataStore.updateLead(lead.id, { status: 'Converted' });
             setLeads(leads.map(l => l.id === lead.id ? { ...l, status: 'Converted' } : l));
             alert('Prospek berhasil dikonversi menjadi klien!');
         }

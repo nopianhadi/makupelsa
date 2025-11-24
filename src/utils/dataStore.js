@@ -347,6 +347,7 @@ export const dataStore = {
     };
     packages.push(newPackage);
     dataStore.setServicePackages(packages);
+    window.dispatchEvent(new CustomEvent('packageAdded', { detail: newPackage }));
     return newPackage;
   },
 
@@ -354,13 +355,16 @@ export const dataStore = {
     const packages = dataStore.getServicePackages();
     const updated = packages.map(p => p.id === id ? { ...p, ...updates } : p);
     dataStore.setServicePackages(updated);
-    return updated.find(p => p.id === id);
+    const updatedPackage = updated.find(p => p.id === id);
+    window.dispatchEvent(new CustomEvent('packageUpdated', { detail: updatedPackage }));
+    return updatedPackage;
   },
 
   deleteServicePackage: (id) => {
     const packages = dataStore.getServicePackages();
     const filtered = packages.filter(p => p.id !== id);
     dataStore.setServicePackages(filtered);
+    window.dispatchEvent(new CustomEvent('packageDeleted', { detail: { id } }));
     return true;
   },
 
