@@ -112,10 +112,10 @@ const ClientDetailModal = ({ client, onClose }) => {
               />
             </div>
             <div>
-              <h2 id="client-detail-title" className="text-xl font-heading font-bold text-foreground truncate">
-                title={client?.name}>{client?.name}<
+              <h2 id="client-detail-title" className="text-xl font-heading font-bold text-foreground truncate" title={client?.name}>
+                {client?.name}
               </h2>
-              <div className="flex items-center gap-3 mt-1">
+              <div className="flex items-center gap-3 mt-1 overflow-hidden">
                 <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground min-w-0">
                   <Icon name="Phone" size={14} />
                   {client?.phone}
