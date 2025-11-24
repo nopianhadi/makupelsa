@@ -37,6 +37,31 @@ MUA Finance Manager is a comprehensive financial management application designed
 **Booking** - Enhanced event listeners (bookingAdded/Updated/Deleted + dataUpdated)
 **Leads** - Fixed duplicate rendering + added search/sort logic
 
+### ✅ **TIER 4: CALENDAR PAGE - REMINDER & GOOGLE CALENDAR SYNC**
+**Calendar Scheduling Page Enhanced** - 3 major new features:
+
+1. **Reminder Manager**
+   - Add multiple reminders per event (1 hour, 24 hours, 7 days, custom)
+   - Browser notifications for event reminders
+   - Automatic reminder checks every minute
+   - Persistent reminder storage via localStorage
+   - Clean UI for managing event reminders
+
+2. **Google Calendar Synchronization** 
+   - One-click sync to Google Calendar
+   - Sync all events with full details (client name, location, amount, notes)
+   - Connection status tracking
+   - Last sync timestamp display
+   - Disconnect functionality
+   - Synced events counter
+
+3. **Enhanced Calendar UI**
+   - New "Pengingat" button for reminder management
+   - New "Google Calendar" button for sync management
+   - Modal-based interfaces for both features
+   - Real-time status updates
+   - Integration with event-driven architecture
+
 ### ✅ **PAGES ALREADY FULLY FEATURED**
 - Dashboard: Hub with revenue, schedules, pending payments, metrics
 - Financial Tracking: Income/expense tracking + filters + reports

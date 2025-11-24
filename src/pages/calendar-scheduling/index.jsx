@@ -6,6 +6,9 @@ import WeekView from './components/WeekView';
 import DayView from './components/DayView';
 import AppointmentModal from './components/AppointmentModal';
 import EventDetailModal from './components/EventDetailModal';
+import ReminderManager from './components/ReminderManager';
+import GoogleCalendarSync from './components/GoogleCalendarSync';
+import Icon from '../../components/AppIcon';
 import { dataStore } from '../../utils/dataStore';
 
 const CalendarScheduling = () => {
@@ -13,6 +16,8 @@ const CalendarScheduling = () => {
   const [view, setView] = useState('month');
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [isEventDetailModalOpen, setIsEventDetailModalOpen] = useState(false);
+  const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
+  const [isGoogleSyncModalOpen, setIsGoogleSyncModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [editingEvent, setEditingEvent] = useState(null);
 
@@ -136,7 +141,7 @@ const CalendarScheduling = () => {
         />
 
         <div className="mt-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-primary/20 border-2 border-primary" />
@@ -152,12 +157,26 @@ const CalendarScheduling = () => {
               </div>
             </div>
 
-            <QuickActionButton
-              label="Buat Jadwal"
-              icon="Plus"
-              variant="primary"
-              onClick={handleCreateAppointment}
-            />
+            <div className="flex items-center gap-2">
+              <QuickActionButton
+                label="Pengingat"
+                icon="Bell"
+                variant="outline"
+                onClick={() => setIsReminderModalOpen(true)}
+              />
+              <QuickActionButton
+                label="Google Calendar"
+                icon="Calendar"
+                variant="outline"
+                onClick={() => setIsGoogleSyncModalOpen(true)}
+              />
+              <QuickActionButton
+                label="Buat Jadwal"
+                icon="Plus"
+                variant="primary"
+                onClick={handleCreateAppointment}
+              />
+            </div>
           </div>
 
           {view === 'month' && (
@@ -208,6 +227,51 @@ const CalendarScheduling = () => {
         onEdit={handleEditEvent}
         onDelete={handleDeleteEvent}
       />
+
+      {/* Reminder Manager Modal */}
+      {isReminderModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-heading font-bold text-foreground">
+                Pengingat Acara
+              </h2>
+              <button 
+                onClick={() => setIsReminderModalOpen(false)}
+                className="p-1 hover:bg-muted rounded"
+              >
+                <Icon name="X" size={24} />
+              </button>
+            </div>
+            <ReminderManager
+              eventId={selectedEvent?.id || ''}
+              onClose={() => setIsReminderModalOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Google Calendar Sync Modal */}
+      {isGoogleSyncModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-heading font-bold text-foreground">
+                Sinkronisasi Google Calendar
+              </h2>
+              <button 
+                onClick={() => setIsGoogleSyncModalOpen(false)}
+                className="p-1 hover:bg-muted rounded"
+              >
+                <Icon name="X" size={24} />
+              </button>
+            </div>
+            <GoogleCalendarSync
+              onClose={() => setIsGoogleSyncModalOpen(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
