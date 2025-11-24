@@ -230,6 +230,66 @@ const Settings = () => {
 
                         <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
                             <div className="flex items-center gap-2 mb-4">
+                                <Icon name="Info" size={20} sm:size={20} color="var(--color-primary)" />
+                                <h3 className="font-bold text-lg">📱 Panduan Ukuran Mobile App</h3>
+                            </div>
+                            <div className="space-y-4 overflow-x-auto">
+                                <div className="min-w-full">
+                                    <h4 className="text-sm font-semibold text-foreground mb-2">1. Grid, Spasi, dan Jarak (Spacing)</h4>
+                                    <p className="text-xs text-muted-foreground mb-3">Sistem grid yang baik menggunakan kelipatan dari 4 dp/pt atau 8 dp/pt:</p>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-xs border-collapse">
+                                            <thead>
+                                                <tr className="border-b border-border">
+                                                    <th className="text-left py-2 px-2 font-semibold text-foreground">Kategori</th>
+                                                    <th className="text-left py-2 px-2 font-semibold text-foreground">Ukuran</th>
+                                                    <th className="text-left py-2 px-2 font-semibold text-foreground">Penggunaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="border-b border-border/50">
+                                                    <td className="py-2 px-2 text-foreground">Grid Dasar</td>
+                                                    <td className="py-2 px-2 text-foreground font-mono">8 dp/pt</td>
+                                                    <td className="py-2 px-2 text-muted-foreground">Margin, padding, jarak antar elemen</td>
+                                                </tr>
+                                                <tr className="border-b border-border/50">
+                                                    <td className="py-2 px-2 text-foreground">Micro Spacing</td>
+                                                    <td className="py-2 px-2 text-foreground font-mono">4 dp/pt</td>
+                                                    <td className="py-2 px-2 text-muted-foreground">Jarak internal, padding dalam tombol</td>
+                                                </tr>
+                                                <tr className="border-b border-border/50">
+                                                    <td className="py-2 px-2 text-foreground">Small Spacing</td>
+                                                    <td className="py-2 px-2 text-foreground font-mono">16 dp/pt</td>
+                                                    <td className="py-2 px-2 text-muted-foreground">Jarak standar antar section</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div className="min-w-full pt-4 border-t border-border">
+                                    <h4 className="text-sm font-semibold text-foreground mb-2">2. Ukuran Touch Target</h4>
+                                    <p className="text-xs text-muted-foreground mb-3">Target minimum untuk elemen yang dapat diklik:</p>
+                                    <div className="space-y-2">
+                                        <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                                            <span className="text-xs text-foreground">Tombol / Interaktif</span>
+                                            <span className="text-xs font-mono text-primary font-semibold">48x48 dp</span>
+                                        </div>
+                                        <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                                            <span className="text-xs text-foreground">Minimum Text</span>
+                                            <span className="text-xs font-mono text-primary font-semibold">14 sp (body)</span>
+                                        </div>
+                                        <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                                            <span className="text-xs text-foreground">Line Height</span>
+                                            <span className="text-xs font-mono text-primary font-semibold">1.5x ukuran font</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
+                            <div className="flex items-center gap-2 mb-4">
                                 <Icon name="Database" size={20} sm:size={20} color="var(--color-primary)" />
                                 <h3 className="font-bold text-lg">Data & Penyimpanan</h3>
                             </div>

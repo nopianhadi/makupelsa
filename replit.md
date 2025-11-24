@@ -42,6 +42,13 @@ Preferred communication style: Simple, everyday language.
   - ✅ Added `w-full max-w-full` width constraints
   - ✅ Added `title` attributes for truncated text tooltips
   - ✅ **RESULT: Data cannot escape from card boundaries - all content CLIPPED**
+- ✅ **Added Mobile App Sizing Guide to Settings:**
+  - ✅ Created responsive "📱 Panduan Ukuran Mobile App" section in Settings page
+  - ✅ Added Grid & Spacing guidelines with responsive table (8dp, 4dp, 16dp)
+  - ✅ Added Touch Target sizes (48x48dp minimum)
+  - ✅ Added Text sizing and line height guidelines
+  - ✅ Fully responsive with `overflow-x-auto` for mobile horizontal scroll
+  - ✅ **RESULT: Complete sizing guide accessible to users**
 
 ## System Architecture
 
