@@ -49,7 +49,7 @@ const InvoiceListModal = ({ client, onClose, onCreateInvoice }) => {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-card border border-border rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-        <div className="flex items-center justify-between p-6 border-b border-border">
+        <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-border">
           <div>
             <h2 className="text-xl font-heading font-bold text-foreground">
               Invoice - {client.name}
@@ -75,7 +75,7 @@ const InvoiceListModal = ({ client, onClose, onCreateInvoice }) => {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6">
           {invoices.length === 0 ? (
             <div className="text-center py-12">
               <div className="w-16 h-16 rounded-2xl bg-muted mx-auto mb-4 flex items-center justify-center">
@@ -181,7 +181,7 @@ const InvoiceListModal = ({ client, onClose, onCreateInvoice }) => {
         {selectedInvoice && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
             <div className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
-              <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-border">
                 <h3 className="text-lg font-heading font-bold text-foreground">
                   Detail Invoice
                 </h3>
@@ -192,7 +192,7 @@ const InvoiceListModal = ({ client, onClose, onCreateInvoice }) => {
                   <Icon name="X" size={20} />
                 </button>
               </div>
-              <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6">
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>

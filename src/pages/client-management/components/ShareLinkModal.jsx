@@ -31,7 +31,7 @@ const ShareLinkModal = ({ client, onClose }) => {
       onClick={onClose}
     >
       <div 
-        className="bg-card rounded-lg shadow-xl max-w-md w-full p-6"
+        className="bg-card rounded-lg shadow-xl max-w-md w-full p-3 sm:p-4 lg:p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
@@ -86,7 +86,7 @@ const ShareLinkModal = ({ client, onClose }) => {
           </div>
 
           <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-3">
-            <div className="flex gap-2">
+            <div className="flex gap-1 sm:gap-2">
               <Icon name="Info" size={16} color="var(--color-primary)" className="flex-shrink-0 mt-0.5" />
               <div className="text-xs text-blue-700 dark:text-blue-300">
                 <p className="font-medium mb-1">Portal klien memungkinkan:</p>

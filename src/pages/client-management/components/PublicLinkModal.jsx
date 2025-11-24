@@ -38,16 +38,16 @@ const PublicLinkModal = ({ isOpen, onClose, client }) => {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-card rounded-lg max-w-lg w-full">
-        <div className="p-6 border-b border-border flex items-center justify-between">
+        <div className="p-3 sm:p-4 lg:p-6 border-b border-border flex items-center justify-between">
           <h2 className="text-xl font-semibold text-foreground">Link Portal Klien</h2>
           <button onClick={onClose} className="p-2 hover:bg-muted rounded-lg">
             <Icon name="X" size={20} />
           </button>
         </div>
 
-        <div className="p-6 space-y-4">
+        <div className="p-3 sm:p-4 lg:p-6 space-y-4">
           <div className="p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-900">
-            <div className="flex gap-2 mb-2">
+            <div className="flex gap-1 sm:gap-2 mb-2">
               <Icon name="Info" size={20} color="var(--color-primary)" />
               <div>
                 <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
@@ -64,7 +64,7 @@ const PublicLinkModal = ({ isOpen, onClose, client }) => {
             <label className="block text-sm font-medium text-foreground mb-2">
               Link untuk {client?.name}
             </label>
-            <div className="flex gap-2">
+            <div className="flex gap-1 sm:gap-2">
               <input
                 type="text"
                 value={publicLink}
@@ -81,7 +81,7 @@ const PublicLinkModal = ({ isOpen, onClose, client }) => {
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-1 sm:gap-2">
             <button
               onClick={handleWhatsApp}
               className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md font-medium flex items-center justify-center gap-2"
@@ -123,7 +123,7 @@ const PublicLinkModal = ({ isOpen, onClose, client }) => {
           </div>
         </div>
 
-        <div className="p-6 border-t border-border">
+        <div className="p-3 sm:p-4 lg:p-6 border-t border-border">
           <button
             onClick={onClose}
             className="w-full px-4 py-2 bg-muted text-foreground rounded-md font-medium"

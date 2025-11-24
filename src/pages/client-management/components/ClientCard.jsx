@@ -51,7 +51,7 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
 
   return (
     <div
-      className={`bg-card border rounded-lg p-4 elevation-1 hover:elevation-3 transition-smooth cursor-pointer ${
+      className={`bg-card border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1 w-full hover:elevation-3 transition-smooth cursor-pointer ${
         isCompleted ? 'border-muted' : 'border-border'
       }`}
       onClick={onClick}
@@ -68,9 +68,9 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
         </div>
       )}
 
-      <div className="flex items-start gap-4 mb-4">
+      <div className="flex items-start gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 flex-col sm:flex-row">
         <div className="relative flex-shrink-0">
-          <div className="w-16 h-16 rounded-full overflow-hidden bg-muted">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden bg-muted">
             <Image
               src={client?.profileImage}
               alt={client?.profileImageAlt}
@@ -95,7 +95,7 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-1">
-            <h3 className="text-base font-heading font-semibold text-foreground truncate">
+            <h3 className="text-sm sm:text-base font-heading font-semibold text-foreground truncate">
               {client?.name}
             </h3>
             {client?.totalEvents > 1 && (

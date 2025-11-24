@@ -43,7 +43,7 @@ const ArchiveClientModal = ({ clients, onClose, onArchive }) => {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-card rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b border-border">
+        <div className="p-3 sm:p-4 lg:p-6 border-b border-border">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-heading font-bold text-foreground">
@@ -65,7 +65,7 @@ const ArchiveClientModal = ({ clients, onClose, onArchive }) => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6">
           {suggestedClients.length === 0 ? (
             <div className="text-center py-8">
               <span className="text-4xl mb-3 block">📦</span>
@@ -80,7 +80,7 @@ const ArchiveClientModal = ({ clients, onClose, onArchive }) => {
             <>
               {/* Info Box */}
               <div className="mb-4 p-4 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-900">
-                <div className="flex gap-2">
+                <div className="flex gap-1 sm:gap-2">
                   <span className="text-amber-600 dark:text-amber-400">⚠️</span>
                   <div className="flex-1">
                     <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
@@ -172,7 +172,7 @@ const ArchiveClientModal = ({ clients, onClose, onArchive }) => {
 
         {/* Footer */}
         {suggestedClients.length > 0 && (
-          <div className="p-6 border-t border-border flex gap-3">
+          <div className="p-3 sm:p-4 lg:p-6 border-t border-border flex gap-3">
             <button
               onClick={onClose}
               className="flex-1 px-4 py-2 bg-muted text-foreground rounded-lg hover:bg-muted/80 transition-colors font-medium"

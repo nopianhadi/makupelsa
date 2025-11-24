@@ -26,7 +26,7 @@ const EditClientModal = ({ client, onClose, onSave }) => {
       onClick={onClose}
     >
       <div 
-        className="bg-card border border-border rounded-2xl w-full max-w-md p-6 elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
+        className="bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg:p-6 elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">

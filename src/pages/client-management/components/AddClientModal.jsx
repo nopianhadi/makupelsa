@@ -104,7 +104,7 @@ const AddClientModal = ({ onClose, onSave }) => {
         className="bg-card border border-border rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e?.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-6 border-b border-border">
+        <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-border">
           <h2 id="add-client-title" className="text-xl font-heading font-bold text-foreground">
             Tambah Klien Baru
           </h2>
@@ -117,7 +117,7 @@ const AddClientModal = ({ onClose, onSave }) => {
           />
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <form onSubmit={handleSubmit} className="p-3 sm:p-4 lg:p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
           <div className="space-y-4">
             <div className="bg-surface rounded-lg p-4 border border-border">
               <h3 className="text-sm font-heading font-semibold text-foreground mb-4 flex items-center gap-2">

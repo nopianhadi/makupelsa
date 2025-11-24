@@ -99,10 +99,10 @@ const ClientDetailModal = ({ client, onClose }) => {
       aria-labelledby="client-detail-title"
     >
       <div 
-        className="bg-card border border-border rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
+        className="bg-card border border-border rounded-lg w-full max-w-2xl sm:max-w-4xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e?.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-6 border-b border-border">
+        <div className="flex items-center justify-between p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6 border-b border-border">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full overflow-hidden bg-muted">
               <Image
@@ -116,12 +116,12 @@ const ClientDetailModal = ({ client, onClose }) => {
                 {client?.name}
               </h2>
               <div className="flex items-center gap-3 mt-1">
-                <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
                   <Icon name="Phone" size={14} />
                   {client?.phone}
                 </span>
                 {client?.email && (
-                  <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
                     <Icon name="Mail" size={14} />
                     {client?.email}
                   </span>
@@ -160,7 +160,7 @@ const ClientDetailModal = ({ client, onClose }) => {
           </div>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+        <div className="p-3 sm:p-4 lg:p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
           {activeTab === 'events' && (
             <div className="space-y-4">
               {client?.events?.map((event, index) => {
@@ -192,14 +192,14 @@ const ClientDetailModal = ({ client, onClose }) => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Icon name="Clock" size={16} color="var(--color-muted-foreground)" />
-                        <span className="text-sm text-muted-foreground font-mono">
+                        <span className="text-xs sm:text-sm text-muted-foreground font-mono">
                           {event?.eventTime}
                         </span>
                       </div>
                       {event?.venue && (
                         <div className="flex items-center gap-2 md:col-span-2">
                           <Icon name="MapPin" size={16} color="var(--color-muted-foreground)" />
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-xs sm:text-sm text-muted-foreground">
                             {event?.venue}
                           </span>
                         </div>
@@ -207,7 +207,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                       {event?.packageName && (
                         <div className="flex items-center gap-2 md:col-span-2">
                           <Icon name="Package" size={16} color="var(--color-muted-foreground)" />
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-xs sm:text-sm text-muted-foreground">
                             {event?.packageName}
                           </span>
                         </div>
@@ -215,7 +215,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                     </div>
                     {event?.notes && (
                       <div className="mt-3 pt-3 border-t border-border">
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           {event?.notes}
                         </p>
                       </div>
@@ -264,7 +264,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                   <p className="text-base font-medium text-foreground mb-1">
                     Belum Ada Invoice
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Invoice untuk klien ini akan muncul di sini
                   </p>
                 </div>
@@ -353,7 +353,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                           {formatDate(log?.date)}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         {log?.message}
                       </p>
                     </div>
