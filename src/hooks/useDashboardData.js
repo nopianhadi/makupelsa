@@ -47,19 +47,10 @@ export const useDashboardData = () => {
       .reduce((sum, inv) => sum + (parseFloat(inv.grandTotal) || 0), 0);
   }, [invoices]);
 
-  // Hitung total expenses - untuk sementara dari localStorage atau default 0
-  // Karena expense belum tersimpan di dataStore
+  // Hitung total expenses dari dataStore
   const totalExpenses = useMemo(() => {
-    try {
-      const savedExpenses = localStorage.getItem('expenses');
-      if (savedExpenses) {
-        const expenses = JSON.parse(savedExpenses);
-        return expenses.reduce((sum, exp) => sum + (parseFloat(exp.amount) || 0), 0);
-      }
-    } catch (error) {
-      console.error('Error loading expenses:', error);
-    }
-    return 0;
+    const expenses = dataStore.getExpenses() || [];
+    return expenses.reduce((sum, exp) => sum + (parseFloat(exp.amount) || 0), 0);
   }, []);
 
   // Hitung pending payments dari clients

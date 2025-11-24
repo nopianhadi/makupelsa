@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Icon from '../../components/AppIcon';
+import { dataStore } from '../../utils/dataStore';
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -8,36 +9,45 @@ const Testimonials = () => {
 
   useEffect(() => {
     loadTestimonials();
+    
+    // Listen untuk perubahan testimonials
+    const handleTestimonialChange = () => {
+      loadTestimonials();
+    };
+    window.addEventListener('testimonialAdded', handleTestimonialChange);
+    window.addEventListener('testimonialUpdated', handleTestimonialChange);
+    window.addEventListener('testimonialDeleted', handleTestimonialChange);
+    
+    return () => {
+      window.removeEventListener('testimonialAdded', handleTestimonialChange);
+      window.removeEventListener('testimonialUpdated', handleTestimonialChange);
+      window.removeEventListener('testimonialDeleted', handleTestimonialChange);
+    };
   }, []);
 
   const loadTestimonials = () => {
-    const stored = localStorage.getItem('testimonials');
-    if (stored) {
-      setTestimonials(JSON.parse(stored));
-    }
+    const stored = dataStore.getTestimonials();
+    setTestimonials(stored);
   };
 
   const handleApprove = (id) => {
-    const updated = testimonials.map(t => 
+    dataStore.updateTestimonial(id, { status: 'approved', approvedAt: new Date().toISOString() });
+    setTestimonials(testimonials.map(t => 
       t.id === id ? { ...t, status: 'approved', approvedAt: new Date().toISOString() } : t
-    );
-    setTestimonials(updated);
-    localStorage.setItem('testimonials', JSON.stringify(updated));
+    ));
   };
 
   const handleReject = (id) => {
-    const updated = testimonials.map(t => 
+    dataStore.updateTestimonial(id, { status: 'rejected' });
+    setTestimonials(testimonials.map(t => 
       t.id === id ? { ...t, status: 'rejected' } : t
-    );
-    setTestimonials(updated);
-    localStorage.setItem('testimonials', JSON.stringify(updated));
+    ));
   };
 
   const handleDelete = (id) => {
     if (confirm('Yakin ingin menghapus testimoni ini?')) {
-      const updated = testimonials.filter(t => t.id !== id);
-      setTestimonials(updated);
-      localStorage.setItem('testimonials', JSON.stringify(updated));
+      dataStore.deleteTestimonial(id);
+      setTestimonials(testimonials.filter(t => t.id !== id));
     }
   };
 

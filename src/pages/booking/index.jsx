@@ -4,11 +4,11 @@ import QuickActionButton from '../../components/ui/QuickActionButton';
 import Icon from '../../components/AppIcon';
 import BookingForm from './components/BookingForm';
 import BookingCard from './components/BookingCard';
+import { dataStore } from '../../utils/dataStore';
 
 const Booking = () => {
   const [bookings, setBookings] = useState(() => {
-    const saved = localStorage.getItem('bookings');
-    return saved ? JSON.parse(saved) : [];
+    return dataStore.getBookings();
   });
 
   const [publicBookings, setPublicBookings] = useState(() => {
@@ -22,8 +22,19 @@ const Booking = () => {
   const [showPublicBookings, setShowPublicBookings] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('bookings', JSON.stringify(bookings));
-  }, [bookings]);
+    // Load bookings from dataStore whenever component mounts
+    setBookings(dataStore.getBookings());
+    
+    // Listen untuk perubahan booking via dataStore
+    const handleBookingChange = () => {
+      setBookings(dataStore.getBookings());
+    };
+    window.addEventListener('storage', handleBookingChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleBookingChange);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,11 +48,13 @@ const Booking = () => {
 
   const handleSaveBooking = (bookingData) => {
     if (editingBooking) {
+      dataStore.updateBooking(editingBooking.id, bookingData);
       setBookings(bookings.map(b => 
-        b.id === editingBooking.id ? { ...bookingData, id: editingBooking.id } : b
+        b.id === editingBooking.id ? { ...b, ...bookingData } : b
       ));
     } else {
-      setBookings([...bookings, { ...bookingData, id: Date.now(), status: 'pending' }]);
+      const newBooking = dataStore.addBooking({ ...bookingData, status: 'pending' });
+      setBookings([...bookings, newBooking]);
     }
     setShowForm(false);
     setEditingBooking(null);
@@ -54,11 +67,13 @@ const Booking = () => {
 
   const handleDeleteBooking = (id) => {
     if (window.confirm('Yakin ingin menghapus booking ini?')) {
+      dataStore.deleteBooking(id);
       setBookings(bookings.filter(b => b.id !== id));
     }
   };
 
   const handleStatusChange = (id, newStatus) => {
+    dataStore.updateBooking(id, { status: newStatus });
     setBookings(bookings.map(b => 
       b.id === id ? { ...b, status: newStatus } : b
     ));

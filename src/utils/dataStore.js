@@ -435,5 +435,40 @@ export const dataStore = {
     dataStore.setExpenses(filtered);
     window.dispatchEvent(new CustomEvent('expenseDeleted', { detail: { id } }));
     return true;
+  },
+
+  // Testimonials management
+  getTestimonials: () => dataStore.get('testimonials', []),
+  setTestimonials: (testimonials) => dataStore.set('testimonials', testimonials),
+
+  addTestimonial: (testimonial) => {
+    const testimonials = dataStore.getTestimonials();
+    const newTestimonial = {
+      ...testimonial,
+      id: nanoid(),
+      createdAt: new Date().toISOString(),
+      status: 'pending'
+    };
+    testimonials.push(newTestimonial);
+    dataStore.setTestimonials(testimonials);
+    window.dispatchEvent(new CustomEvent('testimonialAdded', { detail: newTestimonial }));
+    return newTestimonial;
+  },
+
+  updateTestimonial: (id, updates) => {
+    const testimonials = dataStore.getTestimonials();
+    const updated = testimonials.map(t => t.id === id ? { ...t, ...updates } : t);
+    dataStore.setTestimonials(updated);
+    const updatedTestimonial = updated.find(t => t.id === id);
+    window.dispatchEvent(new CustomEvent('testimonialUpdated', { detail: updatedTestimonial }));
+    return updatedTestimonial;
+  },
+
+  deleteTestimonial: (id) => {
+    const testimonials = dataStore.getTestimonials();
+    const filtered = testimonials.filter(t => t.id !== id);
+    dataStore.setTestimonials(filtered);
+    window.dispatchEvent(new CustomEvent('testimonialDeleted', { detail: { id } }));
+    return true;
   }
 };
