@@ -304,12 +304,12 @@ const FinancialTracking = () => {
   return (
     <div className="min-h-screen bg-background">
 
-      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
         {/* Header Section */}
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Icon name="Wallet" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
+              <Icon name="Wallet" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
             </div>
             <div>
               <h1 className="text-2xl font-heading font-bold text-foreground">

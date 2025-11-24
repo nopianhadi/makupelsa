@@ -45,7 +45,7 @@ const MonthView = ({ currentDate, events, onDateClick, onEventClick }) => {
 
   return (
     <div className="bg-card rounded-lg border border-border overflow-hidden">
-      <div className="grid grid-cols-7 gap-px bg-border">
+      <div className="grid grid-cols- w-full 7 gap-px bg-border">
         {weekDays?.map((day) => (
           <div
             key={day}
@@ -57,7 +57,7 @@ const MonthView = ({ currentDate, events, onDateClick, onEventClick }) => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-7 gap-px bg-border">
+      <div className="grid grid-cols- w-full 7 gap-px bg-border">
         {days?.map((date, index) => {
           const dayEvents = getEventsForDate(date);
           const isCurrentDay = isToday(date);

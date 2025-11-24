@@ -112,7 +112,7 @@ const InvoiceListModal = ({ client, onClose, onCreateInvoice }) => {
                           {getStatusLabel(invoice.status)}
                         </span>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 text-sm">
+                      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2 text-sm">
                         <div>
                           <span className="text-muted-foreground">Tanggal:</span>
                           <span className="ml-2 text-foreground">{invoice.date}</span>
@@ -206,7 +206,7 @@ const InvoiceListModal = ({ client, onClose, onCreateInvoice }) => {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Tanggal Invoice</p>
                       <p className="text-base font-medium text-foreground">{selectedInvoice.date}</p>

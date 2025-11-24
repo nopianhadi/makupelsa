@@ -251,7 +251,7 @@ const ProjectManagement = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
+        <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
           {/* Header */}
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center justify-between mb-4">
@@ -287,7 +287,7 @@ const ProjectManagement = () => {
                   </button>
                 </div>
                 <Button variant="primary" onClick={() => setIsAddModalOpen(true)}>
-                  <Icon name="Plus" size={16} sm:size={16} sm:size={16} sm:size={20} />
+                  <Icon name="Plus" size={20} sm:size={20} />
                   <span className="hidden sm:inline ml-2">Tambah Proyek</span>
                 </Button>
               </div>
@@ -439,38 +439,38 @@ const ProjectManagement = () => {
             )}
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
+            <div className="grid grid-cols- w-full 2 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
               <div className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon name="Briefcase" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                  <Icon name="Briefcase" size={20} sm:size={20} color="var(--color-primary)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total</span>
                 </div>
                 <p className="text-2xl font-bold text-foreground">{stats.total}</p>
               </div>
               <div className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon name="Clock" size={16} sm:size={16} sm:size={16} sm:size={20} color="rgb(59 130 246)" />
+                  <Icon name="Clock" size={20} sm:size={20} color="rgb(59 130 246)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Upcoming</span>
                 </div>
                 <p className="text-2xl font-bold text-foreground">{stats.upcoming}</p>
               </div>
               <div className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon name="PlayCircle" size={16} sm:size={16} sm:size={16} sm:size={20} color="rgb(234 179 8)" />
+                  <Icon name="PlayCircle" size={20} sm:size={20} color="rgb(234 179 8)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Progress</span>
                 </div>
                 <p className="text-2xl font-bold text-foreground">{stats.inProgress}</p>
               </div>
               <div className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon name="CheckCircle2" size={16} sm:size={16} sm:size={16} sm:size={20} color="rgb(34 197 94)" />
+                  <Icon name="CheckCircle2" size={20} sm:size={20} color="rgb(34 197 94)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Selesai</span>
                 </div>
                 <p className="text-2xl font-bold text-foreground">{stats.completed}</p>
               </div>
               <div className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon name="Wallet" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                  <Icon name="Wallet" size={20} sm:size={20} color="var(--color-primary)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Revenue</span>
                 </div>
                 <p className="text-lg font-bold text-foreground">
@@ -485,7 +485,7 @@ const ProjectManagement = () => {
                 <div className="flex-1 relative">
                   <Icon 
                     name="Search" 
-                    size={16} sm:size={16} sm:size={16} sm:size={20} 
+                    size={20} sm:size={20} 
                     className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" 
                   />
                   <input
@@ -598,13 +598,13 @@ const ProjectManagement = () => {
                   </p>
                   {!searchQuery && (
                     <Button variant="primary" onClick={() => setIsAddModalOpen(true)}>
-                      <Icon name="Plus" size={16} sm:size={16} sm:size={16} sm:size={20} />
+                      <Icon name="Plus" size={20} sm:size={20} />
                       <span className="ml-2">Tambah Proyek Pertama</span>
                     </Button>
                   )}
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredProjects.map((project) => {
                     const progress = calculateProgress(project.paid, project.budget);
                     return (
@@ -741,7 +741,7 @@ const ProjectManagement = () => {
                   {getStatusBadge(selectedProject.status)}
                 </div>
                 <Button variant="ghost" size="icon" onClick={() => setSelectedProject(null)}>
-                  <Icon name="X" size={18} sm:size={18} sm:size={24} />
+                  <Icon name="X" size={20} sm:size={24} />
                 </Button>
               </div>
 
@@ -749,16 +749,16 @@ const ProjectManagement = () => {
                 {/* Client Info */}
                 <div>
                   <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">INFORMASI KLIEN</h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols- w-full 2 gap-4">
                     <div className="flex items-center gap-3">
-                      <Icon name="User" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                      <Icon name="User" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Klien</p>
                         <p className="font-medium text-foreground">{selectedProject.client}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Icon name="Tag" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                      <Icon name="Tag" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Tipe</p>
                         <p className="font-medium text-foreground">{selectedProject.type}</p>
@@ -772,14 +772,14 @@ const ProjectManagement = () => {
                   <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">DETAIL ACARA</h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
-                      <Icon name="Calendar" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                      <Icon name="Calendar" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Tanggal</p>
                         <p className="font-medium text-foreground">{formatDate(selectedProject.date)}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Icon name="MapPin" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                      <Icon name="MapPin" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Lokasi</p>
                         <p className="font-medium text-foreground">{selectedProject.location}</p>
@@ -787,7 +787,7 @@ const ProjectManagement = () => {
                     </div>
                     {selectedProject.description && (
                       <div className="flex items-start gap-3">
-                        <Icon name="FileText" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                        <Icon name="FileText" size={20} sm:size={20} color="var(--color-primary)" />
                         <div>
                           <p className="text-xs text-muted-foreground">Deskripsi</p>
                           <p className="font-medium text-foreground">{selectedProject.description}</p>
@@ -882,7 +882,7 @@ const ProjectManagement = () => {
                       setSelectedProject(null);
                     }}
                   >
-                    <Icon name="Edit" size={16} sm:size={16} sm:size={16} sm:size={20} />
+                    <Icon name="Edit" size={20} sm:size={20} />
                     <span className="ml-2">Edit Proyek</span>
                   </Button>
                   <Button 
@@ -890,7 +890,7 @@ const ProjectManagement = () => {
                     onClick={() => handleDeleteProject(selectedProject.id)}
                     className="text-error hover:bg-error/10"
                   >
-                    <Icon name="Trash2" size={16} sm:size={16} sm:size={16} sm:size={20} />
+                    <Icon name="Trash2" size={20} sm:size={20} />
                     <span className="ml-2">Hapus</span>
                   </Button>
                 </div>

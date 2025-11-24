@@ -139,7 +139,7 @@ const ExpenseEntryForm = ({ onSubmit, onCancel }) => {
         error={errors?.description}
         required
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
         <Input
           label="Jumlah Pengeluaran (IDR)"
           type="number"
@@ -158,7 +158,7 @@ const ExpenseEntryForm = ({ onSubmit, onCancel }) => {
           onChange={(e) => handleChange('vendor', e?.target?.value)}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
         <Select
           label="Metode Pembayaran"
           options={paymentMethodOptions}

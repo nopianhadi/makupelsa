@@ -93,7 +93,7 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols- w-full 7 gap-2">
         {/* Day Headers */}
         {['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].map((day) => (
           <div key={day} className="text-center py-2 text-sm font-semibold text-muted-foreground">

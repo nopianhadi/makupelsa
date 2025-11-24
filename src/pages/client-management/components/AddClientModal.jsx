@@ -136,7 +136,7 @@ const AddClientModal = ({ onClose, onSave }) => {
                   required
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                   <Input
                     label="Nomor Telepon"
                     type="tel"
@@ -183,7 +183,7 @@ const AddClientModal = ({ onClose, onSave }) => {
                   required
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                   <Input
                     label="Tanggal Acara"
                     type="date"
@@ -225,7 +225,7 @@ const AddClientModal = ({ onClose, onSave }) => {
                   onChange={(value) => handleChange('packageId', value)}
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                   <Input
                     label="Total Pembayaran"
                     type="number"

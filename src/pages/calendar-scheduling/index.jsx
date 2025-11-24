@@ -130,7 +130,7 @@ const CalendarScheduling = () => {
   return (
     <div className="min-h-screen bg-background">
 
-      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
         <CalendarHeader
           currentDate={currentDate}
           onPrevMonth={handlePrevMonth}
@@ -240,7 +240,7 @@ const CalendarScheduling = () => {
                 onClick={() => setIsReminderModalOpen(false)}
                 className="p-1 hover:bg-muted rounded"
               >
-                <Icon name="X" size={18} sm:size={18} sm:size={24} />
+                <Icon name="X" size={20} sm:size={24} />
               </button>
             </div>
             <ReminderManager
@@ -263,7 +263,7 @@ const CalendarScheduling = () => {
                 onClick={() => setIsGoogleSyncModalOpen(false)}
                 className="p-1 hover:bg-muted rounded"
               >
-                <Icon name="X" size={18} sm:size={18} sm:size={24} />
+                <Icon name="X" size={20} sm:size={24} />
               </button>
             </div>
             <GoogleCalendarSync

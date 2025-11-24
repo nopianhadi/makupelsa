@@ -133,7 +133,7 @@ export default function Signup() {
           {/* Signup Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Two Column Layout for Desktop */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols- w-full 1 md:grid-cols-2 gap-5">
               {/* Full Name */}
               <div>
                 <label htmlFor="fullName" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
@@ -201,7 +201,7 @@ export default function Signup() {
             </div>
 
             {/* Two Column Layout for Contact Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols- w-full 1 md:grid-cols-2 gap-5">
               {/* Phone Number */}
               <div>
                 <label htmlFor="phoneNumber" className="block text-xs sm:text-sm font-medium text-foreground mb-2">

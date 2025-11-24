@@ -135,7 +135,7 @@ const Promotions = () => {
         <title>Manajemen Promo - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
+        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center justify-between mb-2">
               <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -183,7 +183,7 @@ const Promotions = () => {
           </div>
 
           {/* Promo Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {(activeTab === 'active' ? activePromotions : expiredPromotions).map(promo => (
               <div key={promo.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -191,7 +191,7 @@ const Promotions = () => {
                     <h3 className="font-semibold text-foreground mb-1">{promo.title}</h3>
                     <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">{promo.description}</p>
                   </div>
-                  <Icon name="Tag" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
+                  <Icon name="Tag" size={20} sm:size={20} color="var(--color-primary)" />
                 </div>
                 
                 <div className="space-y-2 mb-4">

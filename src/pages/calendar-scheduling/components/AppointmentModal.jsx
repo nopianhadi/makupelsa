@@ -76,7 +76,7 @@ const AppointmentModal = ({ isOpen, onClose, appointment, onSave }) => {
             required
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
             <Input
               label="Tanggal"
               type="date"
@@ -111,7 +111,7 @@ const AppointmentModal = ({ isOpen, onClose, appointment, onSave }) => {
             onChange={(e) => handleChange('notes', e?.target?.value)}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
             <Input
               label="Total Pembayaran (IDR)"
               type="number"

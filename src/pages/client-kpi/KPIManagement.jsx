@@ -127,7 +127,7 @@ const KPIManagement = () => {
           </div>
 
           {/* KPI Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {kpis.map((kpi) => (
               <div key={kpi.id} className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-start justify-between mb-4">
@@ -217,7 +217,7 @@ const KPIManagement = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1">
                       Nilai Saat Ini

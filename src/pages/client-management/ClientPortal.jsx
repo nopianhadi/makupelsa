@@ -236,7 +236,7 @@ const ClientPortal = () => {
         {/* Content */}
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             <button
               onClick={handleContactWhatsApp}
               className="bg-green-500 hover:bg-green-600 text-white rounded-lg p-4 flex items-center gap-3 transition-colors"
@@ -273,7 +273,7 @@ const ClientPortal = () => {
             <h2 className="text-lg font-heading font-bold text-foreground mb-4">
               Ringkasan Pembayaran
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Total Tagihan</p>
                 <p className="text-xl font-bold text-foreground font-mono">

@@ -72,7 +72,7 @@ const ManagementTipsPanel = () => {
       </button>
 
       {isExpanded && (
-        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 animate-fadeIn">
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 animate-fadeIn">
           {tips.map((tip, index) => (
             <div
               key={index}
@@ -106,7 +106,7 @@ const ManagementTipsPanel = () => {
                 <h4 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">
                   Workflow Rekomendasi
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div>
                     <p className="font-semibold text-blue-800 dark:text-blue-200 mb-1">Harian</p>
                     <ul className="text-blue-700 dark:text-blue-300 space-y-0.5">

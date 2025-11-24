@@ -87,7 +87,7 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols- w-full 1 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Nomor Invoice *
@@ -189,7 +189,7 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Pajak (%)

@@ -166,7 +166,7 @@ const FinancialReportPage = ({ incomes = [], expenses = [] }) => {
         </div>
 
         {/* Date Filter */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
               Dari Tanggal
@@ -207,7 +207,7 @@ const FinancialReportPage = ({ incomes = [], expenses = [] }) => {
       </div>
 
       {/* Summary Statistics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-card rounded-lg border border-border p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-muted-foreground">Total Pemasukan</span>
@@ -333,7 +333,7 @@ const FinancialReportPage = ({ incomes = [], expenses = [] }) => {
           <Icon name="CreditCard" size={20} />
           Breakdown Metode Pembayaran
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {Object.entries(stats.incomeByMethod)
             .sort((a, b) => b[1] - a[1])
             .map(([method, amount]) => {

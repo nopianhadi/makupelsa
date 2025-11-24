@@ -45,7 +45,7 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
                 onClick={onToggle}
             >
                 <div className={`w-10 h-10 rounded-lg ${iconBg} flex items-center justify-center`}>
-                    <Icon name={icon} size={16} sm:size={16} sm:size={16} sm:size={20} className={iconColor} />
+                    <Icon name={icon} size={20} sm:size={20} className={iconColor} />
                 </div>
                 <div className="flex-1">
                     <h2 className="text-lg font-bold text-foreground">{title}</h2>
@@ -57,7 +57,7 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
                 <button className="p-2 hover:bg-muted rounded-lg transition-colors">
                     <Icon 
                         name={isCollapsed ? "ChevronDown" : "ChevronUp"} 
-                        size={16} sm:size={16} sm:size={16} sm:size={20} 
+                        size={20} sm:size={20} 
                         className="text-muted-foreground"
                     />
                 </button>
@@ -362,12 +362,12 @@ const Leads = () => {
                 <title>Prospek - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+                <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
                     <div className="mb-4 sm:mb-6">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                                    <Icon name="Users" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                                    <Icon name="Users" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                                 </div>
                                 <div>
                                     <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -415,7 +415,7 @@ const Leads = () => {
                     {activeTab === 'list' && (
                         <>
                             {/* Statistics Cards */}
-                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-4 sm:mb-6">
+                            <div className="grid grid-cols- w-full 1 sm:grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-6 gap-3 mb-4 sm:mb-6">
                                 <div className="p-4 bg-card border border-border rounded-lg">
                                     <div className="text-2xl font-bold text-foreground">{stats.total}</div>
                                     <div className="text-xs text-muted-foreground">Total</div>
@@ -520,7 +520,7 @@ const Leads = () => {
                                 {/* Advanced Filters */}
                                 {showFilters && (
                                     <div className="p-4 bg-card border border-border rounded-lg space-y-3">
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                                             <div>
                                                 <label className="block text-xs font-medium text-muted-foreground mb-1">
                                                     Sumber

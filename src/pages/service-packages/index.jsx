@@ -324,12 +324,12 @@ const ServicePackages = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
 
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           {/* Header */}
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Icon name="Package" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                <Icon name="Package" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
               </div>
               <div>
                 <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -346,7 +346,7 @@ const ServicePackages = () => {
           <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-secondary/10 border border-primary/20 rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6 mb-4 sm:mb-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0">
-                <Icon name="Share2" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" />
+                <Icon name="Share2" size={20} sm:size={24} color="var(--color-primary)" />
               </div>
               <div className="flex-1">
                 <h3 className="text-base font-heading font-semibold text-foreground mb-1">
@@ -423,7 +423,7 @@ const ServicePackages = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols- w-full 1 sm:grid-cols-3 gap-3">
               <Select
                 options={filterTypeOptions}
                 value={filterType}
@@ -457,7 +457,7 @@ const ServicePackages = () => {
             {filteredPackages?.length === 0 ? (
               <div className="text-center py-12">
                 <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
-                  <Icon name="Package" size={18} sm:size={24} sm:size={32} color="var(--color-muted-foreground)" />
+                  <Icon name="Package" size={20} sm:size={32} color="var(--color-muted-foreground)" />
                 </div>
                 <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
                   Belum Ada Paket
@@ -475,7 +475,7 @@ const ServicePackages = () => {
                 </Button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
+              <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
                 {filteredPackages?.map((packageData) => (
                   <PackageCard
                     key={packageData?.id}

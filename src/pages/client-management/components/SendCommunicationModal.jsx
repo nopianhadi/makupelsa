@@ -83,7 +83,7 @@ const SendCommunicationModal = ({ client, onClose, onSave }) => {
 
         <div className="mb-6">
           <p className="text-sm font-medium text-foreground mb-3">Template Cepat:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {templates.map((template, index) => (
               <button
                 key={index}

@@ -49,7 +49,7 @@ const QuickInsightCard = ({ clients }) => {
   if (clients.length === 0) return null;
 
   return (
-    <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
       {/* Perlu Follow-up */}
       <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/30 dark:to-amber-900/20 rounded-lg p-4 border border-amber-200 dark:border-amber-900">
         <div className="flex items-center justify-between mb-2">

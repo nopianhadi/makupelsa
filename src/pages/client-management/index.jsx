@@ -526,7 +526,7 @@ const ClientManagement = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
 
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+        <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center justify-between mb-2">
               <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -586,7 +586,7 @@ const ClientManagement = () => {
               </div> :
 
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredClients?.map((client) =>
             <ClientCard
               key={client?.id}

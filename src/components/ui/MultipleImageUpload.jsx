@@ -209,7 +209,7 @@ const MultipleImageUpload = ({
 
       {/* Image Grid */}
       {safeImages.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols- w-full 2 md:grid-cols-3 gap-4">
           {safeImages.map((image, index) => (
             <div key={index} className="relative group">
               <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">

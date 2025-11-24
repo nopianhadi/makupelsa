@@ -187,7 +187,7 @@ const FinancialReportView = ({ reportData }) => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className="grid grid-cols-2 gap-2 mt-4">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2 mt-4">
           {reportData?.expenseBreakdown?.map((item) => (
             <div key={item?.category} className="flex items-center gap-2">
               <div 
@@ -202,7 +202,7 @@ const FinancialReportView = ({ reportData }) => {
         </div>
       </div>
       {/* Summary Statistics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="p-4 rounded-lg bg-success/10 border border-success/20">
           <div className="flex items-center gap-2 mb-2">
             <Icon name="TrendingUp" size={18} className="text-success" />

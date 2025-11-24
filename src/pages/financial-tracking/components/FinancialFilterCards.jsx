@@ -61,7 +61,7 @@ const FinancialFilterCards = ({ onFilterApply, activeFilters = {} }) => {
       {showFilters && (
         <div className="mt-4 p-4 rounded-lg bg-card border border-border space-y-4">
           {/* Date Range Filter */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 <Icon name="Calendar" size={14} className="inline mr-1" />
@@ -89,7 +89,7 @@ const FinancialFilterCards = ({ onFilterApply, activeFilters = {} }) => {
           </div>
 
           {/* Category & Service Type */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 <Icon name="Tag" size={14} className="inline mr-1" />
@@ -156,7 +156,7 @@ const FinancialFilterCards = ({ onFilterApply, activeFilters = {} }) => {
           </div>
 
           {/* Amount Range */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 <Icon name="DollarSign" size={14} className="inline mr-1" />

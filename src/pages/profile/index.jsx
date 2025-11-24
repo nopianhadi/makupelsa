@@ -68,11 +68,11 @@ const Profile = () => {
                 <title>Profil - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+                <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
                     <div className="mb-4 sm:mb-6">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                                <Icon name="User" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                                <Icon name="User" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                             </div>
                             <div>
                                 <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -92,7 +92,7 @@ const Profile = () => {
                                     {profileData.logoUrl ? (
                                         <img src={profileData.logoUrl} alt="Logo" className="w-full h-full object-cover" />
                                     ) : (
-                                        <Icon name="User" size={18} sm:size={24} sm:size={32} color="var(--color-primary)" />
+                                        <Icon name="User" size={20} sm:size={32} color="var(--color-primary)" />
                                     )}
                                 </div>
                                 <div>
@@ -168,7 +168,7 @@ const Profile = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nama Lengkap / Bisnis *
@@ -203,7 +203,7 @@ const Profile = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Kontak WhatsApp *
@@ -324,7 +324,7 @@ const Profile = () => {
                                     <Icon name="Image" size={18} color="var(--color-primary)" />
                                     Branding
                                 </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <ImageUpload
                                             label="Logo Bisnis"
@@ -354,7 +354,7 @@ const Profile = () => {
                                     Informasi Bank
                                 </h3>
                                 <div className="space-y-4">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nama Bank
@@ -493,7 +493,7 @@ const Profile = () => {
 
                                     <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
                                         <div className="flex items-start gap-3">
-                                            <Icon name="Info" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" className="flex-shrink-0 mt-0.5" />
+                                            <Icon name="Info" size={20} sm:size={20} color="var(--color-primary)" className="flex-shrink-0 mt-0.5" />
                                             <div className="text-xs sm:text-sm">
                                                 <p className="font-medium text-foreground mb-1">Tips Penggunaan:</p>
                                                 <ul className="text-muted-foreground space-y-1 list-disc list-inside">
@@ -520,7 +520,7 @@ const Profile = () => {
                                         }}
                                         className="w-full"
                                     >
-                                        <Icon name="LogOut" size={16} sm:size={16} sm:size={16} sm:size={20} className="mr-2" />
+                                        <Icon name="LogOut" size={20} sm:size={20} className="mr-2" />
                                         Keluar dari Akun
                                     </Button>
                                 </div>

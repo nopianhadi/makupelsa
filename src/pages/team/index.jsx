@@ -160,7 +160,7 @@ const Team = () => {
         <title>Manajemen Tim - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6">
+        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6">
           {/* Header */}
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
@@ -183,7 +183,7 @@ const Team = () => {
           </div>
 
           {/* Team Stats - Enhanced */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
             <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Anggota</span>
@@ -267,7 +267,7 @@ const Team = () => {
           </div>
 
           {/* Team Members Grid - Enhanced */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredMembers.length === 0 ? (
               <div className="col-span-full text-center py-12">
                 <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
@@ -326,7 +326,7 @@ const Team = () => {
                   </div>
 
                   {/* Payment Status */}
-                  <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
+                  <div className="grid grid-cols- w-full 2 gap-2 mb-4 text-xs">
                     <div className="bg-green-500/10 rounded-lg p-2">
                       <p className="text-muted-foreground">Sudah Bayar</p>
                       <p className="font-bold text-green-600">Rp {((member.paymentsPaid || 0) / 1000000).toFixed(1)} Jt</p>

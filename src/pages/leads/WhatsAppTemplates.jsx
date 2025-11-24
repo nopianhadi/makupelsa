@@ -173,7 +173,7 @@ const WhatsAppTemplates = () => {
                 </div>
             )}
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-1 sm:grid-cols-2">
                 {filteredTemplates.length === 0 ? (
                     <div className="col-span-2 text-center py-8 text-muted-foreground">
                         Tidak ada template dalam kategori ini

@@ -130,7 +130,7 @@ const AddPromotionModal = ({ isOpen, onClose, onSave }) => {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Kode Promo *
@@ -177,7 +177,7 @@ const AddPromotionModal = ({ isOpen, onClose, onSave }) => {
             {errors.discountValue && <p className="text-xs text-error mt-1">{errors.discountValue}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Tanggal Mulai *
@@ -207,7 +207,7 @@ const AddPromotionModal = ({ isOpen, onClose, onSave }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Maksimal Penggunaan

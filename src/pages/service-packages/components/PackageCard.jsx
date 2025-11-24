@@ -164,7 +164,7 @@ const PackageCard = ({
         )}
 
         {/* Stats */}
-        <div className="grid grid-cols-2 gap-3 mb-4 pt-4 border-t border-border">
+        <div className="grid grid-cols- w-full 2 gap-3 mb-4 pt-4 border-t border-border">
           <div className="text-center">
             <p className="text-xs font-caption text-muted-foreground mb-1">Total Booking</p>
             <p className="text-lg font-heading font-bold text-foreground">

@@ -179,7 +179,7 @@ const BookingForm = ({ booking, onClose, onSave }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Nama Klien *
@@ -290,7 +290,7 @@ const BookingForm = ({ booking, onClose, onSave }) => {
               Paket & Harga
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Pilih Paket

@@ -243,7 +243,7 @@ const PackageFormModal = ({
                 Harga
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                 <Input
                   label="Harga Dasar"
                   type="number"
@@ -264,7 +264,7 @@ const PackageFormModal = ({
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
                 <Input
                   label="Biaya Perjalanan (Opsional)"
                   type="number"

@@ -97,7 +97,7 @@ const PublicClient = () => {
         {/* Event Details */}
         <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 mb-6">
           <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Icon name="Calendar" size={16} sm:size={20} color="var(--color-primary)" />
+            <Icon name="Calendar" size={20} color="var(--color-primary)" />
             Detail Acara
           </h2>
           {clientData.events.map((event, index) => (
@@ -127,7 +127,7 @@ const PublicClient = () => {
         {/* Payment Status */}
         <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 mb-6">
           <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Icon name="Wallet" size={16} sm:size={20} color="var(--color-success)" />
+            <Icon name="Wallet" size={20} color="var(--color-success)" />
             Status Pembayaran
           </h2>
           {clientData.events.map((event, index) => (
@@ -163,7 +163,7 @@ const PublicClient = () => {
         {/* Payment History */}
         <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
           <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Icon name="Receipt" size={16} sm:size={20} color="var(--color-accent)" />
+            <Icon name="Receipt" size={20} color="var(--color-accent)" />
             Riwayat Pembayaran
           </h2>
           <div className="space-y-3">

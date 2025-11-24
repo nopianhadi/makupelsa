@@ -84,7 +84,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6 pb-24 lg:pb-6">
         {/* Header Section */}
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
@@ -114,7 +114,7 @@ const Dashboard = () => {
         </div>
 
         {/* Revenue Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6 w-full">
           <RevenueCard
             title="Total Pendapatan"
             amount={revenueData?.totalIncome}
@@ -150,14 +150,14 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6 mb-6">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-6 w-full">
           {/* Upcoming Schedule Section */}
           <div className="lg:col-span-2">
             <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Icon name="Calendar" size={16} sm:size={20} color="var(--color-primary)" strokeWidth={2.5} />
+                    <Icon name="Calendar" size={20} color="var(--color-primary)" strokeWidth={2.5} />
                   </div>
                   <div>
                     <h2 className="text-lg font-heading font-semibold text-foreground">
@@ -200,7 +200,7 @@ const Dashboard = () => {
             <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
-                  <Icon name="AlertCircle" size={16} sm:size={20} color="var(--color-error)" strokeWidth={2.5} />
+                  <Icon name="AlertCircle" size={20} color="var(--color-error)" strokeWidth={2.5} />
                 </div>
                 <div>
                   <h2 className="text-lg font-heading font-semibold text-foreground">
@@ -236,7 +236,7 @@ const Dashboard = () => {
         <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-              <Icon name="BarChart3" size={16} sm:size={20} color="var(--color-accent)" strokeWidth={2.5} />
+              <Icon name="BarChart3" size={20} color="var(--color-accent)" strokeWidth={2.5} />
             </div>
             <div>
               <h2 className="text-lg font-heading font-semibold text-foreground">
@@ -248,7 +248,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 w-full">
             {metrics?.map((metric, index) => (
               <MetricCard
                 key={index}
@@ -266,7 +266,7 @@ const Dashboard = () => {
         {/* Mobile Quick Actions */}
         <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40">
           <div className="bg-card border border-border rounded-lg p-4 elevation-6">
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2">
               <QuickActionButton
                 label="Tambah Klien"
                 icon="UserPlus"

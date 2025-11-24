@@ -109,12 +109,12 @@ const Booking = () => {
       
       <div className="min-h-screen bg-background">
         
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           <div className="mb-4 sm:mb-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Icon name="Calendar" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                  <Icon name="Calendar" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                 </div>
                 <div>
                   <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -156,7 +156,7 @@ const Booking = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4 sm:mb-6">
+            <div className="grid grid-cols- w-full 1 sm:grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-4 sm:mb-6">
               <button
                 onClick={() => setFilter('all')}
                 className={`p-4 rounded-xl border transition-smooth ${
@@ -219,11 +219,11 @@ const Booking = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredBookings.length === 0 ? (
               <div className="col-span-full text-center py-12">
                 <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <Icon name="Calendar" size={18} sm:size={24} sm:size={32} color="var(--color-muted-foreground)" />
+                  <Icon name="Calendar" size={20} sm:size={32} color="var(--color-muted-foreground)" />
                 </div>
                 <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
                   Belum Ada Booking
@@ -283,7 +283,7 @@ const Booking = () => {
                   onClick={() => setShowPublicBookings(false)}
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
                 >
-                  <Icon name="X" size={16} sm:size={16} sm:size={16} sm:size={20} />
+                  <Icon name="X" size={20} sm:size={20} />
                 </button>
               </div>
 
@@ -301,7 +301,7 @@ const Booking = () => {
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm mb-3">
+                      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-3 text-xs sm:text-sm mb-3">
                         <div>
                           <span className="text-muted-foreground">Layanan:</span>
                           <span className="ml-2 text-foreground capitalize">{booking.serviceType}</span>

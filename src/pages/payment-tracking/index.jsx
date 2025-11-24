@@ -318,7 +318,7 @@ const PaymentTracking = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
         <div className="mb-4 sm:mb-6">
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
@@ -340,7 +340,7 @@ const PaymentTracking = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
           <PaymentOverviewCard
             title="Total Tertunda"
             amount={paymentStats?.pending?.amount}
@@ -404,7 +404,7 @@ const PaymentTracking = () => {
           {filteredAndSortedClients?.length === 0 ?
             <div className="text-center py-12">
               <div className="w-16 h-16 rounded-2xl bg-muted mx-auto mb-4 flex items-center justify-center">
-                <Icon name="Search" size={18} sm:size={24} sm:size={32} color="var(--color-muted-foreground)" />
+                <Icon name="Search" size={20} sm:size={32} color="var(--color-muted-foreground)" />
               </div>
               <p className="text-base font-medium text-foreground mb-1">
                 Tidak ada hasil
@@ -414,7 +414,7 @@ const PaymentTracking = () => {
               </p>
             </div> :
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols- w-full 1 lg:grid-cols-2 gap-4">
               {filteredAndSortedClients?.map((client) =>
                 <ClientPaymentCard
                   key={client?.id}
@@ -505,7 +505,7 @@ const PaymentTracking = () => {
                 "
                 aria-label="Tutup">
 
-                <Icon name="X" size={16} sm:size={16} sm:size={16} sm:size={20} strokeWidth={2.5} />
+                <Icon name="X" size={20} sm:size={20} strokeWidth={2.5} />
               </button>
             </div>
             <PaymentHistoryTimeline payments={mockPaymentHistory} />

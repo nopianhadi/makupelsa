@@ -115,7 +115,7 @@ const AssistantDetailModal = ({ assistant, onClose }) => {
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
           {activeTab === 'overview' && (
             <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols- w-full 1 md:grid-cols-3 gap-4">
                 <div className="p-4 rounded-lg bg-surface border border-border">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-muted-foreground">Total Pendapatan</span>
@@ -160,7 +160,7 @@ const AssistantDetailModal = ({ assistant, onClose }) => {
                 <h3 className="text-lg font-heading font-bold text-foreground mb-4">
                   Informasi Asisten
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols- w-full 2 gap-4">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
                     <p className="text-sm text-foreground font-medium">{assistant.email || '-'}</p>
@@ -292,7 +292,7 @@ const AssistantDetailModal = ({ assistant, onClose }) => {
                   <p className="text-muted-foreground">Belum terlibat dalam proyek apapun</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols- w-full 1 md:grid-cols-2 gap-4">
                   {paymentSummary.projects.map((project) => (
                     <div
                       key={project.id}

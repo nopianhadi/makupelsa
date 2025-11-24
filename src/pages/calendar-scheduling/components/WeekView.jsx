@@ -47,9 +47,9 @@ const WeekView = ({ currentDate, events, onEventClick }) => {
 
   return (
     <div className="bg-card rounded-lg border border-border overflow-hidden">
-      <div className="overflow-x-auto">
+      <div className="w-full overflow-x-auto">
         <div className="min-w-[800px]">
-          <div className="grid grid-cols-8 gap-px bg-border sticky top-0 z-10">
+          <div className="grid grid-cols- w-full 8 gap-px bg-border sticky top-0 z-10">
             <div className="bg-surface px-3 py-3">
               <span className="text-xs font-caption font-semibold text-muted-foreground">
                 Waktu
@@ -84,7 +84,7 @@ const WeekView = ({ currentDate, events, onEventClick }) => {
             })}
           </div>
 
-          <div className="grid grid-cols-8 gap-px bg-border">
+          <div className="grid grid-cols- w-full 8 gap-px bg-border">
             {timeSlots?.map((time) => (
               <React.Fragment key={time}>
                 <div className="bg-surface px-3 py-4 border-t border-border">

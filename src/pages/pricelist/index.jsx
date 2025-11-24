@@ -101,11 +101,11 @@ const Pricelist = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
           <div className="mb-4 sm:mb-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Icon name="DollarSign" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                <Icon name="DollarSign" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
               </div>
               <div>
                 <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
@@ -192,7 +192,7 @@ const Pricelist = () => {
               )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
+            <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
               {filteredPricelists.map(pricelist => (
                 <PricelistCard
                   key={pricelist.id}

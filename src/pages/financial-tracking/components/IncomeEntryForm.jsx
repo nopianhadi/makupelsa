@@ -134,7 +134,7 @@ const IncomeEntryForm = ({ onSubmit, onCancel }) => {
         error={errors?.clientName}
         required
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
         <Select
           label="Jenis Layanan"
           options={serviceTypeOptions}
@@ -154,7 +154,7 @@ const IncomeEntryForm = ({ onSubmit, onCancel }) => {
           required
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
         <Input
           label="Jumlah Pembayaran (IDR)"
           type="number"

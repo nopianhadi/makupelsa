@@ -187,7 +187,7 @@ const PricelistForm = ({ pricelist, onSave, onClose }) => {
             })()}
             
             {formData.images.length > 0 && (
-              <div className="grid grid-cols-3 gap-2 mb-3 max-h-96 overflow-y-auto p-2 border border-border rounded-xl">
+              <div className="grid grid-cols- w-full 3 gap-2 mb-3 max-h-96 overflow-y-auto p-2 border border-border rounded-xl">
                 {formData.images.map((image, index) => (
                   <div key={index} className="relative group">
                     <img

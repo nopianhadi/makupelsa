@@ -114,7 +114,7 @@ const Testimonials = () => {
         <title>Testimoni - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
+        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
           <div className="mb-4 sm:mb-6">
             <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
               Testimoni Klien
@@ -125,7 +125,7 @@ const Testimonials = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
             <div className="bg-card border border-border rounded-lg p-4">
               <div className="text-2xl font-bold text-foreground">{testimonials.length}</div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Testimoni</div>
@@ -196,14 +196,14 @@ const Testimonials = () => {
                           className="p-2 hover:bg-success/10 rounded-lg transition-colors"
                           title="Setujui"
                         >
-                          <Icon name="Check" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-success)" />
+                          <Icon name="Check" size={20} sm:size={20} color="var(--color-success)" />
                         </button>
                         <button
                           onClick={() => handleReject(testimonial.id)}
                           className="p-2 hover:bg-destructive/10 rounded-lg transition-colors"
                           title="Tolak"
                         >
-                          <Icon name="X" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-destructive)" />
+                          <Icon name="X" size={20} sm:size={20} color="var(--color-destructive)" />
                         </button>
                       </>
                     )}
@@ -212,7 +212,7 @@ const Testimonials = () => {
                       className="p-2 hover:bg-destructive/10 rounded-lg transition-colors"
                       title="Hapus"
                     >
-                      <Icon name="Trash2" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-destructive)" />
+                      <Icon name="Trash2" size={20} sm:size={20} color="var(--color-destructive)" />
                     </button>
                   </div>
                 </div>

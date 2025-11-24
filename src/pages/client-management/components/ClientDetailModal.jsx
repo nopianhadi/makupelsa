@@ -183,7 +183,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                         {formatCurrency(event?.totalAmount)}
                       </span>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
                         <Icon name="Calendar" size={16} color="var(--color-muted-foreground)" />
                         <span className="text-sm text-foreground">
@@ -288,7 +288,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                              invoice.status === 'overdue' ? 'Jatuh Tempo' : 'Draft'}
                           </span>
                         </div>
-                        <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
                           <div>
                             <span>Tanggal: </span>
                             <span className="text-foreground">{invoice.date}</span>

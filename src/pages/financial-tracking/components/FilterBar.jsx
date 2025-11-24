@@ -80,7 +80,7 @@ const FilterBar = ({ onFilterChange, activeFilters }) => {
         </div>
       </div>
       <div className={`space-y-4 ${isExpanded ? 'block' : 'hidden lg:block'}`}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Input
             label="Dari Tanggal"
             type="date"
@@ -101,7 +101,7 @@ const FilterBar = ({ onFilterChange, activeFilters }) => {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Select
             label="Kategori Pengeluaran"
             options={categoryOptions}
@@ -114,7 +114,7 @@ const FilterBar = ({ onFilterChange, activeFilters }) => {
             value={activeFilters?.serviceType}
             onChange={(value) => onFilterChange({ ...activeFilters, serviceType: value })}
           />
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2">
             <Input
               label="Min. Jumlah"
               type="number"
