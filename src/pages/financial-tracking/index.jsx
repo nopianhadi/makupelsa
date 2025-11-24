@@ -467,14 +467,14 @@ const FinancialTracking = () => {
                       </button>
                     </div>
                     <IncomeEntryForm
-                      onSubmit={handleAddIncome}
+                      onSubmit={handleIncomeSubmit}
                       onCancel={() => setShowIncomeForm(false)}
                     />
                   </div>
                 )}
                 <IncomeList
                   incomes={filteredIncomes}
-                  onEdit={handleEditIncome}
+                  onEdit={(income) => console.log('Edit income:', income)}
                   onDelete={handleDeleteIncome}
                 />
               </div>
@@ -514,14 +514,14 @@ const FinancialTracking = () => {
                       </button>
                     </div>
                     <ExpenseEntryForm
-                      onSubmit={handleAddExpense}
+                      onSubmit={handleExpenseSubmit}
                       onCancel={() => setShowExpenseForm(false)}
                     />
                   </div>
                 )}
                 <ExpenseList
                   expenses={filteredExpenses}
-                  onEdit={handleEditExpense}
+                  onEdit={(expense) => console.log('Edit expense:', expense)}
                   onDelete={handleDeleteExpense}
                 />
               </div>
