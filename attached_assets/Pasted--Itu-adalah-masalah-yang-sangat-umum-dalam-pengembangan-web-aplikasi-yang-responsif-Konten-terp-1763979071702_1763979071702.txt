@@ -1,0 +1,65 @@
+
+Itu adalah masalah yang sangat umum dalam pengembangan web/aplikasi yang responsif!
+
+Konten terpotong di mode responsif (seperti yang terlihat pada pratinjau Replit Anda) biasanya mengindikasikan bahwa ada elemen dalam kode Anda yang memiliki lebar tetap (fixed width) atau tidak menggunakan satuan relatif yang seharusnya.
+
+Berikut adalah tiga penyebab utama dan solusi yang dapat Anda terapkan untuk mengatasi masalah konten terpotong tersebut:
+
+✂️ Mengapa Konten Terpotong dan Solusinya
+1. Masalah Viewport (Penyebab Paling Umum)
+Jika Anda menggunakan teknologi web (HTML/CSS, React, Vue, dsb.) di dalam Replit, browser di ponsel tidak tahu bagaimana harus menyesuaikan skala konten Anda kecuali Anda memberikan instruksi.
+
+🛠️ Solusi: Tambahkan Meta Viewport Tag
+Pastikan Anda memiliki tag meta ini di bagian <head> pada file HTML Anda:
+
+HTML
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+width=device-width: Ini memberi tahu browser untuk menjadikan lebar halaman sama dengan lebar layar perangkat (ponsel).
+
+initial-scale=1.0: Ini menetapkan tingkat zoom awal ke 100%.
+
+Jika tag ini tidak ada atau salah, browser akan mencoba menampilkan halaman seolah-olah itu adalah layar desktop, yang menyebabkan konten melebihi batas dan terpotong di ponsel.
+
+2. Penggunaan Ukuran Tetap (Fixed Width)
+Elemen tertentu mungkin memiliki nilai lebar yang tidak akan berubah, terlepas dari ukuran layar.
+
+🛠️ Solusi: Gunakan Satuan Relatif dan Maksimum Lebar
+Ganti px dengan % atau vw (Viewport Width): Hindari mengatur lebar elemen utama (wadah/container) menggunakan px (misalnya, width: 500px).
+
+Contoh Perbaikan: Ubah menjadi width: 90%; atau width: 100vw;.
+
+Atur Lebar Maksimum: Gunakan properti max-width untuk wadah utama Anda:
+
+CSS
+.container {
+    max-width: 100%; /* Wadah tidak akan melebihi lebar layar */
+    padding: 0 16px; /* Tambahkan padding agar konten tidak menempel di tepi */
+}
+3. Masalah Flexbox atau Grid Overflow
+Jika Anda menggunakan Flexbox atau Grid untuk tata letak, salah satu item mungkin tidak menyusut atau terlalu besar.
+
+🛠️ Solusi: Kelola Flex Item dan Teks Panjang
+Gunakan flex-shrink dan overflow: Jika elemen dalam Flexbox tidak menyusut, pastikan properti flex-shrink diatur, atau gunakan overflow-x: hidden; pada wadah jika tujuannya adalah memotong konten yang berlebihan.
+
+Teks Panjang: Pada gambar Anda, ada banyak teks seperti "Biaya Transportasi" atau "Metode Pembayaran." Jika teks ini terlalu panjang dan wadahnya (seperti Card) tidak memiliki lebar yang cukup, teks tersebut akan menyebabkan overflow.
+
+Perbaikan Teks: Gunakan properti word-wrap: break-word; atau overflow-wrap: break-word; agar teks panjang mau pindah baris:
+
+CSS
+.card-text {
+    word-wrap: break-word; /* Atau overflow-wrap: break-word; */
+}
+✅ Langkah Pemeriksaan Cepat
+Berdasarkan gambar pratinjau Anda, coba periksa kode Anda untuk elemen-elemen berikut:
+
+Cek Body dan HTML: Apakah body memiliki margin atau padding yang berlebihan?
+
+CSS
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Sangat direkomendasikan */
+}
+Cek Navigasi Horizontal: Anda menyebutkan "overflow-x-auto untuk horizontal scroll di mobile" di catatan kiri. Jika Anda menerapkan overflow-x: auto; pada elemen yang seharusnya tidak di-scroll (misalnya seluruh body), itu bisa menyebabkan masalah. Pastikan overflow-x: hidden; jika Anda ingin konten tidak terpotong.
+
+Cek Lebar Card: Pastikan lebar dari kartu utama (.card MUA Finance) tidak melebihi 100% dari wadah utamanya.
