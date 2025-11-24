@@ -19,6 +19,9 @@ const ProjectManagement = () => {
   const [editingProject, setEditingProject] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('date'); // 'date', 'budget', 'status'
+  const [filterBudgetRange, setFilterBudgetRange] = useState({ min: 0, max: 999999999 });
+  const [filterClient, setFilterClient] = useState('all');
   
   // State untuk tab dan filter proyek selesai
   const [activeTab, setActiveTab] = useState('active'); // 'active' atau 'completed'
@@ -151,9 +154,36 @@ const ProjectManagement = () => {
         getClientName(project).toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
+
+    // Apply budget range filter
+    filtered = filtered.filter(project => 
+      project.budget >= filterBudgetRange.min && project.budget <= filterBudgetRange.max
+    );
+
+    // Apply client filter
+    if (filterClient !== 'all') {
+      filtered = filtered.filter(project => project.clientId === filterClient);
+    }
+
+    // Apply sorting
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'budget':
+          return b.budget - a.budget;
+        case 'status':
+          const statusOrder = { 'upcoming': 0, 'in-progress': 1, 'completed': 2 };
+          return statusOrder[a.status] - statusOrder[b.status];
+        case 'date':
+        default:
+          return new Date(a.date) - new Date(b.date);
+      }
+    });
     
-    return filtered;
+    return sorted;
   })();
+
+  // Get unique clients for filter
+  const uniqueClients = [...new Set(projects.map(p => p.clientId))].filter(Boolean);
 
   const getStatusBadge = (status) => {
     const badges = {
@@ -450,7 +480,8 @@ const ProjectManagement = () => {
             </div>
 
             {viewMode === 'grid' && (
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="space-y-4">
+                {/* Search */}
                 <div className="flex-1 relative">
                   <Icon 
                     name="Search" 
@@ -465,7 +496,9 @@ const ProjectManagement = () => {
                     className="w-full pl-10 pr-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
-                <div className="flex gap-2 overflow-x-auto">
+
+                {/* Filters Row 1 - Status */}
+                <div className="flex gap-2 overflow-x-auto pb-2">
                   {[
                     { value: 'all', label: 'Semua' },
                     { value: 'upcoming', label: 'Akan Datang' },
@@ -484,6 +517,53 @@ const ProjectManagement = () => {
                       {item.label}
                     </button>
                   ))}
+                </div>
+
+                {/* Filters Row 2 - Advanced */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <select
+                    value={filterClient}
+                    onChange={(e) => setFilterClient(e.target.value)}
+                    className="px-4 py-2 bg-surface border border-input rounded-lg text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <option value="all">Semua Klien</option>
+                    {uniqueClients.map(clientId => {
+                      const client = clients.find(c => c.id === clientId);
+                      return (
+                        <option key={clientId} value={clientId}>
+                          {client?.name || 'Unknown'}
+                        </option>
+                      );
+                    })}
+                  </select>
+
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      placeholder="Min Budget"
+                      value={filterBudgetRange.min}
+                      onChange={(e) => setFilterBudgetRange(prev => ({ ...prev, min: parseInt(e.target.value) || 0 }))}
+                      className="px-3 py-2 bg-surface border border-input rounded-lg text-foreground text-sm w-28 focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <span className="px-2 py-2 text-muted-foreground">-</span>
+                    <input
+                      type="number"
+                      placeholder="Max Budget"
+                      value={filterBudgetRange.max}
+                      onChange={(e) => setFilterBudgetRange(prev => ({ ...prev, max: parseInt(e.target.value) || 999999999 }))}
+                      className="px-3 py-2 bg-surface border border-input rounded-lg text-foreground text-sm w-28 focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="px-4 py-2 bg-surface border border-input rounded-lg text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <option value="date">Urutkan: Tanggal</option>
+                    <option value="budget">Urutkan: Budget</option>
+                    <option value="status">Urutkan: Status</option>
+                  </select>
                 </div>
               </div>
             )}
