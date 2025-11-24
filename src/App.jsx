@@ -129,7 +129,7 @@ function App() {
                         <Route path="team" element={<Team />} />
                         <Route path="promotions" element={<Promotions />} />
                         <Route path="client-kpi" element={<ClientKPI />} />
-                        <Route path="kpi-management" element={<KPIManagement />} />
+                        <Route path="kpi-management" element={<ClientKPI />} />
                         <Route path="testimonials" element={<Testimonials />} />
                     </Route>
 

@@ -10,8 +10,7 @@ const SidebarLayout = ({ children }) => {
   const navigationItems = [
     { path: '/app/dashboard', label: 'Dashboard', icon: 'LayoutDashboard' },
     { path: '/app/client-management', label: 'Klien', icon: 'Users' },
-    { path: '/app/client-kpi', label: 'KPI Klien', icon: 'BarChart3' },
-    { path: '/app/kpi-management', label: 'Manajemen KPI', icon: 'Target' },
+    { path: '/app/client-kpi', label: 'KPI Bisnis', icon: 'BarChart3' },
     { path: '/app/project-management', label: 'Proyek', icon: 'Briefcase' },
     { path: '/app/calendar-scheduling', label: 'Kalender', icon: 'Calendar' },
     { path: '/app/financial-tracking', label: 'Keuangan', icon: 'TrendingUp' },
