@@ -1,0 +1,383 @@
+/* Mobile Component Optimizations */
+
+@media (max-width: 640px) {
+  /* Card optimizations */
+  .card,
+  [class*="Card"] {
+    padding: 0.75rem !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .card-header,
+  [class*="CardHeader"] {
+    padding: 0.5rem 0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .card-title,
+  [class*="CardTitle"] {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
+
+  .card-description,
+  [class*="CardDescription"] {
+    font-size: 0.625rem !important;
+    line-height: 0.875rem !important;
+  }
+
+  .card-content,
+  [class*="CardContent"] {
+    padding: 0 !important;
+  }
+
+  .card-footer,
+  [class*="CardFooter"] {
+    padding: 0.75rem 0 0 !important;
+    gap: 0.5rem !important;
+  }
+
+  /* List optimizations */
+  .list-item,
+  [class*="ListItem"] {
+    padding: 0.5rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .list-item-title {
+    font-size: 0.75rem !important;
+  }
+
+  .list-item-description {
+    font-size: 0.625rem !important;
+  }
+
+  /* Avatar optimizations */
+  .avatar {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  .avatar-sm {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  .avatar-lg {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  /* Badge optimizations */
+  .badge {
+    font-size: 0.625rem !important;
+    padding: 0.125rem 0.375rem !important;
+    border-radius: 0.25rem !important;
+  }
+
+  /* Chip optimizations */
+  .chip {
+    font-size: 0.625rem !important;
+    padding: 0.25rem 0.5rem !important;
+    gap: 0.25rem !important;
+  }
+
+  /* Status indicator */
+  .status-indicator {
+    width: 0.5rem !important;
+    height: 0.5rem !important;
+  }
+
+  /* Divider */
+  .divider {
+    margin: 0.75rem 0 !important;
+  }
+
+  /* Section header */
+  .section-header {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Empty state */
+  .empty-state {
+    padding: 2rem 1rem !important;
+  }
+
+  .empty-state-icon {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+
+  .empty-state-title {
+    font-size: 0.875rem !important;
+  }
+
+  .empty-state-description {
+    font-size: 0.75rem !important;
+  }
+
+  /* Loading state */
+  .loading-spinner {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  /* Skeleton */
+  .skeleton {
+    height: 0.75rem !important;
+  }
+
+  .skeleton-title {
+    height: 1rem !important;
+  }
+
+  .skeleton-avatar {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  /* Stats card */
+  .stats-card {
+    padding: 0.75rem !important;
+  }
+
+  .stats-value {
+    font-size: 1rem !important;
+  }
+
+  .stats-label {
+    font-size: 0.625rem !important;
+  }
+
+  .stats-change {
+    font-size: 0.625rem !important;
+  }
+
+  /* Timeline */
+  .timeline-item {
+    padding-left: 1.5rem !important;
+  }
+
+  .timeline-dot {
+    width: 0.5rem !important;
+    height: 0.5rem !important;
+    left: 0.25rem !important;
+  }
+
+  .timeline-content {
+    font-size: 0.75rem !important;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 0.375rem !important;
+  }
+
+  .progress-label {
+    font-size: 0.625rem !important;
+  }
+
+  /* Alert */
+  .alert {
+    padding: 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .alert-title {
+    font-size: 0.875rem !important;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    font-size: 0.625rem !important;
+    gap: 0.25rem !important;
+  }
+
+  .breadcrumb-item {
+    padding: 0.25rem !important;
+  }
+
+  /* Pagination */
+  .pagination {
+    gap: 0.25rem !important;
+  }
+
+  .pagination-item {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Search bar */
+  .search-bar {
+    height: 2rem !important;
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+  }
+
+  /* Filter chip */
+  .filter-chip {
+    font-size: 0.625rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  /* Action sheet */
+  .action-sheet {
+    padding: 0.75rem !important;
+  }
+
+  .action-sheet-item {
+    padding: 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Bottom sheet */
+  .bottom-sheet {
+    max-height: 80vh !important;
+    border-radius: 1rem 1rem 0 0 !important;
+  }
+
+  .bottom-sheet-header {
+    padding: 1rem !important;
+  }
+
+  .bottom-sheet-content {
+    padding: 0 1rem 1rem !important;
+  }
+
+  /* Floating action button */
+  .fab {
+    width: 3rem !important;
+    height: 3rem !important;
+    bottom: 5rem !important;
+    right: 1rem !important;
+  }
+
+  .fab-mini {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  /* Stepper */
+  .stepper {
+    gap: 0.5rem !important;
+  }
+
+  .stepper-step {
+    font-size: 0.625rem !important;
+  }
+
+  .stepper-circle {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  /* Rating */
+  .rating-star {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  /* Calendar */
+  .calendar-day {
+    width: 2rem !important;
+    height: 2rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  .calendar-header {
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+  }
+
+  /* Data table */
+  .data-table {
+    font-size: 0.625rem !important;
+  }
+
+  .data-table th {
+    padding: 0.375rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  .data-table td {
+    padding: 0.375rem !important;
+  }
+
+  /* Form group */
+  .form-group {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .form-label {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .form-helper-text {
+    font-size: 0.625rem !important;
+    margin-top: 0.25rem !important;
+  }
+
+  .form-error {
+    font-size: 0.625rem !important;
+    margin-top: 0.25rem !important;
+  }
+
+  /* Switch */
+  .switch {
+    width: 2rem !important;
+    height: 1rem !important;
+  }
+
+  .switch-thumb {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+  }
+
+  /* Radio & Checkbox */
+  .radio,
+  .checkbox {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  /* Slider */
+  .slider {
+    height: 0.25rem !important;
+  }
+
+  .slider-thumb {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    font-size: 0.625rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+}
+
+/* Extra small devices (< 360px) */
+@media (max-width: 360px) {
+  .card {
+    padding: 0.5rem !important;
+  }
+
+  .card-title {
+    font-size: 0.75rem !important;
+  }
+
+  .stats-value {
+    font-size: 0.875rem !important;
+  }
+
+  .avatar {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+}

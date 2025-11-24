@@ -5,6 +5,7 @@ import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import ImageUpload from '../../components/ui/ImageUpload';
 import { useAuth } from '../../contexts/AuthContext';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Profile = () => {
     const { user, signOut } = useAuth();
@@ -68,14 +69,14 @@ const Profile = () => {
                 <title>Profil - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-                    <div className="mb-4 sm:mb-6">
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
+                    <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+                        <div className={cn("flex items-center  mb-2", mobileClasses.gapSmall)}>
+                            <div className={cn(" rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconLarge)}>
                                 <Icon name="User" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                             </div>
                             <div>
-                                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                                <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                                     Profil Saya
                                 </h1>
                                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -85,10 +86,10 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6 mb-4 sm:mb-6">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6 pb-6 border-b border-border">
-                            <div className="flex items-center gap-4">
-                                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-2xl font-bold text-primary overflow-hidden border-2 border-primary/20">
+                    <div className={cn("bg-card border border-border rounded-2xl p-3 sm:p-4 lg: mb-4 sm:mb-6", mobileClasses.card)}>
+                        <div className={cn("flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:ga mb-3 sm:mb-4 sm:mb-4 sm:mb-6 pb-6 border-b border-border", mobileClasses.cardCompact)}>
+                            <div className={cn("flex items-center ga", mobileClasses.cardCompact)}>
+                                <div className={cn("w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center  font-bold text-primary overflow-hidden border-2 border-primary/20", mobileClasses.heading2)}>
                                     {profileData.logoUrl ? (
                                         <img src={profileData.logoUrl} alt="Logo" className="w-full h-full object-cover" />
                                     ) : (
@@ -96,7 +97,7 @@ const Profile = () => {
                                     )}
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-heading font-bold text-foreground mb-1">
+                                    <h2 className={cn(" font-heading font-bold text-foreground mb-1", mobileClasses.heading3)}>
                                         {profileData.name || user?.email || 'Nama Bisnis'}
                                     </h2>
                                     <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Makeup Artist Professional</p>
@@ -146,7 +147,7 @@ const Profile = () => {
 
                         <div className="space-y-6">
                             <div>
-                                <h3 className="text-base font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                                     <Icon name="User" size={18} color="var(--color-primary)" />
                                     Informasi Pribadi
                                 </h3>
@@ -168,7 +169,7 @@ const Profile = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
+                                    <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                                         <div>
                                             <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nama Lengkap / Bisnis *
@@ -203,7 +204,7 @@ const Profile = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
+                                    <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                                         <div>
                                             <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Kontak WhatsApp *
@@ -268,7 +269,7 @@ const Profile = () => {
                             </div>
 
                             <div className="pt-6 border-t border-border">
-                                <h3 className="text-base font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                                     <Icon name="Globe" size={18} color="var(--color-primary)" />
                                     Media Sosial & Website
                                 </h3>
@@ -320,11 +321,11 @@ const Profile = () => {
                             </div>
 
                             <div className="pt-6 border-t border-border">
-                                <h3 className="text-base font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                                     <Icon name="Image" size={18} color="var(--color-primary)" />
                                     Branding
                                 </h3>
-                                <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
+                                <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                                     <div>
                                         <ImageUpload
                                             label="Logo Bisnis"
@@ -349,12 +350,12 @@ const Profile = () => {
                             </div>
 
                             <div className="pt-6 border-t border-border">
-                                <h3 className="text-base font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                                     <Icon name="CreditCard" size={18} color="var(--color-primary)" />
                                     Informasi Bank
                                 </h3>
                                 <div className="space-y-4">
-                                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
+                                    <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                                         <div>
                                             <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                                                 Nama Bank
@@ -408,7 +409,7 @@ const Profile = () => {
                             </div>
 
                             <div className="pt-6 border-t border-border">
-                                <h3 className="text-base font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                                     <Icon name="Link" size={18} color="var(--color-primary)" />
                                     Link Publik untuk Klien
                                 </h3>
@@ -491,8 +492,8 @@ const Profile = () => {
                                         </div>
                                     </div>
 
-                                    <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
-                                        <div className="flex items-start gap-3">
+                                    <div className={cn(" bg-primary/10 rounded-xl border border-primary/20", mobileClasses.cardCompact)}>
+                                        <div className={cn("flex items-start ", mobileClasses.gapSmall)}>
                                             <Icon name="Info" size={20} sm:size={20} color="var(--color-primary)" className="flex-shrink-0 mt-0.5" />
                                             <div className="text-xs sm:text-sm">
                                                 <p className="font-medium text-foreground mb-1">Tips Penggunaan:</p>
@@ -509,7 +510,7 @@ const Profile = () => {
                             </div>
 
                             <div className="pt-6 border-t border-border">
-                                <div className="flex flex-col gap-3">
+                                <div className={cn("flex flex-col ", mobileClasses.gapSmall)}>
                                     <Button
                                         variant="destructive"
                                         size="lg"

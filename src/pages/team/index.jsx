@@ -4,6 +4,7 @@ import Icon from '../../components/AppIcon';
 import QuickActionButton from '../../components/ui/QuickActionButton';
 import AddTeamMemberModal from './components/AddTeamMemberModal';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Team = () => {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -160,11 +161,11 @@ const Team = () => {
         <title>Manajemen Tim - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6">
+        <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-4 sm:py-6", mobileClasses.card)}>
           {/* Header */}
-          <div className="mb-4 sm:mb-6">
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
             <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+              <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                 Manajemen Tim
               </h1>
               <QuickActionButton
@@ -183,47 +184,47 @@ const Team = () => {
           </div>
 
           {/* Team Stats - Enhanced */}
-          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+          <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 lg:ga mb-4 sm:mb-6", mobileClasses.cardCompact)}>
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:", mobileClasses.card)}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Anggota</span>
                 <Icon name="Users" size={16} color="var(--color-primary)" />
               </div>
-              <div className="text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stats.total}</div>
+              <div className={cn("text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>{stats.total}</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:", mobileClasses.card)}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Aktif</span>
                 <Icon name="CheckCircle2" size={16} color="rgb(34 197 94)" />
               </div>
-              <div className="text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stats.active}</div>
+              <div className={cn("text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>{stats.active}</div>
               <div className="text-xs text-muted-foreground mt-1">{Math.round((stats.active / stats.total) * 100)}%</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:", mobileClasses.card)}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran Lunas</span>
                 <Icon name="CheckCircle" size={16} color="rgb(34 197 94)" />
               </div>
-              <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsPaid / 1000000).toFixed(1)} Jt</div>
+              <div className={cn("text-base sm:text-lg lg: font-bold text-foreground", mobileClasses.heading2)}>Rp {(stats.totalPaymentsPaid / 1000000).toFixed(1)} Jt</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:", mobileClasses.card)}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran Tertunda</span>
                 <Icon name="Clock" size={16} color="rgb(234 179 8)" />
               </div>
-              <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsUnpaid / 1000000).toFixed(1)} Jt</div>
+              <div className={cn("text-base sm:text-lg lg: font-bold text-foreground", mobileClasses.heading2)}>Rp {(stats.totalPaymentsUnpaid / 1000000).toFixed(1)} Jt</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:", mobileClasses.card)}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Pembayaran</span>
                 <Icon name="Wallet" size={16} color="var(--color-primary)" />
               </div>
-              <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPayments / 1000000).toFixed(1)} Jt</div>
+              <div className={cn("text-base sm:text-lg lg: font-bold text-foreground", mobileClasses.heading2)}>Rp {(stats.totalPayments / 1000000).toFixed(1)} Jt</div>
             </div>
           </div>
 
           {/* Search & Filter - Enhanced */}
-          <div className="mb-4 sm:mb-6 flex flex-col gap-2 sm:gap-3">
+          <div className={cn("mb-4 sm:mb-6 flex flex-col gap-2 sm:", mobileClasses.gapSmall)}>
             <div className="flex-1 relative">
               <Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
@@ -234,7 +235,7 @@ const Team = () => {
                 className="w-full pl-9 pr-3 py-2 sm:py-2 sm:py-3 text-xs sm:text-sm sm:text-base bg-surface border border-input rounded-lg sm:rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-            <div className="flex gap-2 sm:gap-3">
+            <div className={cn("flex gap-2 sm:", mobileClasses.gapSmall)}>
               <select
                 value={filterRole}
                 onChange={(e) => setFilterRole(e.target.value)}
@@ -267,19 +268,19 @@ const Team = () => {
           </div>
 
           {/* Team Members Grid - Enhanced */}
-          <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className={cn("grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
             {filteredMembers.length === 0 ? (
               <div className="col-span-full text-center py-12">
-                <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                <div className={cn("w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto ", mobileClasses.marginBottomSmall)}>
                   <Icon name="Users" size={40} color="var(--color-muted-foreground)" />
                 </div>
                 <p className="text-muted-foreground">Tidak ada anggota tim yang cocok</p>
               </div>
             ) : (
               filteredMembers.map(member => (
-                <div key={member.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow group">
+                <div key={member.id} className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg: hover:shadow-lg transition-shadow group", mobileClasses.card)}>
                   {/* Status Badge */}
-                  <div className="absolute top-4 right-4">
+                  <div className={cn("absolute to right-4", mobileClasses.cardCompact)}>
                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
                       member.status === 'active' 
                         ? 'bg-green-500/10 text-green-600' 
@@ -289,7 +290,7 @@ const Team = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-start gap-4 mb-4">
+                  <div className={cn("flex items-start ga mb-4", mobileClasses.cardCompact)}>
                     <img 
                       src={member.avatar} 
                       alt={member.name}
@@ -306,7 +307,7 @@ const Team = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2 mb-4">
+                  <div className={cn("space-y-2 ", mobileClasses.marginBottomSmall)}>
                     <div className="flex items-center gap-2 text-xs sm:text-sm">
                       <Icon name="Mail" size={16} color="var(--color-muted-foreground)" />
                       <span className="text-muted-foreground truncate">{member.email}</span>
@@ -317,7 +318,7 @@ const Team = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className={cn("flex flex-wrap gap-2 ", mobileClasses.marginBottomSmall)}>
                     {member.specialties.map((specialty, idx) => (
                       <span key={idx} className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
                         {specialty}
@@ -326,7 +327,7 @@ const Team = () => {
                   </div>
 
                   {/* Payment Status */}
-                  <div className="grid grid-cols- w-full 2 gap-2 mb-4 text-xs">
+                  <div className={cn("grid grid-cols- w-full 2 gap-2  text-xs", mobileClasses.marginBottomSmall)}>
                     <div className="bg-green-500/10 rounded-lg p-2">
                       <p className="text-muted-foreground">Sudah Bayar</p>
                       <p className="font-bold text-green-600">Rp {((member.paymentsPaid || 0) / 1000000).toFixed(1)} Jt</p>
@@ -373,11 +374,11 @@ const Team = () => {
 
           {/* Member Detail Modal */}
           {selectedMember && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-3 sm:p-4 lg:p-6">
-                <div className="flex items-start justify-between mb-6">
+            <div className={cn("fixed inset-0 bg-black/50 flex items-center justify-center z-50 ", mobileClasses.cardCompact)}>
+              <div className={cn("bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-3 sm:p-4 lg:", mobileClasses.card)}>
+                <div className={cn("flex items-start justify-between ", mobileClasses.marginBottom)}>
                   <div className="flex-1">
-                    <h2 className="text-2xl font-heading font-bold text-foreground mb-2">
+                    <h2 className={cn(" font-heading font-bold text-foreground mb-2", mobileClasses.heading2)}>
                       {selectedMember.name}
                     </h2>
                     <p className="text-xs sm:text-sm text-muted-foreground">{selectedMember.role}</p>
@@ -392,7 +393,7 @@ const Team = () => {
 
                 <div className="space-y-6">
                   {/* Profile */}
-                  <div className="flex items-center gap-3 sm:p-4 lg:p-6">
+                  <div className={cn("flex items-center gap-3 sm:p-4 lg:", mobileClasses.card)}>
                     <img 
                       src={selectedMember.avatar} 
                       alt={selectedMember.name}
@@ -408,17 +409,17 @@ const Team = () => {
                           {selectedMember.status === 'active' ? 'Aktif' : 'Nonaktif'}
                         </span>
                       </div>
-                      <div className="flex items-center gap-4">
+                      <div className={cn("flex items-center ga", mobileClasses.cardCompact)}>
                         <div>
                           <p className="text-xs text-muted-foreground">Rating</p>
-                          <p className="text-2xl font-bold flex items-center gap-1">
+                          <p className={cn(" font-bold flex items-center gap-1", mobileClasses.heading2)}>
                             {selectedMember.rating}
                             <Icon name="Star" size={16} color="var(--color-warning)" />
                           </p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Pekerjaan Selesai</p>
-                          <p className="text-2xl font-bold">{selectedMember.completedJobs}</p>
+                          <p className={cn(" font-bold", mobileClasses.heading2)}>{selectedMember.completedJobs}</p>
                         </div>
                       </div>
                     </div>
@@ -454,7 +455,7 @@ const Team = () => {
                   {/* Performance */}
                   <div>
                     <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">PERFORMA</h3>
-                    <div className="bg-surface rounded-lg overflow-hidden p-4 space-y-3">
+                    <div className={cn("bg-surface rounded-lg overflow-hidden  space-y-3", mobileClasses.cardCompact)}>
                       <div className="flex justify-between items-center">
                         <span className="text-xs sm:text-sm text-muted-foreground">Rating</span>
                         <div className="flex items-center gap-2">
@@ -472,7 +473,7 @@ const Team = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex gap-3 pt-4 border-t border-border">
+                  <div className={cn("flex  pt-4 border-t border-border", mobileClasses.gapSmall)}>
                     <button 
                       onClick={() => {
                         setEditingMember(selectedMember);

@@ -12,6 +12,7 @@ import RecordPaymentClientModal from './components/RecordPaymentClientModal';
 import SendCommunicationModal from './components/SendCommunicationModal';
 import ShareLinkModal from './components/ShareLinkModal';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const ClientManagement = () => {
   const [clients, setClients] = useState([]);
@@ -526,10 +527,10 @@ const ClientManagement = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
 
-        <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-          <div className="mb-4 sm:mb-6">
+        <main className={cn("w-full max-w-full-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-lg sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+              <h1 className={cn("text-lg sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                 Manajemen Klien
               </h1>
               <QuickActionButton
@@ -546,7 +547,7 @@ const ClientManagement = () => {
             </p>
           </div>
 
-          <div className="mb-4 sm:mb-6">
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
             <ClientSearchFilter
               onSearch={handleSearch}
               onFilter={handleFilter}
@@ -555,7 +556,7 @@ const ClientManagement = () => {
 
           </div>
 
-          <div className="mb-4 flex items-center justify-between">
+          <div className={cn(" flex items-center justify-between", mobileClasses.marginBottomSmall)}>
             <p className="text-xs sm:text-sm text-muted-foreground">
               Menampilkan {filteredClients?.length} dari {clients?.length} klien
             </p>
@@ -574,10 +575,10 @@ const ClientManagement = () => {
           <EmptyState onAddClient={() => setIsAddModalOpen(true)} /> :
 
           <div className="text-center py-16">
-                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🔍</span>
+                <div className={cn("w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto ", mobileClasses.marginBottomSmall)}>
+                  <span className={cn("", mobileClasses.heading2)}>🔍</span>
                 </div>
-                <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                <h3 className={cn(" font-heading font-semibold text-foreground mb-2", mobileClasses.heading4)}>
                   Tidak Ada Hasil
                 </h3>
                 <p className="text-xs sm:text-sm text-muted-foreground">
@@ -586,7 +587,7 @@ const ClientManagement = () => {
               </div> :
 
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-4">
+          <div className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full ga", mobileClasses.cardCompact)}>
               {filteredClients?.map((client) =>
             <ClientCard
               key={client?.id}

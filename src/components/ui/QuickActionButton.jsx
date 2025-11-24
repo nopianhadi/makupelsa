@@ -18,15 +18,15 @@ const QuickActionButton = ({
   };
 
   const sizeStyles = {
-    small: 'px-3 py-2 text-sm gap-1.5',
-    default: 'px-4 py-2.5 text-sm gap-2',
-    large: 'px-5 py-3 text-base gap-2.5'
+    small: 'px-2 py-1.5 text-[10px] gap-1 sm:px-3 sm:py-2 sm:text-sm sm:gap-1.5',
+    default: 'px-2.5 py-2 text-xs gap-1.5 sm:px-4 sm:py-2.5 sm:text-sm sm:gap-2',
+    large: 'px-3 py-2.5 text-sm gap-2 sm:px-5 sm:py-3 sm:text-base sm:gap-2.5'
   };
 
   const iconSizes = {
-    small: 16,
-    default: 18,
-    large: 20
+    small: 14,
+    default: 16,
+    large: 18
   };
 
   return (

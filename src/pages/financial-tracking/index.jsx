@@ -13,6 +13,7 @@ import FinancialFilterCards from './components/FinancialFilterCards';
 import FinancialReportPage from './components/FinancialReportPage';
 import { exportIncomeCSV, exportExpenseCSV } from '../../utils/financialExport';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const FinancialTracking = () => {
   const [activeTab, setActiveTab] = useState('income');
@@ -304,15 +305,15 @@ const FinancialTracking = () => {
   return (
     <div className="min-h-screen bg-background">
 
-      <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
         {/* Header Section */}
-        <div className="mb-4 sm:mb-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+        <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+          <div className={cn("flex items-center  mb-2", mobileClasses.gapSmall)}>
+            <div className={cn(" rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconMedium)}>
               <Icon name="Wallet" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
             </div>
             <div>
-              <h1 className="text-2xl font-heading font-bold text-foreground">
+              <h1 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading2)}>
                 Pelacakan Keuangan
               </h1>
               <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -329,7 +330,7 @@ const FinancialTracking = () => {
         <FinancialSummaryCards summaryData={summaryData} />
 
         {/* Quick Actions */}
-        <div className="flex items-center gap-3 my-6 overflow-x-auto pb-2">
+        <div className={cn("flex items-center  my-6 overflow-x-auto pb-2", mobileClasses.gapSmall)}>
           <QuickActionButton
             label="Catat Pemasukan"
             icon="Plus"
@@ -424,8 +425,8 @@ const FinancialTracking = () => {
           {activeTab === 'income' && (
             <div className="space-y-6">
               {showIncomeForm && (
-                <div className="p-4 rounded-lg bg-card border border-border elevation-3">
-                  <div className="flex items-center justify-between mb-4">
+                <div className={cn(" rounded-lg bg-card border border-border elevation-3", mobileClasses.cardCompact)}>
+                  <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
                     <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground truncate">
                       Catat Pemasukan Baru
                     </h3>
@@ -443,7 +444,7 @@ const FinancialTracking = () => {
                   />
                 </div>
               )}
-              <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
+              <div className={cn(" p-3 rounded-lg bg-muted/50 border border-border", mobileClasses.marginBottomSmall)}>
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                   Menampilkan <span className="font-semibold text-foreground truncate">{filteredIncomes.length}</span> dari {incomes.length} data pemasukan
                 </p>
@@ -459,8 +460,8 @@ const FinancialTracking = () => {
           {activeTab === 'expense' && (
             <div className="space-y-6">
               {showExpenseForm && (
-                <div className="p-4 rounded-lg bg-card border border-border elevation-3">
-                  <div className="flex items-center justify-between mb-4">
+                <div className={cn(" rounded-lg bg-card border border-border elevation-3", mobileClasses.cardCompact)}>
+                  <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
                     <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground truncate">
                       Tambah Pengeluaran Baru
                     </h3>
@@ -478,7 +479,7 @@ const FinancialTracking = () => {
                   />
                 </div>
               )}
-              <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
+              <div className={cn(" p-3 rounded-lg bg-muted/50 border border-border", mobileClasses.marginBottomSmall)}>
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                   Menampilkan <span className="font-semibold text-foreground truncate">{filteredExpenses.length}</span> dari {expenses.length} data pengeluaran
                 </p>

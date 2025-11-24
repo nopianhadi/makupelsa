@@ -5,6 +5,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import App from "./App";
 import "./styles/tailwind.css";
 import "./styles/index.css";
+import "./styles/mobile-modal-fix.css";
+import "./styles/mobile-components.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

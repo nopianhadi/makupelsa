@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Icon from '../../components/AppIcon';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -114,9 +115,9 @@ const Testimonials = () => {
         <title>Testimoni - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
-          <div className="mb-4 sm:mb-6">
-            <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
+        <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6", mobileClasses.card)}>
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+            <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground mb-2", mobileClasses.heading1)}>
               Testimoni Klien
             </h1>
             <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -125,25 +126,25 @@ const Testimonials = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols- w-full 1 sm:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
-              <div className="text-2xl font-bold text-foreground">{testimonials.length}</div>
+          <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:ga mb-3 sm:mb-4 sm:mb-4 sm:mb-6", mobileClasses.cardCompact)}>
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden ", mobileClasses.cardCompact)}>
+              <div className={cn(" font-bold text-foreground", mobileClasses.heading2)}>{testimonials.length}</div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Testimoni</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
-              <div className="text-2xl font-bold text-warning">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden ", mobileClasses.cardCompact)}>
+              <div className={cn(" font-bold text-warning", mobileClasses.heading2)}>
                 {testimonials.filter(t => t.status === 'pending').length}
               </div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Menunggu Review</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
-              <div className="text-2xl font-bold text-success">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden ", mobileClasses.cardCompact)}>
+              <div className={cn(" font-bold text-success", mobileClasses.heading2)}>
                 {testimonials.filter(t => t.status === 'approved').length}
               </div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Disetujui</div>
             </div>
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
-              <div className="text-2xl font-bold text-foreground">
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden ", mobileClasses.cardCompact)}>
+              <div className={cn(" font-bold text-foreground", mobileClasses.heading2)}>
                 {testimonials.length > 0 
                   ? (testimonials.reduce((acc, t) => acc + t.rating, 0) / testimonials.length).toFixed(1)
                   : '0.0'
@@ -154,7 +155,7 @@ const Testimonials = () => {
           </div>
 
           {/* Filter */}
-          <div className="flex gap-2 mb-4 sm:mb-6 overflow-x-auto">
+          <div className={cn("flex gap-2 mb-4 sm: overflow-x-auto", mobileClasses.marginBottom)}>
             {['all', 'pending', 'approved', 'rejected'].map((status) => (
               <button
                 key={status}
@@ -175,14 +176,14 @@ const Testimonials = () => {
           {/* Testimonials List */}
           <div className="space-y-4">
             {filteredTestimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
-                <div className="flex items-start justify-between mb-4">
+              <div key={testimonial.id} className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
+                <div className={cn("flex items-start justify-between ", mobileClasses.marginBottomSmall)}>
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className={cn("flex items-center  mb-2", mobileClasses.gapSmall)}>
                       <h3 className="font-semibold text-foreground truncate">{testimonial.name}</h3>
                       {getStatusBadge(testimonial.status)}
                     </div>
-                    <div className="flex items-center gap-4 text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
+                    <div className={cn("flex items-center ga text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground", mobileClasses.cardCompact)}>
                       <span>{testimonial.email}</span>
                       <span>•</span>
                       <span>{new Date(testimonial.createdAt).toLocaleDateString('id-ID')}</span>
@@ -234,7 +235,7 @@ const Testimonials = () => {
 
           {filteredTestimonials.length === 0 && (
             <div className="text-center py-12">
-              <Icon name="MessageSquare" size={48} color="var(--color-muted-foreground)" className="mx-auto mb-4" />
+              <Icon name="MessageSquare" size={48} color="var(--color-muted-foreground)" className={cn("mx-auto ", mobileClasses.marginBottomSmall)} />
               <p className="text-muted-foreground">
                 {filter === 'all' 
                   ? 'Belum ada testimoni' 

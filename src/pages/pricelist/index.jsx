@@ -5,6 +5,7 @@ import Button from '../../components/ui/Button';
 import { dataStore } from '../../utils/dataStore';
 import PricelistCard from './components/PricelistCard';
 import PricelistForm from './components/PricelistForm';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Pricelist = () => {
   const [pricelists, setPricelists] = useState([]);
@@ -101,14 +102,14 @@ const Pricelist = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-          <div className="mb-4 sm:mb-6">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+        <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+            <div className={cn("flex items-center  mb-2", mobileClasses.gapSmall)}>
+              <div className={cn(" rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconLarge)}>
                 <Icon name="DollarSign" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                   Pricelist Gallery
                 </h1>
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -118,12 +119,12 @@ const Pricelist = () => {
             </div>
           </div>
 
-          <div className="bg-card border border-border rounded-2xl p-4 mb-4 sm:mb-6">
+          <div className={cn("bg-card border border-border rounded-2xl  mb-4 sm:mb-6", mobileClasses.cardCompact)}>
             {(() => {
               const storageInfo = dataStore.getStorageInfo();
               if (storageInfo.percentage > 80) {
                 return (
-                  <div className="mb-4 p-3 bg-warning/10 border border-warning/20 rounded-xl flex items-start gap-2">
+                  <div className={cn(" p-3 bg-warning/10 border border-warning/20 rounded-xl flex items-start gap-2", mobileClasses.marginBottomSmall)}>
                     <Icon name="AlertTriangle" size={18} color="var(--color-warning)" className="flex-shrink-0 mt-0.5" />
                     <div className="text-xs sm:text-sm">
                       <p className="font-medium text-warning">Penyimpanan hampir penuh ({storageInfo.percentage}%)</p>
@@ -137,7 +138,7 @@ const Pricelist = () => {
               return null;
             })()}
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className={cn("flex flex-col sm:flex-row ga", mobileClasses.cardCompact)}>
               <div className="flex-1">
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -168,13 +169,13 @@ const Pricelist = () => {
 
           {filteredPricelists.length === 0 ? (
             <div className="bg-card border border-border rounded-2xl p-12 text-center">
-              <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+              <div className={cn("w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto ", mobileClasses.marginBottomSmall)}>
                 <Icon name="DollarSign" size={40} color="var(--color-muted-foreground)" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+              <h3 className={cn(" font-semibold text-foreground mb-2", mobileClasses.heading4)}>
                 {searchQuery ? 'Tidak ada pricelist ditemukan' : 'Belum ada pricelist'}
               </h3>
-              <p className="text-muted-foreground mb-4 sm:mb-6">
+              <p className={cn("text-muted-foreground mb-4 sm:", mobileClasses.marginBottom)}>
                 {searchQuery
                   ? 'Coba ubah kata kunci pencarian'
                   : 'Mulai tambahkan daftar harga layanan Anda'}
@@ -192,7 +193,7 @@ const Pricelist = () => {
               )}
             </div>
           ) : (
-            <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
+            <div className={cn("grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:", mobileClasses.card)}>
               {filteredPricelists.map(pricelist => (
                 <PricelistCard
                   key={pricelist.id}

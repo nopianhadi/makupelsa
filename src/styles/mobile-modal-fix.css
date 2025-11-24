@@ -1,0 +1,230 @@
+/* Mobile Modal & Dialog Optimizations */
+
+@media (max-width: 640px) {
+  /* Modal/Dialog containers */
+  [role="dialog"],
+  .modal,
+  .dialog {
+    max-width: calc(100vw - 1rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+    margin: 0.5rem !important;
+  }
+
+  /* Modal content */
+  [role="dialog"] > div,
+  .modal-content,
+  .dialog-content {
+    padding: 0.75rem !important;
+    max-height: calc(100vh - 4rem) !important;
+    overflow-y: auto !important;
+  }
+
+  /* Modal header */
+  [role="dialog"] h2,
+  [role="dialog"] h3,
+  .modal-header,
+  .dialog-header {
+    font-size: 1rem !important;
+    padding: 0.5rem 0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Modal footer */
+  [role="dialog"] footer,
+  .modal-footer,
+  .dialog-footer {
+    padding: 0.75rem 0 0 !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Modal buttons */
+  [role="dialog"] button,
+  .modal button,
+  .dialog button {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  /* Form dalam modal */
+  [role="dialog"] form,
+  .modal form,
+  .dialog form {
+    gap: 0.75rem !important;
+  }
+
+  [role="dialog"] label,
+  .modal label,
+  .dialog label {
+    font-size: 0.75rem !important;
+  }
+
+  /* Popover */
+  [role="tooltip"],
+  .popover {
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  /* Dropdown menu */
+  [role="menu"],
+  .dropdown-menu {
+    max-height: 50vh !important;
+    font-size: 0.75rem !important;
+  }
+
+  [role="menuitem"],
+  .dropdown-item {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Toast/Notification */
+  .toast,
+  [role="alert"] {
+    max-width: calc(100vw - 1rem) !important;
+    font-size: 0.75rem !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Table dalam modal */
+  [role="dialog"] table,
+  .modal table {
+    font-size: 0.625rem !important;
+  }
+
+  [role="dialog"] th,
+  [role="dialog"] td,
+  .modal th,
+  .modal td {
+    padding: 0.375rem !important;
+  }
+
+  /* Image dalam modal */
+  [role="dialog"] img,
+  .modal img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Tabs dalam modal */
+  [role="tablist"],
+  .tabs {
+    gap: 0.25rem !important;
+  }
+
+  [role="tab"],
+  .tab {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  /* Accordion */
+  .accordion-header {
+    font-size: 0.875rem !important;
+    padding: 0.75rem !important;
+  }
+
+  .accordion-content {
+    font-size: 0.75rem !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Card dalam modal */
+  [role="dialog"] .card,
+  .modal .card {
+    padding: 0.75rem !important;
+  }
+
+  /* List dalam modal */
+  [role="dialog"] ul,
+  [role="dialog"] ol,
+  .modal ul,
+  .modal ol {
+    padding-left: 1rem !important;
+  }
+
+  [role="dialog"] li,
+  .modal li {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Badge dalam modal */
+  [role="dialog"] .badge,
+  .modal .badge {
+    font-size: 0.625rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  /* Avatar dalam modal */
+  [role="dialog"] .avatar,
+  .modal .avatar {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  /* Separator */
+  [role="dialog"] hr,
+  .modal hr,
+  .separator {
+    margin: 0.75rem 0 !important;
+  }
+
+  /* Scrollbar untuk modal */
+  [role="dialog"]::-webkit-scrollbar,
+  .modal::-webkit-scrollbar {
+    width: 4px !important;
+  }
+
+  [role="dialog"]::-webkit-scrollbar-thumb,
+  .modal::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 2px !important;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 640px) and (orientation: landscape) {
+  [role="dialog"],
+  .modal,
+  .dialog {
+    max-height: calc(100vh - 1rem) !important;
+  }
+
+  [role="dialog"] > div,
+  .modal-content,
+  .dialog-content {
+    max-height: calc(100vh - 2rem) !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  [role="dialog"],
+  .modal,
+  .dialog {
+    max-width: calc(100vw - 0.5rem) !important;
+    margin: 0.25rem !important;
+  }
+
+  [role="dialog"] > div,
+  .modal-content,
+  .dialog-content {
+    padding: 0.5rem !important;
+  }
+
+  [role="dialog"] h2,
+  [role="dialog"] h3,
+  .modal-header,
+  .dialog-header {
+    font-size: 0.875rem !important;
+  }
+
+  [role="dialog"] button,
+  .modal button,
+  .dialog button {
+    font-size: 0.625rem !important;
+    padding: 0.375rem 0.5rem !important;
+  }
+}

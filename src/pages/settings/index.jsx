@@ -7,6 +7,7 @@ import IncomeCategoryManagement from './IncomeCategoryManagement';
 import ServiceTypeManagement from './ServiceTypeManagement';
 import PaymentMethodManagement from './PaymentMethodManagement';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Settings = () => {
     const [darkMode, setDarkMode] = useState(() => {
@@ -134,14 +135,14 @@ const Settings = () => {
                 <title>Pengaturan - MUA Finance Manager</title>
             </Helmet>
             <div className="min-h-screen bg-background">
-                <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-                    <div className="mb-4 sm:mb-6">
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
+                    <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+                        <div className={cn("flex items-center  mb-2", mobileClasses.gapSmall)}>
+                            <div className={cn(" rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconLarge)}>
                                 <Icon name="Settings" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                             </div>
                             <div>
-                                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                                <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                                     Pengaturan
                                 </h1>
                                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -162,14 +163,14 @@ const Settings = () => {
                         
                         <StatusManagement />
 
-                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
-                            <div className="flex items-center gap-2 mb-4">
+                        <div className={cn("bg-card border border-border rounded-2xl p-3 sm:p-4 lg:", mobileClasses.card)}>
+                            <div className={cn("flex items-center gap-2 ", mobileClasses.marginBottomSmall)}>
                                 <Icon name="Palette" size={20} sm:size={20} color="var(--color-primary)" />
-                                <h3 className="font-bold text-lg">Tampilan</h3>
+                                <h3 className={cn("font-bold ", mobileClasses.heading4)}>Tampilan</h3>
                             </div>
                             <div className="space-y-3">
                                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border">
-                                    <div className="flex items-center gap-3">
+                                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                                         <Icon name="Moon" size={18} color="var(--color-foreground)" />
                                         <div>
                                             <p className="font-medium text-foreground">Mode Gelap</p>
@@ -187,14 +188,14 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
-                            <div className="flex items-center gap-2 mb-4">
+                        <div className={cn("bg-card border border-border rounded-2xl p-3 sm:p-4 lg:", mobileClasses.card)}>
+                            <div className={cn("flex items-center gap-2 ", mobileClasses.marginBottomSmall)}>
                                 <Icon name="Bell" size={20} sm:size={20} color="var(--color-primary)" />
-                                <h3 className="font-bold text-lg">Notifikasi</h3>
+                                <h3 className={cn("font-bold ", mobileClasses.heading4)}>Notifikasi</h3>
                             </div>
                             <div className="space-y-3">
                                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border">
-                                    <div className="flex items-center gap-3">
+                                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                                         <Icon name="Mail" size={18} color="var(--color-foreground)" />
                                         <div>
                                             <p className="font-medium text-foreground">Email Notifikasi</p>
@@ -210,7 +211,7 @@ const Settings = () => {
                                     </button>
                                 </div>
                                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border">
-                                    <div className="flex items-center gap-3">
+                                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                                         <Icon name="MessageSquare" size={18} color="var(--color-foreground)" />
                                         <div>
                                             <p className="font-medium text-foreground">Notifikasi WhatsApp</p>
@@ -228,10 +229,10 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
-                            <div className="flex items-center gap-2 mb-4">
+                        <div className={cn("bg-card border border-border rounded-2xl p-3 sm:p-4 lg:", mobileClasses.card)}>
+                            <div className={cn("flex items-center gap-2 ", mobileClasses.marginBottomSmall)}>
                                 <Icon name="Info" size={20} sm:size={20} color="var(--color-primary)" />
-                                <h3 className="font-bold text-lg">📱 Panduan Ukuran Mobile App</h3>
+                                <h3 className={cn("font-bold ", mobileClasses.heading4)}>📱 Panduan Ukuran Mobile App</h3>
                             </div>
                             <div className="space-y-4 overflow-x-auto">
                                 <div className="min-w-full">
@@ -288,17 +289,17 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="bg-card border border-border rounded-2xl p-3 sm:p-4 lg:p-6">
-                            <div className="flex items-center gap-2 mb-4">
+                        <div className={cn("bg-card border border-border rounded-2xl p-3 sm:p-4 lg:", mobileClasses.card)}>
+                            <div className={cn("flex items-center gap-2 ", mobileClasses.marginBottomSmall)}>
                                 <Icon name="Database" size={20} sm:size={20} color="var(--color-primary)" />
-                                <h3 className="font-bold text-lg">Data & Penyimpanan</h3>
+                                <h3 className={cn("font-bold ", mobileClasses.heading4)}>Data & Penyimpanan</h3>
                             </div>
                             <div className="space-y-3">
                                 <button 
                                     onClick={handleExportData}
                                     className="w-full flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border hover:bg-muted/70 transition-smooth"
                                 >
-                                    <div className="flex items-center gap-3">
+                                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                                         <Icon name="Download" size={18} color="var(--color-foreground)" />
                                         <div className="text-left">
                                             <p className="font-medium text-foreground">Ekspor Data</p>
@@ -311,7 +312,7 @@ const Settings = () => {
                                     onClick={handleImportData}
                                     className="w-full flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border hover:bg-muted/70 transition-smooth"
                                 >
-                                    <div className="flex items-center gap-3">
+                                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                                         <Icon name="Upload" size={18} color="var(--color-foreground)" />
                                         <div className="text-left">
                                             <p className="font-medium text-foreground">Impor Data</p>
@@ -324,7 +325,7 @@ const Settings = () => {
                                     onClick={handleDeleteAllData}
                                     className="w-full flex items-center justify-between p-3 bg-destructive/10 rounded-xl border border-destructive/20 hover:bg-destructive/20 transition-smooth"
                                 >
-                                    <div className="flex items-center gap-3">
+                                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                                         <Icon name="Trash2" size={18} color="var(--color-destructive)" />
                                         <div className="text-left">
                                             <p className="font-medium text-destructive">Hapus Semua Data</p>

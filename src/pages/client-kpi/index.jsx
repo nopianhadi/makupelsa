@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Icon from '../../components/AppIcon';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const KPIPage = () => {
   const [activeTab, setActiveTab] = useState('analytics');
@@ -245,10 +246,10 @@ const KPIPage = () => {
         <title>KPI Bisnis - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
-          <div className="mb-4 sm:mb-6 flex items-center justify-between">
+        <main className={cn("w-full max-w-full-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6", mobileClasses.card)}>
+          <div className={cn("mb-4 sm: flex items-center justify-between", mobileClasses.marginBottom)}>
             <div>
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-2">
+              <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground mb-2", mobileClasses.heading1)}>
                 KPI Bisnis
               </h1>
               <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -267,7 +268,7 @@ const KPIPage = () => {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 border-b border-border mb-4 sm:mb-6 overflow-x-auto pb-0">
+          <div className={cn("flex gap-2 border-b border-border mb-4 sm: overflow-x-auto pb-0", mobileClasses.marginBottom)}>
             <button
               onClick={() => setActiveTab('analytics')}
               className={`
@@ -300,40 +301,40 @@ const KPIPage = () => {
           {activeTab === 'analytics' && (
             <div className="space-y-6 pb-6">
               {/* KPI Cards */}
-              <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
+              <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ga", mobileClasses.cardCompact)}>
+                <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Klien</span>
                     <Icon name="Users" size={20} sm:size={20} color="var(--color-primary)" />
                   </div>
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpiData.totalClients}</div>
+                  <div className={cn("text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>{kpiData.totalClients}</div>
                   <div className="text-xs text-success mt-1">↑ +{kpiData.newClientsThisMonth} bulan ini</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
+                <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Klien Baru</span>
                     <Icon name="UserPlus" size={20} sm:size={20} color="var(--color-accent)" />
                   </div>
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpiData.newClientsThisMonth}</div>
+                  <div className={cn("text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>{kpiData.newClientsThisMonth}</div>
                   <div className="text-xs text-muted-foreground mt-1">Bulan ini</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
+                <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Retention Rate</span>
                     <Icon name="TrendingUp" size={20} sm:size={20} color="var(--color-success)" />
                   </div>
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpiData.retentionRate}%</div>
+                  <div className={cn("text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>{kpiData.retentionRate}%</div>
                   <div className="text-xs text-success mt-1">↑ +5% dari bulan lalu</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
+                <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Avg Order Value</span>
                     <Icon name="Wallet" size={20} sm:size={20} color="var(--color-warning)" />
                   </div>
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
+                  <div className={cn("text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>
                     Rp {(kpiData.averageOrderValue / 1000000).toFixed(1)}jt
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">Per transaksi</div>
@@ -341,18 +342,18 @@ const KPIPage = () => {
               </div>
 
               {/* Charts Section */}
-              <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-3 sm:p-4 lg:p-6">
+              <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 gap-3 sm:p-4 lg:", mobileClasses.card)}>
                 {/* Top Clients */}
-                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
-                  <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
+                  <h3 className={cn("font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                     <Icon name="Award" size={20} sm:size={20} color="var(--color-primary)" />
                     Top Klien
                   </h3>
                   <div className="space-y-3">
                     {kpiData.topClients.map((client, index) => (
                       <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
+                        <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
+                          <div className={cn(" rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary", mobileClasses.iconSmall)}>
                             {index + 1}
                           </div>
                           <div>
@@ -371,8 +372,8 @@ const KPIPage = () => {
                 </div>
 
                 {/* Clients by Service */}
-                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
-                  <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
+                  <h3 className={cn("font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                     <Icon name="PieChart" size={20} sm:size={20} color="var(--color-accent)" />
                     Klien per Layanan
                   </h3>
@@ -396,12 +397,12 @@ const KPIPage = () => {
               </div>
 
               {/* Monthly Growth Chart */}
-              <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
-                <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+              <div className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
+                <h3 className={cn("font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
                   <Icon name="BarChart3" size={20} sm:size={20} color="var(--color-success)" />
                   Pertumbuhan Klien Bulanan
                 </h3>
-                <div className="flex items-end justify-between gap-4 h-48">
+                <div className={cn("flex items-end justify-between ga h-48", mobileClasses.cardCompact)}>
                   {kpiData.monthlyGrowth.map((item, index) => (
                     <div key={index} className="flex-1 flex flex-col items-center gap-2">
                       <div className="text-xs sm:text-sm font-medium text-foreground">{item.clients}</div>
@@ -421,10 +422,10 @@ const KPIPage = () => {
           {activeTab === 'management' && (
             <div className="pb-6">
               {/* KPI Grid */}
-              <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
                 {kpis.map((kpi) => (
-                  <div key={kpi.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow">
-                    <div className="flex items-start justify-between mb-4">
+                  <div key={kpi.id} className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg: hover:shadow-lg transition-shadow", mobileClasses.card)}>
+                    <div className={cn("flex items-start justify-between ", mobileClasses.marginBottomSmall)}>
                       <div className="flex-1">
                         <h3 className="font-semibold text-foreground mb-1">{kpi.title}</h3>
                         <span className="text-xs text-muted-foreground capitalize">{kpi.category} • {kpi.period}</span>
@@ -447,7 +448,7 @@ const KPIPage = () => {
 
                     <div className="mb-3">
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{kpi.value}</span>
+                        <span className={cn("text-xl sm:text-2xl lg: font-bold text-foreground", mobileClasses.heading1)}>{kpi.value}</span>
                         <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">{kpi.unit}</span>
                       </div>
                       <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -478,7 +479,7 @@ const KPIPage = () => {
 
               {kpis.length === 0 && (
                 <div className="text-center py-12">
-                  <Icon name="BarChart3" size={48} color="var(--color-muted-foreground)" className="mx-auto mb-4" />
+                  <Icon name="BarChart3" size={48} color="var(--color-muted-foreground)" className={cn("mx-auto ", mobileClasses.marginBottomSmall)} />
                   <p className="text-muted-foreground">Belum ada KPI. Tambahkan KPI pertama Anda!</p>
                 </div>
               )}
@@ -487,10 +488,10 @@ const KPIPage = () => {
 
           {/* Modal Form */}
           {isModalOpen && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-card border border-border rounded-lg overflow-hidden max-w-md w-full p-3 sm:p-4 lg:p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold text-foreground">
+            <div className={cn("fixed inset-0 bg-black/50 flex items-center justify-center z-50 ", mobileClasses.cardCompact)}>
+              <div className={cn("bg-card border border-border rounded-lg overflow-hidden max-w-md w-full p-3 sm:p-4 lg:", mobileClasses.card)}>
+                <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
+                  <h2 className={cn(" font-bold text-foreground", mobileClasses.heading3)}>
                     {editingKpi ? 'Edit KPI' : 'Tambah KPI Baru'}
                   </h2>
                   <button onClick={resetForm} className="p-1 hover:bg-muted rounded">
@@ -512,7 +513,7 @@ const KPIPage = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-4">
+                  <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                     <div>
                       <label className="block text-xs sm:text-sm font-medium text-foreground mb-1">
                         Nilai Saat Ini
@@ -587,7 +588,7 @@ const KPIPage = () => {
                     </select>
                   </div>
 
-                  <div className="flex gap-3 pt-4">
+                  <div className={cn("flex  pt-4", mobileClasses.gapSmall)}>
                     <button
                       type="button"
                       onClick={resetForm}

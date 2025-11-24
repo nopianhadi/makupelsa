@@ -118,7 +118,7 @@ const Select = React.forwardRef(({
                     id={selectId}
                     type="button"
                     className={cn(
-                        "flex h-10 w-full items-center justify-between rounded-md border border-input bg-white text-black px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                        "flex h-8 w-full items-center justify-between rounded-md border border-input bg-white text-black px-2 py-1.5 text-xs sm:h-10 sm:px-3 sm:py-2 sm:text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
                         error && "border-destructive focus:ring-destructive",
                         !hasValue && "text-muted-foreground"
                     )}
@@ -128,11 +128,11 @@ const Select = React.forwardRef(({
                     aria-haspopup="listbox"
                     {...props}
                 >
-                    <span className="truncate">{getSelectedDisplay()}</span>
+                    <span className="truncate text-[10px] sm:text-xs">{getSelectedDisplay()}</span>
 
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-0.5 sm:gap-1">
                         {loading && (
-                            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                            <svg className="animate-spin h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                             </svg>
@@ -142,14 +142,14 @@ const Select = React.forwardRef(({
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-4 w-4"
+                                className="h-3 w-3 sm:h-4 sm:w-4"
                                 onClick={handleClear}
                             >
-                                <X className="h-3 w-3" />
+                                <X className="h-2 w-2 sm:h-3 sm:w-3" />
                             </Button>
                         )}
 
-                        <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
+                        <ChevronDown className={cn("h-3 w-3 sm:h-4 sm:w-4 transition-transform", isOpen && "rotate-180")} />
                     </div>
                 </button>
 
@@ -175,22 +175,22 @@ const Select = React.forwardRef(({
                 {isOpen && (
                     <div className="absolute z-50 w-full mt-1 bg-white text-black border border-border rounded-md shadow-md">
                         {searchable && (
-                            <div className="p-2 border-b">
+                            <div className="p-1.5 sm:p-2 border-b">
                                 <div className="relative">
-                                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                                    <Search className="absolute left-1.5 top-2 h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                                     <Input
-                                        placeholder="Search options..."
+                                        placeholder="Search..."
                                         value={searchTerm}
                                         onChange={handleSearchChange}
-                                        className="pl-8"
+                                        className="pl-6 sm:pl-8 text-xs"
                                     />
                                 </div>
                             </div>
                         )}
 
-                        <div className="py-1 max-h-60 overflow-auto">
+                        <div className="py-0.5 sm:py-1 max-h-48 sm:max-h-60 overflow-auto">
                             {filteredOptions?.length === 0 ? (
-                                <div className="px-3 py-2 text-sm text-muted-foreground">
+                                <div className="px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-sm text-muted-foreground">
                                     {searchTerm ? 'No options found' : 'No options available'}
                                 </div>
                             ) : (
@@ -198,18 +198,18 @@ const Select = React.forwardRef(({
                                     <div
                                         key={option?.value}
                                         className={cn(
-                                            "relative flex cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground",
+                                            "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-[10px] sm:px-3 sm:py-2 sm:text-sm outline-none hover:bg-accent hover:text-accent-foreground",
                                             isSelected(option?.value) && "bg-primary text-primary-foreground",
                                             option?.disabled && "pointer-events-none opacity-50"
                                         )}
                                         onClick={() => !option?.disabled && handleOptionSelect(option)}
                                     >
-                                        <span className="flex-1">{option?.label}</span>
+                                        <span className="flex-1 truncate">{option?.label}</span>
                                         {multiple && isSelected(option?.value) && (
-                                            <Check className="h-4 w-4" />
+                                            <Check className="h-3 w-3 sm:h-4 sm:w-4" />
                                         )}
                                         {option?.description && (
-                                            <span className="text-xs text-muted-foreground ml-2">
+                                            <span className="text-[9px] sm:text-xs text-muted-foreground ml-1 sm:ml-2 truncate">
                                                 {option?.description}
                                             </span>
                                         )}

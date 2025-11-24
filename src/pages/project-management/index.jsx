@@ -9,6 +9,7 @@ import CalendarView from './components/CalendarView';
 import ArchiveProjectModal from './components/ArchiveProjectModal';
 import CompletedProjectStats from './components/CompletedProjectStats';
 import { exportCompletedProjects, exportProjectReport } from '../../utils/projectExport';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const ProjectManagement = () => {
   const [projects, setProjects] = useState([]);
@@ -251,12 +252,12 @@ const ProjectManagement = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
+        <main className={cn("w-full max-w-full-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6", mobileClasses.card)}>
           {/* Header */}
-          <div className="mb-4 sm:mb-6">
-            <div className="flex items-center justify-between mb-4">
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+            <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
               <div>
-                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                   Manajemen Proyek
                 </h1>
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mt-1">
@@ -294,7 +295,7 @@ const ProjectManagement = () => {
             </div>
 
             {/* Tab Navigation */}
-            <div className="mb-4 sm:mb-6">
+            <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
               <div className="border-b border-border">
                 <div className="flex space-x-8">
                   <button
@@ -329,8 +330,8 @@ const ProjectManagement = () => {
 
             {/* Filter untuk Proyek Selesai */}
             {activeTab === 'completed' && (
-              <div className="mb-4 sm:mb-6 p-4 bg-card rounded-lg border border-border">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className={cn("mb-4 sm:mb-6  bg-card rounded-lg border border-border", mobileClasses.cardCompact)}>
+                <div className={cn("flex flex-col sm:flex-row sm:items-center ga", mobileClasses.cardCompact)}>
                   <div className="flex-1">
                     <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                       Filter Periode Selesai
@@ -357,7 +358,7 @@ const ProjectManagement = () => {
                 </div>
 
                 {completedFilter === 'custom' && (
-                  <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                  <div className={cn("mt-4 flex flex-col sm:flex-row ", mobileClasses.gapSmall)}>
                     <div className="flex-1">
                       <label className="block text-xs font-medium text-muted-foreground mb-1">
                         Dari Tanggal
@@ -439,41 +440,41 @@ const ProjectManagement = () => {
             )}
 
             {/* Stats Cards */}
-            <div className="grid grid-cols- w-full 2 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
-              <div className="bg-card border border-border rounded-xl p-4">
+            <div className={cn("grid grid-cols- w-full 2 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:ga mb-3 sm:mb-4 sm:mb-4 sm:mb-6", mobileClasses.cardCompact)}>
+              <div className={cn("bg-card border border-border rounded-xl ", mobileClasses.cardCompact)}>
                 <div className="flex items-center gap-2 mb-2">
                   <Icon name="Briefcase" size={20} sm:size={20} color="var(--color-primary)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+                <p className={cn(" font-bold text-foreground", mobileClasses.heading2)}>{stats.total}</p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-4">
+              <div className={cn("bg-card border border-border rounded-xl ", mobileClasses.cardCompact)}>
                 <div className="flex items-center gap-2 mb-2">
                   <Icon name="Clock" size={20} sm:size={20} color="rgb(59 130 246)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Upcoming</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground">{stats.upcoming}</p>
+                <p className={cn(" font-bold text-foreground", mobileClasses.heading2)}>{stats.upcoming}</p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-4">
+              <div className={cn("bg-card border border-border rounded-xl ", mobileClasses.cardCompact)}>
                 <div className="flex items-center gap-2 mb-2">
                   <Icon name="PlayCircle" size={20} sm:size={20} color="rgb(234 179 8)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Progress</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground">{stats.inProgress}</p>
+                <p className={cn(" font-bold text-foreground", mobileClasses.heading2)}>{stats.inProgress}</p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-4">
+              <div className={cn("bg-card border border-border rounded-xl ", mobileClasses.cardCompact)}>
                 <div className="flex items-center gap-2 mb-2">
                   <Icon name="CheckCircle2" size={20} sm:size={20} color="rgb(34 197 94)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Selesai</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground">{stats.completed}</p>
+                <p className={cn(" font-bold text-foreground", mobileClasses.heading2)}>{stats.completed}</p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-4">
+              <div className={cn("bg-card border border-border rounded-xl ", mobileClasses.cardCompact)}>
                 <div className="flex items-center gap-2 mb-2">
                   <Icon name="Wallet" size={20} sm:size={20} color="var(--color-primary)" />
                   <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Revenue</span>
                 </div>
-                <p className="text-lg font-bold text-foreground">
+                <p className={cn(" font-bold text-foreground", mobileClasses.heading4)}>
                   {formatCurrency(stats.totalRevenue).replace('IDR', 'Rp').replace(',00', '')}
                 </p>
               </div>
@@ -520,7 +521,7 @@ const ProjectManagement = () => {
                 </div>
 
                 {/* Filters Row 2 - Advanced */}
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className={cn("flex flex-col sm:flex-row ", mobileClasses.gapSmall)}>
                   <select
                     value={filterClient}
                     onChange={(e) => setFilterClient(e.target.value)}
@@ -584,13 +585,13 @@ const ProjectManagement = () => {
             <>
               {filteredProjects.length === 0 ? (
                 <div className="text-center py-16">
-                  <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                  <div className={cn("w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto ", mobileClasses.marginBottomSmall)}>
                     <Icon name="Briefcase" size={40} color="var(--color-muted-foreground)" />
                   </div>
-                  <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                  <h3 className={cn(" font-heading font-semibold text-foreground mb-2", mobileClasses.heading4)}>
                     {searchQuery ? 'Tidak Ada Hasil' : 'Belum Ada Proyek'}
                   </h3>
-                  <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
+                  <p className={cn("text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mb-4 sm:", mobileClasses.marginBottom)}>
                     {searchQuery 
                       ? 'Coba ubah kata kunci pencarian'
                       : 'Mulai tambahkan proyek makeup Anda'
@@ -604,7 +605,7 @@ const ProjectManagement = () => {
                   )}
                 </div>
               ) : (
-                <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className={cn("grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
                   {filteredProjects.map((project) => {
                     const progress = calculateProgress(project.paid, project.budget);
                     return (
@@ -627,7 +628,7 @@ const ProjectManagement = () => {
                           </div>
                         </div>
 
-                        <div className="space-y-2 mb-4 cursor-pointer" onClick={() => setSelectedProject(project)}>
+                        <div className={cn("space-y-2  cursor-pointer", mobileClasses.marginBottomSmall)} onClick={() => setSelectedProject(project)}>
                           <div className="flex items-center gap-2 text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                             <Icon name="Tag" size={16} />
                             <span>{project.type}</span>
@@ -726,16 +727,16 @@ const ProjectManagement = () => {
         {/* Project Detail Modal */}
         {selectedProject && (
           <div
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className={cn("fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center ", mobileClasses.cardCompact)}
             onClick={() => setSelectedProject(null)}
           >
             <div
-              className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-3 sm:p-4 lg:p-6"
+              className={cn("bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-3 sm:p-4 lg:", mobileClasses.card)}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-start justify-between mb-4 sm:mb-6">
+              <div className={cn("flex items-start justify-between mb-4 sm:", mobileClasses.marginBottom)}>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-heading font-bold text-foreground mb-2">
+                  <h2 className={cn(" font-heading font-bold text-foreground mb-2", mobileClasses.heading2)}>
                     {selectedProject.title}
                   </h2>
                   {getStatusBadge(selectedProject.status)}
@@ -749,15 +750,15 @@ const ProjectManagement = () => {
                 {/* Client Info */}
                 <div>
                   <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">INFORMASI KLIEN</h3>
-                  <div className="grid grid-cols- w-full 2 gap-4">
-                    <div className="flex items-center gap-3">
+                  <div className={cn("grid grid-cols- w-full 2 ga", mobileClasses.cardCompact)}>
+                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                       <Icon name="User" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Klien</p>
                         <p className="font-medium text-foreground">{selectedProject.client}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
                       <Icon name="Tag" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Tipe</p>
@@ -771,14 +772,14 @@ const ProjectManagement = () => {
                 <div>
                   <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">DETAIL ACARA</h3>
                   <div className="space-y-3">
-                    <div className="flex items-start gap-3">
+                    <div className={cn("flex items-start ", mobileClasses.gapSmall)}>
                       <Icon name="Calendar" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Tanggal</p>
                         <p className="font-medium text-foreground">{formatDate(selectedProject.date)}</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className={cn("flex items-start ", mobileClasses.gapSmall)}>
                       <Icon name="MapPin" size={20} sm:size={20} color="var(--color-primary)" />
                       <div>
                         <p className="text-xs text-muted-foreground">Lokasi</p>
@@ -786,7 +787,7 @@ const ProjectManagement = () => {
                       </div>
                     </div>
                     {selectedProject.description && (
-                      <div className="flex items-start gap-3">
+                      <div className={cn("flex items-start ", mobileClasses.gapSmall)}>
                         <Icon name="FileText" size={20} sm:size={20} color="var(--color-primary)" />
                         <div>
                           <p className="text-xs text-muted-foreground">Deskripsi</p>
@@ -832,7 +833,7 @@ const ProjectManagement = () => {
                 {/* Budget */}
                 <div>
                   <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">KEUANGAN</h3>
-                  <div className="bg-surface rounded-xl p-4">
+                  <div className={cn("bg-surface rounded-xl ", mobileClasses.cardCompact)}>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-muted-foreground">Progress Pembayaran</span>
                       <span className="font-semibold text-foreground truncate">
@@ -848,13 +849,13 @@ const ProjectManagement = () => {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-xs text-muted-foreground">Terbayar</p>
-                        <p className="font-bold text-lg text-primary">
+                        <p className={cn("font-bold  text-primary", mobileClasses.heading4)}>
                           {formatCurrency(selectedProject.paid).replace('IDR', 'Rp').replace(',00', '')}
                         </p>
                       </div>
                       <div className="text-right">
                         <p className="text-xs text-muted-foreground">Total Budget</p>
-                        <p className="font-bold text-lg text-foreground">
+                        <p className={cn("font-bold  text-foreground", mobileClasses.heading4)}>
                           {formatCurrency(selectedProject.budget).replace('IDR', 'Rp').replace(',00', '')}
                         </p>
                       </div>
@@ -866,14 +867,14 @@ const ProjectManagement = () => {
                 {selectedProject.notes && (
                   <div>
                     <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">CATATAN</h3>
-                    <div className="bg-surface rounded-xl p-4">
+                    <div className={cn("bg-surface rounded-xl ", mobileClasses.cardCompact)}>
                       <p className="text-foreground">{selectedProject.notes}</p>
                     </div>
                   </div>
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex gap-3 pt-4 border-t border-border">
+                <div className={cn("flex  pt-4 border-t border-border", mobileClasses.gapSmall)}>
                   <Button 
                     variant="outline" 
                     className="flex-1"

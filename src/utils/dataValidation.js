@@ -5,6 +5,7 @@ import {
   getClientTotalPaid,
   getClientRemainingAmount
 } from './paymentSync';
+import { fixClientData } from './fixClientData';
 
 /**
  * Validasi konsistensi data klien
@@ -43,6 +44,23 @@ export const validateClientData = (clientId) => {
     if (Math.abs(totalPaid - calculatedTotal) > 0.01) {
       errors.push('Inkonsistensi dalam total pembayaran');
     }
+
+    // Cek apakah ada payment history tanpa invoice
+    const invoices = dataStore.getInvoices();
+    const clientInvoices = invoices.filter(inv => inv.clientId === clientId);
+    
+    client.paymentHistory.forEach(payment => {
+      if (!payment.invoiceId && !payment.invoiceNumber) {
+        const matchingInvoice = clientInvoices.find(inv => 
+          inv.paidDate === payment.date && 
+          Math.abs(inv.amount - payment.amount) < 0.01
+        );
+        
+        if (!matchingInvoice) {
+          errors.push('Ada payment history tapi tidak ada invoice yang sesuai');
+        }
+      }
+    });
   }
 
   const paymentValidation = validatePaymentConsistency(clientId);
@@ -328,6 +346,18 @@ export const autoFixAllData = () => {
   const invoices = dataStore.getInvoices();
 
   let fixedCount = 0;
+
+  // Jalankan perbaikan khusus untuk data klien yang bermasalah
+  // (payment history tanpa invoice)
+  try {
+    const clientFixResult = fixClientData();
+    if (clientFixResult.success) {
+      fixedCount += clientFixResult.invoicesCreated || 0;
+      console.log('✅ Perbaikan data klien berhasil:', clientFixResult.message);
+    }
+  } catch (error) {
+    console.error('⚠️ Error saat memperbaiki data klien:', error);
+  }
 
   clients.forEach(client => {
     const validation = validateClientData(client.id);

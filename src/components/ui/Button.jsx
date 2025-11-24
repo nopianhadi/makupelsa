@@ -5,7 +5,7 @@ import { cn } from "../../utils/cn";
 import Icon from '../AppIcon';
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     {
         variants: {
             variant: {
@@ -20,12 +20,12 @@ const buttonVariants = cva(
                 danger: "bg-error text-error-foreground hover:bg-error/90",
             },
             size: {
-                default: "h-10 px-4 py-2",
-                sm: "h-9 rounded-md px-3",
-                lg: "h-11 rounded-md px-8",
-                icon: "h-10 w-10",
-                xs: "h-8 rounded-md px-2 text-xs",
-                xl: "h-12 rounded-md px-10 text-base",
+                default: "h-8 px-2 py-1.5 text-xs sm:h-10 sm:px-4 sm:py-2 sm:text-sm",
+                sm: "h-7 px-2 py-1 text-[10px] sm:h-9 sm:px-3 sm:text-xs",
+                lg: "h-9 px-3 py-2 text-sm sm:h-11 sm:px-8 sm:text-base",
+                icon: "h-8 w-8 sm:h-10 sm:w-10",
+                xs: "h-6 px-1.5 py-0.5 text-[9px] sm:h-8 sm:px-2 sm:text-xs",
+                xl: "h-10 px-4 py-2.5 text-sm sm:h-12 sm:px-10 sm:text-base",
             },
         },
         defaultVariants: {
@@ -51,17 +51,17 @@ const Button = React.forwardRef(({
 }, ref) => {
     const Comp = asChild ? Slot : "button";
 
-    // Icon size mapping based on button size
+    // Icon size mapping based on button size (mobile-first)
     const iconSizeMap = {
-        xs: 12,
-        sm: 14,
-        default: 16,
-        lg: 18,
-        xl: 20,
-        icon: 16,
+        xs: 10,
+        sm: 12,
+        default: 14,
+        lg: 16,
+        xl: 18,
+        icon: 14,
     };
 
-    const calculatedIconSize = iconSize || iconSizeMap?.[size] || 16;
+    const calculatedIconSize = iconSize || iconSizeMap?.[size] || 14;
 
     // Loading spinner
     const LoadingSpinner = () => (

@@ -7,6 +7,7 @@ import PendingPaymentAlert from './components/PendingPaymentAlert';
 import MetricCard from './components/MetricCard';
 import Icon from '../../components/AppIcon';
 import { useDashboardData } from '../../hooks/useDashboardData';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -84,19 +85,19 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className={cn("w-full max-w-7xl mx-auto pb-24 lg:pb-6", mobileClasses.container)}>
         {/* Header Section */}
-        <div className="mb-4 sm:mb-6">
+        <div className={mobileClasses.marginBottomSmall}>
           <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
             <div>
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+              <h1 className={cn("font-heading font-bold text-foreground", mobileClasses.heading1)}>
                 Dashboard
               </h1>
-              <p className="text-xs sm:text-xs sm:text-sm text-muted-foreground mt-1">
+              <p className={cn("text-muted-foreground mt-0.5", mobileClasses.textSmall)}>
                 Ringkasan bisnis untuk {currentMonth}
               </p>
             </div>
-            <div className="hidden sm:flex items-center gap-1 sm:gap-2">
+            <div className={cn("hidden sm:flex items-center", mobileClasses.gapSmall)}>
               <QuickActionButton
                 label="Tambah Klien"
                 icon="UserPlus"
@@ -114,7 +115,7 @@ const Dashboard = () => {
         </div>
 
         {/* Revenue Summary Cards */}
-        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6 w-full">
+        <div className={cn("grid", mobileClasses.grid4, mobileClasses.gap, mobileClasses.marginBottomSmall)}>
           <RevenueCard
             title="Total Pendapatan"
             amount={revenueData?.totalIncome}
@@ -150,20 +151,20 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-6 w-full">
+        <div className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3", mobileClasses.gap, "mb-4 sm:mb-6")}>
           {/* Upcoming Schedule Section */}
           <div className="lg:col-span-2">
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 elevation-1">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Icon name="Calendar" size={20} color="var(--color-primary)" strokeWidth={2.5} />
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden elevation-1", mobileClasses.cardCompact)}>
+              <div className={cn("flex items-center justify-between", mobileClasses.marginBottomSmall)}>
+                <div className={cn("flex items-center", mobileClasses.gapSmall)}>
+                  <div className={cn("rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconMedium)}>
+                    <Icon name="Calendar" className="w-4 h-4 sm:w-5 sm:h-5" color="var(--color-primary)" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h2 className="text-lg font-heading font-semibold text-foreground truncate">
+                    <h2 className={cn("font-heading font-semibold text-foreground truncate", mobileClasses.heading3)}>
                       Jadwal Mendatang
                     </h2>
-                    <p className="text-xs text-muted-foreground">
+                    <p className={cn("text-muted-foreground", mobileClasses.textTiny)}>
                       {upcomingSchedules?.length} acara minggu ini
                     </p>
                   </div>
@@ -177,7 +178,7 @@ const Dashboard = () => {
                 />
               </div>
 
-              <div className="space-y-3">
+              <div className={cn("space-y-2", mobileClasses.gapSmall)}>
                 {upcomingSchedules && upcomingSchedules.length > 0 ? (
                   upcomingSchedules.map((schedule) => (
                     <UpcomingScheduleCard
@@ -186,9 +187,9 @@ const Dashboard = () => {
                     />
                   ))
                 ) : (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Icon name="Calendar" size={48} className="mx-auto mb-2 opacity-20" />
-                    <p>Tidak ada jadwal minggu ini</p>
+                  <div className="text-center py-6 text-muted-foreground">
+                    <Icon name="Calendar" className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 opacity-20" />
+                    <p className={mobileClasses.textSmall}>Tidak ada jadwal minggu ini</p>
                   </div>
                 )}
               </div>
@@ -197,22 +198,22 @@ const Dashboard = () => {
 
           {/* Pending Payments Section */}
           <div className="lg:col-span-1">
-            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 elevation-1">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
-                  <Icon name="AlertCircle" size={20} color="var(--color-error)" strokeWidth={2.5} />
+            <div className={cn("bg-card border border-border rounded-lg overflow-hidden elevation-1", mobileClasses.cardCompact)}>
+              <div className={cn("flex items-center", mobileClasses.gapSmall, mobileClasses.marginBottomSmall)}>
+                <div className={cn("rounded-lg bg-error/10 flex items-center justify-center", mobileClasses.iconMedium)}>
+                  <Icon name="AlertCircle" className="w-4 h-4 sm:w-5 sm:h-5" color="var(--color-error)" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h2 className="text-lg font-heading font-semibold text-foreground truncate">
+                  <h2 className={cn("font-heading font-semibold text-foreground truncate", mobileClasses.heading3)}>
                     Pembayaran Tertunda
                   </h2>
-                  <p className="text-xs text-muted-foreground">
+                  <p className={cn("text-muted-foreground", mobileClasses.textTiny)}>
                     {pendingPaymentList?.length} pembayaran tertunda
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {pendingPaymentList && pendingPaymentList.length > 0 ? (
                   pendingPaymentList.map((payment) => (
                     <PendingPaymentAlert
@@ -222,9 +223,9 @@ const Dashboard = () => {
                     />
                   ))
                 ) : (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Icon name="CheckCircle" size={48} className="mx-auto mb-2 opacity-20" />
-                    <p>Semua pembayaran lunas!</p>
+                  <div className="text-center py-6 text-muted-foreground">
+                    <Icon name="CheckCircle" className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 opacity-20" />
+                    <p className={mobileClasses.textSmall}>Semua pembayaran lunas!</p>
                   </div>
                 )}
               </div>
@@ -233,22 +234,22 @@ const Dashboard = () => {
         </div>
 
         {/* Key Metrics Section */}
-        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 elevation-1">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-              <Icon name="BarChart3" size={20} color="var(--color-accent)" strokeWidth={2.5} />
+        <div className={cn("bg-card border border-border rounded-lg overflow-hidden elevation-1", mobileClasses.cardCompact)}>
+          <div className={cn("flex items-center", mobileClasses.gapSmall, mobileClasses.marginBottomSmall)}>
+            <div className={cn("rounded-lg bg-accent/10 flex items-center justify-center", mobileClasses.iconMedium)}>
+              <Icon name="BarChart3" className="w-4 h-4 sm:w-5 sm:h-5" color="var(--color-accent)" strokeWidth={2.5} />
             </div>
             <div>
-              <h2 className="text-lg font-heading font-semibold text-foreground truncate">
+              <h2 className={cn("font-heading font-semibold text-foreground truncate", mobileClasses.heading3)}>
                 Metrik Kinerja
               </h2>
-              <p className="text-xs text-muted-foreground">
+              <p className={cn("text-muted-foreground", mobileClasses.textTiny)}>
                 Ringkasan performa bisnis bulan ini
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 w-full">
+          <div className={cn("grid", mobileClasses.grid4, mobileClasses.gap)}>
             {metrics?.map((metric, index) => (
               <MetricCard
                 key={index}
@@ -264,9 +265,9 @@ const Dashboard = () => {
         </div>
 
         {/* Mobile Quick Actions */}
-        <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40">
-          <div className="bg-card border border-border rounded-lg overflow-hidden p-4 elevation-6">
-            <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2">
+        <div className="sm:hidden fixed bottom-20 left-2 right-2 z-40">
+          <div className={cn("bg-card border border-border rounded-lg overflow-hidden elevation-6", mobileClasses.cardCompact)}>
+            <div className={cn("grid grid-cols-2", mobileClasses.gapSmall)}>
               <QuickActionButton
                 label="Tambah Klien"
                 icon="UserPlus"

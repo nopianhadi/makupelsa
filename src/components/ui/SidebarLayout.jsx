@@ -85,28 +85,28 @@ const SidebarLayout = ({ children }) => {
 
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 bg-card border-b border-border z-50">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Icon name="Sparkles" size={20} color="var(--color-primary)" strokeWidth={2.5} />
+        <div className="flex items-center justify-between px-2 py-2">
+          <div className="flex items-center gap-1.5">
+            <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Icon name="Sparkles" size={16} color="var(--color-primary)" strokeWidth={2.5} />
             </div>
-            <span className="text-sm font-heading font-bold text-foreground">
+            <span className="text-xs font-heading font-bold text-foreground">
               MUA Finance
             </span>
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 hover:bg-muted rounded-lg transition-smooth"
+            className="p-1.5 hover:bg-muted rounded-lg transition-smooth"
           >
-            <Icon name={isMobileMenuOpen ? 'X' : 'Menu'} size={24} />
+            <Icon name={isMobileMenuOpen ? 'X' : 'Menu'} size={20} />
           </button>
         </div>
 
         {/* Mobile Menu Drawer */}
         {isMobileMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-card border-b border-border shadow-lg">
-            <nav className="p-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
-              <div className="space-y-1">
+            <nav className="p-2 max-h-[calc(100vh-3rem)] overflow-y-auto">
+              <div className="space-y-0.5">
                 {navigationItems.map((item) => {
                   const active = isActive(item.path);
                   return (
@@ -114,7 +114,7 @@ const SidebarLayout = ({ children }) => {
                       key={item.path}
                       onClick={() => handleNavigation(item.path)}
                       className={`
-                        w-full flex items-center gap-3 px-4 py-3 rounded-lg
+                        w-full flex items-center gap-2 px-2 py-2 rounded-lg
                         transition-smooth text-left
                         ${active
                           ? 'bg-primary text-primary-foreground'
@@ -124,10 +124,10 @@ const SidebarLayout = ({ children }) => {
                     >
                       <Icon
                         name={item.icon}
-                        size={20}
+                        size={16}
                         strokeWidth={active ? 2.5 : 2}
                       />
-                      <span className={`text-sm ${active ? 'font-semibold' : 'font-medium'}`}>
+                      <span className={`text-xs ${active ? 'font-semibold' : 'font-medium'}`}>
                         {item.label}
                       </span>
                     </button>
@@ -141,7 +141,7 @@ const SidebarLayout = ({ children }) => {
 
       {/* Main Content */}
       <div className="flex-1 lg:pl-64">
-        <div className="pt-16 lg:pt-0">
+        <div className="pt-12 lg:pt-0">
           {children}
         </div>
       </div>

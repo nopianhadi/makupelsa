@@ -10,6 +10,7 @@ import ReminderManager from './components/ReminderManager';
 import GoogleCalendarSync from './components/GoogleCalendarSync';
 import Icon from '../../components/AppIcon';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const CalendarScheduling = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -130,7 +131,7 @@ const CalendarScheduling = () => {
   return (
     <div className="min-h-screen bg-background">
 
-      <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+      <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
         <CalendarHeader
           currentDate={currentDate}
           onPrevMonth={handlePrevMonth}
@@ -141,8 +142,8 @@ const CalendarScheduling = () => {
         />
 
         <div className="mt-6">
-          <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-            <div className="flex items-center gap-3">
+          <div className={cn("flex items-center justify-between mb-4 flex-wrap ", mobileClasses.gapSmall)}>
+            <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-primary/20 border-2 border-primary" />
                 <span className="text-xs font-caption text-muted-foreground">Akad</span>
@@ -230,10 +231,10 @@ const CalendarScheduling = () => {
 
       {/* Reminder Manager Modal */}
       {isReminderModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-heading font-bold text-foreground">
+        <div className={cn("fixed inset-0 bg-black/50 flex items-center justify-center z-50 ", mobileClasses.cardCompact)}>
+          <div className={cn("bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg:", mobileClasses.card)}>
+            <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
+              <h2 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading4)}>
                 Pengingat Acara
               </h2>
               <button 
@@ -253,10 +254,10 @@ const CalendarScheduling = () => {
 
       {/* Google Calendar Sync Modal */}
       {isGoogleSyncModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg:p-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-heading font-bold text-foreground">
+        <div className={cn("fixed inset-0 bg-black/50 flex items-center justify-center z-50 ", mobileClasses.cardCompact)}>
+          <div className={cn("bg-card border border-border rounded-2xl w-full max-w-md p-3 sm:p-4 lg: max-h-[90vh] overflow-y-auto", mobileClasses.card)}>
+            <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
+              <h2 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading4)}>
                 Sinkronisasi Google Calendar
               </h2>
               <button 

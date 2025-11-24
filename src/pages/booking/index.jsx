@@ -5,6 +5,7 @@ import Icon from '../../components/AppIcon';
 import BookingForm from './components/BookingForm';
 import BookingCard from './components/BookingCard';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Booking = () => {
   const [bookings, setBookings] = useState(() => {
@@ -109,15 +110,15 @@ const Booking = () => {
       
       <div className="min-h-screen bg-background">
         
-        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-          <div className="mb-4 sm:mb-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+        <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+            <div className={cn("flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 lg:ga mb-3 sm:mb-4", mobileClasses.cardCompact)}>
+              <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
+                <div className={cn(" rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconLarge)}>
                   <Icon name="Calendar" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                  <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                     Booking
                   </h1>
                   <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -156,7 +157,7 @@ const Booking = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols- w-full 1 sm:grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-4 sm:mb-6">
+            <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5  mb-4 sm:mb-6", mobileClasses.gapSmall)}>
               <button
                 onClick={() => setFilter('all')}
                 className={`p-4 rounded-xl border transition-smooth ${
@@ -165,7 +166,7 @@ const Booking = () => {
                     : 'bg-card border-border hover:bg-muted'
                 }`}
               >
-                <div className="text-2xl font-bold">{stats.total}</div>
+                <div className={cn(" font-bold", mobileClasses.heading2)}>{stats.total}</div>
                 <div className="text-xs mt-1">Semua</div>
               </button>
               
@@ -177,7 +178,7 @@ const Booking = () => {
                     : 'bg-card border-border hover:bg-muted'
                 }`}
               >
-                <div className="text-2xl font-bold">{stats.pending}</div>
+                <div className={cn(" font-bold", mobileClasses.heading2)}>{stats.pending}</div>
                 <div className="text-xs mt-1">Pending</div>
               </button>
               
@@ -189,7 +190,7 @@ const Booking = () => {
                     : 'bg-card border-border hover:bg-muted'
                 }`}
               >
-                <div className="text-2xl font-bold">{stats.confirmed}</div>
+                <div className={cn(" font-bold", mobileClasses.heading2)}>{stats.confirmed}</div>
                 <div className="text-xs mt-1">Confirmed</div>
               </button>
               
@@ -201,7 +202,7 @@ const Booking = () => {
                     : 'bg-card border-border hover:bg-muted'
                 }`}
               >
-                <div className="text-2xl font-bold">{stats.completed}</div>
+                <div className={cn(" font-bold", mobileClasses.heading2)}>{stats.completed}</div>
                 <div className="text-xs mt-1">Selesai</div>
               </button>
               
@@ -213,22 +214,22 @@ const Booking = () => {
                     : 'bg-card border-border hover:bg-muted'
                 }`}
               >
-                <div className="text-2xl font-bold">{stats.cancelled}</div>
+                <div className={cn(" font-bold", mobileClasses.heading2)}>{stats.cancelled}</div>
                 <div className="text-xs mt-1">Batal</div>
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
             {filteredBookings.length === 0 ? (
               <div className="col-span-full text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                <div className={cn("w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto ", mobileClasses.marginBottomSmall)}>
                   <Icon name="Calendar" size={20} sm:size={32} color="var(--color-muted-foreground)" />
                 </div>
-                <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                <h3 className={cn(" font-heading font-semibold text-foreground mb-2", mobileClasses.heading4)}>
                   Belum Ada Booking
                 </h3>
-                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mb-4">
+                <p className={cn("text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground ", mobileClasses.marginBottomSmall)}>
                   Tambahkan booking pertama Anda
                 </p>
                 <QuickActionButton
@@ -263,16 +264,16 @@ const Booking = () => {
 
         {showPublicBookings && (
           <div 
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            className={cn("fixed inset-0 bg-background/80 backdrop-blur-sm z-[300] flex items-center justify-center ", mobileClasses.cardCompact)}
             onClick={() => setShowPublicBookings(false)}
           >
             <div 
               className="bg-card border border-border rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden elevation-12"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6 border-b border-border">
+              <div className={cn("flex items-center justify-between p-3 sm:p-4 lg:p-3 sm:p-4 lg: border-b border-border", mobileClasses.card)}>
                 <div>
-                  <h2 className="text-xl font-heading font-bold text-foreground">
+                  <h2 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading3)}>
                     Booking Publik Masuk
                   </h2>
                   <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mt-1">
@@ -281,16 +282,16 @@ const Booking = () => {
                 </div>
                 <button
                   onClick={() => setShowPublicBookings(false)}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
+                  className={cn(" rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth", mobileClasses.iconMedium)}
                 >
                   <Icon name="X" size={20} sm:size={20} />
                 </button>
               </div>
 
-              <div className="p-3 sm:p-4 lg:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className={cn("p-3 sm:p-4 lg: overflow-y-auto max-h-[calc(90vh-120px)]", mobileClasses.card)}>
                 <div className="space-y-4">
                   {publicBookings.map((booking, index) => (
-                    <div key={index} className="border border-border rounded-xl p-4 bg-muted/30">
+                    <div key={index} className={cn("border border-border rounded-xl  bg-muted/30", mobileClasses.cardCompact)}>
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h3 className="font-semibold text-foreground truncate">{booking.clientName}</h3>
@@ -301,7 +302,7 @@ const Booking = () => {
                         </span>
                       </div>
 
-                      <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-3 text-xs sm:text-sm mb-3">
+                      <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2  text-xs sm:text-sm mb-3", mobileClasses.gapSmall)}>
                         <div>
                           <span className="text-muted-foreground">Layanan:</span>
                           <span className="ml-2 text-foreground capitalize">{booking.serviceType}</span>

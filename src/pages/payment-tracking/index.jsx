@@ -10,6 +10,7 @@ import InvoicePreviewModal from './components/InvoicePreviewModal';
 import Icon from '../../components/AppIcon';
 import Select from '../../components/ui/Select';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const PaymentTracking = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -318,11 +319,11 @@ const PaymentTracking = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="w-full max-w-full-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-        <div className="mb-4 sm:mb-6">
-          <div className="flex items-start justify-between gap-4 mb-2">
+      <main className={cn("w-full max-w-full-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
+        <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+          <div className={cn("flex items-start justify-between ga mb-2", mobileClasses.cardCompact)}>
             <div>
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-1">
+              <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground mb-1", mobileClasses.heading1)}>
                 Pelacakan Pembayaran
               </h1>
               <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -340,7 +341,7 @@ const PaymentTracking = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
+        <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:ga mb-3 sm:mb-4 sm:mb-4 sm:mb-6", mobileClasses.cardCompact)}>
           <PaymentOverviewCard
             title="Total Tertunda"
             amount={paymentStats?.pending?.amount}
@@ -377,9 +378,9 @@ const PaymentTracking = () => {
 
         </div>
 
-        <div className="bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6 mb-4 sm:mb-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
-            <h2 className="text-lg font-heading font-bold text-foreground">
+        <div className={cn("bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg: mb-4 sm:mb-6", mobileClasses.card)}>
+          <div className={cn("flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 lg:ga mb-3 sm:mb-4", mobileClasses.cardCompact)}>
+            <h2 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading4)}>
               Daftar Pembayaran Klien
             </h2>
             <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -398,12 +399,12 @@ const PaymentTracking = () => {
             onFilter={setFilters}
             placeholder="Cari klien berdasarkan nama atau nomor telepon..."
             showFilters={true}
-            className="mb-4"
+            className={cn("", mobileClasses.marginBottomSmall)}
           />
 
           {filteredAndSortedClients?.length === 0 ?
             <div className="text-center py-12">
-              <div className="w-16 h-16 rounded-2xl bg-muted mx-auto mb-4 flex items-center justify-center">
+              <div className={cn("w-16 h-16 rounded-2xl bg-muted mx-auto  flex items-center justify-center", mobileClasses.marginBottomSmall)}>
                 <Icon name="Search" size={20} sm:size={32} color="var(--color-muted-foreground)" />
               </div>
               <p className="text-base font-medium text-foreground mb-1">
@@ -414,7 +415,7 @@ const PaymentTracking = () => {
               </p>
             </div> :
 
-            <div className="grid grid-cols- w-full 1 lg:grid-cols-2 gap-4">
+            <div className={cn("grid grid-cols- w-full 1 lg:grid-cols-2 ga", mobileClasses.cardCompact)}>
               {filteredAndSortedClients?.map((client) =>
                 <ClientPaymentCard
                   key={client?.id}
@@ -429,9 +430,9 @@ const PaymentTracking = () => {
         </div>
 
         {invoices.length > 0 && (
-          <div className="bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-heading font-bold text-foreground">
+          <div className={cn("bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:", mobileClasses.card)}>
+            <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
+              <h2 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading4)}>
                 Daftar Invoice
               </h2>
             </div>
@@ -440,7 +441,7 @@ const PaymentTracking = () => {
               {invoices.map((invoice) => (
                 <div
                   key={invoice.id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl border border-border bg-muted/40 hover:border-primary/50 transition-smooth cursor-pointer"
+                  className={cn("flex flex-col sm:flex-row sm:items-center justify-between  p-3 rounded-xl border border-border bg-muted/40 hover:border-primary/50 transition-smooth cursor-pointer", mobileClasses.gapSmall)}
                   onClick={() => handleViewInvoice(invoice)}
                 >
                   <div>
@@ -471,7 +472,7 @@ const PaymentTracking = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+                  <div className={cn("flex items-center justify-between sm:justify-end  w-full sm:w-auto", mobileClasses.gapSmall)}>
                     <div className="text-right">
                       <p className="text-xs sm:text-sm font-bold text-primary">
                         {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(
@@ -488,9 +489,9 @@ const PaymentTracking = () => {
         )}
 
         {showPaymentHistory && selectedClient &&
-          <div className="bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-heading font-bold text-foreground">
+          <div className={cn("bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:", mobileClasses.card)}>
+            <div className={cn("flex items-center justify-between ", mobileClasses.marginBottomSmall)}>
+              <h2 className={cn(" font-heading font-bold text-foreground", mobileClasses.heading4)}>
                 Riwayat Pembayaran - {selectedClient?.name}
               </h2>
               <button
@@ -498,14 +499,9 @@ const PaymentTracking = () => {
                   setShowPaymentHistory(false);
                   setSelectedClient(null);
                 }}
-                className="
-                  w-8 h-8 rounded-lg flex items-center justify-center
-                  text-muted-foreground hover:text-foreground hover:bg-muted
-                  transition-smooth
-                "
+                className={cn("rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth", mobileClasses.iconSmall)}
                 aria-label="Tutup">
-
-                <Icon name="X" size={20} sm:size={20} strokeWidth={2.5} />
+                <Icon name="X" size={20} strokeWidth={2.5} />
               </button>
             </div>
             <PaymentHistoryTimeline payments={mockPaymentHistory} />

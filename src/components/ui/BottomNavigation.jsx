@@ -77,7 +77,7 @@ const BottomNavigation = () => {
       role="navigation"
       aria-label="Bottom Navigation"
     >
-      <div className="flex items-center justify-around px-2 py-2 max-w-screen-xl mx-auto overflow-x-auto">
+      <div className="flex items-center justify-around px-1 py-1.5 max-w-screen-xl mx-auto overflow-x-auto">
         {navigationItems?.map((item) => {
           const active = isActive(item?.path);
 
@@ -86,8 +86,8 @@ const BottomNavigation = () => {
               key={item?.path}
               onClick={() => handleNavigation(item?.path)}
               className={`
-                flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md
-                transition-smooth min-w-[60px] relative
+                flex flex-col items-center justify-center gap-0.5 px-1.5 py-1.5 rounded-md
+                transition-smooth min-w-[50px] relative
                 ${active
                   ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }
@@ -98,19 +98,19 @@ const BottomNavigation = () => {
             >
               <Icon
                 name={item?.icon}
-                size={20}
+                size={16}
                 strokeWidth={active ? 2.5 : 2}
                 className="transition-smooth"
               />
               <span className={`
-                text-[10px] font-caption font-medium leading-tight text-center
+                text-[9px] font-caption font-medium leading-tight text-center
                 ${active ? 'font-semibold' : ''}
               `}>
                 {item?.label}
               </span>
               {active && (
                 <span
-                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full"
+                  className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-primary rounded-full"
                   aria-hidden="true"
                 />
               )}

@@ -9,6 +9,7 @@ import PackageFormModal from './components/PackageFormModal';
 import PackageTemplates from './components/PackageTemplates';
 import PackageStats from './components/PackageStats';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const ServicePackages = () => {
   const [packages, setPackages] = useState(() => {
@@ -324,15 +325,15 @@ const ServicePackages = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
 
-        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
+        <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6 pb-24 lg:pb-6", mobileClasses.card)}>
           {/* Header */}
-          <div className="mb-4 sm:mb-6">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
+            <div className={cn("flex items-center  mb-2", mobileClasses.gapSmall)}>
+              <div className={cn(" rounded-lg bg-primary/10 flex items-center justify-center", mobileClasses.iconLarge)}>
                 <Icon name="Package" size={20} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                   Paket Layanan
                 </h1>
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
@@ -343,9 +344,9 @@ const ServicePackages = () => {
           </div>
 
           {/* Public Link Info Banner */}
-          <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-secondary/10 border border-primary/20 rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6 mb-4 sm:mb-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0">
+          <div className={cn("bg-gradient-to-r from-primary/10 via-primary/5 to-secondary/10 border border-primary/20 rounded-2xl p-4 sm:p-3 sm:p-4 lg: mb-4 sm:mb-6", mobileClasses.card)}>
+            <div className={cn("flex flex-col sm:flex-row items-start sm:items-center ga", mobileClasses.cardCompact)}>
+              <div className={cn(" rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0", mobileClasses.iconLarge)}>
                 <Icon name="Share2" size={20} sm:size={24} color="var(--color-primary)" />
               </div>
               <div className="flex-1">
@@ -394,7 +395,7 @@ const ServicePackages = () => {
 
           {/* Actions & Filters */}
           <div className="mt-6 space-y-4">
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className={cn("flex flex-col sm:flex-row items-stretch sm:items-center ", mobileClasses.gapSmall)}>
               <QuickActionButton
                 label="Buat Paket Baru"
                 icon="Plus"
@@ -423,7 +424,7 @@ const ServicePackages = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols- w-full 1 sm:grid-cols-3 gap-3">
+            <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-3 ", mobileClasses.gapSmall)}>
               <Select
                 options={filterTypeOptions}
                 value={filterType}
@@ -447,7 +448,7 @@ const ServicePackages = () => {
 
           {/* Templates Section */}
           {showTemplates && (
-            <div className="mt-6 p-3 sm:p-4 lg:p-6 bg-surface rounded-lg overflow-hidden border border-border">
+            <div className={cn("mt-6 p-3 sm:p-4 lg: bg-surface rounded-lg overflow-hidden border border-border", mobileClasses.card)}>
               <PackageTemplates onSelectTemplate={handleSelectTemplate} />
             </div>
           )}
@@ -456,13 +457,13 @@ const ServicePackages = () => {
           <div className="mt-6">
             {filteredPackages?.length === 0 ? (
               <div className="text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
+                <div className={cn("w-16 h-16 rounded-full bg-muted mx-auto  flex items-center justify-center", mobileClasses.marginBottomSmall)}>
                   <Icon name="Package" size={20} sm:size={32} color="var(--color-muted-foreground)" />
                 </div>
-                <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
+                <h3 className={cn(" font-heading font-semibold text-foreground mb-2", mobileClasses.heading4)}>
                   Belum Ada Paket
                 </h3>
-                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mb-4">
+                <p className={cn("text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground ", mobileClasses.marginBottomSmall)}>
                   Mulai dengan membuat paket layanan pertama Anda
                 </p>
                 <Button
@@ -475,7 +476,7 @@ const ServicePackages = () => {
                 </Button>
               </div>
             ) : (
-              <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:p-6">
+              <div className={cn("grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:p-4 lg:", mobileClasses.card)}>
                 {filteredPackages?.map((packageData) => (
                   <PackageCard
                     key={packageData?.id}

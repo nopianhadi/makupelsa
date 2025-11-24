@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
+import { mobileClasses, cn } from '../../../utils/mobileOptimization';
 
 const RevenueCard = ({ title, amount, trend, trendValue, icon, variant = 'default' }) => {
   const variantStyles = {
@@ -19,32 +20,32 @@ const RevenueCard = ({ title, amount, trend, trendValue, icon, variant = 'defaul
   };
 
   return (
-    <div className="bg-card border border-border rounded-lg overflow-hidden p-6 elevation-1 hover:elevation-3 transition-smooth">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
-          <p className="text-sm font-caption text-muted-foreground mb-1">
+    <div className={cn("bg-card border border-border rounded-lg overflow-hidden elevation-1 hover:elevation-3 transition-smooth", mobileClasses.cardCompact)}>
+      <div className={cn("flex items-start justify-between", mobileClasses.marginBottomSmall)}>
+        <div className="flex-1 min-w-0">
+          <p className={cn("font-caption text-muted-foreground mb-0.5", mobileClasses.textSmall)}>
             {title}
           </p>
-          <h3 className="text-2xl font-heading font-bold text-foreground">
+          <h3 className={cn("font-heading font-bold text-foreground truncate", mobileClasses.heading3)}>
             {formatCurrency(amount)}
           </h3>
         </div>
-        <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${variantStyles?.[variant]}`}>
-          <Icon name={icon} size={24} strokeWidth={2.5} />
+        <div className={cn(`rounded-lg flex items-center justify-center ${variantStyles?.[variant]}`, mobileClasses.iconMedium)}>
+          <Icon name={icon} className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
         </div>
       </div>
       {trend && (
-        <div className="flex items-center gap-1.5">
+        <div className={cn("flex items-center", mobileClasses.gapTiny)}>
           <Icon 
             name={trend === 'up' ? 'TrendingUp' : 'TrendingDown'} 
-            size={16} 
+            className="w-3 h-3 sm:w-4 sm:h-4"
             color={trend === 'up' ? 'var(--color-success)' : 'var(--color-error)'}
             strokeWidth={2.5}
           />
-          <span className={`text-sm font-medium ${trend === 'up' ? 'text-success' : 'text-error'}`}>
+          <span className={cn(`font-medium ${trend === 'up' ? 'text-success' : 'text-error'}`, mobileClasses.textSmall)}>
             {trendValue}%
           </span>
-          <span className="text-xs text-muted-foreground">vs bulan lalu</span>
+          <span className={cn("text-muted-foreground", mobileClasses.textTiny)}>vs bulan lalu</span>
         </div>
       )}
     </div>

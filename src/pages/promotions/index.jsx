@@ -4,6 +4,7 @@ import Icon from '../../components/AppIcon';
 import QuickActionButton from '../../components/ui/QuickActionButton';
 import AddPromotionModal from './components/AddPromotionModal';
 import { dataStore } from '../../utils/dataStore';
+import { mobileClasses, cn } from '../../utils/mobileOptimization';
 
 const Promotions = () => {
   const [promotions, setPromotions] = useState([]);
@@ -135,10 +136,10 @@ const Promotions = () => {
         <title>Manajemen Promo - MUA Finance Manager</title>
       </Helmet>
       <div className="min-h-screen bg-background">
-        <main className="w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
-          <div className="mb-4 sm:mb-6">
+        <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6", mobileClasses.card)}>
+          <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+              <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground", mobileClasses.heading1)}>
                 Manajemen Promo
               </h1>
               <QuickActionButton
@@ -157,7 +158,7 @@ const Promotions = () => {
           </div>
 
           {/* Tab Navigation */}
-          <div className="mb-4 sm:mb-6 border-b border-border">
+          <div className={cn("mb-4 sm: border-b border-border", mobileClasses.marginBottom)}>
             <div className="flex space-x-8">
               <button
                 onClick={() => setActiveTab('active')}
@@ -183,10 +184,10 @@ const Promotions = () => {
           </div>
 
           {/* Promo Grid */}
-          <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className={cn("grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
             {(activeTab === 'active' ? activePromotions : expiredPromotions).map(promo => (
-              <div key={promo.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
-                <div className="flex items-start justify-between mb-4">
+              <div key={promo.id} className={cn("bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:", mobileClasses.card)}>
+                <div className={cn("flex items-start justify-between ", mobileClasses.marginBottomSmall)}>
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1">{promo.title}</h3>
                     <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">{promo.description}</p>
@@ -194,7 +195,7 @@ const Promotions = () => {
                   <Icon name="Tag" size={20} sm:size={20} color="var(--color-primary)" />
                 </div>
                 
-                <div className="space-y-2 mb-4">
+                <div className={cn("space-y-2 ", mobileClasses.marginBottomSmall)}>
                   <div className="flex items-center justify-between text-xs sm:text-sm">
                     <span className="text-muted-foreground">Kode:</span>
                     <span className="font-mono font-semibold text-primary">{promo.code}</span>
