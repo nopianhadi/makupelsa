@@ -44,8 +44,8 @@ const MonthView = ({ currentDate, events, onDateClick, onEventClick }) => {
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border overflow-hidden">
-      <div className="grid grid-cols- w-full 7 gap-px bg-border">
+    <div className="bg-card rounded-lg border border-border overflow-hidden w-full">
+      <div className="grid grid-cols-7 w-full gap-px bg-border">
         {weekDays?.map((day) => (
           <div
             key={day}
@@ -57,7 +57,7 @@ const MonthView = ({ currentDate, events, onDateClick, onEventClick }) => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols- w-full 7 gap-px bg-border">
+      <div className="grid grid-cols-7 w-full gap-px bg-border">
         {days?.map((date, index) => {
           const dayEvents = getEventsForDate(date);
           const isCurrentDay = isToday(date);
@@ -67,7 +67,7 @@ const MonthView = ({ currentDate, events, onDateClick, onEventClick }) => {
               key={index}
               onClick={() => date && onDateClick(date)}
               className={`
-                bg-card min-h-[100px] sm:min-h-[120px] p-2
+                bg-card min-h-[80px] sm:min-h-[100px] lg:min-h-[120px] p-2
                 ${date ? 'cursor-pointer hover:bg-muted transition-smooth' : 'bg-surface/50'}
               `}
             >
@@ -75,7 +75,7 @@ const MonthView = ({ currentDate, events, onDateClick, onEventClick }) => {
                 <>
                   <div className="flex items-center justify-between mb-2">
                     <span className={`
-                      text-sm font-medium
+                      text-xs sm:text-sm font-medium
                       ${isCurrentDay 
                         ? 'w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold' 
                         : 'text-foreground'

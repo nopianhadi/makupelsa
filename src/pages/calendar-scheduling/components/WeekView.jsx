@@ -46,11 +46,11 @@ const WeekView = ({ currentDate, events, onEventClick }) => {
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border overflow-hidden">
+    <div className="bg-card rounded-lg border border-border overflow-hidden w-full">
       <div className="w-full overflow-x-auto">
-        <div className="min-w-[800px]">
-          <div className="grid grid-cols- w-full 8 gap-px bg-border sticky top-0 z-10">
-            <div className="bg-surface px-3 py-3">
+        <div className="w-full">
+          <div className="grid grid-cols-8 w-full gap-px bg-border sticky top-0 z-10">
+            <div className="bg-surface px-2 sm:px-3 py-2 sm:py-3">
               <span className="text-xs font-caption font-semibold text-muted-foreground">
                 Waktu
               </span>
@@ -66,7 +66,7 @@ const WeekView = ({ currentDate, events, onEventClick }) => {
                   `}
                 >
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-[10px] font-caption font-semibold text-muted-foreground uppercase">
+                    <span className="text-[8px] sm:text-[10px] font-caption font-semibold text-muted-foreground uppercase">
                       {weekDayNames?.[index]}
                     </span>
                     <span className={`
@@ -84,10 +84,10 @@ const WeekView = ({ currentDate, events, onEventClick }) => {
             })}
           </div>
 
-          <div className="grid grid-cols- w-full 8 gap-px bg-border">
+          <div className="grid grid-cols-8 w-full gap-px bg-border">
             {timeSlots?.map((time) => (
               <React.Fragment key={time}>
-                <div className="bg-surface px-3 py-4 border-t border-border">
+                <div className="bg-surface px-2 sm:px-3 py-2 sm:py-4 border-t border-border">
                   <span className="text-xs font-mono text-muted-foreground">
                     {time}
                   </span>
@@ -114,7 +114,7 @@ const WeekView = ({ currentDate, events, onEventClick }) => {
                             hover:elevation-3 transition-smooth
                           `}
                         >
-                          <p className="text-[10px] font-medium truncate">
+                          <p className="text-[8px] sm:text-[10px] font-medium truncate">
                             {event?.clientName}
                           </p>
                           <p className="text-[9px] font-caption opacity-80 truncate">

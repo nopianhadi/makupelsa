@@ -240,7 +240,7 @@ const CalendarScheduling = () => {
                 onClick={() => setIsReminderModalOpen(false)}
                 className="p-1 hover:bg-muted rounded"
               >
-                <Icon name="X" size={20} sm:size={24} />
+                <Icon name="X" size={24} />
               </button>
             </div>
             <ReminderManager
@@ -263,7 +263,7 @@ const CalendarScheduling = () => {
                 onClick={() => setIsGoogleSyncModalOpen(false)}
                 className="p-1 hover:bg-muted rounded"
               >
-                <Icon name="X" size={20} sm:size={24} />
+                <Icon name="X" size={24} />
               </button>
             </div>
             <GoogleCalendarSync
