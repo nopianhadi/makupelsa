@@ -8,6 +8,15 @@ MUA Finance Manager is a comprehensive financial management application for make
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (November 24, 2025)
+
+- ✅ Completed Gallery page deletion (folder, routes, references removed)
+- ✅ Verified navigation order: 15 pages optimized for logical workflow
+- ✅ Added payment tracking to Team Management page:
+  - Dashboard stats: Pembayaran Lunas, Pembayaran Tertunda, Total Pembayaran
+  - Per-member payment cards showing paid vs unpaid amounts
+  - Real-time calculation of team-wide payment metrics
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -33,6 +42,7 @@ The application includes robust modules for:
 - **Booking Management:** Client booking forms, status tracking, and real-time sync.
 - **Leads Management:** Lead creation, status tracking, conversion to clients, and WhatsApp integration.
 - **Calendar Scheduling:** Event management, Reminder Manager with browser notifications, and Google Calendar synchronization.
+- **Team Management:** Team member profiles, performance tracking (completed jobs, ratings), role management, and **payment tracking** (total paid, total unpaid, and per-member payment status).
 - **Settings & Preferences:** Dark mode, notification preferences, data export/import (JSON), and data deletion.
 
 ### Image Handling

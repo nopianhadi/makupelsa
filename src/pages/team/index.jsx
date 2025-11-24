@@ -34,7 +34,9 @@ const Team = () => {
           rating: 4.8,
           specialties: ["Bridal", "Traditional"],
           status: "active",
-          joinDate: "2023-01-15"
+          joinDate: "2023-01-15",
+          paymentsPaid: 45000000,
+          paymentsUnpaid: 5000000
         },
         {
           name: "Dina Kartika",
@@ -46,7 +48,9 @@ const Team = () => {
           rating: 4.7,
           specialties: ["Modern", "Party"],
           status: "active",
-          joinDate: "2023-02-20"
+          joinDate: "2023-02-20",
+          paymentsPaid: 32000000,
+          paymentsUnpaid: 8000000
         },
         {
           name: "Emma Putri",
@@ -58,7 +62,9 @@ const Team = () => {
           rating: 4.5,
           specialties: ["Casual", "Wedding"],
           status: "active",
-          joinDate: "2023-06-10"
+          joinDate: "2023-06-10",
+          paymentsPaid: 18000000,
+          paymentsUnpaid: 2000000
         }
       ];
       mockTeam.forEach(member => dataStore.addTeamMember(member));
@@ -134,12 +140,18 @@ const Team = () => {
   const uniqueRoles = [...new Set(teamMembers.map(m => m.role))];
 
   // Calculate stats
+  const totalPaymentsPaid = teamMembers.reduce((sum, m) => sum + (m.paymentsPaid || 0), 0);
+  const totalPaymentsUnpaid = teamMembers.reduce((sum, m) => sum + (m.paymentsUnpaid || 0), 0);
+
   const stats = {
     total: teamMembers.length,
     active: teamMembers.filter(m => m.status === 'active').length,
     totalJobs: teamMembers.reduce((sum, m) => sum + m.completedJobs, 0),
     avgRating: teamMembers.length > 0 ? (teamMembers.reduce((sum, m) => sum + m.rating, 0) / teamMembers.length).toFixed(1) : 0,
-    bestPerformer: teamMembers.length > 0 ? teamMembers.reduce((prev, curr) => (prev.rating > curr.rating) ? prev : curr).name : 'N/A'
+    bestPerformer: teamMembers.length > 0 ? teamMembers.reduce((prev, curr) => (prev.rating > curr.rating) ? prev : curr).name : 'N/A',
+    totalPaymentsPaid,
+    totalPaymentsUnpaid,
+    totalPayments: totalPaymentsPaid + totalPaymentsUnpaid
   };
 
   return (
@@ -189,24 +201,24 @@ const Team = () => {
             </div>
             <div className="bg-card border border-border rounded-lg p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Total Pekerjaan</span>
-                <Icon name="Briefcase" size={20} color="var(--color-accent)" />
+                <span className="text-sm text-muted-foreground">Pembayaran Lunas</span>
+                <Icon name="CheckCircle" size={20} color="rgb(34 197 94)" />
               </div>
-              <div className="text-3xl font-bold text-foreground">{stats.totalJobs}</div>
+              <div className="text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsPaid / 1000000).toFixed(1)} Jt</div>
             </div>
             <div className="bg-card border border-border rounded-lg p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Rating Rata-rata</span>
-                <Icon name="Star" size={20} color="var(--color-warning)" />
+                <span className="text-sm text-muted-foreground">Pembayaran Tertunda</span>
+                <Icon name="Clock" size={20} color="rgb(234 179 8)" />
               </div>
-              <div className="text-3xl font-bold text-foreground">{stats.avgRating}</div>
+              <div className="text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsUnpaid / 1000000).toFixed(1)} Jt</div>
             </div>
             <div className="bg-card border border-border rounded-lg p-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Top Performer</span>
-                <Icon name="Trophy" size={20} color="rgb(251 146 60)" />
+                <span className="text-sm text-muted-foreground">Total Pembayaran</span>
+                <Icon name="Wallet" size={20} color="var(--color-primary)" />
               </div>
-              <div className="text-sm font-bold text-foreground truncate">{stats.bestPerformer}</div>
+              <div className="text-2xl font-bold text-foreground">Rp {(stats.totalPayments / 1000000).toFixed(1)} Jt</div>
             </div>
           </div>
 
@@ -309,6 +321,18 @@ const Team = () => {
                         {specialty}
                       </span>
                     ))}
+                  </div>
+
+                  {/* Payment Status */}
+                  <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
+                    <div className="bg-green-500/10 rounded-lg p-2">
+                      <p className="text-muted-foreground">Sudah Bayar</p>
+                      <p className="font-bold text-green-600">Rp {((member.paymentsPaid || 0) / 1000000).toFixed(1)} Jt</p>
+                    </div>
+                    <div className="bg-yellow-500/10 rounded-lg p-2">
+                      <p className="text-muted-foreground">Belum Bayar</p>
+                      <p className="font-bold text-yellow-600">Rp {((member.paymentsUnpaid || 0) / 1000000).toFixed(1)} Jt</p>
+                    </div>
                   </div>
 
                   <div className="flex gap-2">
