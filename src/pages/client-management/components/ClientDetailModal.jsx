@@ -102,9 +102,9 @@ const ClientDetailModal = ({ client, onClose }) => {
         className="bg-card border border-border rounded-lg w-full max-w-2xl sm:max-w-4xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e?.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6 border-b border-border">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full overflow-hidden bg-muted">
+        <div className="flex items-center justify-between p-2 sm:p-3 lg:p-4 border-b border-border">
+          <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden bg-muted">
               <Image
                 src={client?.profileImage}
                 alt={client?.profileImageAlt}
@@ -139,13 +139,13 @@ const ClientDetailModal = ({ client, onClose }) => {
         </div>
 
         <div className="border-b border-border">
-          <div className="flex items-center gap-2 px-6">
+          <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 lg:px-6 overflow-x-auto">
             {tabs?.map((tab) => (
               <button
                 key={tab?.id}
                 onClick={() => setActiveTab(tab?.id)}
                 className={`
-                  flex items-center gap-2 px-4 py-3 border-b-2 transition-smooth
+                  flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 sm:py-3 border-b-2 transition-smooth
                   ${activeTab === tab?.id
                     ? 'border-primary text-primary font-medium' :'border-transparent text-muted-foreground hover:text-foreground'
                   }
@@ -166,10 +166,10 @@ const ClientDetailModal = ({ client, onClose }) => {
               {client?.events?.map((event, index) => {
                 const serviceConfig = getServiceTypeConfig(event?.serviceType);
                 return (
-                  <div key={index} className="bg-surface rounded-lg p-4 border border-border">
+                  <div key={index} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-sm font-medium ${serviceConfig?.bgColor} ${serviceConfig?.textColor}`}>
+                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs sm:text-sm font-medium ${serviceConfig?.bgColor} ${serviceConfig?.textColor}`}>
                           {serviceConfig?.label}
                         </span>
                         <PaymentStatusIndicator 
@@ -179,11 +179,11 @@ const ClientDetailModal = ({ client, onClose }) => {
                           amount={event?.totalAmount}
                         />
                       </div>
-                      <span className="text-lg font-heading font-bold text-foreground font-mono">
+                      <span className="text-base sm:text-base sm:text-lg font-heading font-bold text-foreground font-mono">
                         {formatCurrency(event?.totalAmount)}
                       </span>
                     </div>
-                    <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3">
                       <div className="flex items-center gap-2">
                         <Icon name="Calendar" size={16} color="var(--color-muted-foreground)" />
                         <span className="text-sm text-foreground">
@@ -197,7 +197,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                         </span>
                       </div>
                       {event?.venue && (
-                        <div className="flex items-center gap-2 md:col-span-2">
+                        <div className="flex items-center gap-2 sm:col-span-2">
                           <Icon name="MapPin" size={16} color="var(--color-muted-foreground)" />
                           <span className="text-xs sm:text-sm text-muted-foreground">
                             {event?.venue}
@@ -205,7 +205,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                         </div>
                       )}
                       {event?.packageName && (
-                        <div className="flex items-center gap-2 md:col-span-2">
+                        <div className="flex items-center gap-2 sm:col-span-2">
                           <Icon name="Package" size={16} color="var(--color-muted-foreground)" />
                           <span className="text-xs sm:text-sm text-muted-foreground">
                             {event?.packageName}
@@ -229,17 +229,17 @@ const ClientDetailModal = ({ client, onClose }) => {
           {activeTab === 'payments' && (
             <div className="space-y-4">
               {client?.paymentHistory?.map((payment, index) => (
-                <div key={index} className="bg-surface rounded-lg p-4 border border-border">
+                <div key={index} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border">
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <p className="text-sm font-medium text-foreground mb-1">
+                      <p className="text-xs sm:text-sm font-medium text-foreground mb-1">
                         {payment?.description}
                       </p>
                       <p className="text-xs text-muted-foreground">
                         {formatDate(payment?.date)}
                       </p>
                     </div>
-                    <span className="text-lg font-heading font-bold text-success font-mono">
+                    <span className="text-base sm:text-base sm:text-lg font-heading font-bold text-success font-mono">
                       {formatCurrency(payment?.amount)}
                     </span>
                   </div>
@@ -258,8 +258,8 @@ const ClientDetailModal = ({ client, onClose }) => {
             <div className="space-y-4">
               {clientInvoices.length === 0 ? (
                 <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-2xl bg-muted mx-auto mb-4 flex items-center justify-center">
-                    <Icon name="FileText" size={32} color="var(--color-muted-foreground)" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl bg-muted mx-auto mb-4 flex items-center justify-center">
+                    <Icon name="FileText" size={24} sm:size={32} color="var(--color-muted-foreground)" />
                   </div>
                   <p className="text-base font-medium text-foreground mb-1">
                     Belum Ada Invoice
@@ -270,7 +270,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                 </div>
               ) : (
                 clientInvoices.map((invoice) => (
-                  <div key={invoice.id} className="bg-surface rounded-lg p-4 border border-border hover:border-primary/50 transition-smooth cursor-pointer" onClick={() => handleViewInvoice(invoice)}>
+                  <div key={invoice.id} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border hover:border-primary/50 transition-smooth cursor-pointer" onClick={() => handleViewInvoice(invoice)}>
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center gap-2 mb-1">
@@ -288,7 +288,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                              invoice.status === 'overdue' ? 'Jatuh Tempo' : 'Draft'}
                           </span>
                         </div>
-                        <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-2 text-xs text-muted-foreground">
                           <div>
                             <span>Tanggal: </span>
                             <span className="text-foreground">{invoice.date}</span>
@@ -300,7 +300,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-heading font-bold text-primary font-mono">
+                        <span className="text-base sm:text-base sm:text-lg font-heading font-bold text-primary font-mono">
                           {formatCurrency(invoice.grandTotal || 0)}
                         </span>
                         <Icon name="ChevronRight" size={18} color="var(--color-muted-foreground)" />
@@ -332,7 +332,7 @@ const ClientDetailModal = ({ client, onClose }) => {
           {activeTab === 'communication' && (
             <div className="space-y-4">
               {client?.communicationLog?.map((log, index) => (
-                <div key={index} className="bg-surface rounded-lg p-4 border border-border">
+                <div key={index} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border">
                   <div className="flex items-start gap-3">
                     <div className={`
                       w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0
@@ -346,7 +346,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-foreground">
+                        <span className="text-xs sm:text-sm font-medium text-foreground">
                           {log?.subject}
                         </span>
                         <span className="text-xs text-muted-foreground">
