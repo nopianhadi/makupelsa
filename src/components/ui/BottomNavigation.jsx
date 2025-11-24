@@ -9,55 +9,55 @@ const BottomNavigation = () => {
   const navigationItems = [
     {
       label: 'Dashboard',
-      path: '/dashboard',
+      path: '/app/dashboard',
       icon: 'LayoutDashboard',
       tooltip: 'Ringkasan bisnis dan operasi harian'
     },
     {
       label: 'Klien',
-      path: '/client-management',
+      path: '/app/client-management',
       icon: 'Users',
       tooltip: 'Manajemen hubungan klien'
     },
     {
       label: 'Kalender',
-      path: '/calendar-scheduling',
+      path: '/app/calendar-scheduling',
       icon: 'Calendar',
       tooltip: 'Penjadwalan dan ketersediaan'
     },
     {
       label: 'Keuangan',
-      path: '/financial-tracking',
+      path: '/app/financial-tracking',
       icon: 'Wallet',
       tooltip: 'Pelacakan keuangan lengkap'
     },
     {
       label: 'Pembayaran',
-      path: '/payment-tracking',
+      path: '/app/payment-tracking',
       icon: 'CreditCard',
       tooltip: 'Pemantauan status pembayaran'
     },
     {
       label: 'Paket Layanan',
-      path: '/service-packages',
+      path: '/app/service-packages',
       icon: 'Package',
       tooltip: 'Definisi paket layanan'
     },
     {
       label: 'Prospek',
-      path: '/leads',
+      path: '/app/leads',
       icon: 'UserPlus',
       tooltip: 'Kelola calon klien potensial'
     },
     {
       label: 'Pengaturan',
-      path: '/settings',
+      path: '/app/settings',
       icon: 'Settings',
       tooltip: 'Pengaturan aplikasi'
     },
     {
       label: 'Profil',
-      path: '/profile',
+      path: '/app/profile',
       icon: 'User',
       tooltip: 'Profil pengguna'
     }

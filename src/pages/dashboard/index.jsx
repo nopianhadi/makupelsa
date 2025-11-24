@@ -60,15 +60,15 @@ const Dashboard = () => {
   };
 
   const handleAddClient = () => {
-    navigate('/client-management');
+    navigate('/app/client-management');
   };
 
   const handleRecordExpense = () => {
-    navigate('/financial-tracking');
+    navigate('/app/financial-tracking');
   };
 
   const handleViewCalendar = () => {
-    navigate('/calendar-scheduling');
+    navigate('/app/calendar-scheduling');
   };
 
   if (loading) {
