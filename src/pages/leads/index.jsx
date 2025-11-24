@@ -39,13 +39,13 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
     const hasMore = filtered.length > displayLimit;
 
     return (
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
             <div 
                 className="flex items-center gap-2 mb-4 cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={onToggle}
             >
                 <div className={`w-10 h-10 rounded-lg ${iconBg} flex items-center justify-center`}>
-                    <Icon name={icon} size={16} sm:size={20} className={iconColor} />
+                    <Icon name={icon} size={16} sm:size={16} sm:size={16} sm:size={20} className={iconColor} />
                 </div>
                 <div className="flex-1">
                     <h2 className="text-lg font-bold text-foreground">{title}</h2>
@@ -57,7 +57,7 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
                 <button className="p-2 hover:bg-muted rounded-lg transition-colors">
                     <Icon 
                         name={isCollapsed ? "ChevronDown" : "ChevronUp"} 
-                        size={16} sm:size={20} 
+                        size={16} sm:size={16} sm:size={16} sm:size={20} 
                         className="text-muted-foreground"
                     />
                 </button>
@@ -128,7 +128,7 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
                          lead.status === 'Lost' ? 'Lost' : lead.status}
                     </span>
                 </div>
-                <div className="flex items-center gap-3 text-xs sm:text-sm text-muted-foreground">
+                <div className="flex items-center gap-3 text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                         <Icon name="Phone" size={14} />
                         <span>{lead.phone}</span>
@@ -363,17 +363,17 @@ const Leads = () => {
             </Helmet>
             <div className="min-h-screen bg-background">
                 <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-                    <div className="mb-6">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                    <div className="mb-4 sm:mb-6">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                                    <Icon name="Users" size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                                    <Icon name="Users" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                                    <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                                         Prospek
                                     </h1>
-                                    <p className="text-xs sm:text-sm text-muted-foreground">
+                                    <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                                         Kelola calon klien potensial Anda
                                     </p>
                                 </div>
@@ -396,7 +396,7 @@ const Leads = () => {
                         </div>
 
                         {/* Tabs */}
-                        <div className="flex border-b border-border mb-6 overflow-x-auto">
+                        <div className="flex border-b border-border mb-4 sm:mb-6 overflow-x-auto">
                             <button
                                 className={`px-4 py-2 font-medium text-xs sm:text-sm whitespace-nowrap ${activeTab === 'list' ? 'border-b-2 border-primary text-primary' : 'text-muted-foreground'}`}
                                 onClick={() => setActiveTab('list')}
@@ -415,7 +415,7 @@ const Leads = () => {
                     {activeTab === 'list' && (
                         <>
                             {/* Statistics Cards */}
-                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-4 sm:mb-6">
                                 <div className="p-4 bg-card border border-border rounded-lg">
                                     <div className="text-2xl font-bold text-foreground">{stats.total}</div>
                                     <div className="text-xs text-muted-foreground">Total</div>
@@ -443,7 +443,7 @@ const Leads = () => {
                             </div>
 
                             {/* Search and Filter */}
-                            <div className="mb-6 space-y-3">
+                            <div className="mb-4 sm:mb-6 space-y-3">
                                 <div className="flex gap-2">
                                     <div className="relative flex-1">
                                         <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />

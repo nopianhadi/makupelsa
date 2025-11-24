@@ -136,9 +136,9 @@ const Promotions = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
         <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6">
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                 Manajemen Promo
               </h1>
               <QuickActionButton
@@ -151,13 +151,13 @@ const Promotions = () => {
                 }}
               />
             </div>
-            <p className="text-xs sm:text-sm text-muted-foreground">
+            <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
               Kelola promo dan diskon untuk menarik lebih banyak klien
             </p>
           </div>
 
           {/* Tab Navigation */}
-          <div className="mb-6 border-b border-border">
+          <div className="mb-4 sm:mb-6 border-b border-border">
             <div className="flex space-x-8">
               <button
                 onClick={() => setActiveTab('active')}
@@ -189,9 +189,9 @@ const Promotions = () => {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1">{promo.title}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">{promo.description}</p>
+                    <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">{promo.description}</p>
                   </div>
-                  <Icon name="Tag" size={16} sm:size={20} color="var(--color-primary)" />
+                  <Icon name="Tag" size={16} sm:size={16} sm:size={16} sm:size={20} color="var(--color-primary)" />
                 </div>
                 
                 <div className="space-y-2 mb-4">

@@ -110,17 +110,17 @@ const Booking = () => {
       <div className="min-h-screen bg-background">
         
         <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-          <div className="mb-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div className="mb-4 sm:mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Icon name="Calendar" size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                  <Icon name="Calendar" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                  <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                     Booking
                   </h1>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                     Kelola semua booking layanan Anda
                   </p>
                 </div>
@@ -156,7 +156,7 @@ const Booking = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4 sm:mb-6">
               <button
                 onClick={() => setFilter('all')}
                 className={`p-4 rounded-xl border transition-smooth ${
@@ -223,12 +223,12 @@ const Booking = () => {
             {filteredBookings.length === 0 ? (
               <div className="col-span-full text-center py-12">
                 <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <Icon name="Calendar" size={32} color="var(--color-muted-foreground)" />
+                  <Icon name="Calendar" size={18} sm:size={24} sm:size={32} color="var(--color-muted-foreground)" />
                 </div>
                 <h3 className="text-lg font-heading font-semibold text-foreground mb-2">
                   Belum Ada Booking
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground mb-4">
+                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mb-4">
                   Tambahkan booking pertama Anda
                 </p>
                 <QuickActionButton
@@ -270,12 +270,12 @@ const Booking = () => {
               className="bg-card border border-border rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden elevation-12"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-border">
+              <div className="flex items-center justify-between p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6 border-b border-border">
                 <div>
                   <h2 className="text-xl font-heading font-bold text-foreground">
                     Booking Publik Masuk
                   </h2>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                  <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground mt-1">
                     {publicBookings.length} booking dari form publik
                   </p>
                 </div>
@@ -283,7 +283,7 @@ const Booking = () => {
                   onClick={() => setShowPublicBookings(false)}
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
                 >
-                  <Icon name="X" size={16} sm:size={20} />
+                  <Icon name="X" size={16} sm:size={16} sm:size={16} sm:size={20} />
                 </button>
               </div>
 
@@ -294,7 +294,7 @@ const Booking = () => {
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h3 className="font-semibold text-foreground">{booking.clientName}</h3>
-                          <p className="text-xs sm:text-sm text-muted-foreground">{booking.clientPhone}</p>
+                          <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">{booking.clientPhone}</p>
                         </div>
                         <span className="px-3 py-1 rounded-full bg-warning/10 text-warning text-xs font-medium">
                           Baru

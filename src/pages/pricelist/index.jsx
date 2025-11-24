@@ -102,23 +102,23 @@ const Pricelist = () => {
 
       <div className="min-h-screen bg-background">
         <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Icon name="DollarSign" size={24} color="var(--color-primary)" strokeWidth={2.5} />
+                <Icon name="DollarSign" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
+                <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground">
                   Pricelist Gallery
                 </h1>
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                   Kelola dan bagikan daftar harga layanan Anda
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-card border border-border rounded-2xl p-4 mb-6">
+          <div className="bg-card border border-border rounded-2xl p-4 mb-4 sm:mb-6">
             {(() => {
               const storageInfo = dataStore.getStorageInfo();
               if (storageInfo.percentage > 80) {
@@ -174,7 +174,7 @@ const Pricelist = () => {
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 {searchQuery ? 'Tidak ada pricelist ditemukan' : 'Belum ada pricelist'}
               </h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-4 sm:mb-6">
                 {searchQuery
                   ? 'Coba ubah kata kunci pencarian'
                   : 'Mulai tambahkan daftar harga layanan Anda'}

@@ -306,16 +306,16 @@ const FinancialTracking = () => {
 
       <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
         {/* Header Section */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Icon name="Wallet" size={24} color="var(--color-primary)" strokeWidth={2.5} />
+              <Icon name="Wallet" size={18} sm:size={18} sm:size={24} color="var(--color-primary)" strokeWidth={2.5} />
             </div>
             <div>
               <h1 className="text-2xl font-heading font-bold text-foreground">
                 Pelacakan Keuangan
               </h1>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                 Kelola pemasukan dan pengeluaran bisnis makeup Anda
               </p>
             </div>
@@ -444,7 +444,7 @@ const FinancialTracking = () => {
                 </div>
               )}
               <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                   Menampilkan <span className="font-semibold text-foreground">{filteredIncomes.length}</span> dari {incomes.length} data pemasukan
                 </p>
               </div>
@@ -479,7 +479,7 @@ const FinancialTracking = () => {
                 </div>
               )}
               <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                   Menampilkan <span className="font-semibold text-foreground">{filteredExpenses.length}</span> dari {expenses.length} data pengeluaran
                 </p>
               </div>

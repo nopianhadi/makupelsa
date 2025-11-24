@@ -319,13 +319,13 @@ const PaymentTracking = () => {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 pb-24 lg:pb-6">
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
-              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-1">
+              <h1 className="text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mb-1">
                 Pelacakan Pembayaran
               </h1>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                 Pantau status pembayaran dan kirim pengingat kepada klien
               </p>
             </div>
@@ -340,7 +340,7 @@ const PaymentTracking = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
           <PaymentOverviewCard
             title="Total Tertunda"
             amount={paymentStats?.pending?.amount}
@@ -377,8 +377,8 @@ const PaymentTracking = () => {
 
         </div>
 
-        <div className="bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6 mb-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-3 sm:p-4 lg:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
             <h2 className="text-lg font-heading font-bold text-foreground">
               Daftar Pembayaran Klien
             </h2>
@@ -404,12 +404,12 @@ const PaymentTracking = () => {
           {filteredAndSortedClients?.length === 0 ?
             <div className="text-center py-12">
               <div className="w-16 h-16 rounded-2xl bg-muted mx-auto mb-4 flex items-center justify-center">
-                <Icon name="Search" size={32} color="var(--color-muted-foreground)" />
+                <Icon name="Search" size={18} sm:size={24} sm:size={32} color="var(--color-muted-foreground)" />
               </div>
               <p className="text-base font-medium text-foreground mb-1">
                 Tidak ada hasil
               </p>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                 Coba ubah filter atau kata kunci pencarian
               </p>
             </div> :
@@ -505,7 +505,7 @@ const PaymentTracking = () => {
                 "
                 aria-label="Tutup">
 
-                <Icon name="X" size={16} sm:size={20} strokeWidth={2.5} />
+                <Icon name="X" size={16} sm:size={16} sm:size={16} sm:size={20} strokeWidth={2.5} />
               </button>
             </div>
             <PaymentHistoryTimeline payments={mockPaymentHistory} />
