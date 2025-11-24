@@ -1,0 +1,70 @@
+﻿import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import ClientSearchFilter from '../../components/ui/ClientSearchFilter';
+import QuickActionButton from '../../components/ui/QuickActionButton';
+import ClientCard from './components/ClientCard';
+import ClientDetailModal from './components/ClientDetailModal';
+import AddClientModal from './components/AddClientModal';
+import EmptyState from './components/EmptyState';
+import EditClientModal from './components/EditClientModal';
+import AddServiceModal from './components/AddServiceModal';
+import RecordPaymentClientModal from './components/RecordPaymentClientModal';
+import SendCommunicationModal from './components/SendCommunicationModal';
+import InvoiceListModal from './components/InvoiceListModal';
+import CreateInvoiceModal from '../../pages/payment-tracking/components/CreateInvoiceModal';
+import ArchiveClientModal from './components/ArchiveClientModal';
+import PublicLinkModal from './components/PublicLinkModal';
+import CompletedClientStats from './components/CompletedClientStats';
+import QuickInsightCard from './components/QuickInsightCard';
+import ManagementTipsPanel from './components/ManagementTipsPanel';
+import { dataStore } from '../../utils/dataStore';
+import { exportCompletedClients, exportSummaryReport } from '../../utils/clientExport';
+import { loadClientsWithFallback } from '../../utils/migrateClientData';
+import { getClientPaymentSummary, updateClientPaymentStatus } from '../../utils/paymentSync';
+
+const ClientManagement = () => {
+  // Load clients dari dataStore dengan fallback ke mock data
+  const [clients, setClients] = useState(() => loadClientsWithFallback());
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilters, setActiveFilters] = useState({
+    serviceType: '',
+    paymentStatus: '',
+    dateRange: ''
+  });
+  const [editModalClient, setEditModalClient] = useState(null);
+  const [addServiceClient, setAddServiceClient] = useState(null);
+  const [recordPaymentClient, setRecordPaymentClient] = useState(null);
+  const [communicationClient, setCommunicationClient] = useState(null);
+  const [invoiceClient, setInvoiceClient] = useState(null);
+  const [showCreateInvoice, setShowCreateInvoice] = useState(false);
+  const [publicLinkClient, setPublicLinkClient] = useState(null);
+  
+  // State untuk tab dan filter klien selesai
+  const [activeTab, setActiveTab] = useState('active'); // 'active' atau 'completed'
+  const [completedFilter, setCompletedFilter] = useState('all'); // 'all', 'today', 'week', 'month', 'custom'
+  const [customDateRange, setCustomDateRange] = useState({ start: '', end: '' });
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
+  const [archivedClients, setArchivedClients] = useState([]);
+
+  // Listen for payment updates untuk real-time sync
+  useEffect(() => {
+    const handlePaymentUpdate = () => {
+      console.log('ðŸ”„ Payment update detected, refreshing client data...');
+      const updatedClients = dataStore.getClients();
+      setClients(updatedClients);
+    };
+    
+    window.addEventListener('paymentRecorded', handlePaymentUpdate);
+    return () => window.removeEventListener('paymentRecorded', handlePaymentUpdate);
+  }, []);
+
+  // Load initial data (sudah di-load di useState, ini untuk refresh jika perlu)
+  useEffect(() => {
+    const loadedClients = dataStore.getClients();
+    if (loadedClients.length > 0 && loadedClients !== clients) {
+      setClients(loadedClients);
+    }
