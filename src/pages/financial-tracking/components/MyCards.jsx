@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
-const MyCards = () => {
+const MyCards = ({ cashBalance = 0, bankBalance = 0 }) => {
     const [cards, setCards] = useState(() => {
         const saved = localStorage.getItem('my_cards');
         return saved ? JSON.parse(saved) : [
             {
                 id: 'cash',
                 label: 'Tunai',
-                balance: 2500000,
                 icon: 'Banknote',
                 color: 'bg-emerald-500',
                 textColor: 'text-white',
@@ -18,7 +17,6 @@ const MyCards = () => {
             {
                 id: 'bank',
                 label: 'Bank',
-                balance: 15750000,
                 icon: 'CreditCard',
                 color: 'bg-blue-600',
                 textColor: 'text-white',
@@ -26,6 +24,12 @@ const MyCards = () => {
             }
         ];
     });
+
+    // Use real balance calculation
+    const balanceMap = {
+        cash: cashBalance,
+        bank: bankBalance
+    };
 
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -293,7 +297,7 @@ const MyCards = () => {
 
                             <div className="relative z-10">
                                 <p className="text-sm opacity-80 mb-1">Saldo Tersedia</p>
-                                <h3 className="text-2xl font-bold mb-4">{formatCurrency(card.balance)}</h3>
+                                <h3 className="text-2xl font-bold mb-4">{formatCurrency(balanceMap[card.id] || 0)}</h3>
                                 <p className="font-mono text-sm opacity-75 tracking-widest">{card.number}</p>
                             </div>
                         </div>

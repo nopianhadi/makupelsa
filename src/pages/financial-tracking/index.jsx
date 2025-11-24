@@ -292,6 +292,15 @@ const FinancialTracking = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Calculate actual card balances from income and expenses
+  const totalIncome = incomes?.reduce((sum, item) => sum + item?.amount, 0) || 0;
+  const totalExpenses = expenses?.reduce((sum, item) => sum + item?.amount, 0) || 0;
+  const totalBalance = totalIncome - totalExpenses;
+  
+  // Split balance: 60% cash, 40% bank (or use stored allocation)
+  const cashBalance = Math.round(totalBalance * 0.6);
+  const bankBalance = totalBalance - cashBalance;
+
   return (
     <div className="min-h-screen bg-background">
 
@@ -314,7 +323,7 @@ const FinancialTracking = () => {
         </div>
 
         {/* My Cards Section */}
-        <MyCards />
+        <MyCards cashBalance={cashBalance} bankBalance={bankBalance} />
 
         {/* Summary Cards */}
         <FinancialSummaryCards summaryData={summaryData} />
