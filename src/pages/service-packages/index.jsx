@@ -11,32 +11,11 @@ import PackageStats from './components/PackageStats';
 import { dataStore } from '../../utils/dataStore';
 
 const ServicePackages = () => {
-  const [packages, setPackages] = useState(() => dataStore.getServicePackages());
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingPackage, setEditingPackage] = useState(null);
-  const [modalMode, setModalMode] = useState('create');
-  const [filterType, setFilterType] = useState('');
-  const [filterStatus, setFilterStatus] = useState('');
-  const [sortBy, setSortBy] = useState('newest');
-  const [showTemplates, setShowTemplates] = useState(false);
-
-  useEffect(() => {
-    const handlePackageUpdate = () => {
-      setPackages(dataStore.getServicePackages());
-    };
-
-    window.addEventListener('packageAdded', handlePackageUpdate);
-    window.addEventListener('packageUpdated', handlePackageUpdate);
-    window.addEventListener('packageDeleted', handlePackageUpdate);
-
-    return () => {
-      window.removeEventListener('packageAdded', handlePackageUpdate);
-      window.removeEventListener('packageUpdated', handlePackageUpdate);
-      window.removeEventListener('packageDeleted', handlePackageUpdate);
-    };
-  }, []);
-
-  const mockPackages = [
+  const [packages, setPackages] = useState(() => {
+    let stored = dataStore.getServicePackages();
+    // Initialize with mock data if empty
+    if (stored.length === 0) {
+      const mockData = [
     {
       id: 'pkg_001',
       name: 'Paket Akad Nikah Premium',
@@ -197,7 +176,36 @@ const ServicePackages = () => {
         totalBookings: 28,
         totalRevenue: 25200000
       }
-    ];
+      ];
+      // Save mock data to storage
+      mockData.forEach(pkg => dataStore.addServicePackage(pkg));
+      stored = mockData;
+    }
+    return stored;
+  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingPackage, setEditingPackage] = useState(null);
+  const [modalMode, setModalMode] = useState('create');
+  const [filterType, setFilterType] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
+  const [sortBy, setSortBy] = useState('newest');
+  const [showTemplates, setShowTemplates] = useState(false);
+
+  useEffect(() => {
+    const handlePackageUpdate = () => {
+      setPackages(dataStore.getServicePackages());
+    };
+
+    window.addEventListener('packageAdded', handlePackageUpdate);
+    window.addEventListener('packageUpdated', handlePackageUpdate);
+    window.addEventListener('packageDeleted', handlePackageUpdate);
+
+    return () => {
+      window.removeEventListener('packageAdded', handlePackageUpdate);
+      window.removeEventListener('packageUpdated', handlePackageUpdate);
+      window.removeEventListener('packageDeleted', handlePackageUpdate);
+    };
+  }, []);
 
   const handleCreatePackage = () => {
     setEditingPackage(null);
