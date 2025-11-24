@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import QuickActionButton from '../../components/ui/QuickActionButton';
 import CalendarHeader from './components/CalendarHeader';
 import MonthView from './components/MonthView';
@@ -6,6 +6,7 @@ import WeekView from './components/WeekView';
 import DayView from './components/DayView';
 import AppointmentModal from './components/AppointmentModal';
 import EventDetailModal from './components/EventDetailModal';
+import { dataStore } from '../../utils/dataStore';
 
 const CalendarScheduling = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -15,96 +16,49 @@ const CalendarScheduling = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [editingEvent, setEditingEvent] = useState(null);
 
-  const mockEvents = [
-    {
-      id: 1,
-      clientName: 'Siti Nurhaliza',
-      serviceType: 'akad',
-      date: '2025-11-22',
-      time: '09:00',
-      location: 'Masjid Agung Jakarta',
-      notes: 'Makeup natural dengan hijab syar\'i',
-      amount: 3500000,
-      paymentStatus: 'paid'
-    },
-    {
-      id: 2,
-      clientName: 'Dewi Lestari',
-      serviceType: 'resepsi',
-      date: '2025-11-23',
-      time: '14:00',
-      location: 'Grand Ballroom Hotel Mulia',
-      notes: 'Makeup glamour dengan gaun putih',
-      amount: 5000000,
-      paymentStatus: 'partial'
-    },
-    {
-      id: 3,
-      clientName: 'Rina Wijaya',
-      serviceType: 'wisuda',
-      date: '2025-11-25',
-      time: '07:00',
-      location: 'Universitas Indonesia, Depok',
-      notes: 'Makeup fresh untuk foto wisuda',
-      amount: 1500000,
-      paymentStatus: 'pending'
-    },
-    {
-      id: 4,
-      clientName: 'Maya Sari',
-      serviceType: 'akad',
-      date: '2025-11-28',
-      time: '10:00',
-      location: 'Gedung Pernikahan Syariah',
-      notes: 'Makeup soft dengan tema pastel',
-      amount: 3000000,
-      paymentStatus: 'partial'
-    },
-    {
-      id: 5,
-      clientName: 'Putri Ayu',
-      serviceType: 'resepsi',
-      date: '2025-11-30',
-      time: '18:00',
-      location: 'The Ritz-Carlton Jakarta',
-      notes: 'Makeup bold dengan tema gold',
-      amount: 6000000,
-      paymentStatus: 'paid'
-    },
-    {
-      id: 6,
-      clientName: 'Indah Permata',
-      serviceType: 'wisuda',
-      date: '2025-12-02',
-      time: '08:00',
-      location: 'Universitas Gadjah Mada, Yogyakarta',
-      notes: 'Makeup natural untuk dokumentasi',
-      amount: 1200000,
-      paymentStatus: 'pending'
-    },
-    {
-      id: 7,
-      clientName: 'Laila Sari',
-      serviceType: 'akad',
-      date: '2025-12-05',
-      time: '11:00',
-      location: 'Masjid Istiqlal',
-      notes: 'Makeup elegan dengan hijab modern',
-      amount: 4000000,
-      paymentStatus: 'partial'
-    },
-    {
-      id: 8,
-      clientName: 'Ayu Ting Ting',
-      serviceType: 'resepsi',
-      date: '2025-12-08',
-      time: '16:00',
-      location: 'Balai Kartini Jakarta',
-      notes: 'Makeup glamour dengan tema merah',
-      amount: 4500000,
-      paymentStatus: 'paid'
-    }
-  ];
+  const loadEventsFromClients = () => {
+    const clients = dataStore.getClients();
+    const events = [];
+    
+    clients.forEach(client => {
+      if (client.events && Array.isArray(client.events)) {
+        client.events.forEach((event, index) => {
+          events.push({
+            id: `${client.id}-${index}`,
+            clientId: client.id,
+            clientName: client.name,
+            serviceType: event.serviceType || 'other',
+            date: event.eventDate,
+            time: event.eventTime || '00:00',
+            location: event.venue || '',
+            notes: event.notes || '',
+            amount: event.totalAmount || 0,
+            paymentStatus: event.paymentStatus || 'pending'
+          });
+        });
+      }
+    });
+    
+    return events;
+  };
+
+  const [events, setEvents] = useState(loadEventsFromClients());
+
+  useEffect(() => {
+    const handleClientUpdate = () => {
+      setEvents(loadEventsFromClients());
+    };
+
+    window.addEventListener('clientUpdated', handleClientUpdate);
+    window.addEventListener('clientAdded', handleClientUpdate);
+    window.addEventListener('clientDeleted', handleClientUpdate);
+
+    return () => {
+      window.removeEventListener('clientUpdated', handleClientUpdate);
+      window.removeEventListener('clientAdded', handleClientUpdate);
+      window.removeEventListener('clientDeleted', handleClientUpdate);
+    };
+  }, []);
 
   const handlePrevMonth = () => {
     const newDate = new Date(currentDate);
@@ -207,7 +161,7 @@ const CalendarScheduling = () => {
           {view === 'month' && (
             <MonthView
               currentDate={currentDate}
-              events={mockEvents}
+              events={events}
               onDateClick={handleDateClick}
               onEventClick={handleEventClick}
             />
@@ -216,7 +170,7 @@ const CalendarScheduling = () => {
           {view === 'week' && (
             <WeekView
               currentDate={currentDate}
-              events={mockEvents}
+              events={events}
               onEventClick={handleEventClick}
             />
           )}
@@ -224,7 +178,7 @@ const CalendarScheduling = () => {
           {view === 'day' && (
             <DayView
               currentDate={currentDate}
-              events={mockEvents}
+              events={events}
               onEventClick={handleEventClick}
             />
           )}

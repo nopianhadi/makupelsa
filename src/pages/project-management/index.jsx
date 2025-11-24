@@ -12,6 +12,7 @@ import { exportCompletedProjects, exportProjectReport } from '../../utils/projec
 
 const ProjectManagement = () => {
   const [projects, setProjects] = useState([]);
+  const [clients, setClients] = useState([]);
   const [filter, setFilter] = useState('all');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'calendar'
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -26,68 +27,41 @@ const ProjectManagement = () => {
   const [showArchiveModal, setShowArchiveModal] = useState(false);
   const [archivedProjects, setArchivedProjects] = useState([]);
 
-  useEffect(() => {
-    const saved = dataStore.getProjects();
-    if (saved.length === 0) {
-      const mockProjects = [
-        {
-          id: 'proj1',
-          title: 'Pernikahan Siti & Ahmad',
-          client: 'Siti Nurhaliza',
-          type: 'Pernikahan',
-          status: 'upcoming',
-          date: '2025-12-15',
-          location: 'Masjid Istiqlal, Jakarta',
-          description: 'Makeup akad dan resepsi dengan tema modern elegant',
-          budget: 5500000,
-          paid: 1500000,
-          team: ['MUA Utama', 'Asisten 1', 'Asisten 2'],
-          services: ['Makeup Pengantin', 'Makeup Ibu', 'Makeup Keluarga'],
-          notes: 'Klien prefer natural makeup dengan hijab syar\'i',
-          images: [],
-          createdAt: '2025-11-01'
-        },
-        {
-          id: 'proj2',
-          title: 'Photoshoot Magazine Fashion',
-          client: 'Vogue Indonesia',
-          type: 'Photoshoot',
-          status: 'in-progress',
-          date: '2025-11-25',
-          location: 'Studio Central Park Jakarta',
-          description: 'Editorial photoshoot untuk edisi Desember',
-          budget: 8000000,
-          paid: 8000000,
-          team: ['MUA Utama', 'Hair Stylist', 'Asisten'],
-          services: ['Creative Makeup', 'Hair Styling', 'Body Painting'],
-          notes: 'Tema: Winter Wonderland dengan bold colors',
-          images: [],
-          createdAt: '2025-10-20'
-        },
-        {
-          id: 'proj3',
-          title: 'Wisuda Universitas Indonesia',
-          client: 'Batch Event UI',
-          type: 'Wisuda',
-          status: 'completed',
-          date: '2025-11-10',
-          location: 'Balairung UI, Depok',
-          description: 'Makeup wisuda untuk 15 mahasiswi',
-          budget: 3750000,
-          paid: 3750000,
-          team: ['MUA Utama', 'Asisten 1', 'Asisten 2', 'Asisten 3'],
-          services: ['Makeup Wisuda Natural'],
-          notes: 'Selesai dengan baik, semua klien puas',
-          images: [],
-          createdAt: '2025-10-15',
-          completedAt: '2025-11-10'
-        }
-      ];
-      setProjects(mockProjects);
-      dataStore.setProjects(mockProjects);
-    } else {
-      setProjects(saved);
+  const getClientName = (project) => {
+    if (project.clientId) {
+      const client = clients.find(c => c.id === project.clientId);
+      return client ? client.name : 'Client Not Found';
     }
+    return project.client || 'Unknown Client';
+  };
+
+  useEffect(() => {
+    setClients(dataStore.getClients());
+    setProjects(dataStore.getProjects());
+
+    const handleClientUpdate = () => {
+      setClients(dataStore.getClients());
+    };
+
+    const handleProjectUpdate = () => {
+      setProjects(dataStore.getProjects());
+    };
+
+    window.addEventListener('clientAdded', handleClientUpdate);
+    window.addEventListener('clientUpdated', handleClientUpdate);
+    window.addEventListener('clientDeleted', handleClientUpdate);
+    window.addEventListener('projectAdded', handleProjectUpdate);
+    window.addEventListener('projectUpdated', handleProjectUpdate);
+    window.addEventListener('projectDeleted', handleProjectUpdate);
+
+    return () => {
+      window.removeEventListener('clientAdded', handleClientUpdate);
+      window.removeEventListener('clientUpdated', handleClientUpdate);
+      window.removeEventListener('clientDeleted', handleClientUpdate);
+      window.removeEventListener('projectAdded', handleProjectUpdate);
+      window.removeEventListener('projectUpdated', handleProjectUpdate);
+      window.removeEventListener('projectDeleted', handleProjectUpdate);
+    };
   }, []);
 
   const saveProjects = (updatedProjects) => {
@@ -96,31 +70,21 @@ const ProjectManagement = () => {
   };
 
   const handleAddProject = (projectData) => {
-    const { nanoid } = require('nanoid');
-    const newProject = {
+    dataStore.addProject({
       ...projectData,
-      id: nanoid(),
-      createdAt: new Date().toISOString().split('T')[0],
       images: []
-    };
-    
-    const updatedProjects = [newProject, ...projects];
-    saveProjects(updatedProjects);
+    });
     setIsAddModalOpen(false);
   };
 
   const handleEditProject = (updatedProject) => {
-    const updatedProjects = projects.map(p => 
-      p.id === updatedProject.id ? updatedProject : p
-    );
-    saveProjects(updatedProjects);
+    dataStore.updateProject(updatedProject.id, updatedProject);
     setEditingProject(null);
   };
 
   const handleDeleteProject = (projectId) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus proyek ini?')) {
-      const updatedProjects = projects.filter(p => p.id !== projectId);
-      saveProjects(updatedProjects);
+      dataStore.deleteProject(projectId);
       setSelectedProject(null);
     }
   };
@@ -184,7 +148,7 @@ const ProjectManagement = () => {
     if (searchQuery) {
       filtered = filtered.filter(project =>
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.client.toLowerCase().includes(searchQuery.toLowerCase())
+        getClientName(project).toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
     
@@ -575,7 +539,7 @@ const ProjectManagement = () => {
                             </h3>
                             <p className="text-sm text-muted-foreground flex items-center gap-1">
                               <Icon name="User" size={14} />
-                              {project.client}
+                              {getClientName(project)}
                             </p>
                           </div>
                           <div className="flex items-center gap-1">

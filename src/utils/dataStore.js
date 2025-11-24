@@ -67,6 +67,7 @@ export const dataStore = {
     };
     clients.push(newClient);
     dataStore.setClients(clients);
+    window.dispatchEvent(new CustomEvent('clientAdded', { detail: newClient }));
     return newClient;
   },
 
@@ -74,13 +75,16 @@ export const dataStore = {
     const clients = dataStore.getClients();
     const updated = clients.map(c => c.id === id ? { ...c, ...updates } : c);
     dataStore.setClients(updated);
-    return updated.find(c => c.id === id);
+    const updatedClient = updated.find(c => c.id === id);
+    window.dispatchEvent(new CustomEvent('clientUpdated', { detail: updatedClient }));
+    return updatedClient;
   },
 
   deleteClient: (id) => {
     const clients = dataStore.getClients();
     const filtered = clients.filter(c => c.id !== id);
     dataStore.setClients(filtered);
+    window.dispatchEvent(new CustomEvent('clientDeleted', { detail: { id } }));
     return true;
   },
 
@@ -129,6 +133,7 @@ export const dataStore = {
     };
     projects.push(newProject);
     dataStore.setProjects(projects);
+    window.dispatchEvent(new CustomEvent('projectAdded', { detail: newProject }));
     return newProject;
   },
 
@@ -136,13 +141,16 @@ export const dataStore = {
     const projects = dataStore.getProjects();
     const updated = projects.map(p => p.id === id ? { ...p, ...updates } : p);
     dataStore.setProjects(updated);
-    return updated.find(p => p.id === id);
+    const updatedProject = updated.find(p => p.id === id);
+    window.dispatchEvent(new CustomEvent('projectUpdated', { detail: updatedProject }));
+    return updatedProject;
   },
 
   deleteProject: (id) => {
     const projects = dataStore.getProjects();
     const filtered = projects.filter(p => p.id !== id);
     dataStore.setProjects(filtered);
+    window.dispatchEvent(new CustomEvent('projectDeleted', { detail: { id } }));
     return true;
   },
 
@@ -390,5 +398,38 @@ export const dataStore = {
   getPricelistByPublicId: (publicId) => {
     const pricelists = dataStore.getPricelists();
     return pricelists.find(p => p.publicId === publicId);
+  },
+
+  // Expenses management
+  getExpenses: () => dataStore.get('expenses', []),
+  setExpenses: (expenses) => dataStore.set('expenses', expenses),
+
+  addExpense: (expense) => {
+    const expenses = dataStore.getExpenses();
+    const newExpense = { 
+      ...expense, 
+      id: nanoid(),
+      createdAt: new Date().toISOString()
+    };
+    expenses.push(newExpense);
+    dataStore.setExpenses(expenses);
+    window.dispatchEvent(new CustomEvent('expenseAdded', { detail: newExpense }));
+    return newExpense;
+  },
+
+  updateExpense: (id, updates) => {
+    const expenses = dataStore.getExpenses();
+    const updated = expenses.map(e => e.id === id ? { ...e, ...updates } : e);
+    dataStore.setExpenses(updated);
+    window.dispatchEvent(new CustomEvent('expenseUpdated', { detail: updated.find(e => e.id === id) }));
+    return updated.find(e => e.id === id);
+  },
+
+  deleteExpense: (id) => {
+    const expenses = dataStore.getExpenses();
+    const filtered = expenses.filter(e => e.id !== id);
+    dataStore.setExpenses(filtered);
+    window.dispatchEvent(new CustomEvent('expenseDeleted', { detail: { id } }));
+    return true;
   }
 };

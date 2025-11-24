@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import { dataStore } from '../../../utils/dataStore';
 
 const AddProjectModal = ({ onClose, onSave }) => {
+  const [clients, setClients] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
-    client: '',
+    clientId: '',
     type: 'Pernikahan',
     status: 'upcoming',
     date: '',
@@ -17,6 +19,10 @@ const AddProjectModal = ({ onClose, onSave }) => {
     services: '',
     notes: ''
   });
+
+  useEffect(() => {
+    setClients(dataStore.getClients());
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,15 +81,20 @@ const AddProjectModal = ({ onClose, onSave }) => {
               <label className="block text-sm font-medium text-foreground mb-2">
                 Nama Klien *
               </label>
-              <input
-                type="text"
-                name="client"
-                value={formData.client}
+              <select
+                name="clientId"
+                value={formData.clientId}
                 onChange={handleChange}
                 required
-                placeholder="Nama klien"
                 className="w-full px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              />
+              >
+                <option value="">Pilih Klien</option>
+                {clients.map((client) => (
+                  <option key={client.id} value={client.id}>
+                    {client.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
