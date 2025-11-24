@@ -185,10 +185,14 @@ export const validatePaymentConsistency = (clientId) => {
     errors.push(`Status pembayaran tidak sesuai. Expected: ${expectedStatus}, Got: ${summary.paymentStatus}`);
   }
   
-  // Cek apakah jumlah invoice sesuai dengan payment history
+  // Cek apakah ada payment history entry tanpa invoice yang sesuai
+  // (Less strict: multiple payment entries can belong to one invoice via installments)
   const paidInvoices = summary.invoices.filter(inv => inv.status === 'paid');
-  if (paidInvoices.length !== summary.paymentHistory.length) {
-    errors.push('Jumlah invoice tidak sesuai dengan payment history');
+  
+  // Hanya error jika ada payment history tapi tidak ada invoice sama sekali
+  // atau jika ada banyak payment entries tapi semua tanpa corresponding invoice
+  if (summary.paymentHistory.length > 0 && paidInvoices.length === 0) {
+    errors.push('Ada payment history tapi tidak ada invoice yang sesuai');
   }
   
   return {
@@ -207,6 +211,9 @@ export const fixPaymentInconsistency = (clientId) => {
   if (validation.isValid) {
     return { success: true, message: 'Data sudah konsisten' };
   }
+  
+  // Sinkronisasi payment history ke invoices
+  syncClientPaymentsToInvoices(clientId);
   
   // Update status pembayaran
   updateClientPaymentStatus(clientId);
