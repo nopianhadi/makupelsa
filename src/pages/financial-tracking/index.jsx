@@ -90,6 +90,33 @@ const FinancialTracking = () => {
     return dataStore.getExpenses();
   });
 
+  // Real-time sync: Listen untuk payment dan expense updates
+  useEffect(() => {
+    const handleDataRefresh = () => {
+      setIncomes(loadIncomesFromInvoices());
+      setExpenses(dataStore.getExpenses());
+    };
+
+    // Listen to all relevant events
+    window.addEventListener('paymentRecorded', handleDataRefresh);
+    window.addEventListener('invoiceAdded', handleDataRefresh);
+    window.addEventListener('invoiceUpdated', handleDataRefresh);
+    window.addEventListener('expenseAdded', handleDataRefresh);
+    window.addEventListener('expenseUpdated', handleDataRefresh);
+    window.addEventListener('expenseDeleted', handleDataRefresh);
+    window.addEventListener('clientUpdated', handleDataRefresh);
+
+    return () => {
+      window.removeEventListener('paymentRecorded', handleDataRefresh);
+      window.removeEventListener('invoiceAdded', handleDataRefresh);
+      window.removeEventListener('invoiceUpdated', handleDataRefresh);
+      window.removeEventListener('expenseAdded', handleDataRefresh);
+      window.removeEventListener('expenseUpdated', handleDataRefresh);
+      window.removeEventListener('expenseDeleted', handleDataRefresh);
+      window.removeEventListener('clientUpdated', handleDataRefresh);
+    };
+  }, []);
+
   const summaryData = {
     totalIncome: incomes?.reduce((sum, item) => sum + item?.amount, 0),
     totalExpense: expenses?.reduce((sum, item) => sum + item?.amount, 0),

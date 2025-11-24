@@ -52,11 +52,13 @@ const CalendarScheduling = () => {
     window.addEventListener('clientUpdated', handleClientUpdate);
     window.addEventListener('clientAdded', handleClientUpdate);
     window.addEventListener('clientDeleted', handleClientUpdate);
+    window.addEventListener('paymentRecorded', handleClientUpdate);
 
     return () => {
       window.removeEventListener('clientUpdated', handleClientUpdate);
       window.removeEventListener('clientAdded', handleClientUpdate);
       window.removeEventListener('clientDeleted', handleClientUpdate);
+      window.removeEventListener('paymentRecorded', handleClientUpdate);
     };
   }, []);
 
