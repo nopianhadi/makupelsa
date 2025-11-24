@@ -7,11 +7,36 @@ import WhatsAppTemplates from './WhatsAppTemplates';
 import SendReminderModal from './components/SendReminderModal';
 import { dataStore } from '../../utils/dataStore';
 
-const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, badgeColor, leads, isCollapsed, onToggle, onFollowUp, onConvert, onEdit, onDelete }) => {
+const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, badgeColor, leads, isCollapsed, onToggle, onFollowUp, onConvert, onEdit, onDelete, searchQuery, sortBy }) => {
     const [showAll, setShowAll] = useState(false);
     const displayLimit = 5;
-    const displayedLeads = showAll ? leads : leads.slice(0, displayLimit);
-    const hasMore = leads.length > displayLimit;
+    
+    // Apply search and sort
+    let filtered = leads;
+    if (searchQuery) {
+      filtered = filtered.filter(l => 
+        l.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        l.phone?.includes(searchQuery) ||
+        l.source?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // Apply sorting
+    filtered = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'date':
+          return new Date(b.date || 0) - new Date(a.date || 0);
+        case 'rating':
+          return (b.rating || 0) - (a.rating || 0);
+        default:
+          return 0;
+      }
+    });
+    
+    const displayedLeads = showAll ? filtered : filtered.slice(0, displayLimit);
+    const hasMore = filtered.length > displayLimit;
 
     return (
         <div className="mb-6">

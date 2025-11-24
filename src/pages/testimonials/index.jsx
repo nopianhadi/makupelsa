@@ -6,6 +6,8 @@ import { dataStore } from '../../utils/dataStore';
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('date');
 
   useEffect(() => {
     loadTestimonials();
@@ -51,9 +53,26 @@ const Testimonials = () => {
     }
   };
 
-  const filteredTestimonials = filter === 'all' 
+  const filteredTestimonials = (filter === 'all' 
     ? testimonials 
-    : testimonials.filter(t => t.status === filter);
+    : testimonials.filter(t => t.status === filter)).filter(t => {
+      if (searchQuery) {
+        return t.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               t.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               t.message?.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+      return true;
+    }).sort((a, b) => {
+      switch (sortBy) {
+        case 'rating':
+          return (b.rating || 0) - (a.rating || 0);
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'date':
+        default:
+          return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+    });
 
   const getStatusBadge = (status) => {
     const styles = {

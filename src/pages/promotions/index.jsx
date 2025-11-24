@@ -11,8 +11,30 @@ const Promotions = () => {
   const [editingPromo, setEditingPromo] = useState(null);
   const [activeTab, setActiveTab] = useState('active'); // 'active' atau 'expired'
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('date');
+
   useEffect(() => {
     loadPromotions();
+  }, []);
+
+  useEffect(() => {
+    // Listen to all data sync events for real-time updates
+    const handleDataUpdate = () => {
+      loadPromotions();
+    };
+    
+    window.addEventListener('packageAdded', handleDataUpdate);
+    window.addEventListener('packageUpdated', handleDataUpdate);
+    window.addEventListener('packageDeleted', handleDataUpdate);
+    window.addEventListener('dataUpdated', handleDataUpdate);
+    
+    return () => {
+      window.removeEventListener('packageAdded', handleDataUpdate);
+      window.removeEventListener('packageUpdated', handleDataUpdate);
+      window.removeEventListener('packageDeleted', handleDataUpdate);
+      window.removeEventListener('dataUpdated', handleDataUpdate);
+    };
   }, []);
 
   const loadPromotions = () => {
@@ -76,13 +98,32 @@ const Promotions = () => {
     loadPromotions();
   };
 
-  const activePromotions = promotions.filter(p => {
+  const filteredPromos = promotions.filter(p => {
+    if (searchQuery) {
+      return p.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+             p.code?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+             p.description?.toLowerCase().includes(searchQuery.toLowerCase());
+    }
+    return true;
+  }).sort((a, b) => {
+    switch (sortBy) {
+      case 'usage':
+        return (b.usageCount || 0) - (a.usageCount || 0);
+      case 'discount':
+        return b.discountValue - a.discountValue;
+      case 'date':
+      default:
+        return new Date(b.startDate) - new Date(a.startDate);
+    }
+  });
+
+  const activePromotions = filteredPromos.filter(p => {
     const today = new Date();
     const endDate = new Date(p.endDate);
     return p.isActive && endDate >= today;
   });
 
-  const expiredPromotions = promotions.filter(p => {
+  const expiredPromotions = filteredPromos.filter(p => {
     const today = new Date();
     const endDate = new Date(p.endDate);
     return !p.isActive || endDate < today;

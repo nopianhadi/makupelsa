@@ -34,6 +34,25 @@ const Gallery = () => {
     filterProjects();
   }, [projects, searchQuery, selectedCategory]);
 
+  useEffect(() => {
+    // Listen to all data sync events for real-time updates
+    const handleDataUpdate = () => {
+      loadProjects();
+    };
+    
+    window.addEventListener('projectAdded', handleDataUpdate);
+    window.addEventListener('projectUpdated', handleDataUpdate);
+    window.addEventListener('projectDeleted', handleDataUpdate);
+    window.addEventListener('dataUpdated', handleDataUpdate);
+    
+    return () => {
+      window.removeEventListener('projectAdded', handleDataUpdate);
+      window.removeEventListener('projectUpdated', handleDataUpdate);
+      window.removeEventListener('projectDeleted', handleDataUpdate);
+      window.removeEventListener('dataUpdated', handleDataUpdate);
+    };
+  }, []);
+
   const loadProjects = () => {
     const allProjects = dataStore.getProjects();
     setProjects(allProjects);

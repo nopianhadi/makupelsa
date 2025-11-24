@@ -21,6 +21,25 @@ const Pricelist = () => {
     filterPricelists();
   }, [pricelists, searchQuery]);
 
+  useEffect(() => {
+    // Listen to all data sync events for real-time updates
+    const handleDataUpdate = () => {
+      loadPricelists();
+    };
+    
+    window.addEventListener('pricelistAdded', handleDataUpdate);
+    window.addEventListener('pricelistUpdated', handleDataUpdate);
+    window.addEventListener('pricelistDeleted', handleDataUpdate);
+    window.addEventListener('dataUpdated', handleDataUpdate);
+    
+    return () => {
+      window.removeEventListener('pricelistAdded', handleDataUpdate);
+      window.removeEventListener('pricelistUpdated', handleDataUpdate);
+      window.removeEventListener('pricelistDeleted', handleDataUpdate);
+      window.removeEventListener('dataUpdated', handleDataUpdate);
+    };
+  }, []);
+
   const loadPricelists = () => {
     const allPricelists = dataStore.getPricelists();
     setPricelists(allPricelists);

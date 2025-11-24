@@ -30,9 +30,17 @@ const Booking = () => {
       setBookings(dataStore.getBookings());
     };
     window.addEventListener('storage', handleBookingChange);
+    window.addEventListener('bookingAdded', handleBookingChange);
+    window.addEventListener('bookingUpdated', handleBookingChange);
+    window.addEventListener('bookingDeleted', handleBookingChange);
+    window.addEventListener('dataUpdated', handleBookingChange);
     
     return () => {
       window.removeEventListener('storage', handleBookingChange);
+      window.removeEventListener('bookingAdded', handleBookingChange);
+      window.removeEventListener('bookingUpdated', handleBookingChange);
+      window.removeEventListener('bookingDeleted', handleBookingChange);
+      window.removeEventListener('dataUpdated', handleBookingChange);
     };
   }, []);
 
