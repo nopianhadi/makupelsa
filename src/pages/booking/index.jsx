@@ -21,6 +21,19 @@ const Booking = () => {
   const [editingBooking, setEditingBooking] = useState(null);
   const [filter, setFilter] = useState('all');
   const [showPublicBookings, setShowPublicBookings] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({
+    pending: true,
+    confirmed: true,
+    completed: false,
+    cancelled: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   useEffect(() => {
     // Load bookings from dataStore whenever component mounts
@@ -220,7 +233,8 @@ const Booking = () => {
             </div>
           </div>
 
-          <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
+          {/* Desktop: Grid View */}
+          <div className={cn("hidden sm:grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ga", mobileClasses.cardCompact)}>
             {filteredBookings.length === 0 ? (
               <div className="col-span-full text-center py-12">
                 <div className={cn("w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto ", mobileClasses.marginBottomSmall)}>
@@ -249,6 +263,179 @@ const Booking = () => {
                   onStatusChange={handleStatusChange}
                 />
               ))
+            )}
+          </div>
+
+          {/* Mobile: Accordion View by Status */}
+          <div className="sm:hidden space-y-2">
+            {bookings.length === 0 ? (
+              <div className="text-center py-12 bg-card border border-border rounded-lg">
+                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                  <Icon name="Calendar" size={32} color="var(--color-muted-foreground)" />
+                </div>
+                <h3 className="text-base font-heading font-semibold text-foreground mb-2">
+                  Belum Ada Booking
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Tambahkan booking pertama Anda
+                </p>
+                <QuickActionButton
+                  label="Tambah Booking"
+                  icon="Plus"
+                  variant="primary"
+                  onClick={() => setShowForm(true)}
+                />
+              </div>
+            ) : (
+              <>
+                {/* Pending Bookings */}
+                {stats.pending > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('pending')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="Clock" size={18} color="var(--color-warning)" />
+                        <span className="text-sm font-medium text-foreground">Pending</span>
+                        <span className="px-2 py-0.5 rounded-full bg-warning/10 text-warning text-xs font-bold">
+                          {stats.pending}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.pending ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.pending && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {bookings.filter(b => b.status === 'pending').map(booking => (
+                          <BookingCard
+                            key={booking.id}
+                            booking={booking}
+                            onEdit={handleEditBooking}
+                            onDelete={handleDeleteBooking}
+                            onStatusChange={handleStatusChange}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Confirmed Bookings */}
+                {stats.confirmed > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('confirmed')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle" size={18} color="var(--color-primary)" />
+                        <span className="text-sm font-medium text-foreground">Confirmed</span>
+                        <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                          {stats.confirmed}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.confirmed ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.confirmed && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {bookings.filter(b => b.status === 'confirmed').map(booking => (
+                          <BookingCard
+                            key={booking.id}
+                            booking={booking}
+                            onEdit={handleEditBooking}
+                            onDelete={handleDeleteBooking}
+                            onStatusChange={handleStatusChange}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Completed Bookings */}
+                {stats.completed > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('completed')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="Check" size={18} color="var(--color-success)" />
+                        <span className="text-sm font-medium text-foreground">Selesai</span>
+                        <span className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-bold">
+                          {stats.completed}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.completed ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.completed && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {bookings.filter(b => b.status === 'completed').map(booking => (
+                          <BookingCard
+                            key={booking.id}
+                            booking={booking}
+                            onEdit={handleEditBooking}
+                            onDelete={handleDeleteBooking}
+                            onStatusChange={handleStatusChange}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Cancelled Bookings */}
+                {stats.cancelled > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('cancelled')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="XCircle" size={18} color="var(--color-error)" />
+                        <span className="text-sm font-medium text-foreground">Batal</span>
+                        <span className="px-2 py-0.5 rounded-full bg-error/10 text-error text-xs font-bold">
+                          {stats.cancelled}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.cancelled ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.cancelled && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {bookings.filter(b => b.status === 'cancelled').map(booking => (
+                          <BookingCard
+                            key={booking.id}
+                            booking={booking}
+                            onEdit={handleEditBooking}
+                            onDelete={handleDeleteBooking}
+                            onStatusChange={handleStatusChange}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </main>

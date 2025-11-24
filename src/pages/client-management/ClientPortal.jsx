@@ -15,6 +15,19 @@ const ClientPortal = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [expandedSections, setExpandedSections] = useState({
+    payment: true,
+    events: true,
+    history: false,
+    communication: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   useEffect(() => {
     // Load data klien dari localStorage berdasarkan clientId

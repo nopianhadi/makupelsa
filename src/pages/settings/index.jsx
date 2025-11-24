@@ -19,6 +19,19 @@ const Settings = () => {
     const [whatsappNotifications, setWhatsappNotifications] = useState(() => {
         return localStorage.getItem('whatsappNotifications') !== 'false';
     });
+    const [expandedSections, setExpandedSections] = useState({
+        appearance: true,
+        notifications: false,
+        categories: false,
+        data: false
+    });
+
+    const toggleSection = (section) => {
+        setExpandedSections(prev => ({
+            ...prev,
+            [section]: !prev[section]
+        }));
+    };
 
     // Aplikasi dark mode
     useEffect(() => {
@@ -152,7 +165,8 @@ const Settings = () => {
                         </div>
                     </div>
 
-                    <div className="space-y-6">
+                    {/* Desktop: Full View */}
+                    <div className="hidden sm:block space-y-6">
                         <ServiceTypeManagement />
                         
                         <IncomeCategoryManagement />

@@ -5,6 +5,19 @@ import Button from '../../../components/ui/Button';
 import PaymentStatusIndicator from '../../../components/ui/PaymentStatusIndicator';
 
 const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoices, onShareLink, onDelete, onClick, isCompleted }) => {
+  const [expandedSections, setExpandedSections] = React.useState({
+    event: true,
+    payment: false,
+    actions: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
   const formatDate = (dateString) => {
     if (!dateString) return '';
     return new Intl.DateTimeFormat('id-ID', {
@@ -119,134 +132,351 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
           )}
         </div>
       </div>
-      {upcomingEvent && (
-        <div className="bg-surface rounded-lg overflow-hidden p-3 mb-3">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-caption text-muted-foreground">
-              {isCompleted ? 'Event Terakhir' : 'Acara Mendatang'}
-            </span>
-            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${serviceConfig?.bgColor} ${serviceConfig?.textColor}`}>
-              {serviceConfig?.label}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 mb-2">
-            <Icon name="Calendar" size={14} color="var(--color-foreground)" />
-            <span className="text-sm font-medium text-foreground">
-              {formatDate(upcomingEvent?.eventDate)}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 mb-2">
-            <Icon name="Clock" size={14} color="var(--color-muted-foreground)" />
-            <span className="text-sm text-muted-foreground font-mono">
-              {upcomingEvent?.eventTime}
-            </span>
-          </div>
-
-          {upcomingEvent?.venue && (
-            <div className="flex items-center gap-2">
-              <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" />
-              <span className="text-sm text-muted-foreground truncate">
-                {upcomingEvent?.venue}
+      {/* Desktop: Full View */}
+      <div className="hidden sm:block">
+        {upcomingEvent && (
+          <div className="bg-surface rounded-lg overflow-hidden p-3 mb-3">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-caption text-muted-foreground">
+                {isCompleted ? 'Event Terakhir' : 'Acara Mendatang'}
               </span>
+              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${serviceConfig?.bgColor} ${serviceConfig?.textColor}`}>
+                {serviceConfig?.label}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 mb-2">
+              <Icon name="Calendar" size={14} color="var(--color-foreground)" />
+              <span className="text-sm font-medium text-foreground">
+                {formatDate(upcomingEvent?.eventDate)}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 mb-2">
+              <Icon name="Clock" size={14} color="var(--color-muted-foreground)" />
+              <span className="text-sm text-muted-foreground font-mono">
+                {upcomingEvent?.eventTime}
+              </span>
+            </div>
+
+            {upcomingEvent?.venue && (
+              <div className="flex items-center gap-2">
+                <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" />
+                <span className="text-sm text-muted-foreground truncate">
+                  {upcomingEvent?.venue}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+        <div className="flex items-center justify-between mb-3 pb-3 border-b border-border">
+          <div className="flex flex-col">
+            <span className="text-xs font-caption text-muted-foreground mb-1">
+              Total Pembayaran
+            </span>
+            <span className="text-lg font-heading font-bold text-foreground font-mono">
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              })?.format(client?.totalAmount)}
+            </span>
+          </div>
+          <PaymentStatusIndicator 
+            status={client?.paymentStatus}
+            type="badge"
+            showIcon={true}
+          />
+        </div>
+        <div className="flex items-center gap-2 mb-2">
+          <Button
+            variant="outline"
+            size="sm"
+            iconName="Edit"
+            iconPosition="left"
+            onClick={(e) => {
+              e?.stopPropagation();
+              onEdit(client);
+            }}
+            className="flex-1"
+          >
+            Edit
+          </Button>
+          <Button
+            variant="default"
+            size="sm"
+            iconName="Plus"
+            iconPosition="left"
+            onClick={(e) => {
+              e?.stopPropagation();
+              onAddService(client);
+            }}
+            className="flex-1"
+          >
+            Tambah Layanan
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            iconName="Bell"
+            onClick={(e) => {
+              e?.stopPropagation();
+              onSendReminder(client);
+            }}
+            aria-label="Kirim pengingat"
+          />
+          <Button
+            variant="ghost"
+            size="sm"
+            iconName="Trash2"
+            onClick={(e) => {
+              e?.stopPropagation();
+              onDelete(client.id);
+            }}
+            aria-label="Hapus klien"
+            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+          />
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            iconName="FileText"
+            iconPosition="left"
+            onClick={(e) => {
+              e?.stopPropagation();
+              onViewInvoices(client);
+            }}
+            className="flex-1"
+          >
+            Lihat Invoice
+          </Button>
+          <Button
+            variant="default"
+            size="sm"
+            iconName="Share2"
+            onClick={(e) => {
+              e?.stopPropagation();
+              onShareLink(client);
+            }}
+            aria-label="Share link portal"
+          />
+        </div>
+      </div>
+
+      {/* Mobile: Accordion View */}
+      <div className="sm:hidden space-y-2">
+        {/* Acara Section */}
+        {upcomingEvent && (
+          <div className="border border-border rounded-lg overflow-hidden">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleSection('event');
+              }}
+              className="w-full flex items-center justify-between p-3 bg-surface/50 hover:bg-surface transition-smooth"
+            >
+              <div className="flex items-center gap-2">
+                <Icon name="Calendar" size={16} color="var(--color-primary)" />
+                <span className="text-sm font-medium text-foreground">
+                  {isCompleted ? 'Event Terakhir' : 'Acara'}
+                </span>
+              </div>
+              <Icon 
+                name="ChevronDown" 
+                size={16} 
+                className={`transition-transform duration-200 ${expandedSections.event ? 'rotate-180' : ''}`}
+                color="var(--color-muted-foreground)"
+              />
+            </button>
+            {expandedSections.event && (
+              <div className="p-3 pt-0 animate-in slide-in-from-top-2 duration-200">
+                <div className="flex items-center justify-between mb-2 mt-2">
+                  <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${serviceConfig?.bgColor} ${serviceConfig?.textColor}`}>
+                    {serviceConfig?.label}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Calendar" size={14} color="var(--color-foreground)" />
+                    <span className="text-sm font-medium text-foreground">
+                      {formatDate(upcomingEvent?.eventDate)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Clock" size={14} color="var(--color-muted-foreground)" />
+                    <span className="text-sm text-muted-foreground font-mono">
+                      {upcomingEvent?.eventTime}
+                    </span>
+                  </div>
+                  {upcomingEvent?.venue && (
+                    <div className="flex items-center gap-2">
+                      <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" />
+                      <span className="text-sm text-muted-foreground truncate">
+                        {upcomingEvent?.venue}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Pembayaran Section */}
+        <div className="border border-border rounded-lg overflow-hidden">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleSection('payment');
+            }}
+            className="w-full flex items-center justify-between p-3 bg-surface/50 hover:bg-surface transition-smooth"
+          >
+            <div className="flex items-center gap-2">
+              <Icon name="CreditCard" size={16} color="var(--color-primary)" />
+              <span className="text-sm font-medium text-foreground">Pembayaran</span>
+            </div>
+            <Icon 
+              name="ChevronDown" 
+              size={16} 
+              className={`transition-transform duration-200 ${expandedSections.payment ? 'rotate-180' : ''}`}
+              color="var(--color-muted-foreground)"
+            />
+          </button>
+          {expandedSections.payment && (
+            <div className="p-3 pt-0 animate-in slide-in-from-top-2 duration-200">
+              <div className="flex items-center justify-between mt-2">
+                <div className="flex flex-col">
+                  <span className="text-xs font-caption text-muted-foreground mb-1">
+                    Total Pembayaran
+                  </span>
+                  <span className="text-lg font-heading font-bold text-foreground font-mono">
+                    {new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0
+                    })?.format(client?.totalAmount)}
+                  </span>
+                </div>
+                <PaymentStatusIndicator 
+                  status={client?.paymentStatus}
+                  type="badge"
+                  showIcon={true}
+                />
+              </div>
             </div>
           )}
         </div>
-      )}
-      <div className="flex items-center justify-between mb-3 pb-3 border-b border-border">
-        <div className="flex flex-col">
-          <span className="text-xs font-caption text-muted-foreground mb-1">
-            Total Pembayaran
-          </span>
-          <span className="text-lg font-heading font-bold text-foreground font-mono">
-            {new Intl.NumberFormat('id-ID', {
-              style: 'currency',
-              currency: 'IDR',
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0
-            })?.format(client?.totalAmount)}
-          </span>
+
+        {/* Actions Section */}
+        <div className="border border-border rounded-lg overflow-hidden">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleSection('actions');
+            }}
+            className="w-full flex items-center justify-between p-3 bg-surface/50 hover:bg-surface transition-smooth"
+          >
+            <div className="flex items-center gap-2">
+              <Icon name="Settings" size={16} color="var(--color-primary)" />
+              <span className="text-sm font-medium text-foreground">Aksi</span>
+            </div>
+            <Icon 
+              name="ChevronDown" 
+              size={16} 
+              className={`transition-transform duration-200 ${expandedSections.actions ? 'rotate-180' : ''}`}
+              color="var(--color-muted-foreground)"
+            />
+          </button>
+          {expandedSections.actions && (
+            <div className="p-3 pt-0 space-y-2 animate-in slide-in-from-top-2 duration-200">
+              <div className="flex items-center gap-2 mt-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  iconName="Edit"
+                  iconPosition="left"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onEdit(client);
+                  }}
+                  className="flex-1"
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="default"
+                  size="sm"
+                  iconName="Plus"
+                  iconPosition="left"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onAddService(client);
+                  }}
+                  className="flex-1"
+                >
+                  Tambah
+                </Button>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  iconName="FileText"
+                  iconPosition="left"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onViewInvoices(client);
+                  }}
+                  className="flex-1"
+                >
+                  Invoice
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  iconName="Bell"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onSendReminder(client);
+                  }}
+                  className="flex-1"
+                >
+                  Reminder
+                </Button>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="default"
+                  size="sm"
+                  iconName="Share2"
+                  iconPosition="left"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onShareLink(client);
+                  }}
+                  className="flex-1"
+                >
+                  Share Link
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  iconName="Trash2"
+                  onClick={(e) => {
+                    e?.stopPropagation();
+                    onDelete(client.id);
+                  }}
+                  className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                >
+                  Hapus
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
-        <PaymentStatusIndicator 
-          status={client?.paymentStatus}
-          type="badge"
-          showIcon={true}
-        />
-      </div>
-      <div className="flex items-center gap-2 mb-2">
-        <Button
-          variant="outline"
-          size="sm"
-          iconName="Edit"
-          iconPosition="left"
-          onClick={(e) => {
-            e?.stopPropagation();
-            onEdit(client);
-          }}
-          className="flex-1"
-        >
-          Edit
-        </Button>
-        <Button
-          variant="default"
-          size="sm"
-          iconName="Plus"
-          iconPosition="left"
-          onClick={(e) => {
-            e?.stopPropagation();
-            onAddService(client);
-          }}
-          className="flex-1"
-        >
-          Tambah Layanan
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          iconName="Bell"
-          onClick={(e) => {
-            e?.stopPropagation();
-            onSendReminder(client);
-          }}
-          aria-label="Kirim pengingat"
-        />
-        <Button
-          variant="ghost"
-          size="sm"
-          iconName="Trash2"
-          onClick={(e) => {
-            e?.stopPropagation();
-            onDelete(client.id);
-          }}
-          aria-label="Hapus klien"
-          className="text-destructive hover:text-destructive hover:bg-destructive/10"
-        />
-      </div>
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          iconName="FileText"
-          iconPosition="left"
-          onClick={(e) => {
-            e?.stopPropagation();
-            onViewInvoices(client);
-          }}
-          className="flex-1"
-        >
-          Lihat Invoice
-        </Button>
-        <Button
-          variant="default"
-          size="sm"
-          iconName="Share2"
-          onClick={(e) => {
-            e?.stopPropagation();
-            onShareLink(client);
-          }}
-          aria-label="Share link portal"
-        />
       </div>
     </div>
   );

@@ -27,6 +27,19 @@ const PaymentTracking = () => {
   const [invoices, setInvoices] = useState(() => dataStore.getInvoices() || []);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [showInvoicePreview, setShowInvoicePreview] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({
+    overdue: true,
+    pending: true,
+    partial: true,
+    paid: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   // Listen for payment and client updates
   React.useEffect(() => {
@@ -402,7 +415,7 @@ const PaymentTracking = () => {
             className={cn("", mobileClasses.marginBottomSmall)}
           />
 
-          {filteredAndSortedClients?.length === 0 ?
+          {filteredAndSortedClients?.length === 0 ? (
             <div className="text-center py-12">
               <div className={cn("w-16 h-16 rounded-2xl bg-muted mx-auto  flex items-center justify-center", mobileClasses.marginBottomSmall)}>
                 <Icon name="Search" size={20} sm:size={32} color="var(--color-muted-foreground)" />
@@ -413,20 +426,174 @@ const PaymentTracking = () => {
               <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                 Coba ubah filter atau kata kunci pencarian
               </p>
-            </div> :
-
-            <div className={cn("grid grid-cols- w-full 1 lg:grid-cols-2 ga", mobileClasses.cardCompact)}>
-              {filteredAndSortedClients?.map((client) =>
-                <ClientPaymentCard
-                  key={client?.id}
-                  client={client}
-                  onSendReminder={handleSendReminder}
-                  onRecordPayment={handleRecordPayment}
-                  onViewDetails={handleViewDetails}
-                />
-              )}
             </div>
-          }
+          ) : (
+            <>
+              {/* Desktop: Grid View */}
+              <div className={cn("hidden sm:grid grid-cols- w-full 1 lg:grid-cols-2 ga", mobileClasses.cardCompact)}>
+                {filteredAndSortedClients?.map((client) =>
+                  <ClientPaymentCard
+                    key={client?.id}
+                    client={client}
+                    onSendReminder={handleSendReminder}
+                    onRecordPayment={handleRecordPayment}
+                    onViewDetails={handleViewDetails}
+                  />
+                )}
+              </div>
+
+              {/* Mobile: Accordion by Status */}
+              <div className="sm:hidden space-y-2">
+                {/* Overdue */}
+                {filteredAndSortedClients.filter(c => c.paymentStatus === 'overdue').length > 0 && (
+                  <div className="border border-error/30 rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('overdue')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="AlertCircle" size={18} color="var(--color-error)" />
+                        <span className="text-sm font-medium text-foreground">Jatuh Tempo</span>
+                        <span className="px-2 py-0.5 rounded-full bg-error/10 text-error text-xs font-bold">
+                          {filteredAndSortedClients.filter(c => c.paymentStatus === 'overdue').length}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.overdue ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.overdue && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {filteredAndSortedClients.filter(c => c.paymentStatus === 'overdue').map(client => (
+                          <ClientPaymentCard
+                            key={client.id}
+                            client={client}
+                            onSendReminder={handleSendReminder}
+                            onRecordPayment={handleRecordPayment}
+                            onViewDetails={handleViewDetails}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Pending */}
+                {filteredAndSortedClients.filter(c => c.paymentStatus === 'pending').length > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('pending')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="Clock" size={18} color="var(--color-warning)" />
+                        <span className="text-sm font-medium text-foreground">Pending</span>
+                        <span className="px-2 py-0.5 rounded-full bg-warning/10 text-warning text-xs font-bold">
+                          {filteredAndSortedClients.filter(c => c.paymentStatus === 'pending').length}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.pending ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.pending && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {filteredAndSortedClients.filter(c => c.paymentStatus === 'pending').map(client => (
+                          <ClientPaymentCard
+                            key={client.id}
+                            client={client}
+                            onSendReminder={handleSendReminder}
+                            onRecordPayment={handleRecordPayment}
+                            onViewDetails={handleViewDetails}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Partial */}
+                {filteredAndSortedClients.filter(c => c.paymentStatus === 'partial').length > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('partial')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="DollarSign" size={18} color="var(--color-primary)" />
+                        <span className="text-sm font-medium text-foreground">DP Dibayar</span>
+                        <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                          {filteredAndSortedClients.filter(c => c.paymentStatus === 'partial').length}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.partial ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.partial && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {filteredAndSortedClients.filter(c => c.paymentStatus === 'partial').map(client => (
+                          <ClientPaymentCard
+                            key={client.id}
+                            client={client}
+                            onSendReminder={handleSendReminder}
+                            onRecordPayment={handleRecordPayment}
+                            onViewDetails={handleViewDetails}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Paid */}
+                {filteredAndSortedClients.filter(c => c.paymentStatus === 'paid').length > 0 && (
+                  <div className="border border-border rounded-lg overflow-hidden bg-card">
+                    <button
+                      onClick={() => toggleSection('paid')}
+                      className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" size={18} color="var(--color-success)" />
+                        <span className="text-sm font-medium text-foreground">Lunas</span>
+                        <span className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-bold">
+                          {filteredAndSortedClients.filter(c => c.paymentStatus === 'paid').length}
+                        </span>
+                      </div>
+                      <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 ${expandedSections.paid ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                      />
+                    </button>
+                    {expandedSections.paid && (
+                      <div className="p-4 pt-0 border-t border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
+                        {filteredAndSortedClients.filter(c => c.paymentStatus === 'paid').map(client => (
+                          <ClientPaymentCard
+                            key={client.id}
+                            client={client}
+                            onSendReminder={handleSendReminder}
+                            onRecordPayment={handleRecordPayment}
+                            onViewDetails={handleViewDetails}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         {invoices.length > 0 && (

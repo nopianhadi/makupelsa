@@ -7,6 +7,18 @@ import { getAssistantPaymentSummary } from '../../../utils/paymentSync';
 const AssistantDetailModal = ({ assistant, onClose }) => {
   const [paymentSummary, setPaymentSummary] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
+  const [expandedSections, setExpandedSections] = useState({
+    overview: true,
+    payments: false,
+    projects: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   useEffect(() => {
     if (assistant) {
@@ -78,7 +90,8 @@ const AssistantDetailModal = ({ assistant, onClose }) => {
             />
           </div>
 
-          <div className="flex gap-2 mt-6">
+          {/* Desktop: Tabs */}
+          <div className="hidden sm:flex gap-2 mt-6">
             <button
               onClick={() => setActiveTab('overview')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-smooth ${

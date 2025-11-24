@@ -28,6 +28,18 @@ const FinancialTracking = () => {
     minAmount: '',
     maxAmount: ''
   });
+  const [expandedSections, setExpandedSections] = useState({
+    summary: true,
+    income: true,
+    expense: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   // Load incomes from invoices
   const loadIncomesFromInvoices = () => {
@@ -365,8 +377,8 @@ const FinancialTracking = () => {
           activeFilters={filters}
         />
 
-        {/* Tabs Navigation */}
-        <div className="flex items-center gap-2 border-b border-border mt-6 overflow-x-auto">
+        {/* Desktop: Tabs Navigation */}
+        <div className="hidden sm:flex items-center gap-2 border-b border-border mt-6 overflow-x-auto">
           <button
             onClick={() => {
               setActiveTab('income');
@@ -420,8 +432,119 @@ const FinancialTracking = () => {
           </button>
         </div>
 
-        {/* Tab Content */}
-        <div className="mt-6">
+        {/* Mobile: Accordion Sections */}
+        <div className="sm:hidden mt-6 space-y-2">
+          {/* Pemasukan Section */}
+          <div className="border border-border rounded-lg overflow-hidden bg-card">
+            <button
+              onClick={() => toggleSection('income')}
+              className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+            >
+              <div className="flex items-center gap-2">
+                <Icon name="TrendingUp" size={18} color="var(--color-success)" />
+                <span className="text-sm font-medium text-foreground">Pemasukan</span>
+              </div>
+              <Icon 
+                name="ChevronDown" 
+                size={18} 
+                className={`transition-transform duration-200 ${expandedSections.income ? 'rotate-180' : ''}`}
+                color="var(--color-muted-foreground)"
+              />
+            </button>
+            {expandedSections.income && (
+              <div className="p-4 pt-0 border-t border-border animate-in slide-in-from-top-2 duration-200">
+                {showIncomeForm && (
+                  <div className="mb-4 p-4 rounded-lg bg-surface border border-border">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-heading font-semibold text-foreground">
+                        Catat Pemasukan Baru
+                      </h3>
+                      <button
+                        onClick={() => setShowIncomeForm(false)}
+                        className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
+                      >
+                        <Icon name="X" size={18} />
+                      </button>
+                    </div>
+                    <IncomeEntryForm
+                      onSubmit={handleAddIncome}
+                      onCancel={() => setShowIncomeForm(false)}
+                    />
+                  </div>
+                )}
+                <IncomeList
+                  incomes={filteredIncomes}
+                  onEdit={handleEditIncome}
+                  onDelete={handleDeleteIncome}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Pengeluaran Section */}
+          <div className="border border-border rounded-lg overflow-hidden bg-card">
+            <button
+              onClick={() => toggleSection('expense')}
+              className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+            >
+              <div className="flex items-center gap-2">
+                <Icon name="TrendingDown" size={18} color="var(--color-error)" />
+                <span className="text-sm font-medium text-foreground">Pengeluaran</span>
+              </div>
+              <Icon 
+                name="ChevronDown" 
+                size={18} 
+                className={`transition-transform duration-200 ${expandedSections.expense ? 'rotate-180' : ''}`}
+                color="var(--color-muted-foreground)"
+              />
+            </button>
+            {expandedSections.expense && (
+              <div className="p-4 pt-0 border-t border-border animate-in slide-in-from-top-2 duration-200">
+                {showExpenseForm && (
+                  <div className="mb-4 p-4 rounded-lg bg-surface border border-border">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-heading font-semibold text-foreground">
+                        Tambah Pengeluaran Baru
+                      </h3>
+                      <button
+                        onClick={() => setShowExpenseForm(false)}
+                        className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
+                      >
+                        <Icon name="X" size={18} />
+                      </button>
+                    </div>
+                    <ExpenseEntryForm
+                      onSubmit={handleAddExpense}
+                      onCancel={() => setShowExpenseForm(false)}
+                    />
+                  </div>
+                )}
+                <ExpenseList
+                  expenses={filteredExpenses}
+                  onEdit={handleEditExpense}
+                  onDelete={handleDeleteExpense}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Laporan Section */}
+          <div className="border border-border rounded-lg overflow-hidden bg-card">
+            <button
+              onClick={() => setActiveTab('report')}
+              className="w-full flex items-center justify-between p-4 hover:bg-surface/50 transition-smooth"
+            >
+              <div className="flex items-center gap-2">
+                <Icon name="BarChart3" size={18} color="var(--color-primary)" />
+                <span className="text-sm font-medium text-foreground">Laporan</span>
+              </div>
+              <Icon name="ChevronRight" size={18} color="var(--color-muted-foreground)" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop: Tab Content */}
+        <div className="hidden sm:block mt-6">
           {activeTab === 'income' && (
             <div className="space-y-6">
               {showIncomeForm && (

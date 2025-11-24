@@ -29,6 +29,20 @@ const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [savedData, setSavedData] = useState(null);
+    const [expandedSections, setExpandedSections] = useState({
+        personal: true,
+        social: false,
+        branding: false,
+        bank: false,
+        links: false
+    });
+
+    const toggleSection = (section) => {
+        setExpandedSections(prev => ({
+            ...prev,
+            [section]: !prev[section]
+        }));
+    };
 
     useEffect(() => {
         localStorage.setItem('user_profile', JSON.stringify(profileData));
@@ -61,6 +75,36 @@ const Profile = () => {
         }
         setSavedData(null);
         setIsEditing(false);
+    };
+
+    const renderAccordionSection = (id, icon, title, content) => {
+        const isExpanded = expandedSections[id];
+        
+        return (
+            <div key={id} className="border-t border-border">
+                <button
+                    onClick={() => toggleSection(id)}
+                    className="w-full flex items-center justify-between py-4 hover:bg-surface/30 transition-smooth sm:cursor-default sm:pointer-events-none"
+                    aria-expanded={isExpanded}
+                >
+                    <div className="flex items-center gap-2">
+                        <Icon name={icon} size={18} color="var(--color-primary)" />
+                        <h3 className="text-base font-heading font-semibold text-foreground">
+                            {title}
+                        </h3>
+                    </div>
+                    <Icon 
+                        name="ChevronDown" 
+                        size={18} 
+                        className={`transition-transform duration-200 sm:hidden ${isExpanded ? 'rotate-180' : ''}`}
+                        color="var(--color-muted-foreground)"
+                    />
+                </button>
+                <div className={`${isExpanded ? 'block' : 'hidden'} sm:block pb-4 animate-in slide-in-from-top-2 duration-200`}>
+                    {content}
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -145,12 +189,8 @@ const Profile = () => {
                             </div>
                         </div>
 
-                        <div className="space-y-6">
-                            <div>
-                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
-                                    <Icon name="User" size={18} color="var(--color-primary)" />
-                                    Informasi Pribadi
-                                </h3>
+                        <div className="space-y-0 sm:space-y-6">
+                            {renderAccordionSection('personal', 'User', 'Informasi Pribadi', (
                                 <div className="space-y-4">
                                     <div>
                                         <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
@@ -266,13 +306,9 @@ const Profile = () => {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            ))}
 
-                            <div className="pt-6 border-t border-border">
-                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
-                                    <Icon name="Globe" size={18} color="var(--color-primary)" />
-                                    Media Sosial & Website
-                                </h3>
+                            {renderAccordionSection('social', 'Globe', 'Media Sosial & Website', (
                                 <div className="space-y-4">
                                     <div>
                                         <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
@@ -318,13 +354,9 @@ const Profile = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            ))}
 
-                            <div className="pt-6 border-t border-border">
-                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
-                                    <Icon name="Image" size={18} color="var(--color-primary)" />
-                                    Branding
-                                </h3>
+                            {renderAccordionSection('branding', 'Image', 'Branding', (
                                 <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                                     <div>
                                         <ImageUpload
@@ -347,13 +379,10 @@ const Profile = () => {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            ))}
 
-                            <div className="pt-6 border-t border-border">
-                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
-                                    <Icon name="CreditCard" size={18} color="var(--color-primary)" />
-                                    Informasi Bank
-                                </h3>
+                            {renderAccordionSection('bank', 'CreditCard', 'Informasi Bank', (
+                                <>
                                 <div className="space-y-4">
                                     <div className={cn("grid grid-cols- w-full 1 sm:grid-cols-2 ga", mobileClasses.cardCompact)}>
                                         <div>
@@ -406,13 +435,10 @@ const Profile = () => {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                                </>
+                            ))}
 
-                            <div className="pt-6 border-t border-border">
-                                <h3 className={cn("text-base font-heading font-semibold text-foreground  flex items-center gap-2", mobileClasses.marginBottomSmall)}>
-                                    <Icon name="Link" size={18} color="var(--color-primary)" />
-                                    Link Publik untuk Klien
-                                </h3>
+                            {renderAccordionSection('links', 'Link', 'Link Publik untuk Klien', (
                                 <div className="space-y-4">
                                     <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
                                         Bagikan link ini kepada klien agar mereka bisa melihat paket layanan dan melakukan booking secara langsung.
@@ -507,7 +533,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            ))}
 
                             <div className="pt-6 border-t border-border">
                                 <div className={cn("flex flex-col ", mobileClasses.gapSmall)}>
