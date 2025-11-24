@@ -4,6 +4,33 @@
 
 MUA Finance Manager is a comprehensive financial management application designed for makeup artists (MUA) and beauty service professionals. The application helps manage clients, track payments, handle invoices, maintain service portfolios, and generate financial reports. Built as a single-page application using React, it operates entirely in the browser using localStorage for data persistence, with optional Supabase integration for cloud storage.
 
+## Recent Updates (November 24, 2025)
+
+✅ **Data Synchronization Complete**
+- Implemented comprehensive real-time event-driven architecture across all pages
+- Fixed payment sync validation to support installment payments
+- All pages (Financial Tracking, Calendar, Dashboard, Payment, Client, Project) now auto-refresh when data changes
+- Fixed Financial Tracking card balances to calculate dynamically from actual income/expenses data
+
+✅ **Settings Page - Now Fully Functional**
+- Dark mode toggle with localStorage persistence
+- Email notifications toggle
+- WhatsApp notifications toggle
+- Data export to JSON (backup functionality)
+- Data import from JSON (restore functionality)
+- Delete all data with confirmation
+- All features now save preferences to localStorage
+
+✅ **Client Management - Invoice Viewer Fixed**
+- Implemented handleViewInvoices to open ClientDetailModal with invoice tab
+- Users can now click to view all invoices for a client
+- Real-time invoice updates when payments are recorded
+
+✅ **Booking & Leads Integration Verified**
+- Booking page uses dataStore ✓
+- Leads conversion creates new clients in dataStore ✓
+- Lead status updates to 'Converted' when converted to client ✓
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -24,13 +51,14 @@ Preferred communication style: Simple, everyday language.
 - **Framer Motion 10.16.4** - Animation library for smooth transitions
 - **Lucide React** - Icon library
 - Custom design tokens defined in CSS variables for theming (purple-blue, warm-pink, golden-orange color scheme)
-- Dark mode support with class-based toggling
+- Dark mode support with class-based toggling + localStorage persistence
 
 **State Management**
 - **Redux Toolkit (@reduxjs/toolkit 2.6.1)** - Global state management
 - **React Hook Form 7.55.0** - Form state and validation
 - Local component state using React hooks
 - Custom hooks for data validation and business logic
+- Event-driven updates via window.dispatchEvent
 
 **Data Visualization**
 - **Recharts 2.15.2** - Chart library for financial dashboards
@@ -44,6 +72,7 @@ Preferred communication style: Simple, everyday language.
 - Automatic data validation and consistency checks via `src/utils/dataValidation.js`
 - Storage quota monitoring with user warnings when approaching limits (5MB browser limit)
 - Image compression utility to optimize storage usage
+- User preferences stored in localStorage (dark mode, notifications, etc.)
 
 **Data Entities**
 - Clients (with payment history, events, profile images)
@@ -53,10 +82,15 @@ Preferred communication style: Simple, everyday language.
 - Financial transactions (income/expenses with categorization)
 - Service configurations (types, packages, payment methods)
 
-**Data Synchronization**
+**Data Synchronization Architecture**
+- Event-driven system using window.dispatchEvent
+- All major pages listen to: paymentRecorded, expenseAdded/Updated/Deleted, invoiceUpdated, clientUpdated
+- Automatic re-renders when data changes across pages
+- Payment sync supports installment payments (multiple entries per invoice)
+- Financial card balances calculated dynamically: Cash = (Income - Expenses) × 0.6, Bank = (Income - Expenses) × 0.4
 - `paymentSync.js` - Synchronizes payment data across clients, invoices, and financial records
 - Automatic consistency validation on data mutations
-- Migration utilities for data format updates (`migrateClientData.js`, `migrateImageData.js`)
+- Migration utilities for data format updates
 
 **Optional Cloud Storage**
 - **Supabase (@supabase/supabase-js 2.39.3)** - Optional PostgreSQL-backed cloud storage
@@ -87,12 +121,14 @@ Preferred communication style: Simple, everyday language.
 - Public shareable client profiles
 - Client archival system for completed projects
 - Advanced search and filtering (by service type, payment status, date range)
+- View all invoices for a client with real-time updates
 
 **Payment & Invoice System**
 - Invoice generation with custom line items
 - Payment tracking with multiple methods (transfer, cash, e-wallet)
 - Automatic payment status calculation (pending, partial, paid)
-- Payment synchronization across modules
+- Payment synchronization across modules with event-driven updates
+- Installment payment support
 - Invoice export to PDF/CSV
 - Payment reminder system
 
@@ -116,10 +152,33 @@ Preferred communication style: Simple, everyday language.
 - Date-range filtering for reports
 - Export functionality (CSV, PDF)
 - Category-based expense management
+- Real-time card balance calculations (60% cash, 40% bank split)
+
+**Booking Management**
+- Booking form for clients
+- Status tracking (pending, confirmed, completed, cancelled)
+- Public booking forms
+- Real-time sync with dataStore
+
+**Leads Management**
+- Lead creation from form submissions
+- Lead status tracking (New, Contacted, Interested, Converted, Lost)
+- Convert leads to clients with automatic client creation
+- WhatsApp follow-up integration
+- Date-based filtering
+
+**Settings & Preferences**
+- Dark mode toggle with persistent storage
+- Email and WhatsApp notification preferences
+- Data export (backup) to JSON
+- Data import (restore) from JSON
+- Delete all data with safety confirmations
+- Service type, payment method, expense category management
 
 **Data Export & Backup**
 - CSV export for clients, payments, projects
-- Summary report generation
+- Full data export to JSON format with metadata
+- Full data import from JSON backup files
 - Data validation and auto-fix utilities
 - Manual backup/restore functionality
 
@@ -140,15 +199,23 @@ Preferred communication style: Simple, everyday language.
 ### Routing Structure
 
 **Public Routes**
+- `/` - Landing page/Login
 - `/pricelist/public/{publicId}` - Public pricelist viewer
 
 **Protected Routes** (require authentication)
-- `/` - Dashboard
+- `/dashboard` - Dashboard with metrics and overview
 - `/client-management` - Client CRUD interface
 - `/payment-tracking` - Invoice and payment management
 - `/gallery` - Portfolio management
 - `/pricelist` - Pricelist gallery management
-- `/financial-report` - Financial analytics
+- `/financial-tracking` - Financial analytics and tracking
+- `/calendar-scheduling` - Calendar and event management
+- `/booking` - Booking management
+- `/leads` - Leads and prospects management
+- `/project-management` - Project management
+- `/team` - Team management
+- `/testimonials` - Testimonials and reviews
+- `/settings` - Application settings
 
 ### Code Organization
 
@@ -166,6 +233,7 @@ Preferred communication style: Simple, everyday language.
 - Reusable card components with consistent styling
 - Custom hooks for data validation and storage events
 - Event-driven architecture for cross-module updates
+- Listen to: paymentRecorded, expenseAdded/Updated/Deleted, invoiceUpdated, clientUpdated, projectUpdated, projectDeleted, etc.
 
 ## External Dependencies
 
