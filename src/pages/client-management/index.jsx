@@ -510,8 +510,8 @@ const ClientManagement = () => {
   };
 
   const handleViewInvoices = (client) => {
-    // TODO: Implementasi lihat invoice
-    console.log('View invoices for client:', client.name);
+    setSelectedClient(client);
+    setIsDetailModalOpen(true);
   };
 
   const handleShareLink = (client) => {

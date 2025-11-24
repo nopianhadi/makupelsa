@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Icon from '../../components/AppIcon';
 import StatusManagement from './StatusManagement';
@@ -6,8 +6,128 @@ import CategoryManagement from './CategoryManagement';
 import IncomeCategoryManagement from './IncomeCategoryManagement';
 import ServiceTypeManagement from './ServiceTypeManagement';
 import PaymentMethodManagement from './PaymentMethodManagement';
+import { dataStore } from '../../utils/dataStore';
 
 const Settings = () => {
+    const [darkMode, setDarkMode] = useState(() => {
+        return localStorage.getItem('darkMode') === 'true';
+    });
+    const [emailNotifications, setEmailNotifications] = useState(() => {
+        return localStorage.getItem('emailNotifications') !== 'false';
+    });
+    const [whatsappNotifications, setWhatsappNotifications] = useState(() => {
+        return localStorage.getItem('whatsappNotifications') !== 'false';
+    });
+
+    // Aplikasi dark mode
+    useEffect(() => {
+        localStorage.setItem('darkMode', darkMode);
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [darkMode]);
+
+    const handleToggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
+
+    const handleToggleEmailNotifications = () => {
+        const newValue = !emailNotifications;
+        setEmailNotifications(newValue);
+        localStorage.setItem('emailNotifications', newValue);
+        alert(newValue ? 'Email notifikasi diaktifkan' : 'Email notifikasi dinonaktifkan');
+    };
+
+    const handleToggleWhatsappNotifications = () => {
+        const newValue = !whatsappNotifications;
+        setWhatsappNotifications(newValue);
+        localStorage.setItem('whatsappNotifications', newValue);
+        alert(newValue ? 'Notifikasi WhatsApp diaktifkan' : 'Notifikasi WhatsApp dinonaktifkan');
+    };
+
+    const handleExportData = () => {
+        try {
+            const allData = {
+                clients: dataStore.getClients(),
+                invoices: dataStore.getInvoices(),
+                projects: dataStore.getProjects(),
+                expenses: dataStore.getExpenses(),
+                bookings: dataStore.getBookings(),
+                leads: dataStore.getLeads(),
+                exportDate: new Date().toISOString(),
+                appVersion: '1.0.0'
+            };
+
+            const dataStr = JSON.stringify(allData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `mua-finance-backup-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            alert('✅ Data berhasil diexpor!');
+        } catch (error) {
+            console.error('Export error:', error);
+            alert('❌ Gagal mengexpor data: ' + error.message);
+        }
+    };
+
+    const handleImportData = () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const importedData = JSON.parse(event.target.result);
+                    
+                    if (window.confirm('Ini akan MENGGANTIKAN semua data Anda. Lanjutkan?')) {
+                        // Restore semua data
+                        if (importedData.clients) localStorage.setItem('clients', JSON.stringify(importedData.clients));
+                        if (importedData.invoices) localStorage.setItem('invoices', JSON.stringify(importedData.invoices));
+                        if (importedData.projects) localStorage.setItem('projects', JSON.stringify(importedData.projects));
+                        if (importedData.expenses) localStorage.setItem('expenses', JSON.stringify(importedData.expenses));
+                        if (importedData.bookings) localStorage.setItem('bookings', JSON.stringify(importedData.bookings));
+                        if (importedData.leads) localStorage.setItem('leads', JSON.stringify(importedData.leads));
+                        
+                        alert('✅ Data berhasil diimpor! Halaman akan direload.');
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    console.error('Import error:', error);
+                    alert('❌ Format file tidak valid: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        };
+        input.click();
+    };
+
+    const handleDeleteAllData = () => {
+        if (window.confirm('⚠️ Ini akan MENGHAPUS SEMUA data Anda. Yakin?')) {
+            if (window.confirm('Konfirmasi terakhir: Ketik "HAPUS" untuk melanjutkan')) {
+                try {
+                    // Hapus semua localStorage
+                    localStorage.clear();
+                    alert('✅ Semua data berhasil dihapus! Halaman akan direload.');
+                    window.location.reload();
+                } catch (error) {
+                    console.error('Delete error:', error);
+                    alert('❌ Gagal menghapus data: ' + error.message);
+                }
+            }
+        }
+    };
+
     return (
         <>
             <Helmet>
@@ -57,10 +177,11 @@ const Settings = () => {
                                         </div>
                                     </div>
                                     <button 
-                                        className="w-12 h-6 bg-muted rounded-full relative transition-colors hover:bg-muted/80"
+                                        onClick={handleToggleDarkMode}
+                                        className={`w-12 h-6 rounded-full relative transition-colors ${darkMode ? 'bg-primary' : 'bg-muted'}`}
                                         aria-label="Toggle dark mode"
                                     >
-                                        <span className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform shadow-sm" />
+                                        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all shadow-sm ${darkMode ? 'right-1' : 'left-1'}`} />
                                     </button>
                                 </div>
                             </div>
@@ -81,10 +202,11 @@ const Settings = () => {
                                         </div>
                                     </div>
                                     <button 
-                                        className="w-12 h-6 bg-primary rounded-full relative transition-colors hover:bg-primary/90"
+                                        onClick={handleToggleEmailNotifications}
+                                        className={`w-12 h-6 rounded-full relative transition-colors ${emailNotifications ? 'bg-primary' : 'bg-muted'}`}
                                         aria-label="Toggle email notifications"
                                     >
-                                        <span className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full transition-transform shadow-sm" />
+                                        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all shadow-sm ${emailNotifications ? 'right-1' : 'left-1'}`} />
                                     </button>
                                 </div>
                                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border">
@@ -96,10 +218,11 @@ const Settings = () => {
                                         </div>
                                     </div>
                                     <button 
-                                        className="w-12 h-6 bg-primary rounded-full relative transition-colors hover:bg-primary/90"
+                                        onClick={handleToggleWhatsappNotifications}
+                                        className={`w-12 h-6 rounded-full relative transition-colors ${whatsappNotifications ? 'bg-primary' : 'bg-muted'}`}
                                         aria-label="Toggle WhatsApp notifications"
                                     >
-                                        <span className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full transition-transform shadow-sm" />
+                                        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all shadow-sm ${whatsappNotifications ? 'right-1' : 'left-1'}`} />
                                     </button>
                                 </div>
                             </div>
@@ -111,7 +234,10 @@ const Settings = () => {
                                 <h3 className="font-bold text-lg">Data & Penyimpanan</h3>
                             </div>
                             <div className="space-y-3">
-                                <button className="w-full flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border hover:bg-muted/70 transition-smooth">
+                                <button 
+                                    onClick={handleExportData}
+                                    className="w-full flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border hover:bg-muted/70 transition-smooth"
+                                >
                                     <div className="flex items-center gap-3">
                                         <Icon name="Download" size={18} color="var(--color-foreground)" />
                                         <div className="text-left">
@@ -121,7 +247,10 @@ const Settings = () => {
                                     </div>
                                     <Icon name="ChevronRight" size={18} color="var(--color-muted-foreground)" />
                                 </button>
-                                <button className="w-full flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border hover:bg-muted/70 transition-smooth">
+                                <button 
+                                    onClick={handleImportData}
+                                    className="w-full flex items-center justify-between p-3 bg-muted/50 rounded-xl border border-border hover:bg-muted/70 transition-smooth"
+                                >
                                     <div className="flex items-center gap-3">
                                         <Icon name="Upload" size={18} color="var(--color-foreground)" />
                                         <div className="text-left">
@@ -131,7 +260,10 @@ const Settings = () => {
                                     </div>
                                     <Icon name="ChevronRight" size={18} color="var(--color-muted-foreground)" />
                                 </button>
-                                <button className="w-full flex items-center justify-between p-3 bg-destructive/10 rounded-xl border border-destructive/20 hover:bg-destructive/20 transition-smooth">
+                                <button 
+                                    onClick={handleDeleteAllData}
+                                    className="w-full flex items-center justify-between p-3 bg-destructive/10 rounded-xl border border-destructive/20 hover:bg-destructive/20 transition-smooth"
+                                >
                                     <div className="flex items-center gap-3">
                                         <Icon name="Trash2" size={18} color="var(--color-destructive)" />
                                         <div className="text-left">
