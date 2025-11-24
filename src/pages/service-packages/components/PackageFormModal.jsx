@@ -319,7 +319,7 @@ const PackageFormModal = ({
                     >
                       <div className="flex items-center gap-2">
                         <Icon name="CheckCircle2" size={16} color="var(--color-success)" />
-                        <span className="text-sm text-foreground">{service}</span>
+                        <span className="text-sm text-foreground truncate">{service}</span>
                       </div>
                       <button
                         type="button"
@@ -376,7 +376,7 @@ const PackageFormModal = ({
                     >
                       <div className="flex items-center gap-2">
                         <Icon name="Plus" size={16} color="var(--color-muted-foreground)" />
-                        <span className="text-sm text-foreground">{addOn?.name}</span>
+                        <span className="text-sm text-foreground truncate">{addOn?.name}</span>
                         <span className="text-xs font-mono text-muted-foreground">
                           +{new Intl.NumberFormat('id-ID', {
                             style: 'currency',

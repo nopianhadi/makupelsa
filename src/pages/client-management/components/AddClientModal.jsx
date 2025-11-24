@@ -94,14 +94,14 @@ const AddClientModal = ({ onClose, onSave }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-background overflow-hidden/80 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="add-client-title"
     >
       <div 
-        className="bg-card border border-border rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
+        className="bg-card border border-border rounded-lg overflow-hidden w-full max-w-2xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e?.stopPropagation()}
       >
         <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-border">
@@ -117,9 +117,9 @@ const AddClientModal = ({ onClose, onSave }) => {
           />
         </div>
 
-        <form onSubmit={handleSubmit} className="p-3 sm:p-4 lg:p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <form onSubmit={handleSubmit} className="p-3 sm:p-4 lg:overflow-hidden p-2 sm:p-3 lg:p-4 overflow-y-auto max-h-[calc(90vh-140px)]">
           <div className="space-y-4">
-            <div className="bg-surface rounded-lg p-4 border border-border">
+            <div className="bg-surface rounded-lg overflow-hidden p-4 border border-border">
               <h3 className="text-sm font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Icon name="User" size={18} />
                 Informasi Klien
@@ -167,7 +167,7 @@ const AddClientModal = ({ onClose, onSave }) => {
               </div>
             </div>
 
-            <div className="bg-surface rounded-lg p-4 border border-border">
+            <div className="bg-surface rounded-lg overflow-hidden p-4 border border-border">
               <h3 className="text-sm font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Icon name="Calendar" size={18} />
                 Detail Acara
@@ -211,7 +211,7 @@ const AddClientModal = ({ onClose, onSave }) => {
               </div>
             </div>
 
-            <div className="bg-surface rounded-lg p-4 border border-border">
+            <div className="bg-surface rounded-lg overflow-hidden p-4 border border-border">
               <h3 className="text-sm font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Icon name="CreditCard" size={18} />
                 Informasi Pembayaran
@@ -247,7 +247,7 @@ const AddClientModal = ({ onClose, onSave }) => {
               </div>
             </div>
 
-            <div className="bg-surface rounded-lg p-4 border border-border">
+            <div className="bg-surface rounded-lg overflow-hidden p-4 border border-border">
               <h3 className="text-sm font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Icon name="FileText" size={18} />
                 Catatan Tambahan

@@ -129,7 +129,7 @@ const KPIManagement = () => {
           {/* KPI Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {kpis.map((kpi) => (
-              <div key={kpi.id} className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+              <div key={kpi.id} className="bg-card border border-border rounded-lg overflow-hidden p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1">{kpi.title}</h3>
@@ -193,7 +193,7 @@ const KPIManagement = () => {
         {/* Modal Form */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-card border border-border rounded-lg max-w-md w-full p-6">
+            <div className="bg-card border border-border rounded-lg overflow-hidden max-w-md w-full p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-foreground">
                   {editingKpi ? 'Edit KPI' : 'Tambah KPI Baru'}

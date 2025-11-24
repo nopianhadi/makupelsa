@@ -82,7 +82,7 @@ const PublicClient = () => {
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
-        <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 mb-6">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 mb-6">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
               <Icon name="User" size={32} color="var(--color-primary)" />
@@ -95,7 +95,7 @@ const PublicClient = () => {
         </div>
 
         {/* Event Details */}
-        <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 mb-6">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 mb-6">
           <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Icon name="Calendar" size={20} color="var(--color-primary)" />
             Detail Acara
@@ -125,7 +125,7 @@ const PublicClient = () => {
         </div>
 
         {/* Payment Status */}
-        <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 mb-6">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 mb-6">
           <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Icon name="Wallet" size={20} color="var(--color-success)" />
             Status Pembayaran
@@ -134,7 +134,7 @@ const PublicClient = () => {
             <div key={index} className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Total Biaya:</span>
-                <span className="font-semibold text-foreground">
+                <span className="font-semibold text-foreground truncate">
                   Rp {event.totalAmount.toLocaleString('id-ID')}
                 </span>
               </div>
@@ -161,7 +161,7 @@ const PublicClient = () => {
         </div>
 
         {/* Payment History */}
-        <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
           <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Icon name="Receipt" size={20} color="var(--color-accent)" />
             Riwayat Pembayaran

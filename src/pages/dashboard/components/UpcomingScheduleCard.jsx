@@ -40,7 +40,7 @@ const UpcomingScheduleCard = ({ schedule }) => {
   };
 
   return (
-    <div className="bg-card border border-border rounded-lg p-4 elevation-1 hover:elevation-3 transition-smooth">
+    <div className="bg-card border border-border rounded-lg overflow-hidden p-4 elevation-1 hover:elevation-3 transition-smooth">
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex-1 min-w-0">
           <h4 className="text-base font-heading font-semibold text-foreground mb-1 truncate">

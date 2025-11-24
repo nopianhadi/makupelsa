@@ -31,7 +31,7 @@ const LeadsForm = ({ onSave, onCancel, initialData }) => {
     };
 
     return (
-        <div className="bg-card border border-border rounded-lg p-6">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-6">
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold">
                     {initialData ? 'Edit Prospek' : 'Tambah Prospek Baru'}

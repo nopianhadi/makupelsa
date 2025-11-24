@@ -66,7 +66,7 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
             {!isCollapsed && (
                 <div className="space-y-3">
                     {leads.length === 0 ? (
-                        <div className="text-center py-8 text-muted-foreground bg-card border border-border rounded-lg">
+                        <div className="text-center py-8 text-muted-foreground bg-card border border-border rounded-lg overflow-hidden">
                             Tidak ada data
                         </div>
                     ) : (
@@ -109,7 +109,7 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
 
 const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
     return (
-        <div className="p-4 bg-card border border-border rounded-lg shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-shadow">
+        <div className="p-4 bg-card border border-border rounded-lg overflow-hidden shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-shadow">
             <div className="flex-1">
                 <div className="flex items-center gap-2 flex-wrap mb-2">
                     <h3 className="font-bold text-base">{lead.name}</h3>
@@ -416,7 +416,7 @@ const Leads = () => {
                         <>
                             {/* Statistics Cards */}
                             <div className="grid grid-cols- w-full 1 sm:grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-6 gap-3 mb-4 sm:mb-6">
-                                <div className="p-4 bg-card border border-border rounded-lg">
+                                <div className="p-4 bg-card border border-border rounded-lg overflow-hidden">
                                     <div className="text-2xl font-bold text-foreground">{stats.total}</div>
                                     <div className="text-xs text-muted-foreground">Total</div>
                                 </div>
@@ -519,7 +519,7 @@ const Leads = () => {
 
                                 {/* Advanced Filters */}
                                 {showFilters && (
-                                    <div className="p-4 bg-card border border-border rounded-lg space-y-3">
+                                    <div className="p-4 bg-card border border-border rounded-lg overflow-hidden space-y-3">
                                         <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                                             <div>
                                                 <label className="block text-xs font-medium text-muted-foreground mb-1">

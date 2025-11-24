@@ -184,14 +184,14 @@ const Team = () => {
 
           {/* Team Stats - Enhanced */}
           <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6">
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Anggota</span>
                 <Icon name="Users" size={16} color="var(--color-primary)" />
               </div>
               <div className="text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stats.total}</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Aktif</span>
                 <Icon name="CheckCircle2" size={16} color="rgb(34 197 94)" />
@@ -199,21 +199,21 @@ const Team = () => {
               <div className="text-xl sm:text-2xl lg:text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stats.active}</div>
               <div className="text-xs text-muted-foreground mt-1">{Math.round((stats.active / stats.total) * 100)}%</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran Lunas</span>
                 <Icon name="CheckCircle" size={16} color="rgb(34 197 94)" />
               </div>
               <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsPaid / 1000000).toFixed(1)} Jt</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran Tertunda</span>
                 <Icon name="Clock" size={16} color="rgb(234 179 8)" />
               </div>
               <div className="text-base sm:text-lg lg:text-2xl font-bold text-foreground">Rp {(stats.totalPaymentsUnpaid / 1000000).toFixed(1)} Jt</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-3 sm:p-4 lg:p-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Pembayaran</span>
                 <Icon name="Wallet" size={16} color="var(--color-primary)" />
@@ -277,7 +277,7 @@ const Team = () => {
               </div>
             ) : (
               filteredMembers.map(member => (
-                <div key={member.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow group">
+                <div key={member.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow group">
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -296,7 +296,7 @@ const Team = () => {
                       className="w-16 h-16 rounded-full object-cover"
                     />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-foreground">{member.name}</h3>
+                      <h3 className="font-semibold text-foreground truncate">{member.name}</h3>
                       <p className="text-xs sm:text-sm text-muted-foreground">{member.role}</p>
                       <div className="flex items-center gap-1 mt-1">
                         <Icon name="Star" size={14} color="var(--color-warning)" />
@@ -454,19 +454,19 @@ const Team = () => {
                   {/* Performance */}
                   <div>
                     <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-3">PERFORMA</h3>
-                    <div className="bg-surface rounded-lg p-4 space-y-3">
+                    <div className="bg-surface rounded-lg overflow-hidden p-4 space-y-3">
                       <div className="flex justify-between items-center">
                         <span className="text-xs sm:text-sm text-muted-foreground">Rating</span>
                         <div className="flex items-center gap-2">
                           <div className="w-32 h-2 bg-muted rounded-full">
                             <div className="h-2 bg-yellow-500 rounded-full" style={{ width: `${(selectedMember.rating / 5) * 100}%` }} />
                           </div>
-                          <span className="font-semibold text-foreground">{selectedMember.rating}/5</span>
+                          <span className="font-semibold text-foreground truncate">{selectedMember.rating}/5</span>
                         </div>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-xs sm:text-sm text-muted-foreground">Pekerjaan</span>
-                        <span className="font-semibold text-foreground">{selectedMember.completedJobs} projects</span>
+                        <span className="font-semibold text-foreground truncate">{selectedMember.completedJobs} projects</span>
                       </div>
                     </div>
                   </div>

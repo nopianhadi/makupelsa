@@ -105,7 +105,7 @@ const EventDetailModal = ({ isOpen, onClose, event, onEdit, onDelete }) => {
                   <p className="text-xs font-caption text-muted-foreground mb-1">
                     Catatan
                   </p>
-                  <p className="text-sm text-foreground">
+                  <p className="text-sm text-foreground truncate">
                     {event?.notes}
                   </p>
                 </div>

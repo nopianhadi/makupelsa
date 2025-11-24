@@ -269,7 +269,7 @@ const ClientPortal = () => {
             </button>
           </div>
           {/* Ringkasan Pembayaran */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-6">
+          <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
             <h2 className="text-lg font-heading font-bold text-foreground mb-4">
               Ringkasan Pembayaran
             </h2>
@@ -303,13 +303,13 @@ const ClientPortal = () => {
           </div>
 
           {/* Acara */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-6">
+          <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
             <h2 className="text-lg font-heading font-bold text-foreground mb-4">
               Detail Acara
             </h2>
             <div className="space-y-4">
               {client.events.map((event, index) => (
-                <div key={index} className="bg-surface rounded-lg p-4">
+                <div key={index} className="bg-surface rounded-lg overflow-hidden p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-sm font-semibold text-primary">
                       {getServiceTypeLabel(event.serviceType)}
@@ -363,14 +363,14 @@ const ClientPortal = () => {
           </div>
 
           {/* Riwayat Pembayaran */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-6">
+          <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
             <h2 className="text-lg font-heading font-bold text-foreground mb-4">
               Riwayat Pembayaran
             </h2>
             {client.paymentHistory.length > 0 ? (
               <div className="space-y-3">
                 {client.paymentHistory.map((payment, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-surface rounded-lg">
+                  <div key={index} className="flex items-center justify-between p-3 bg-surface rounded-lg overflow-hidden">
                     <div>
                       <p className="font-medium text-foreground">{payment.description}</p>
                       <p className="text-sm text-muted-foreground">
@@ -391,14 +391,14 @@ const ClientPortal = () => {
           </div>
 
           {/* Komunikasi */}
-          <div className="bg-card border border-border rounded-lg p-6">
+          <div className="bg-card border border-border rounded-lg overflow-hidden p-6">
             <h2 className="text-lg font-heading font-bold text-foreground mb-4">
               Riwayat Komunikasi
             </h2>
             {client.communicationLog.length > 0 ? (
               <div className="space-y-3">
                 {client.communicationLog.map((comm, index) => (
-                  <div key={index} className="p-3 bg-surface rounded-lg">
+                  <div key={index} className="p-3 bg-surface rounded-lg overflow-hidden">
                     <div className="flex items-center gap-2 mb-2">
                       <Icon 
                         name={comm.type === 'incoming' ? 'ArrowDownLeft' : 'ArrowUpRight'} 
@@ -467,7 +467,7 @@ const ClientPortal = () => {
 
         {/* Chat Box */}
         {isChatOpen && (
-          <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-3rem)] bg-card border border-border rounded-lg shadow-2xl z-50 flex flex-col max-h-[600px]">
+          <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-3rem)] bg-card border border-border rounded-lg overflow-hidden shadow-2xl z-50 flex flex-col max-h-[600px]">
             {/* Chat Header */}
             <div className="bg-primary text-white p-4 rounded-t-lg flex items-center justify-between">
               <div className="flex items-center gap-3">

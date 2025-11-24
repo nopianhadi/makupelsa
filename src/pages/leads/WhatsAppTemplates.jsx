@@ -115,7 +115,7 @@ const WhatsAppTemplates = () => {
             </div>
 
             {isEditing && (
-                <div className="bg-card border border-border rounded-lg p-6 mb-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
                     <h3 className="font-bold mb-4">{currentTemplate ? 'Edit Template' : 'Template Baru'}</h3>
                     <form onSubmit={handleSave} className="space-y-4">
                         <div>
@@ -180,7 +180,7 @@ const WhatsAppTemplates = () => {
                     </div>
                 ) : (
                     filteredTemplates.map(template => (
-                        <div key={template.id} className="p-4 bg-card border border-border rounded-lg relative group">
+                        <div key={template.id} className="p-4 bg-card border border-border rounded-lg overflow-hidden relative group">
                             <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button
                                     onClick={() => { setCurrentTemplate(template); setIsEditing(true); }}

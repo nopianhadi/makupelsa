@@ -426,7 +426,7 @@ const FinancialTracking = () => {
               {showIncomeForm && (
                 <div className="p-4 rounded-lg bg-card border border-border elevation-3">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground">
+                    <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground truncate">
                       Catat Pemasukan Baru
                     </h3>
                     <button
@@ -445,7 +445,7 @@ const FinancialTracking = () => {
               )}
               <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
-                  Menampilkan <span className="font-semibold text-foreground">{filteredIncomes.length}</span> dari {incomes.length} data pemasukan
+                  Menampilkan <span className="font-semibold text-foreground truncate">{filteredIncomes.length}</span> dari {incomes.length} data pemasukan
                 </p>
               </div>
               <IncomeList
@@ -461,7 +461,7 @@ const FinancialTracking = () => {
               {showExpenseForm && (
                 <div className="p-4 rounded-lg bg-card border border-border elevation-3">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground">
+                    <h3 className="text-xs sm:text-sm font-heading font-semibold text-foreground truncate">
                       Tambah Pengeluaran Baru
                     </h3>
                     <button
@@ -480,7 +480,7 @@ const FinancialTracking = () => {
               )}
               <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-border">
                 <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
-                  Menampilkan <span className="font-semibold text-foreground">{filteredExpenses.length}</span> dari {expenses.length} data pengeluaran
+                  Menampilkan <span className="font-semibold text-foreground truncate">{filteredExpenses.length}</span> dari {expenses.length} data pengeluaran
                 </p>
               </div>
               <ExpenseList

@@ -185,7 +185,7 @@ const Promotions = () => {
           {/* Promo Grid */}
           <div className="grid grid-cols- w-full 1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {(activeTab === 'active' ? activePromotions : expiredPromotions).map(promo => (
-              <div key={promo.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+              <div key={promo.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1">{promo.title}</h3>

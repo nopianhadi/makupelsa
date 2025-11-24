@@ -264,7 +264,7 @@ const ProjectManagement = () => {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <div className="hidden sm:flex bg-surface rounded-lg p-1">
+                <div className="hidden sm:flex bg-surface rounded-lg overflow-hidden p-1">
                   <button
                     onClick={() => setViewMode('grid')}
                     className={`px-3 py-2 rounded-md transition-smooth ${
@@ -645,7 +645,7 @@ const ProjectManagement = () => {
                         <div className="border-t border-border pt-3 mb-3">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Pembayaran</span>
-                            <span className="text-xs sm:text-sm font-semibold text-foreground">{progress}%</span>
+                            <span className="text-xs sm:text-sm font-semibold text-foreground truncate">{progress}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2 mb-2">
                             <div
@@ -657,7 +657,7 @@ const ProjectManagement = () => {
                             <span className="text-muted-foreground">
                               {formatCurrency(project.paid).replace('IDR', 'Rp').replace(',00', '')}
                             </span>
-                            <span className="font-semibold text-foreground">
+                            <span className="font-semibold text-foreground truncate">
                               {formatCurrency(project.budget).replace('IDR', 'Rp').replace(',00', '')}
                             </span>
                           </div>
@@ -835,7 +835,7 @@ const ProjectManagement = () => {
                   <div className="bg-surface rounded-xl p-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-muted-foreground">Progress Pembayaran</span>
-                      <span className="font-semibold text-foreground">
+                      <span className="font-semibold text-foreground truncate">
                         {calculateProgress(selectedProject.paid, selectedProject.budget)}%
                       </span>
                     </div>

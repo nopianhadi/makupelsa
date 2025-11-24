@@ -126,23 +126,23 @@ const Testimonials = () => {
 
           {/* Stats */}
           <div className="grid grid-cols- w-full 1 sm:grid-cols-4 gap-2 sm:gap-3 lg:gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 sm:mb-4 sm:mb-6">
-            <div className="bg-card border border-border rounded-lg p-4">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
               <div className="text-2xl font-bold text-foreground">{testimonials.length}</div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Testimoni</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-4">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
               <div className="text-2xl font-bold text-warning">
                 {testimonials.filter(t => t.status === 'pending').length}
               </div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Menunggu Review</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-4">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
               <div className="text-2xl font-bold text-success">
                 {testimonials.filter(t => t.status === 'approved').length}
               </div>
               <div className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Disetujui</div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-4">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-4">
               <div className="text-2xl font-bold text-foreground">
                 {testimonials.length > 0 
                   ? (testimonials.reduce((acc, t) => acc + t.rating, 0) / testimonials.length).toFixed(1)
@@ -175,11 +175,11 @@ const Testimonials = () => {
           {/* Testimonials List */}
           <div className="space-y-4">
             {filteredTestimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+              <div key={testimonial.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-foreground">{testimonial.name}</h3>
+                      <h3 className="font-semibold text-foreground truncate">{testimonial.name}</h3>
                       {getStatusBadge(testimonial.status)}
                     </div>
                     <div className="flex items-center gap-4 text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">

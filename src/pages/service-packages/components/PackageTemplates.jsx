@@ -176,7 +176,7 @@ const PackageTemplates = ({ onSelectTemplate }) => {
           return (
             <div
               key={template?.id}
-              className="bg-card border border-border rounded-lg overflow-hidden elevation-1 hover:elevation-3 transition-smooth"
+              className="bg-card border border-border rounded-lg overflow-hidden overflow-hidden elevation-1 hover:elevation-3 transition-smooth"
             >
               <div className={`p-4 ${config?.bgColor}`}>
                 <div className="flex items-center gap-2 mb-2">

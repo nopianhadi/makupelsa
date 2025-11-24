@@ -109,7 +109,7 @@ const Homepage = () => {
           </div>
 
           {/* Demo Accounts Info */}
-          <div className="mt-8 p-4 bg-card border border-border rounded-lg max-w-md mx-auto text-left">
+          <div className="mt-8 p-4 bg-card border border-border rounded-lg overflow-hidden max-w-md mx-auto text-left">
             <p className="text-xs sm:text-sm font-medium text-foreground mb-2">Akun Demo untuk Testing:</p>
             <div className="text-xs text-muted-foreground space-y-1">
               <p>📧 demo@muafinance.com / demo123</p>
@@ -135,7 +135,7 @@ const Homepage = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-3 sm:p-4 lg:p-6 bg-card border border-border rounded-lg hover:elevation-3 transition-all"
+                className="p-3 sm:p-4 lg:p-6 bg-card border border-border rounded-lg overflow-hidden hover:elevation-3 transition-all"
               >
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <Icon name={feature.icon} size={24} color="var(--color-primary)" strokeWidth={2} />

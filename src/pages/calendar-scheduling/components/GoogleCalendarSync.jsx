@@ -112,7 +112,7 @@ const GoogleCalendarSync = ({ onClose }) => {
 
       {/* Synced Events Count */}
       {isConnected && (
-        <div className="text-center py-3 bg-card border border-border rounded-lg">
+        <div className="text-center py-3 bg-card border border-border rounded-lg overflow-hidden">
           <p className="text-sm text-muted-foreground">Total Acara Tersync</p>
           <p className="text-2xl font-bold text-foreground">{connectionInfo?.syncedCount || 0}</p>
         </div>

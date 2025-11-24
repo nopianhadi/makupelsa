@@ -41,7 +41,7 @@ const FinancialReportView = ({ reportData }) => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload?.length) {
       return (
-        <div className="bg-card border border-border rounded-lg p-3 elevation-6">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 elevation-6">
           <p className="text-xs font-caption text-muted-foreground mb-2">{label}</p>
           {payload?.map((entry, index) => (
             <p key={index} className="text-xs font-mono font-semibold" style={{ color: entry?.color }}>

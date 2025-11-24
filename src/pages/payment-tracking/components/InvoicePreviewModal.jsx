@@ -25,7 +25,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-background overflow-hidden/80 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div 
@@ -173,7 +173,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
               <p className="text-xs font-medium text-muted-foreground mb-3">INFORMASI PEMBAYARAN:</p>
               {invoice.paymentMethod && (
                 <div className="mb-2">
-                  <span className="text-sm text-foreground">
+                  <span className="text-sm text-foreground truncate">
                     <span className="font-semibold">Metode: </span>
                     {invoice.paymentMethod === 'cash' ? 'Tunai' :
                      invoice.paymentMethod === 'transfer' ? 'Transfer Bank' :
@@ -184,7 +184,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
               )}
               {invoice.paymentReference && (
                 <div className="mb-2">
-                  <span className="text-sm text-foreground">
+                  <span className="text-sm text-foreground truncate">
                     <span className="font-semibold">Referensi: </span>
                     {invoice.paymentReference}
                   </span>
@@ -193,14 +193,14 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
               {invoice.bankName && (
                 <>
                   <div className="mb-2">
-                    <span className="text-sm text-foreground">
+                    <span className="text-sm text-foreground truncate">
                       <span className="font-semibold">Bank: </span>
                       {invoice.bankName}
                     </span>
                   </div>
                   {invoice.bankAccount && (
                     <div className="mb-2">
-                      <span className="text-sm text-foreground">
+                      <span className="text-sm text-foreground truncate">
                         <span className="font-semibold">No. Rekening: </span>
                         <span className="font-mono">{invoice.bankAccount}</span>
                       </span>
@@ -208,7 +208,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
                   )}
                   {invoice.bankAccountName && (
                     <div>
-                      <span className="text-sm text-foreground">
+                      <span className="text-sm text-foreground truncate">
                         <span className="font-semibold">Atas Nama: </span>
                         {invoice.bankAccountName}
                       </span>
@@ -236,7 +236,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
           {invoice.notes && (
             <div className="mb-8">
               <p className="text-xs font-medium text-muted-foreground mb-2">CATATAN:</p>
-              <p className="text-sm text-foreground">{invoice.notes}</p>
+              <p className="text-sm text-foreground truncate">{invoice.notes}</p>
             </div>
           )}
 

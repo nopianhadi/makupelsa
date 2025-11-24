@@ -75,7 +75,7 @@ const ReminderManager = ({ eventId, onClose }) => {
               <div key={reminder.id} className="flex items-center justify-between bg-surface border border-border rounded-lg p-3">
                 <div className="flex items-center gap-2">
                   <Icon name="Bell" size={16} color="var(--color-primary)" />
-                  <span className="text-sm text-foreground">
+                  <span className="text-sm text-foreground truncate">
                     {reminderService.formatReminderText(reminder.type, reminder.customMinutes)}
                   </span>
                 </div>

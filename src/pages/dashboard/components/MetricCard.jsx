@@ -3,7 +3,7 @@ import Icon from '../../../components/AppIcon';
 
 const MetricCard = ({ title, value, subtitle, icon, trend, trendValue }) => {
   return (
-    <div className="bg-card border border-border rounded-lg p-4 elevation-1 hover:elevation-3 transition-smooth">
+    <div className="bg-card border border-border rounded-lg overflow-hidden p-4 elevation-1 hover:elevation-3 transition-smooth">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <p className="text-xs font-caption text-muted-foreground mb-1">

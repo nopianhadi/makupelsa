@@ -135,7 +135,7 @@ const PackageCard = ({
                   color="var(--color-success)" 
                   className="mt-0.5 flex-shrink-0"
                 />
-                <span className="text-sm text-foreground">{service}</span>
+                <span className="text-sm text-foreground truncate">{service}</span>
               </div>
             ))}
           </div>

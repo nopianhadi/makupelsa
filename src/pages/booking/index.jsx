@@ -293,7 +293,7 @@ const Booking = () => {
                     <div key={index} className="border border-border rounded-xl p-4 bg-muted/30">
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h3 className="font-semibold text-foreground">{booking.clientName}</h3>
+                          <h3 className="font-semibold text-foreground truncate">{booking.clientName}</h3>
                           <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">{booking.clientPhone}</p>
                         </div>
                         <span className="px-3 py-1 rounded-full bg-warning/10 text-warning text-xs font-medium">

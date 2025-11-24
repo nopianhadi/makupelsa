@@ -301,7 +301,7 @@ const KPIPage = () => {
             <div className="space-y-6 pb-6">
               {/* KPI Cards */}
               <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Total Klien</span>
                     <Icon name="Users" size={20} sm:size={20} color="var(--color-primary)" />
@@ -310,7 +310,7 @@ const KPIPage = () => {
                   <div className="text-xs text-success mt-1">↑ +{kpiData.newClientsThisMonth} bulan ini</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Klien Baru</span>
                     <Icon name="UserPlus" size={20} sm:size={20} color="var(--color-accent)" />
@@ -319,7 +319,7 @@ const KPIPage = () => {
                   <div className="text-xs text-muted-foreground mt-1">Bulan ini</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Retention Rate</span>
                     <Icon name="TrendingUp" size={20} sm:size={20} color="var(--color-success)" />
@@ -328,7 +328,7 @@ const KPIPage = () => {
                   <div className="text-xs text-success mt-1">↑ +5% dari bulan lalu</div>
                 </div>
 
-                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">Avg Order Value</span>
                     <Icon name="Wallet" size={20} sm:size={20} color="var(--color-warning)" />
@@ -343,7 +343,7 @@ const KPIPage = () => {
               {/* Charts Section */}
               <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-3 sm:p-4 lg:p-6">
                 {/* Top Clients */}
-                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                   <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                     <Icon name="Award" size={20} sm:size={20} color="var(--color-primary)" />
                     Top Klien
@@ -361,7 +361,7 @@ const KPIPage = () => {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="font-semibold text-foreground">
+                          <div className="font-semibold text-foreground truncate">
                             Rp {(client.totalSpent / 1000000).toFixed(1)}jt
                           </div>
                         </div>
@@ -371,7 +371,7 @@ const KPIPage = () => {
                 </div>
 
                 {/* Clients by Service */}
-                <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+                <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                   <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                     <Icon name="PieChart" size={20} sm:size={20} color="var(--color-accent)" />
                     Klien per Layanan
@@ -396,7 +396,7 @@ const KPIPage = () => {
               </div>
 
               {/* Monthly Growth Chart */}
-              <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6">
+              <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6">
                 <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                   <Icon name="BarChart3" size={20} sm:size={20} color="var(--color-success)" />
                   Pertumbuhan Klien Bulanan
@@ -423,7 +423,7 @@ const KPIPage = () => {
               {/* KPI Grid */}
               <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {kpis.map((kpi) => (
-                  <div key={kpi.id} className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow">
+                  <div key={kpi.id} className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 hover:shadow-lg transition-shadow">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <h3 className="font-semibold text-foreground mb-1">{kpi.title}</h3>
@@ -488,7 +488,7 @@ const KPIPage = () => {
           {/* Modal Form */}
           {isModalOpen && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-card border border-border rounded-lg max-w-md w-full p-3 sm:p-4 lg:p-6">
+              <div className="bg-card border border-border rounded-lg overflow-hidden max-w-md w-full p-3 sm:p-4 lg:p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-foreground">
                     {editingKpi ? 'Edit KPI' : 'Tambah KPI Baru'}

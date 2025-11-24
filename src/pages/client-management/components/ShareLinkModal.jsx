@@ -58,7 +58,7 @@ const ShareLinkModal = ({ client, onClose }) => {
             </div>
           </div>
 
-          <div className="bg-surface rounded-lg p-4 mb-4">
+          <div className="bg-surface rounded-lg overflow-hidden p-4 mb-4">
             <label className="text-xs font-caption text-muted-foreground mb-2 block">
               Link Portal Klien
             </label>

@@ -153,14 +153,14 @@ const Dashboard = () => {
         <div className="grid grid-cols- w-full 1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-6 w-full">
           {/* Upcoming Schedule Section */}
           <div className="lg:col-span-2">
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 elevation-1">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Icon name="Calendar" size={20} color="var(--color-primary)" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h2 className="text-lg font-heading font-semibold text-foreground">
+                    <h2 className="text-lg font-heading font-semibold text-foreground truncate">
                       Jadwal Mendatang
                     </h2>
                     <p className="text-xs text-muted-foreground">
@@ -197,13 +197,13 @@ const Dashboard = () => {
 
           {/* Pending Payments Section */}
           <div className="lg:col-span-1">
-            <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
+            <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 elevation-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
                   <Icon name="AlertCircle" size={20} color="var(--color-error)" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h2 className="text-lg font-heading font-semibold text-foreground">
+                  <h2 className="text-lg font-heading font-semibold text-foreground truncate">
                     Pembayaran Tertunda
                   </h2>
                   <p className="text-xs text-muted-foreground">
@@ -233,13 +233,13 @@ const Dashboard = () => {
         </div>
 
         {/* Key Metrics Section */}
-        <div className="bg-card border border-border rounded-lg p-3 sm:p-4 lg:p-6 elevation-1">
+        <div className="bg-card border border-border rounded-lg overflow-hidden p-3 sm:p-4 lg:p-6 elevation-1">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
               <Icon name="BarChart3" size={20} color="var(--color-accent)" strokeWidth={2.5} />
             </div>
             <div>
-              <h2 className="text-lg font-heading font-semibold text-foreground">
+              <h2 className="text-lg font-heading font-semibold text-foreground truncate">
                 Metrik Kinerja
               </h2>
               <p className="text-xs text-muted-foreground">
@@ -265,7 +265,7 @@ const Dashboard = () => {
 
         {/* Mobile Quick Actions */}
         <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40">
-          <div className="bg-card border border-border rounded-lg p-4 elevation-6">
+          <div className="bg-card border border-border rounded-lg overflow-hidden p-4 elevation-6">
             <div className="grid grid-cols- w-full 1 sm:grid-cols-2 gap-2">
               <QuickActionButton
                 label="Tambah Klien"

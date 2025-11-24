@@ -447,7 +447,7 @@ const ServicePackages = () => {
 
           {/* Templates Section */}
           {showTemplates && (
-            <div className="mt-6 p-3 sm:p-4 lg:p-6 bg-surface rounded-lg border border-border">
+            <div className="mt-6 p-3 sm:p-4 lg:p-6 bg-surface rounded-lg overflow-hidden border border-border">
               <PackageTemplates onSelectTemplate={handleSelectTemplate} />
             </div>
           )}

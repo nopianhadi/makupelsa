@@ -22,7 +22,7 @@ const EditClientModal = ({ client, onClose, onSave }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-background overflow-hidden/80 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div 

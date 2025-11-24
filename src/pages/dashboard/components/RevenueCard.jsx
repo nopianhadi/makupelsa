@@ -19,7 +19,7 @@ const RevenueCard = ({ title, amount, trend, trendValue, icon, variant = 'defaul
   };
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6 elevation-1 hover:elevation-3 transition-smooth">
+    <div className="bg-card border border-border rounded-lg overflow-hidden p-6 elevation-1 hover:elevation-3 transition-smooth">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <p className="text-sm font-caption text-muted-foreground mb-1">

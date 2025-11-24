@@ -92,14 +92,14 @@ const ClientDetailModal = ({ client, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-background overflow-hidden/80 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="client-detail-title"
     >
       <div 
-        className="bg-card border border-border rounded-lg w-full max-w-2xl sm:max-w-4xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
+        className="bg-card border border-border rounded-lg overflow-hidden w-full max-w-2xl sm:max-w-4xl max-h-[90vh] overflow-hidden elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e?.stopPropagation()}
       >
         <div className="flex items-center justify-between p-2 sm:p-3 lg:p-4 border-b border-border">
@@ -112,16 +112,16 @@ const ClientDetailModal = ({ client, onClose }) => {
               />
             </div>
             <div>
-              <h2 id="client-detail-title" className="text-xl font-heading font-bold text-foreground">
-                {client?.name}
+              <h2 id="client-detail-title" className="text-xl font-heading font-bold text-foreground truncate">
+                title={client?.name}>{client?.name}<
               </h2>
               <div className="flex items-center gap-3 mt-1">
-                <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
+                <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground min-w-0">
                   <Icon name="Phone" size={14} />
                   {client?.phone}
                 </span>
                 {client?.email && (
-                  <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground min-w-0">
                     <Icon name="Mail" size={14} />
                     {client?.email}
                   </span>
@@ -160,13 +160,13 @@ const ClientDetailModal = ({ client, onClose }) => {
           </div>
         </div>
 
-        <div className="p-3 sm:p-4 lg:p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+        <div className="p-2 sm:p-3 lg:p-4 overflow-y-auto max-h-[calc(90vh-200px)]">
           {activeTab === 'events' && (
             <div className="space-y-4">
               {client?.events?.map((event, index) => {
                 const serviceConfig = getServiceTypeConfig(event?.serviceType);
                 return (
-                  <div key={index} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border">
+                  <div key={index} className="bg-surface rounded-lg overflow-hidden w-full p-2 sm:p-3 lg:p-4 border w-full border-border">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs sm:text-sm font-medium ${serviceConfig?.bgColor} ${serviceConfig?.textColor}`}>
@@ -186,7 +186,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3">
                       <div className="flex items-center gap-2">
                         <Icon name="Calendar" size={16} color="var(--color-muted-foreground)" />
-                        <span className="text-sm text-foreground">
+                        <span className="text-sm text-foreground truncate">
                           {formatDate(event?.eventDate)}
                         </span>
                       </div>
@@ -229,13 +229,13 @@ const ClientDetailModal = ({ client, onClose }) => {
           {activeTab === 'payments' && (
             <div className="space-y-4">
               {client?.paymentHistory?.map((payment, index) => (
-                <div key={index} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border">
+                <div key={index} className="bg-surface rounded-lg overflow-hidden w-full p-2 sm:p-3 lg:p-4 border w-full border-border">
                   <div className="flex items-start justify-between mb-2">
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-foreground mb-1">
                         {payment?.description}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-muted-foreground line-clamp-1">
                         {formatDate(payment?.date)}
                       </p>
                     </div>
@@ -245,7 +245,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                   </div>
                   <div className="flex items-center gap-2 mt-2">
                     <Icon name="CreditCard" size={14} color="var(--color-muted-foreground)" />
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-muted-foreground line-clamp-1">
                       {payment?.method}
                     </span>
                   </div>
@@ -270,7 +270,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                 </div>
               ) : (
                 clientInvoices.map((invoice) => (
-                  <div key={invoice.id} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border hover:border-primary/50 transition-smooth cursor-pointer" onClick={() => handleViewInvoice(invoice)}>
+                  <div key={invoice.id} className="bg-surface rounded-lg overflow-hidden w-full p-2 sm:p-3 lg:p-4 border w-full border-border hover:border-primary/50 transition-smooth cursor-pointer" onClick={() => handleViewInvoice(invoice)}>
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center gap-2 mb-1">
@@ -332,7 +332,7 @@ const ClientDetailModal = ({ client, onClose }) => {
           {activeTab === 'communication' && (
             <div className="space-y-4">
               {client?.communicationLog?.map((log, index) => (
-                <div key={index} className="bg-surface rounded-lg p-2 sm:p-3 lg:p-4 border w-full border-border">
+                <div key={index} className="bg-surface rounded-lg overflow-hidden w-full p-2 sm:p-3 lg:p-4 border w-full border-border">
                   <div className="flex items-start gap-3">
                     <div className={`
                       w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0
@@ -349,7 +349,7 @@ const ClientDetailModal = ({ client, onClose }) => {
                         <span className="text-xs sm:text-sm font-medium text-foreground">
                           {log?.subject}
                         </span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-muted-foreground line-clamp-1">
                           {formatDate(log?.date)}
                         </span>
                       </div>
