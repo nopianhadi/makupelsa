@@ -29,21 +29,21 @@ const PricelistCard = ({ pricelist, onEdit, onDelete, onCopyLink }) => {
         )}
       </div>
 
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-1">
+      <div className="p-3 sm:p-4">
+        <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 break-words line-clamp-2">
           {pricelist.title}
         </h3>
         
         {pricelist.description && (
-          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-4 line-clamp-2">
             {pricelist.description}
           </p>
         )}
 
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-start gap-2 mb-4">
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Icon name="Calendar" size={14} />
-            <span>{new Date(pricelist.createdAt).toLocaleDateString('id-ID')}</span>
+            <Icon name="Calendar" size={14} className="flex-shrink-0" />
+            <span className="break-words">{new Date(pricelist.createdAt).toLocaleDateString('id-ID')}</span>
           </div>
         </div>
 

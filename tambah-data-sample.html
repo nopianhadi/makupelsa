@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Sample - MUA Finance Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-box li {
+            padding: 5px 0;
+            color: #555;
+        }
+        
+        .info-box li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        #result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            display: block;
+        }
+        
+        #result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            display: block;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Tambah Data Sample</h1>
+        <p class="subtitle">MUA Finance Manager - Data Initialization Tool</p>
+        
+        <div class="info-box">
+            <h3>Data yang akan ditambahkan:</h3>
+            <ul>
+                <li><strong>5 Testimonials</strong> - Ulasan dari klien dengan berbagai rating</li>
+                <li><strong>5 Service Packages</strong> - Paket layanan makeup lengkap</li>
+                <li><strong>5 Bookings</strong> - Booking acara dengan berbagai status</li>
+                <li><strong>3 Leads</strong> - Prospek klien baru</li>
+            </ul>
+        </div>
+        
+        <button id="addDataBtn" onclick="tambahData()">
+            🚀 Tambahkan Data Sample
+        </button>
+        
+        <div id="result"></div>
+        
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-card">
+                <div class="number" id="testimonialCount">0</div>
+                <div class="label">Testimonials</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="packageCount">0</div>
+                <div class="label">Packages</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="bookingCount">0</div>
+                <div class="label">Bookings</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="leadCount">0</div>
+                <div class="label">Leads</div>
+            </div>
+        </div>
+        
+        <a href="/" class="back-link">← Kembali ke Dashboard</a>
+    </div>
+
+    <script>
+        const sampleData = {
+            testimonials: [
+                {
+                    name: "Siti Nurhaliza",
+                    email: "siti@email.com",
+                    phone: "08123456789",
+                    rating: 5,
+                    message: "Pelayanan sangat memuaskan! Makeup untuk acara pernikahan saya sempurna. Tim sangat profesional dan ramah. Highly recommended!",
+                    service: "Paket Akad Nikah Premium",
+                    status: "approved",
+                    createdAt: new Date(2025, 10, 1).toISOString(),
+                    approvedAt: new Date(2025, 10, 2).toISOString()
+                },
+                {
+                    name: "Dewi Lestari",
+                    email: "dewi@email.com",
+                    phone: "08234567890",
+                    rating: 5,
+                    message: "Makeup untuk wisuda saya cantik banget! Tahan lama dan sesuai dengan yang saya mau. Terima kasih banyak!",
+                    service: "Paket Wisuda",
+                    status: "approved",
+                    createdAt: new Date(2025, 10, 5).toISOString(),
+                    approvedAt: new Date(2025, 10, 5).toISOString()
+                },
+                {
+                    name: "Rina Wijaya",
+                    email: "rina@email.com",
+                    phone: "08345678901",
+                    rating: 4,
+                    message: "Hasilnya bagus, makeup natural dan elegan. Cocok untuk acara resepsi. Pelayanan juga cepat dan tepat waktu.",
+                    service: "Paket Resepsi",
+                    status: "approved",
+                    createdAt: new Date(2025, 10, 10).toISOString(),
+                    approvedAt: new Date(2025, 10, 10).toISOString()
+                },
+                {
+                    name: "Maya Putri",
+                    email: "maya@email.com",
+                    phone: "08456789012",
+                    rating: 5,
+                    message: "Sangat puas dengan hasilnya! Makeup untuk lamaran saya terlihat fresh dan natural. Semua tamu memuji makeup saya.",
+                    service: "Paket Lamaran",
+                    status: "pending",
+                    createdAt: new Date(2025, 10, 20).toISOString()
+                },
+                {
+                    name: "Ayu Ting Ting",
+                    email: "ayu@email.com",
+                    phone: "08567890123",
+                    rating: 5,
+                    message: "MUA terbaik! Makeup untuk photoshoot saya sempurna. Hasilnya bagus di kamera dan tahan lama.",
+                    service: "Paket Photoshoot",
+                    status: "pending",
+                    createdAt: new Date(2025, 10, 22).toISOString()
+                }
+            ],
+            servicePackages: [
+                {
+                    name: "Paket Akad Nikah Premium",
+                    description: "Paket lengkap untuk acara akad nikah dengan makeup flawless dan tahan lama",
+                    serviceType: "akad",
+                    basePrice: 3500000,
+                    originalPrice: 4000000,
+                    duration: "4-5 jam",
+                    includedServices: [
+                        "Makeup pengantin (bride)",
+                        "Hairdo pengantin",
+                        "Aksesoris hijab/mahkota",
+                        "Touch up 2x",
+                        "Makeup ibu pengantin",
+                        "Free konsultasi pre-wedding"
+                    ],
+                    addOns: [
+                        { name: "Makeup ayah pengantin", price: 300000 },
+                        { name: "Makeup saudara kandung", price: 250000 },
+                        { name: "Paket foto dokumentasi", price: 1500000 }
+                    ],
+                    isActive: true,
+                    totalBookings: 15,
+                    totalRevenue: 52500000
+                },
+                {
+                    name: "Paket Resepsi Elegant",
+                    description: "Paket makeup untuk resepsi pernikahan dengan tampilan glamour dan mewah",
+                    serviceType: "resepsi",
+                    basePrice: 4500000,
+                    originalPrice: 5000000,
+                    duration: "6-8 jam",
+                    includedServices: [
+                        "Makeup pengantin (bride & groom)",
+                        "Hairdo pengantin",
+                        "Aksesoris lengkap",
+                        "Touch up unlimited",
+                        "Makeup 2 orang tua",
+                        "Makeup 2 penerima tamu",
+                        "Free trial makeup"
+                    ],
+                    addOns: [
+                        { name: "Makeup bridesmaid (per orang)", price: 350000 },
+                        { name: "Dekorasi pelaminan", price: 2000000 },
+                        { name: "Paket video cinematic", price: 3000000 }
+                    ],
+                    isActive: true,
+                    totalBookings: 22,
+                    totalRevenue: 99000000
+                },
+                {
+                    name: "Paket Wisuda Fresh",
+                    description: "Makeup natural dan fresh untuk acara wisuda, tahan lama seharian",
+                    serviceType: "wisuda",
+                    basePrice: 500000,
+                    originalPrice: 650000,
+                    duration: "2-3 jam",
+                    includedServices: [
+                        "Makeup natural/glowing",
+                        "Hairdo simple",
+                        "Free eyelash",
+                        "Touch up 1x"
+                    ],
+                    addOns: [
+                        { name: "Hairdo premium", price: 150000 },
+                        { name: "Makeup waterproof", price: 100000 }
+                    ],
+                    isActive: true,
+                    totalBookings: 45,
+                    totalRevenue: 22500000
+                },
+                {
+                    name: "Paket Lamaran Romantic",
+                    description: "Makeup soft dan romantic untuk acara lamaran yang berkesan",
+                    serviceType: "akad",
+                    basePrice: 2000000,
+                    originalPrice: 2500000,
+                    duration: "3-4 jam",
+                    includedServices: [
+                        "Makeup calon pengantin",
+                        "Hairdo elegant",
+                        "Aksesoris hijab",
+                        "Touch up 1x",
+                        "Makeup ibu"
+                    ],
+                    addOns: [
+                        { name: "Makeup calon mempelai pria", price: 400000 },
+                        { name: "Dekorasi backdrop", price: 1000000 }
+                    ],
+                    isActive: true,
+                    totalBookings: 18,
+                    totalRevenue: 36000000
+                },
+                {
+                    name: "Paket Photoshoot Professional",
+                    description: "Makeup khusus untuk photoshoot dengan hasil maksimal di kamera",
+                    serviceType: "wisuda",
+                    basePrice: 1500000,
+                    duration: "3-4 jam",
+                    includedServices: [
+                        "Makeup HD",
+                        "Hairdo sesuai konsep",
+                        "3x ganti look",
+                        "Touch up unlimited"
+                    ],
+                    addOns: [
+                        { name: "Styling wardrobe", price: 500000 },
+                        { name: "Makeup body painting", price: 1000000 }
+                    ],
+                    isActive: true,
+                    totalBookings: 12,
+                    totalRevenue: 18000000
+                }
+            ],
+            bookings: [
+                {
+                    clientName: "Putri Ayu",
+                    clientPhone: "08123456789",
+                    clientEmail: "putri@email.com",
+                    serviceType: "akad",
+                    packageName: "Paket Akad Nikah Premium",
+                    eventDate: "2025-12-15",
+                    eventTime: "08:00",
+                    venue: "Gedung Serbaguna Melati, Jakarta Selatan",
+                    totalAmount: 3500000,
+                    downPayment: 1500000,
+                    status: "confirmed",
+                    notes: "Tema warna pink soft, makeup natural glowing",
+                    createdAt: new Date(2025, 10, 1).toISOString()
+                },
+                {
+                    clientName: "Sari Indah",
+                    clientPhone: "08234567890",
+                    clientEmail: "sari@email.com",
+                    serviceType: "resepsi",
+                    packageName: "Paket Resepsi Elegant",
+                    eventDate: "2025-12-20",
+                    eventTime: "14:00",
+                    venue: "Hotel Grand Ballroom, Jakarta Pusat",
+                    totalAmount: 4500000,
+                    downPayment: 2000000,
+                    status: "confirmed",
+                    notes: "Makeup glamour, tema gold & burgundy",
+                    createdAt: new Date(2025, 10, 5).toISOString()
+                },
+                {
+                    clientName: "Dina Mariana",
+                    clientPhone: "08345678901",
+                    clientEmail: "dina@email.com",
+                    serviceType: "wisuda",
+                    packageName: "Paket Wisuda Fresh",
+                    eventDate: "2025-11-30",
+                    eventTime: "06:00",
+                    venue: "Universitas Indonesia, Depok",
+                    totalAmount: 500000,
+                    downPayment: 500000,
+                    status: "confirmed",
+                    notes: "Makeup natural, tidak terlalu tebal",
+                    createdAt: new Date(2025, 10, 15).toISOString()
+                },
+                {
+                    clientName: "Rina Susanti",
+                    clientPhone: "08456789012",
+                    clientEmail: "rina.s@email.com",
+                    serviceType: "akad",
+                    packageName: "Paket Lamaran Romantic",
+                    eventDate: "2025-12-05",
+                    eventTime: "10:00",
+                    venue: "Rumah Mempelai Wanita, Tangerang",
+                    totalAmount: 2000000,
+                    downPayment: 1000000,
+                    status: "pending",
+                    notes: "Makeup soft pink, hijab syar'i",
+                    createdAt: new Date(2025, 10, 18).toISOString()
+                },
+                {
+                    clientName: "Maya Anggraini",
+                    clientPhone: "08567890123",
+                    clientEmail: "maya.a@email.com",
+                    serviceType: "wisuda",
+                    packageName: "Paket Photoshoot Professional",
+                    eventDate: "2025-12-10",
+                    eventTime: "09:00",
+                    venue: "Studio Foto Cahaya, Jakarta Barat",
+                    totalAmount: 1500000,
+                    downPayment: 750000,
+                    status: "pending",
+                    notes: "Konsep vintage, 3 look berbeda",
+                    createdAt: new Date(2025, 10, 20).toISOString()
+                }
+            ],
+            leads: [
+                {
+                    name: "Lina Marlina",
+                    phone: "08123456780",
+                    email: "lina@email.com",
+                    status: "New",
+                    source: "Instagram",
+                    serviceType: "akad",
+                    budget: "3000000-4000000",
+                    eventDate: "2026-01-15",
+                    notes: "Tertarik paket akad nikah, minta info detail",
+                    createdAt: new Date(2025, 10, 23).toISOString()
+                },
+                {
+                    name: "Fitri Handayani",
+                    phone: "08234567891",
+                    email: "fitri@email.com",
+                    status: "Contacted",
+                    source: "TikTok",
+                    serviceType: "resepsi",
+                    budget: "4000000-5000000",
+                    eventDate: "2026-02-20",
+                    notes: "Sudah dihubungi via WA, minta jadwal konsultasi",
+                    createdAt: new Date(2025, 10, 21).toISOString()
+                },
+                {
+                    name: "Nadia Putri",
+                    phone: "08345678902",
+                    email: "nadia@email.com",
+                    status: "Interested",
+                    source: "Referral",
+                    serviceType: "wisuda",
+                    budget: "500000-700000",
+                    eventDate: "2025-12-28",
+                    notes: "Sangat tertarik, sudah tanya detail paket",
+                    createdAt: new Date(2025, 10, 19).toISOString()
+                }
+            ]
+        };
+
+        function tambahData() {
+            const btn = document.getElementById('addDataBtn');
+            const result = document.getElementById('result');
+            const stats = document.getElementById('stats');
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ Menambahkan data...';
+            
+            try {
+                // Tambah Testimonials
+                const existingTestimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
+                if (existingTestimonials.length === 0) {
+                    localStorage.setItem('testimonials', JSON.stringify(sampleData.testimonials));
+                }
+                
+                // Tambah Service Packages
+                const existingPackages = JSON.parse(localStorage.getItem('service_packages') || '[]');
+                if (existingPackages.length === 0) {
+                    localStorage.setItem('service_packages', JSON.stringify(sampleData.servicePackages));
+                }
+                
+                // Tambah Bookings
+                const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                if (existingBookings.length === 0) {
+                    localStorage.setItem('bookings', JSON.stringify(sampleData.bookings));
+                }
+                
+                // Tambah Leads
+                const existingLeads = JSON.parse(localStorage.getItem('leads') || '[]');
+                const updatedLeads = [...existingLeads, ...sampleData.leads];
+                localStorage.setItem('leads', JSON.stringify(updatedLeads));
+                
+                // Update UI
+                result.className = 'success';
+                result.innerHTML = `
+                    <strong>✅ Berhasil!</strong><br>
+                    Data sample telah ditambahkan ke aplikasi. Silakan refresh halaman atau kembali ke dashboard untuk melihat data baru.
+                `;
+                
+                // Show stats
+                stats.style.display = 'grid';
+                document.getElementById('testimonialCount').textContent = sampleData.testimonials.length;
+                document.getElementById('packageCount').textContent = sampleData.servicePackages.length;
+                document.getElementById('bookingCount').textContent = sampleData.bookings.length;
+                document.getElementById('leadCount').textContent = sampleData.leads.length;
+                
+                btn.textContent = '✓ Data Berhasil Ditambahkan';
+                
+                // Auto redirect after 3 seconds
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
+                
+            } catch (error) {
+                result.className = 'error';
+                result.innerHTML = `
+                    <strong>❌ Error!</strong><br>
+                    Terjadi kesalahan: ${error.message}
+                `;
+                btn.disabled = false;
+                btn.textContent = '🔄 Coba Lagi';
+            }
+        }
+    </script>
+</body>
+</html>

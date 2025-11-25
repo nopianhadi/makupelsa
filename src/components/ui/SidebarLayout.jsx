@@ -8,19 +8,27 @@ const SidebarLayout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
+    // Overview & Monitoring
     { path: '/app/dashboard', label: 'Dashboard', icon: 'LayoutDashboard' },
-    { path: '/app/client-management', label: 'Klien', icon: 'Users' },
     { path: '/app/client-kpi', label: 'KPI Bisnis', icon: 'BarChart3' },
+    { path: '/app/financial-tracking', label: 'Keuangan', icon: 'TrendingUp' },
+    
+    // Client Management
+    { path: '/app/client-management', label: 'Klien', icon: 'Users' },
+    { path: '/app/leads', label: 'Prospek', icon: 'UserPlus' },
+    { path: '/app/booking', label: 'Booking', icon: 'CalendarCheck' },
+    
+    // Project & Operations
     { path: '/app/project-management', label: 'Proyek', icon: 'Briefcase' },
     { path: '/app/calendar-scheduling', label: 'Kalender', icon: 'Calendar' },
-    { path: '/app/financial-tracking', label: 'Keuangan', icon: 'TrendingUp' },
     { path: '/app/payment-tracking', label: 'Pembayaran', icon: 'CreditCard' },
+    
+    // Products & Services
     { path: '/app/service-packages', label: 'Paket Layanan', icon: 'Package' },
     { path: '/app/pricelist', label: 'Pricelist', icon: 'DollarSign' },
     { path: '/app/promotions', label: 'Promo', icon: 'Tag' },
-    { path: '/app/leads', label: 'Prospek', icon: 'UserPlus' },
-    { path: '/app/booking', label: 'Booking', icon: 'CalendarCheck' },
-    { path: '/app/testimonials', label: 'Testimoni', icon: 'MessageSquare' },
+    
+    // Team & Settings
     { path: '/app/team', label: 'Tim', icon: 'Users' },
     { path: '/app/settings', label: 'Pengaturan', icon: 'Settings' },
     { path: '/app/profile', label: 'Profil', icon: 'User' }

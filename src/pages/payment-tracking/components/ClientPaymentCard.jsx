@@ -74,8 +74,8 @@ const ClientPaymentCard = ({
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2 mb-1">
-            <h3 className="text-base font-heading font-semibold text-foreground">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
+            <h3 className="text-sm sm:text-base font-heading font-semibold text-foreground break-words">
               {client?.name}
             </h3>
             <PaymentStatusIndicator 
@@ -83,18 +83,19 @@ const ClientPaymentCard = ({
               type="badge"
               showIcon={false}
               amount={client?.remainingAmount}
+              className="flex-shrink-0"
             />
           </div>
 
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className={`
               inline-flex items-center gap-1 px-2 py-0.5 rounded-md
-              text-xs font-medium font-caption
+              text-xs font-medium font-caption flex-shrink-0
               ${serviceConfig?.bg} ${serviceConfig?.color}
             `}>
               {serviceConfig?.label}
             </span>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground break-words">
               {formatDate(client?.eventDate)}
             </span>
           </div>
@@ -104,7 +105,7 @@ const ClientPaymentCard = ({
               flex items-center gap-1.5 px-2 py-1 rounded-md
               bg-error/10 border border-error/20 mb-2
             ">
-              <Icon name="Clock" size={14} color="var(--color-error)" strokeWidth={2.5} />
+              <Icon name="Clock" size={14} color="var(--color-error)" strokeWidth={2.5} className="flex-shrink-0" />
               <span className="text-xs font-medium text-error">
                 Terlambat {daysOverdue} hari
               </span>
@@ -113,31 +114,31 @@ const ClientPaymentCard = ({
         </div>
       </div>
       <div className="space-y-2 mb-3">
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-caption text-muted-foreground">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-xs sm:text-sm font-caption text-muted-foreground">
             Total Pembayaran
           </span>
-          <span className="text-sm font-mono font-semibold text-foreground">
+          <span className="text-xs sm:text-sm font-mono font-semibold text-foreground break-all">
             {formatCurrency(client?.totalAmount)}
           </span>
         </div>
 
         {client?.downPayment > 0 && (
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-caption text-muted-foreground">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-xs sm:text-sm font-caption text-muted-foreground">
               DP Dibayar
             </span>
-            <span className="text-sm font-mono font-medium text-success">
+            <span className="text-xs sm:text-sm font-mono font-medium text-success break-all">
               {formatCurrency(client?.downPayment)}
             </span>
           </div>
         )}
 
-        <div className="flex items-center justify-between pt-2 border-t border-border">
-          <span className="text-sm font-caption font-medium text-foreground">
+        <div className="flex items-center justify-between gap-2 pt-2 border-t border-border">
+          <span className="text-xs sm:text-sm font-caption font-medium text-foreground">
             Sisa Pembayaran
           </span>
-          <span className="text-base font-mono font-bold text-error">
+          <span className="text-sm sm:text-base font-mono font-bold text-error break-all">
             {formatCurrency(client?.remainingAmount)}
           </span>
         </div>
@@ -166,10 +167,10 @@ const ClientPaymentCard = ({
       </div>
       {client?.lastReminder && (
         <div className="
-          flex items-center gap-1.5 mt-3 pt-3 border-t border-border
+          flex items-start gap-1.5 mt-3 pt-3 border-t border-border
         ">
-          <Icon name="MessageSquare" size={14} color="var(--color-muted-foreground)" />
-          <span className="text-xs text-muted-foreground">
+          <Icon name="MessageSquare" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+          <span className="text-xs text-muted-foreground break-words">
             Pengingat terakhir: {formatDate(client?.lastReminder)}
           </span>
         </div>

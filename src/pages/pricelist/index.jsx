@@ -141,16 +141,16 @@ const Pricelist = () => {
             <div className={cn("flex flex-col sm:flex-row ga", mobileClasses.cardCompact)}>
               <div className="flex-1">
                 <div className="relative">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                    <Icon name="Search" size={18} color="var(--color-muted-foreground)" />
-                  </div>
                   <input
                     type="text"
                     placeholder="Cari pricelist..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full pl-3 sm:pl-4 pr-9 sm:pr-10 py-2 sm:py-2.5 text-sm rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   />
+                  <div className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                    <Icon name="Search" size={16} sm:size={18} color="var(--color-muted-foreground)" />
+                  </div>
                 </div>
               </div>
 

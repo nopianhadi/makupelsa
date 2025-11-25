@@ -75,8 +75,8 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
   return (
     <div className="bg-card border border-border rounded-2xl p-6">
       {/* Calendar Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-heading font-bold text-foreground">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+        <h2 className="text-lg sm:text-xl font-heading font-bold text-foreground">
           {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
         </h2>
         <div className="flex items-center gap-2">
@@ -93,10 +93,10 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols- w-full 7 gap-2">
+      <div className="grid grid-cols-7 gap-1 sm:gap-2">
         {/* Day Headers */}
         {['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].map((day) => (
-          <div key={day} className="text-center py-2 text-sm font-semibold text-muted-foreground">
+          <div key={day} className="text-center py-2 text-xs sm:text-sm font-semibold text-muted-foreground">
             {day}
           </div>
         ))}
@@ -110,7 +110,7 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
             <div
               key={index}
               className={`
-                min-h-[100px] p-2 border border-border rounded-lg
+                min-h-[80px] sm:min-h-[100px] p-1 sm:p-2 border border-border rounded-lg
                 ${day ? 'bg-surface hover:bg-muted cursor-pointer' : 'bg-muted/30'}
                 ${isToday(day) ? 'ring-2 ring-primary' : ''}
                 transition-smooth
@@ -119,7 +119,7 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
               {day && (
                 <>
                   <div className={`
-                    text-sm font-medium mb-1
+                    text-xs sm:text-sm font-medium mb-1
                     ${isToday(day) ? 'text-primary font-bold' : 'text-foreground'}
                   `}>
                     {day}
@@ -130,19 +130,19 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
                       {dayProjects.slice(0, 2).map((project) => (
                         <div
                           key={project.id}
-                          className="text-xs p-1.5 rounded bg-card border border-border hover:shadow-sm transition-smooth group relative"
+                          className="text-xs p-1 sm:p-1.5 rounded bg-card border border-border hover:shadow-sm transition-smooth group relative"
                         >
                           <div 
                             className="cursor-pointer"
                             onClick={() => onProjectClick(project)}
                           >
-                            <div className="flex items-center gap-1 mb-0.5">
-                              <div className={`w-2 h-2 rounded-full ${getStatusColor(project.status)}`} />
-                              <span className="font-medium text-foreground truncate">
-                                {project.title.length > 12 ? project.title.substring(0, 12) + '...' : project.title}
+                            <div className="flex items-start gap-1 mb-0.5">
+                              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-0.5 ${getStatusColor(project.status)}`} />
+                              <span className="font-medium text-foreground break-words line-clamp-1 text-[10px] sm:text-xs">
+                                {project.title}
                               </span>
                             </div>
-                            <div className="text-muted-foreground truncate text-[10px]">
+                            <div className="text-muted-foreground break-words line-clamp-1 text-[9px] sm:text-[10px] pl-3">
                               {project.client}
                             </div>
                           </div>
@@ -172,7 +172,7 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
                       ))}
                       
                       {dayProjects.length > 2 && (
-                        <div className="text-xs text-primary font-medium pl-1">
+                        <div className="text-[10px] sm:text-xs text-primary font-medium pl-1">
                           +{dayProjects.length - 2} lainnya
                         </div>
                       )}
@@ -186,18 +186,18 @@ const CalendarView = ({ projects, onProjectClick, onEditProject, onDeleteProject
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-6 mt-6 pt-4 border-t border-border">
+      <div className="flex flex-wrap items-center gap-3 sm:gap-6 mt-6 pt-4 border-t border-border">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-blue-500" />
-          <span className="text-sm text-muted-foreground">Akan Datang</span>
+          <div className="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0" />
+          <span className="text-xs sm:text-sm text-muted-foreground">Akan Datang</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <span className="text-sm text-muted-foreground">Sedang Berjalan</span>
+          <div className="w-3 h-3 rounded-full bg-yellow-500 flex-shrink-0" />
+          <span className="text-xs sm:text-sm text-muted-foreground">Sedang Berjalan</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-          <span className="text-sm text-muted-foreground">Selesai</span>
+          <div className="w-3 h-3 rounded-full bg-green-500 flex-shrink-0" />
+          <span className="text-xs sm:text-sm text-muted-foreground">Selesai</span>
         </div>
       </div>
     </div>

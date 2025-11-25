@@ -11,6 +11,9 @@ import FinancialReportView from './components/FinancialReportView';
 import FilterBar from './components/FilterBar';
 import FinancialFilterCards from './components/FinancialFilterCards';
 import FinancialReportPage from './components/FinancialReportPage';
+import CategoryCards from './components/CategoryCards';
+import CashflowCard from './components/CashflowCard';
+import ReportCard from './components/ReportCard';
 import { exportIncomeCSV, exportExpenseCSV } from '../../utils/financialExport';
 import { dataStore } from '../../utils/dataStore';
 import { mobileClasses, cn } from '../../utils/mobileOptimization';
@@ -27,6 +30,10 @@ const FinancialTracking = () => {
     paymentMethod: '',
     minAmount: '',
     maxAmount: ''
+  });
+  const [categoryFilter, setCategoryFilter] = useState({
+    category: null,
+    type: 'expense' // 'expense' or 'income'
   });
   const [expandedSections, setExpandedSections] = useState({
     summary: true,
@@ -251,8 +258,13 @@ const FinancialTracking = () => {
       filtered = filtered.filter(item => item.amount <= parseFloat(filters.maxAmount));
     }
 
+    // Apply category filter from CategoryCards
+    if (categoryFilter.type === 'income' && categoryFilter.category) {
+      filtered = filtered.filter(item => item.serviceType === categoryFilter.category);
+    }
+
     return filtered;
-  }, [incomes, filters]);
+  }, [incomes, filters, categoryFilter]);
 
   const filteredExpenses = useMemo(() => {
     let filtered = [...expenses];
@@ -285,8 +297,13 @@ const FinancialTracking = () => {
       filtered = filtered.filter(item => item.amount <= parseFloat(filters.maxAmount));
     }
 
+    // Apply category filter from CategoryCards
+    if (categoryFilter.type === 'expense' && categoryFilter.category) {
+      filtered = filtered.filter(item => item.category === categoryFilter.category);
+    }
+
     return filtered;
-  }, [expenses, filters]);
+  }, [expenses, filters, categoryFilter]);
 
   // Listen for payment updates
   useEffect(() => {
@@ -370,6 +387,19 @@ const FinancialTracking = () => {
             onClick={handleExportReport}
           />
         </div>
+
+        {/* Category Cards with Filter */}
+        <CategoryCards
+          incomes={incomes}
+          expenses={expenses}
+          onCategoryFilter={(category, type) => {
+            setCategoryFilter({ category, type });
+            // Auto switch tab based on selected type
+            if (category) {
+              setActiveTab(type);
+            }
+          }}
+        />
 
         {/* Financial Filter Cards */}
         <FinancialFilterCards
@@ -616,10 +646,26 @@ const FinancialTracking = () => {
           )}
 
           {activeTab === 'report' && (
-            <FinancialReportPage 
-              incomes={incomes}
-              expenses={expenses}
-            />
+            <div className="space-y-6">
+              {/* Cashflow Card */}
+              <CashflowCard
+                incomes={incomes}
+                expenses={expenses}
+              />
+
+              {/* Report Card */}
+              <ReportCard
+                incomes={incomes}
+                expenses={expenses}
+                onViewReport={() => setActiveTab('report')}
+              />
+
+              {/* Full Report Page */}
+              <FinancialReportPage 
+                incomes={incomes}
+                expenses={expenses}
+              />
+            </div>
           )}
         </div>
       </main>

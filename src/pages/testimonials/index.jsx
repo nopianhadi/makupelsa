@@ -9,6 +9,7 @@ const Testimonials = () => {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('date');
+  const [showCopySuccess, setShowCopySuccess] = useState(false);
 
   useEffect(() => {
     loadTestimonials();
@@ -109,6 +110,17 @@ const Testimonials = () => {
     );
   };
 
+  const handleCopyLink = () => {
+    const publicFormUrl = `${window.location.origin}/testimonial/public`;
+    navigator.clipboard.writeText(publicFormUrl).then(() => {
+      setShowCopySuccess(true);
+      setTimeout(() => setShowCopySuccess(false), 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+      alert('Gagal menyalin link');
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -117,12 +129,32 @@ const Testimonials = () => {
       <div className="min-h-screen bg-background">
         <main className={cn("w-full max-w-screen-xl mx-auto px-2 sm:px-4 lg: py-4 sm:py-6", mobileClasses.card)}>
           <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
-            <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground mb-2", mobileClasses.heading1)}>
-              Testimoni Klien
-            </h1>
-            <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
-              Kelola testimoni dari klien Anda
-            </p>
+            <div className="flex items-start justify-between gap-4 mb-2">
+              <div className="flex-1">
+                <h1 className={cn("text-lg sm:text-2xl lg:text-xl sm:text-2xl lg:text-xl sm:text-2xl lg: font-heading font-bold text-foreground mb-2", mobileClasses.heading1)}>
+                  Testimoni Klien
+                </h1>
+                <p className="text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground">
+                  Kelola testimoni dari klien Anda
+                </p>
+              </div>
+              <div className="relative">
+                <button
+                  onClick={handleCopyLink}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+                  title="Salin link form testimoni publik"
+                >
+                  <Icon name="Link" size={18} />
+                  <span className="hidden sm:inline">Copy Link Form</span>
+                  <span className="sm:hidden">Copy Link</span>
+                </button>
+                {showCopySuccess && (
+                  <div className="absolute top-full right-0 mt-2 px-3 py-2 bg-success text-white text-sm rounded-lg shadow-lg whitespace-nowrap z-10">
+                    ✓ Link berhasil disalin!
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Stats */}

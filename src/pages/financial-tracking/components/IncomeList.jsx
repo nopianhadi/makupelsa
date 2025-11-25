@@ -59,26 +59,26 @@ const IncomeList = ({ incomes, onEdit, onDelete }) => {
             key={income?.id}
             className="p-4 rounded-lg bg-card border border-border elevation-1 hover:elevation-3 transition-smooth"
           >
-            <div className="flex items-start justify-between gap-3 mb-3">
+            <div className="flex items-start justify-between gap-2 mb-3">
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-heading font-semibold text-foreground mb-1 truncate">
+                <h4 className="text-xs sm:text-sm font-heading font-semibold text-foreground mb-1 break-words">
                   {income?.clientName}
                 </h4>
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className={`
                     inline-flex items-center gap-1 px-2 py-0.5 rounded-md
-                    text-xs font-medium font-caption
+                    text-xs font-medium font-caption flex-shrink-0
                     ${serviceConfig?.bgColor} ${serviceConfig?.color}
                   `}>
                     {serviceConfig?.label}
                   </span>
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Icon name={paymentConfig?.icon} size={12} />
+                    <Icon name={paymentConfig?.icon} size={12} className="flex-shrink-0" />
                     {paymentConfig?.label}
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 flex-shrink-0">
                 <button
                   onClick={() => onEdit(income)}
                   className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-smooth"
@@ -95,9 +95,9 @@ const IncomeList = ({ incomes, onEdit, onDelete }) => {
                 </button>
               </div>
             </div>
-            <div className="flex items-center justify-between pt-3 border-t border-border">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-3 border-t border-border">
               <div className="flex flex-col">
-                <span className="text-xs font-caption text-muted-foreground mb-0.5">
+                <span className="text-xs font-caption text-muted-foreground mb-0.5 break-words">
                   {formatDate(income?.transactionDate)}
                 </span>
                 <span className="text-xs text-muted-foreground">
@@ -106,17 +106,17 @@ const IncomeList = ({ incomes, onEdit, onDelete }) => {
                   {income?.paymentMethod === 'ewallet' && 'E-Wallet'}
                 </span>
               </div>
-              <div className="text-right">
-                <p className="text-lg font-mono font-bold text-success">
+              <div className="text-left sm:text-right">
+                <p className="text-base sm:text-lg font-mono font-bold text-success break-all">
                   {formatCurrency(income?.amount)}
                 </p>
               </div>
             </div>
             {income?.notes && (
               <div className="mt-3 pt-3 border-t border-border">
-                <p className="text-xs text-muted-foreground">
-                  <Icon name="FileText" size={12} className="inline mr-1" />
-                  {income?.notes}
+                <p className="text-xs text-muted-foreground break-words flex items-start gap-1">
+                  <Icon name="FileText" size={12} className="flex-shrink-0 mt-0.5" />
+                  <span>{income?.notes}</span>
                 </p>
               </div>
             )}

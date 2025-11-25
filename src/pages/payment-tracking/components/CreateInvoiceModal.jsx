@@ -72,24 +72,24 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
         className="bg-card border border-border rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-xl font-heading font-bold text-foreground">
+        <div className="flex items-start justify-between gap-2 mb-4 sm:mb-6">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-lg sm:text-xl font-heading font-bold text-foreground break-words">
               Buat Invoice
             </h2>
             {client && (
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1 break-words">
                 Untuk {client.name}
               </p>
             )}
           </div>
-          <Button variant="ghost" size="icon" iconName="X" onClick={onClose} />
+          <Button variant="ghost" size="icon" iconName="X" onClick={onClose} className="flex-shrink-0" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols- w-full 1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Nomor Invoice *
               </label>
               <input
@@ -98,12 +98,12 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
                 value={formData.invoiceNumber}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Tanggal Invoice *
               </label>
               <input
@@ -112,12 +112,12 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
                 value={formData.date}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Jatuh Tempo *
               </label>
               <input
@@ -126,7 +126,7 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
                 value={formData.dueDate}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
@@ -149,49 +149,51 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
 
             <div className="space-y-3">
               {formData.items.map((item, index) => (
-                <div key={index} className="flex gap-2">
+                <div key={index} className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
                     value={item.description}
                     onChange={(e) => handleItemChange(index, 'description', e.target.value)}
                     placeholder="Deskripsi layanan"
                     required
-                    className="flex-1 px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   />
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
-                    placeholder="Qty"
-                    required
-                    min="1"
-                    className="w-20 px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                  <input
-                    type="number"
-                    value={item.amount}
-                    onChange={(e) => handleItemChange(index, 'amount', e.target.value)}
-                    placeholder="Jumlah (Rp)"
-                    required
-                    className="w-40 px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                  {formData.items.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeItem(index)}
-                      className="p-3 hover:bg-error/10 text-error rounded-xl transition-smooth"
-                    >
-                      <Icon name="Trash2" size={18} />
-                    </button>
-                  )}
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      value={item.quantity}
+                      onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+                      placeholder="Qty"
+                      required
+                      min="1"
+                      className="w-20 px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <input
+                      type="number"
+                      value={item.amount}
+                      onChange={(e) => handleItemChange(index, 'amount', e.target.value)}
+                      placeholder="Jumlah (Rp)"
+                      required
+                      className="flex-1 sm:w-40 px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    {formData.items.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeItem(index)}
+                        className="p-2 sm:p-3 hover:bg-error/10 text-error rounded-xl transition-smooth flex-shrink-0"
+                      >
+                        <Icon name="Trash2" size={18} />
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="grid grid-cols- w-full 2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Pajak (%)
               </label>
               <input
@@ -201,11 +203,11 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
                 onChange={handleChange}
                 min="0"
                 max="100"
-                className="w-full px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 Diskon (Rp)
               </label>
               <input
@@ -214,38 +216,38 @@ const CreateInvoiceModal = ({ client, onClose, onSave }) => {
                 value={formData.discount}
                 onChange={handleChange}
                 min="0"
-                className="w-full px-4 py-3 bg-surface border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-surface border border-input rounded-xl text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
 
-          <div className="bg-muted/50 rounded-xl p-4">
+          <div className="bg-muted/50 rounded-xl p-3 sm:p-4">
             <div className="space-y-2">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-xs sm:text-sm">
                 <span className="text-muted-foreground">Subtotal:</span>
-                <span className="font-medium">
+                <span className="font-medium break-all">
                   {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(subtotal)}
                 </span>
               </div>
               {formData.tax > 0 && (
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span className="text-muted-foreground">Pajak ({formData.tax}%):</span>
-                  <span className="font-medium">
+                  <span className="font-medium break-all">
                     {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(taxAmount)}
                   </span>
                 </div>
               )}
               {discountAmount > 0 && (
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span className="text-muted-foreground">Diskon:</span>
-                  <span className="font-medium text-success">
+                  <span className="font-medium text-success break-all">
                     -{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(discountAmount)}
                   </span>
                 </div>
               )}
-              <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
+              <div className="flex justify-between text-base sm:text-lg font-bold pt-2 border-t border-border">
                 <span>Total:</span>
-                <span className="text-primary">
+                <span className="text-primary break-all">
                   {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(grandTotal)}
                 </span>
               </div>

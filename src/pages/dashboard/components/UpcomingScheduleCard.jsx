@@ -41,17 +41,17 @@ const UpcomingScheduleCard = ({ schedule }) => {
 
   return (
     <div className="bg-card border border-border rounded-lg overflow-hidden p-4 elevation-1 hover:elevation-3 transition-smooth">
-      <div className="flex items-start justify-between gap-3 mb-3">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
         <div className="flex-1 min-w-0">
-          <h4 className="text-base font-heading font-semibold text-foreground mb-1 truncate">
+          <h4 className="text-sm sm:text-base font-heading font-semibold text-foreground mb-1 break-words">
             {schedule?.clientName}
           </h4>
           <div className="flex items-center gap-2 flex-wrap">
-            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium font-caption ${config?.bgColor} ${config?.textColor}`}>
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium font-caption flex-shrink-0 ${config?.bgColor} ${config?.textColor}`}>
               {config?.label}
             </span>
             <span className="flex items-center gap-1 text-xs font-mono text-muted-foreground">
-              <Icon name="Clock" size={12} />
+              <Icon name="Clock" size={12} className="flex-shrink-0" />
               {formatTime(schedule?.time)}
             </span>
           </div>
@@ -60,17 +60,18 @@ const UpcomingScheduleCard = ({ schedule }) => {
           status={schedule?.paymentStatus}
           type="badge"
           showIcon={false}
+          className="flex-shrink-0"
         />
       </div>
       <div className="space-y-2">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Icon name="Calendar" size={14} />
-          <span>{formatDate(schedule?.date)}</span>
+        <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+          <Icon name="Calendar" size={14} className="flex-shrink-0 mt-0.5" />
+          <span className="break-words">{formatDate(schedule?.date)}</span>
         </div>
         {schedule?.location && (
-          <div className="flex items-start gap-2 text-sm text-muted-foreground">
-            <Icon name="MapPin" size={14} className="mt-0.5" />
-            <span className="line-clamp-1">{schedule?.location}</span>
+          <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+            <Icon name="MapPin" size={14} className="flex-shrink-0 mt-0.5" />
+            <span className="break-words">{schedule?.location}</span>
           </div>
         )}
       </div>

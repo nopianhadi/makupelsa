@@ -31,6 +31,8 @@ const ClientManagement = () => {
   const [recordPaymentClient, setRecordPaymentClient] = useState(null);
   const [communicationClient, setCommunicationClient] = useState(null);
   const [shareLinkClient, setShareLinkClient] = useState(null);
+  const [summaryModalOpen, setSummaryModalOpen] = useState(false);
+  const [summaryModalData, setSummaryModalData] = useState({ title: '', clients: [], icon: '' });
 
   useEffect(() => {
     // Load klien dari localStorage
@@ -519,6 +521,40 @@ const ClientManagement = () => {
     setShareLinkClient(client);
   };
 
+  const handleSummaryCardClick = (type) => {
+    let title = '';
+    let filteredClients = [];
+    let icon = '';
+
+    switch (type) {
+      case 'total':
+        title = 'Semua Klien';
+        filteredClients = clients;
+        icon = '👥';
+        break;
+      case 'active':
+        title = 'Klien Aktif';
+        filteredClients = clients.filter(c => c.isActive);
+        icon = '✅';
+        break;
+      case 'revenue':
+        title = 'Total Pendapatan';
+        filteredClients = clients.sort((a, b) => (b.totalAmount || 0) - (a.totalAmount || 0));
+        icon = '💰';
+        break;
+      case 'pending':
+        title = 'Pembayaran Tertunda';
+        filteredClients = clients.filter(c => c.paymentStatus === 'pending' || c.paymentStatus === 'overdue');
+        icon = '⏰';
+        break;
+      default:
+        return;
+    }
+
+    setSummaryModalData({ title, clients: filteredClients, icon });
+    setSummaryModalOpen(true);
+  };
+
   return (
     <>
       <Helmet>
@@ -545,6 +581,79 @@ const ClientManagement = () => {
             <p className="text-xs sm:text-sm text-muted-foreground">
               Kelola database klien dan tracking layanan makeup
             </p>
+          </div>
+
+          {/* Card Ringkasan */}
+          <div className={cn("grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6", mobileClasses.marginBottom)}>
+            {/* Total Klien */}
+            <button
+              onClick={() => handleSummaryCardClick('total')}
+              className="bg-card border border-border rounded-lg p-3 sm:p-4 hover:bg-accent hover:border-primary/50 transition-all cursor-pointer text-left"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-base sm:text-xl">👥</span>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">Total Klien</p>
+              </div>
+              <p className="text-xl sm:text-2xl font-bold text-foreground font-mono">
+                {clients.length}
+              </p>
+            </button>
+
+            {/* Klien Aktif */}
+            <button
+              onClick={() => handleSummaryCardClick('active')}
+              className="bg-card border border-border rounded-lg p-3 sm:p-4 hover:bg-accent hover:border-success/50 transition-all cursor-pointer text-left"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-success/10 flex items-center justify-center">
+                  <span className="text-base sm:text-xl">✅</span>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">Klien Aktif</p>
+              </div>
+              <p className="text-xl sm:text-2xl font-bold text-success font-mono">
+                {clients.filter(c => c.isActive).length}
+              </p>
+            </button>
+
+            {/* Total Pendapatan */}
+            <button
+              onClick={() => handleSummaryCardClick('revenue')}
+              className="bg-card border border-border rounded-lg p-3 sm:p-4 hover:bg-accent hover:border-warning/50 transition-all cursor-pointer text-left"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-warning/10 flex items-center justify-center">
+                  <span className="text-base sm:text-xl">💰</span>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">Total Pendapatan</p>
+              </div>
+              <p className="text-base sm:text-xl font-bold text-foreground font-mono">
+                {new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  minimumFractionDigits: 0,
+                  notation: 'compact',
+                  compactDisplay: 'short'
+                }).format(clients.reduce((sum, c) => sum + (c.totalAmount || 0), 0))}
+              </p>
+            </button>
+
+            {/* Pembayaran Tertunda */}
+            <button
+              onClick={() => handleSummaryCardClick('pending')}
+              className="bg-card border border-border rounded-lg p-3 sm:p-4 hover:bg-accent hover:border-destructive/50 transition-all cursor-pointer text-left"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-destructive/10 flex items-center justify-center">
+                  <span className="text-base sm:text-xl">⏰</span>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">Belum Bayar</p>
+              </div>
+              <p className="text-xl sm:text-2xl font-bold text-destructive font-mono">
+                {clients.filter(c => c.paymentStatus === 'pending' || c.paymentStatus === 'overdue').length}
+              </p>
+            </button>
           </div>
 
           <div className={cn("mb-4 sm:", mobileClasses.marginBottom)}>
@@ -661,6 +770,125 @@ const ClientManagement = () => {
           onClose={() => setShareLinkClient(null)} />
 
         }
+
+        {/* Summary Detail Modal */}
+        {summaryModalOpen && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-card border border-border rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-2xl">{summaryModalData.icon}</span>
+                  </div>
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-heading font-bold text-foreground">
+                      {summaryModalData.title}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      {summaryModalData.clients.length} klien
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSummaryModalOpen(false)}
+                  className="w-8 h-8 rounded-full hover:bg-muted flex items-center justify-center transition-colors"
+                >
+                  <span className="text-xl">×</span>
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                {summaryModalData.clients.length === 0 ? (
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Tidak ada data klien</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {summaryModalData.clients.map((client) => (
+                      <div
+                        key={client.id}
+                        onClick={() => {
+                          setSummaryModalOpen(false);
+                          handleClientClick(client);
+                        }}
+                        className="bg-surface border border-border rounded-lg p-4 hover:bg-accent hover:border-primary/50 transition-all cursor-pointer"
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
+                            {client.profileImage ? (
+                              <img
+                                src={client.profileImage}
+                                alt={client.name}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-xl">
+                                👤
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between gap-2 mb-2">
+                              <div>
+                                <h3 className="font-semibold text-foreground">
+                                  {client.name}
+                                </h3>
+                                <p className="text-sm text-muted-foreground">
+                                  {client.phone}
+                                </p>
+                              </div>
+                              <div className="text-right">
+                                <p className="font-bold text-foreground font-mono text-sm">
+                                  {new Intl.NumberFormat('id-ID', {
+                                    style: 'currency',
+                                    currency: 'IDR',
+                                    minimumFractionDigits: 0
+                                  }).format(client.totalAmount || 0)}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className={cn(
+                                "text-xs px-2 py-1 rounded-full font-medium",
+                                client.paymentStatus === 'paid' && "bg-success/10 text-success",
+                                client.paymentStatus === 'partial' && "bg-warning/10 text-warning",
+                                (client.paymentStatus === 'pending' || client.paymentStatus === 'overdue') && "bg-destructive/10 text-destructive"
+                              )}>
+                                {client.paymentStatus === 'paid' ? 'Lunas' :
+                                 client.paymentStatus === 'partial' ? 'Sebagian' :
+                                 client.paymentStatus === 'overdue' ? 'Terlambat' : 'Belum Bayar'}
+                              </span>
+                              {client.isActive && (
+                                <span className="text-xs px-2 py-1 rounded-full font-medium bg-primary/10 text-primary">
+                                  Aktif
+                                </span>
+                              )}
+                              <span className="text-xs text-muted-foreground">
+                                {client.totalEvents || 0} acara
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 sm:p-6 border-t border-border">
+                <button
+                  onClick={() => setSummaryModalOpen(false)}
+                  className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+                >
+                  Tutup
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>);
 

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Lengkap - MUA Finance Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .section li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        button.secondary {
+            background: #6c757d;
+        }
+        
+        button.success {
+            background: #28a745;
+        }
+        
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        #result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            display: block;
+        }
+        
+        #result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            display: block;
+        }
+        
+        .progress {
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Tambah Data Lengkap</h1>
+        <p class="subtitle">Inisialisasi data untuk semua halaman aplikasi</p>
+        
+        <div class="section">
+            <h2>📋 Data yang Tersedia</h2>
+            <ul>
+                <li><strong>Testimonials</strong> - 5 ulasan klien</li>
+                <li><strong>Service Packages</strong> - 5 paket layanan</li>
+                <li><strong>Bookings</strong> - 5 booking acara</li>
+                <li><strong>Leads</strong> - 3 prospek klien</li>
+                <li><strong>Pricelist</strong> - 10 item harga layanan</li>
+                <li><strong>Gallery Projects</strong> - 3 project portfolio</li>
+            </ul>
+        </div>
+        
+        <div class="btn-group">
+            <button onclick="tambahSemuaData()">
+                🚀 Tambah Semua Data
+            </button>
+            <button onclick="tambahDataDasar()" class="secondary">
+                📦 Data Dasar Saja
+            </button>
+            <button onclick="hapusSemuaData()" class="secondary">
+                🗑️ Hapus Semua Data
+            </button>
+            <button onclick="window.location.href='/'" class="success">
+                🏠 Ke Dashboard
+            </button>
+        </div>
+        
+        <div class="progress" id="progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+        </div>
+        
+        <div id="result"></div>
+        
+        <div class="stats-grid" id="stats" style="display: none;">
+            <div class="stat-card">
+                <div class="number" id="testimonialCount">0</div>
+                <div class="label">Testimonials</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="packageCount">0</div>
+                <div class="label">Packages</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="bookingCount">0</div>
+                <div class="label">Bookings</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="leadCount">0</div>
+                <div class="label">Leads</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="pricelistCount">0</div>
+                <div class="label">Pricelist</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="projectCount">0</div>
+                <div class="label">Projects</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data lengkap untuk semua halaman
+        const allData = {
+            testimonials: [
+                { name: "Siti Nurhaliza", email: "siti@email.com", phone: "08123456789", rating: 5, message: "Pelayanan sangat memuaskan! Makeup untuk acara pernikahan saya sempurna.", service: "Paket Akad Nikah Premium", status: "approved", createdAt: new Date(2025, 10, 1).toISOString(), approvedAt: new Date(2025, 10, 2).toISOString() },
+                { name: "Dewi Lestari", email: "dewi@email.com", phone: "08234567890", rating: 5, message: "Makeup untuk wisuda saya cantik banget! Tahan lama dan sesuai dengan yang saya mau.", service: "Paket Wisuda", status: "approved", createdAt: new Date(2025, 10, 5).toISOString(), approvedAt: new Date(2025, 10, 5).toISOString() },
+                { name: "Rina Wijaya", email: "rina@email.com", phone: "08345678901", rating: 4, message: "Hasilnya bagus, makeup natural dan elegan. Cocok untuk acara resepsi.", service: "Paket Resepsi", status: "approved", createdAt: new Date(2025, 10, 10).toISOString(), approvedAt: new Date(2025, 10, 10).toISOString() },
+                { name: "Maya Putri", email: "maya@email.com", phone: "08456789012", rating: 5, message: "Sangat puas dengan hasilnya! Makeup untuk lamaran saya terlihat fresh dan natural.", service: "Paket Lamaran", status: "pending", createdAt: new Date(2025, 10, 20).toISOString() },
+                { name: "Ayu Ting Ting", email: "ayu@email.com", phone: "08567890123", rating: 5, message: "MUA terbaik! Makeup untuk photoshoot saya sempurna.", service: "Paket Photoshoot", status: "pending", createdAt: new Date(2025, 10, 22).toISOString() }
+            ],
+            servicePackages: [
+                { name: "Paket Akad Nikah Premium", description: "Paket lengkap untuk acara akad nikah dengan makeup flawless", serviceType: "akad", basePrice: 3500000, originalPrice: 4000000, duration: "4-5 jam", includedServices: ["Makeup pengantin", "Hairdo pengantin", "Aksesoris hijab/mahkota", "Touch up 2x", "Makeup ibu pengantin", "Free konsultasi"], addOns: [{ name: "Makeup ayah", price: 300000 }], isActive: true, totalBookings: 15, totalRevenue: 52500000 },
+                { name: "Paket Resepsi Elegant", description: "Paket makeup untuk resepsi pernikahan dengan tampilan glamour", serviceType: "resepsi", basePrice: 4500000, originalPrice: 5000000, duration: "6-8 jam", includedServices: ["Makeup pengantin (bride & groom)", "Hairdo pengantin", "Aksesoris lengkap", "Touch up unlimited", "Makeup 2 orang tua", "Free trial makeup"], addOns: [{ name: "Makeup bridesmaid", price: 350000 }], isActive: true, totalBookings: 22, totalRevenue: 99000000 },
+                { name: "Paket Wisuda Fresh", description: "Makeup natural dan fresh untuk acara wisuda", serviceType: "wisuda", basePrice: 500000, originalPrice: 650000, duration: "2-3 jam", includedServices: ["Makeup natural/glowing", "Hairdo simple", "Free eyelash", "Touch up 1x"], addOns: [{ name: "Hairdo premium", price: 150000 }], isActive: true, totalBookings: 45, totalRevenue: 22500000 },
+                { name: "Paket Lamaran Romantic", description: "Makeup soft dan romantic untuk acara lamaran", serviceType: "akad", basePrice: 2000000, originalPrice: 2500000, duration: "3-4 jam", includedServices: ["Makeup calon pengantin", "Hairdo elegant", "Aksesoris hijab", "Touch up 1x", "Makeup ibu"], addOns: [{ name: "Makeup calon mempelai pria", price: 400000 }], isActive: true, totalBookings: 18, totalRevenue: 36000000 },
+                { name: "Paket Photoshoot Professional", description: "Makeup khusus untuk photoshoot dengan hasil maksimal", serviceType: "wisuda", basePrice: 1500000, duration: "3-4 jam", includedServices: ["Makeup HD", "Hairdo sesuai konsep", "3x ganti look", "Touch up unlimited"], addOns: [{ name: "Styling wardrobe", price: 500000 }], isActive: true, totalBookings: 12, totalRevenue: 18000000 }
+            ],
+            bookings: [
+                { clientName: "Putri Ayu", clientPhone: "08123456789", clientEmail: "putri@email.com", serviceType: "akad", packageName: "Paket Akad Nikah Premium", eventDate: "2025-12-15", eventTime: "08:00", venue: "Gedung Serbaguna Melati, Jakarta Selatan", totalAmount: 3500000, downPayment: 1500000, status: "confirmed", notes: "Tema warna pink soft", createdAt: new Date(2025, 10, 1).toISOString() },
+                { clientName: "Sari Indah", clientPhone: "08234567890", clientEmail: "sari@email.com", serviceType: "resepsi", packageName: "Paket Resepsi Elegant", eventDate: "2025-12-20", eventTime: "14:00", venue: "Hotel Grand Ballroom, Jakarta Pusat", totalAmount: 4500000, downPayment: 2000000, status: "confirmed", notes: "Makeup glamour, tema gold", createdAt: new Date(2025, 10, 5).toISOString() },
+                { clientName: "Dina Mariana", clientPhone: "08345678901", clientEmail: "dina@email.com", serviceType: "wisuda", packageName: "Paket Wisuda Fresh", eventDate: "2025-11-30", eventTime: "06:00", venue: "Universitas Indonesia, Depok", totalAmount: 500000, downPayment: 500000, status: "confirmed", notes: "Makeup natural", createdAt: new Date(2025, 10, 15).toISOString() },
+                { clientName: "Rina Susanti", clientPhone: "08456789012", clientEmail: "rina.s@email.com", serviceType: "akad", packageName: "Paket Lamaran Romantic", eventDate: "2025-12-05", eventTime: "10:00", venue: "Rumah Mempelai Wanita, Tangerang", totalAmount: 2000000, downPayment: 1000000, status: "pending", notes: "Makeup soft pink", createdAt: new Date(2025, 10, 18).toISOString() },
+                { clientName: "Maya Anggraini", clientPhone: "08567890123", clientEmail: "maya.a@email.com", serviceType: "wisuda", packageName: "Paket Photoshoot Professional", eventDate: "2025-12-10", eventTime: "09:00", venue: "Studio Foto Cahaya, Jakarta Barat", totalAmount: 1500000, downPayment: 750000, status: "pending", notes: "Konsep vintage", createdAt: new Date(2025, 10, 20).toISOString() }
+            ],
+            leads: [
+                { name: "Lina Marlina", phone: "08123456780", email: "lina@email.com", status: "New", source: "Instagram", serviceType: "akad", budget: "3000000-4000000", eventDate: "2026-01-15", notes: "Tertarik paket akad nikah", createdAt: new Date(2025, 10, 23).toISOString() },
+                { name: "Fitri Handayani", phone: "08234567891", email: "fitri@email.com", status: "Contacted", source: "TikTok", serviceType: "resepsi", budget: "4000000-5000000", eventDate: "2026-02-20", notes: "Sudah dihubungi via WA", createdAt: new Date(2025, 10, 21).toISOString() },
+                { name: "Nadia Putri", phone: "08345678902", email: "nadia@email.com", status: "Interested", source: "Referral", serviceType: "wisuda", budget: "500000-700000", eventDate: "2025-12-28", notes: "Sangat tertarik", createdAt: new Date(2025, 10, 19).toISOString() }
+            ],
+            pricelists: [
+                { category: "Makeup Pengantin", serviceName: "Makeup Akad Nikah", price: 2500000, duration: "3-4 jam", description: "Makeup flawless untuk akad nikah", isActive: true },
+                { category: "Makeup Pengantin", serviceName: "Makeup Resepsi", price: 3500000, duration: "5-6 jam", description: "Makeup glamour untuk resepsi", isActive: true },
+                { category: "Makeup Wisuda", serviceName: "Makeup Wisuda Natural", price: 350000, duration: "1-2 jam", description: "Makeup natural untuk wisuda", isActive: true },
+                { category: "Makeup Wisuda", serviceName: "Makeup Wisuda Premium", price: 500000, duration: "2-3 jam", description: "Makeup premium dengan hairdo", isActive: true },
+                { category: "Makeup Party", serviceName: "Makeup Party Glam", price: 750000, duration: "2-3 jam", description: "Makeup glamour untuk pesta", isActive: true },
+                { category: "Makeup Party", serviceName: "Makeup Bridesmaid", price: 400000, duration: "1-2 jam", description: "Makeup untuk bridesmaid", isActive: true },
+                { category: "Hairdo", serviceName: "Hairdo Simple", price: 200000, duration: "1 jam", description: "Hairdo sederhana", isActive: true },
+                { category: "Hairdo", serviceName: "Hairdo Premium", price: 400000, duration: "1-2 jam", description: "Hairdo dengan aksesoris", isActive: true },
+                { category: "Add-ons", serviceName: "Touch Up", price: 150000, duration: "30 menit", description: "Touch up makeup", isActive: true },
+                { category: "Add-ons", serviceName: "Eyelash Extension", price: 100000, duration: "30 menit", description: "Pemasangan bulu mata", isActive: true }
+            ]
+        };
+
+        function updateProgress(percent, text) {
+            const progress = document.getElementById('progress');
+            const fill = document.getElementById('progressFill');
+            progress.style.display = 'block';
+            fill.style.width = percent + '%';
+            fill.textContent = text || percent + '%';
+        }
+
+        function showResult(success, message) {
+            const result = document.getElementById('result');
+            result.className = success ? 'success' : 'error';
+            result.innerHTML = message;
+        }
+
+        function updateStats() {
+            const stats = document.getElementById('stats');
+            stats.style.display = 'grid';
+            
+            document.getElementById('testimonialCount').textContent = JSON.parse(localStorage.getItem('testimonials') || '[]').length;
+            document.getElementById('packageCount').textContent = JSON.parse(localStorage.getItem('service_packages') || '[]').length;
+            document.getElementById('bookingCount').textContent = JSON.parse(localStorage.getItem('bookings') || '[]').length;
+            document.getElementById('leadCount').textContent = JSON.parse(localStorage.getItem('leads') || '[]').length;
+            document.getElementById('pricelistCount').textContent = JSON.parse(localStorage.getItem('pricelists') || '[]').length;
+            document.getElementById('projectCount').textContent = JSON.parse(localStorage.getItem('gallery_projects') || '[]').length;
+        }
+
+        async function tambahSemuaData() {
+            try {
+                updateProgress(0, 'Memulai...');
+                
+                // Testimonials
+                updateProgress(16, 'Testimonials...');
+                const existingTestimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
+                if (existingTestimonials.length === 0) {
+                    localStorage.setItem('testimonials', JSON.stringify(allData.testimonials));
+                }
+                
+                // Service Packages
+                updateProgress(33, 'Packages...');
+                const existingPackages = JSON.parse(localStorage.getItem('service_packages') || '[]');
+                if (existingPackages.length === 0) {
+                    localStorage.setItem('service_packages', JSON.stringify(allData.servicePackages));
+                }
+                
+                // Bookings
+                updateProgress(50, 'Bookings...');
+                const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                if (existingBookings.length === 0) {
+                    localStorage.setItem('bookings', JSON.stringify(allData.bookings));
+                }
+                
+                // Leads
+                updateProgress(66, 'Leads...');
+                const existingLeads = JSON.parse(localStorage.getItem('leads') || '[]');
+                localStorage.setItem('leads', JSON.stringify([...existingLeads, ...allData.leads]));
+                
+                // Pricelists
+                updateProgress(83, 'Pricelist...');
+                const existingPricelists = JSON.parse(localStorage.getItem('pricelists') || '[]');
+                if (existingPricelists.length === 0) {
+                    localStorage.setItem('pricelists', JSON.stringify(allData.pricelists));
+                }
+                
+                updateProgress(100, 'Selesai!');
+                
+                showResult(true, '<strong>✅ Berhasil!</strong><br>Semua data telah ditambahkan. Redirect ke dashboard dalam 3 detik...');
+                updateStats();
+                
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
+                
+            } catch (error) {
+                showResult(false, '<strong>❌ Error!</strong><br>' + error.message);
+            }
+        }
+
+        function tambahDataDasar() {
+            try {
+                updateProgress(0, 'Memulai...');
+                
+                updateProgress(25, 'Testimonials...');
+                const existingTestimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
+                if (existingTestimonials.length === 0) {
+                    localStorage.setItem('testimonials', JSON.stringify(allData.testimonials));
+                }
+                
+                updateProgress(50, 'Packages...');
+                const existingPackages = JSON.parse(localStorage.getItem('service_packages') || '[]');
+                if (existingPackages.length === 0) {
+                    localStorage.setItem('service_packages', JSON.stringify(allData.servicePackages));
+                }
+                
+                updateProgress(75, 'Bookings...');
+                const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                if (existingBookings.length === 0) {
+                    localStorage.setItem('bookings', JSON.stringify(allData.bookings));
+                }
+                
+                updateProgress(100, 'Selesai!');
+                
+                showResult(true, '<strong>✅ Berhasil!</strong><br>Data dasar telah ditambahkan.');
+                updateStats();
+                
+            } catch (error) {
+                showResult(false, '<strong>❌ Error!</strong><br>' + error.message);
+            }
+        }
+
+        function hapusSemuaData() {
+            if (confirm('⚠️ Yakin ingin menghapus SEMUA data? Tindakan ini tidak dapat dibatalkan!')) {
+                localStorage.clear();
+                showResult(true, '<strong>✅ Berhasil!</strong><br>Semua data telah dihapus.');
+                updateStats();
+            }
+        }
+
+        // Load stats on page load
+        window.addEventListener('load', updateStats);
+    </script>
+</body>
+</html>

@@ -142,31 +142,32 @@ const CalendarScheduling = () => {
         />
 
         <div className="mt-6">
-          <div className={cn("flex items-center justify-between mb-4 flex-wrap ", mobileClasses.gapSmall)}>
-            <div className={cn("flex items-center ", mobileClasses.gapSmall)}>
+          <div className={cn("flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4", mobileClasses.gapSmall)}>
+            <div className={cn("flex flex-wrap items-center gap-3", mobileClasses.gapSmall)}>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-primary/20 border-2 border-primary" />
+                <div className="w-3 h-3 rounded-full bg-primary/20 border-2 border-primary flex-shrink-0" />
                 <span className="text-xs font-caption text-muted-foreground">Akad</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-secondary/20 border-2 border-secondary" />
+                <div className="w-3 h-3 rounded-full bg-secondary/20 border-2 border-secondary flex-shrink-0" />
                 <span className="text-xs font-caption text-muted-foreground">Resepsi</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-accent/20 border-2 border-accent" />
+                <div className="w-3 h-3 rounded-full bg-accent/20 border-2 border-accent flex-shrink-0" />
                 <span className="text-xs font-caption text-muted-foreground">Wisuda</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <QuickActionButton
                 label="Pengingat"
                 icon="Bell"
                 variant="outline"
                 onClick={() => setIsReminderModalOpen(true)}
+                className="hidden sm:inline-flex"
               />
               <QuickActionButton
-                label="Google Calendar"
+                label="Google"
                 icon="Calendar"
                 variant="outline"
                 onClick={() => setIsGoogleSyncModalOpen(true)}

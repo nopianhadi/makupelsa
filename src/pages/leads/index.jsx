@@ -110,11 +110,11 @@ const LeadSection = ({ title, description, icon, iconBg, iconColor, badgeBg, bad
 
 const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
     return (
-        <div className={cn(" bg-card border border-border rounded-lg overflow-hidden shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-shadow", mobileClasses.cardCompact)}>
-            <div className="flex-1">
+        <div className={cn("p-3 sm:p-4 bg-card border border-border rounded-lg overflow-hidden shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow", mobileClasses.cardCompact)}>
+            <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap mb-2">
-                    <h3 className="font-bold text-base">{lead.name}</h3>
-                    <span className={`px-2 py-0.5 text-xs rounded-full ${
+                    <h3 className="font-bold text-sm sm:text-base break-words">{lead.name}</h3>
+                    <span className={`px-2 py-0.5 text-xs rounded-full flex-shrink-0 ${
                         lead.status === 'New' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' :
                         lead.status === 'Contacted' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-200' :
                         lead.status === 'Interested' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-200' :
@@ -129,37 +129,37 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
                          lead.status === 'Lost' ? 'Lost' : lead.status}
                     </span>
                 </div>
-                <div className={cn("flex items-center  text-xs sm:text-xs sm:text-xs sm:text-sm text-muted-foreground", mobileClasses.gapSmall)}>
+                <div className={cn("flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground", mobileClasses.gapSmall)}>
                     <div className="flex items-center gap-1">
-                        <Icon name="Phone" size={14} />
-                        <span>{lead.phone}</span>
+                        <Icon name="Phone" size={14} className="flex-shrink-0" />
+                        <span className="break-all">{lead.phone}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <Icon name="Tag" size={14} />
-                        <span>{lead.source}</span>
+                        <Icon name="Tag" size={14} className="flex-shrink-0" />
+                        <span className="break-words">{lead.source}</span>
                     </div>
                 </div>
                 {lead.notes && (
-                    <p className="text-muted-foreground text-xs mt-2 italic line-clamp-2">
+                    <p className="text-muted-foreground text-xs mt-2 italic break-words line-clamp-2">
                         {lead.notes}
                     </p>
                 )}
             </div>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
+            <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap flex-shrink-0">
                 <button
                     onClick={() => onFollowUp(lead)}
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-2 bg-green-600 text-white rounded-lg text-xs sm:text-sm hover:bg-green-700 transition-colors"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-2 sm:px-3 py-2 bg-green-600 text-white rounded-lg text-xs sm:text-sm hover:bg-green-700 transition-colors"
                 >
-                    <Icon name="Send" size={16} />
+                    <Icon name="Send" size={14} sm:size={16} className="flex-shrink-0" />
                     <span className="hidden sm:inline">Kirim</span>
                 </button>
                 {lead.status !== 'Converted' && lead.status !== 'Lost' && (
                     <button
                         onClick={() => onConvert(lead)}
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-2 bg-primary text-primary-foreground rounded-lg text-xs sm:text-sm hover:bg-primary/90 transition-colors"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-2 sm:px-3 py-2 bg-primary text-primary-foreground rounded-lg text-xs sm:text-sm hover:bg-primary/90 transition-colors"
                     >
-                        <Icon name="UserCheck" size={16} />
+                        <Icon name="UserCheck" size={14} sm:size={16} className="flex-shrink-0" />
                         <span className="hidden sm:inline">Jadi Klien</span>
                     </button>
                 )}
@@ -168,14 +168,14 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
                     className="p-2 hover:bg-muted rounded-lg text-blue-500 transition-colors"
                     title="Edit"
                 >
-                    <Icon name="Edit" size={18} />
+                    <Icon name="Edit" size={16} sm:size={18} />
                 </button>
                 <button
                     onClick={() => onDelete(lead.id)}
                     className="p-2 hover:bg-muted rounded-lg text-red-500 transition-colors"
                     title="Hapus"
                 >
-                    <Icon name="Trash" size={18} />
+                    <Icon name="Trash" size={16} sm:size={18} />
                 </button>
             </div>
         </div>
@@ -447,14 +447,14 @@ const Leads = () => {
                             <div className={cn("mb-4 sm: space-y-3", mobileClasses.marginBottom)}>
                                 <div className="flex gap-2">
                                     <div className="relative flex-1">
-                                        <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                                         <input
                                             type="text"
                                             placeholder="Cari nama atau nomor..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            className="w-full pl-10 pr-4 py-2 rounded-lg border border-input bg-background"
+                                            className="w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 text-sm rounded-lg border border-input bg-background"
                                         />
+                                        <Icon name="Search" size={16} sm:size={18} className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10" />
                                     </div>
                                     <button
                                         onClick={() => setShowFilters(!showFilters)}

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Pricelist - Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .success {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-left: 4px solid #4CAF50;
+        }
+        .info {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-left: 4px solid #2196F3;
+        }
+        .warning {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-left: 4px solid #ff9800;
+        }
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Tambah Data Pricelist</h1>
+        <p class="subtitle">Kelola data pricelist makeup Anda dengan mudah</p>
+
+        <div class="step">
+            <h3>📋 Langkah 1: Cek Data Saat Ini</h3>
+            <p>Lihat berapa banyak data pricelist yang sudah ada di aplikasi Anda.</p>
+            <button class="btn-secondary" onclick="cekData()">👁️ Cek Data</button>
+        </div>
+
+        <div class="step">
+            <h3>✨ Langkah 2: Tambah Data Baru</h3>
+            <p>Tambahkan 10 paket pricelist dengan gambar ke aplikasi Anda.</p>
+            <button onclick="tambahDataOtomatis()">🚀 Tambah Data Otomatis</button>
+        </div>
+
+        <div class="step">
+            <h3>🗑️ Langkah 3: Hapus Data (Opsional)</h3>
+            <p>Hapus semua data pricelist jika diperlukan.</p>
+            <button class="btn-danger" onclick="hapusSemua()">⚠️ Hapus Semua Data</button>
+        </div>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Fungsi untuk generate ID unik
+        function nanoid(length = 21) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function cekData() {
+            const pricelists = JSON.parse(localStorage.getItem('pricelists') || '[]');
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result info';
+            resultDiv.style.display = 'block';
+            
+            if (pricelists.length === 0) {
+                resultDiv.innerHTML = `
+                    <h3>📊 Status Data</h3>
+                    <p><strong>Belum ada data pricelist.</strong></p>
+                    <p>Klik tombol "Tambah Data Otomatis" untuk menambahkan data.</p>
+                `;
+            } else {
+                let html = `
+                    <h3>📊 Status Data</h3>
+                    <p><strong>Total: ${pricelists.length} pricelist</strong></p>
+                    <div style="margin-top: 15px;">
+                `;
+                pricelists.forEach((item, index) => {
+                    html += `
+                        <div style="margin: 8px 0;">
+                            <span class="badge">${index + 1}</span>
+                            <strong>${item.title}</strong> - ${item.images.length} gambar
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                resultDiv.innerHTML = html;
+            }
+        }
+
+        function tambahDataOtomatis() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result info';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h3>⏳ Sedang Memproses...</h3>
+                <p>Mohon tunggu, sedang menambahkan data pricelist...</p>
+            `;
+
+            // Simulasi delay untuk efek loading
+            setTimeout(() => {
+                try {
+                    // Data pricelist (gambar placeholder - ganti dengan gambar asli Anda)
+                    const sampleImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23ddd' width='400' height='300'/%3E%3Ctext fill='%23999' font-family='sans-serif' font-size='24' dy='10.5' font-weight='bold' x='50%25' y='50%25' text-anchor='middle'%3EMakeup Image%3C/text%3E%3C/svg%3E";
+                    
+                    const newPricelists = [
+                        {
+                            title: 'Paket Wedding Elegant 2025',
+                            description: 'Paket makeup wedding lengkap dengan styling rambut dan aksesoris. Cocok untuk acara pernikahan yang elegan dan mewah.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Prewedding Premium',
+                            description: 'Makeup dan styling untuk sesi foto prewedding. Termasuk touch up dan konsultasi tema.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Engagement Party',
+                            description: 'Makeup natural dan fresh untuk acara lamaran. Tahan lama hingga 8 jam.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Graduation Makeup',
+                            description: 'Makeup wisuda yang natural dan photogenic. Cocok untuk foto dan video dokumentasi.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Party Makeup',
+                            description: 'Makeup glamour untuk pesta dan acara malam. Bold dan tahan lama.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Bridesmaid Complete',
+                            description: 'Paket makeup untuk bridesmaid dengan harga spesial group. Minimal 3 orang.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Photoshoot Studio',
+                            description: 'Makeup untuk sesi foto studio dengan berbagai konsep. Termasuk 2x touch up.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Birthday Special',
+                            description: 'Makeup ulang tahun yang fun dan colorful. Cocok untuk sweet seventeen dan milestone birthday.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Corporate Event',
+                            description: 'Makeup profesional untuk acara kantor, seminar, dan presentasi. Natural dan rapi.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            title: 'Paket Traditional Wedding',
+                            description: 'Makeup adat dengan riasan tradisional lengkap. Tersedia berbagai adat Nusantara.',
+                            whatsappNumber: '6281234567890',
+                            images: [sampleImage, sampleImage, sampleImage],
+                            id: nanoid(),
+                            publicId: nanoid(10),
+                            createdAt: new Date().toISOString()
+                        }
+                    ];
+
+                    // Ambil data yang sudah ada
+                    const existingPricelists = JSON.parse(localStorage.getItem('pricelists') || '[]');
+                    
+                    // Gabungkan
+                    const allPricelists = [...existingPricelists, ...newPricelists];
+                    
+                    // Simpan
+                    localStorage.setItem('pricelists', JSON.stringify(allPricelists));
+                    
+                    // Trigger event untuk update UI
+                    window.dispatchEvent(new Event('pricelistAdded'));
+                    window.dispatchEvent(new Event('dataUpdated'));
+                    
+                    // Tampilkan hasil
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Berhasil!</h3>
+                        <p><strong>Data berhasil ditambahkan!</strong></p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>✓ Ditambahkan: ${newPricelists.length} pricelist baru</li>
+                            <li>✓ Total sekarang: ${allPricelists.length} pricelist</li>
+                        </ul>
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin-top: 15px;">
+                            <strong>📝 Catatan:</strong>
+                            <p style="margin: 5px 0 0 0;">Gambar menggunakan placeholder. Anda bisa edit dan upload gambar asli melalui aplikasi.</p>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button onclick="location.reload()" style="background: #4CAF50;">🔄 Refresh Halaman</button>
+                        </div>
+                    `;
+                } catch (error) {
+                    resultDiv.className = 'result warning';
+                    resultDiv.innerHTML = `
+                        <h3>❌ Error!</h3>
+                        <p><strong>Terjadi kesalahan:</strong></p>
+                        <div class="code-box">${error.message}</div>
+                    `;
+                }
+            }, 500);
+        }
+
+        function hapusSemua() {
+            if (confirm('⚠️ PERINGATAN!\n\nApakah Anda yakin ingin menghapus SEMUA data pricelist?\n\nTindakan ini tidak dapat dibatalkan!')) {
+                localStorage.removeItem('pricelists');
+                
+                // Trigger event
+                window.dispatchEvent(new Event('pricelistDeleted'));
+                window.dispatchEvent(new Event('dataUpdated'));
+                
+                const resultDiv = document.getElementById('result');
+                resultDiv.className = 'result warning';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `
+                    <h3>🗑️ Data Dihapus</h3>
+                    <p><strong>Semua data pricelist telah dihapus.</strong></p>
+                    <div style="margin-top: 20px;">
+                        <button onclick="location.reload()" style="background: #ff9800;">🔄 Refresh Halaman</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto check data saat halaman dimuat
+        window.addEventListener('load', () => {
+            setTimeout(cekData, 500);
+        });
+    </script>
+</body>
+</html>

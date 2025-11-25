@@ -111,16 +111,13 @@ const ClientSearchFilter = ({
     <div className={`relative ${className}`}>
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            <Icon name="Search" size={18} color="var(--color-muted-foreground)" />
-          </div>
           <input
             type="text"
             value={searchValue}
             onChange={handleSearchChange}
             placeholder={placeholder}
             className="
-              w-full pl-10 pr-10 py-2.5 rounded-md
+              w-full pl-3 sm:pl-4 pr-10 sm:pr-12 py-2 sm:py-2.5 rounded-md
               bg-surface border border-border
               text-sm text-foreground placeholder:text-muted-foreground
               focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent
@@ -128,13 +125,16 @@ const ClientSearchFilter = ({
             "
             aria-label="Cari klien"
           />
+          <div className="absolute right-10 sm:right-11 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+            <Icon name="Search" size={16} sm:size={18} color="var(--color-muted-foreground)" />
+          </div>
           {searchValue && (
             <button
               onClick={handleClearSearch}
               className="
                 absolute right-3 top-1/2 -translate-y-1/2
                 text-muted-foreground hover:text-foreground
-                transition-smooth
+                transition-smooth z-20
               "
               aria-label="Hapus pencarian"
             >

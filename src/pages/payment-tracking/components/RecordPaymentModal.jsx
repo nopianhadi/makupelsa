@@ -178,15 +178,15 @@ const RecordPaymentModal = ({ client, onClose, onSubmit }) => {
           elevation-12 max-h-[90vh] overflow-y-auto
         "
       >
-        <div className="sticky top-0 bg-card border-b border-border p-4 rounded-t-2xl">
-          <div className="flex items-center justify-between">
-            <h2 id="modal-title" className="text-lg font-heading font-bold text-foreground">
+        <div className="sticky top-0 bg-card border-b border-border p-3 sm:p-4 rounded-t-2xl">
+          <div className="flex items-center justify-between gap-2">
+            <h2 id="modal-title" className="text-base sm:text-lg font-heading font-bold text-foreground break-words flex-1">
               Catat Pembayaran
             </h2>
             <button
               onClick={onClose}
               className="
-                w-8 h-8 rounded-lg flex items-center justify-center
+                w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
                 text-muted-foreground hover:text-foreground hover:bg-muted
                 transition-smooth
               "
@@ -199,17 +199,17 @@ const RecordPaymentModal = ({ client, onClose, onSubmit }) => {
 
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div className="p-3 rounded-lg bg-surface border border-border">
-            <p className="text-sm font-caption text-muted-foreground mb-1">
+            <p className="text-xs sm:text-sm font-caption text-muted-foreground mb-1">
               Klien
             </p>
-            <p className="text-base font-heading font-semibold text-foreground">
+            <p className="text-sm sm:text-base font-heading font-semibold text-foreground break-words">
               {client?.name}
             </p>
-            <div className="flex items-center justify-between mt-2 pt-2 border-t border-border">
-              <span className="text-sm font-caption text-muted-foreground">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mt-2 pt-2 border-t border-border">
+              <span className="text-xs sm:text-sm font-caption text-muted-foreground">
                 Sisa Pembayaran
               </span>
-              <span className="text-base font-mono font-bold text-error">
+              <span className="text-sm sm:text-base font-mono font-bold text-error">
                 {formatCurrency(client?.remainingAmount)}
               </span>
             </div>

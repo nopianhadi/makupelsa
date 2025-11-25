@@ -45,20 +45,20 @@ const BookingCard = ({ booking, onEdit, onDelete, onStatusChange }) => {
 
   return (
     <div className="bg-card border border-border rounded-xl p-5 elevation-1 hover:elevation-3 transition-smooth">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
+      <div className="flex items-start justify-between gap-2 mb-4">
+        <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-lg font-heading font-bold text-foreground">
+            <h3 className="text-base sm:text-lg font-heading font-bold text-foreground break-words">
               {booking.clientName}
             </h3>
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Icon name="Phone" size={14} />
-            <span>{booking.clientPhone}</span>
+          <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+            <Icon name="Phone" size={14} className="flex-shrink-0 mt-0.5" />
+            <span className="break-all">{booking.clientPhone}</span>
           </div>
         </div>
         
-        <div className="flex gap-1">
+        <div className="flex gap-1 flex-shrink-0">
           <button
             onClick={() => onEdit(booking)}
             className="p-2 hover:bg-muted rounded-lg transition-smooth"
@@ -77,36 +77,36 @@ const BookingCard = ({ booking, onEdit, onDelete, onStatusChange }) => {
       </div>
 
       <div className="space-y-3 mb-4">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-medium ${getServiceColor(booking.serviceType)}`}>
             {booking.serviceType.charAt(0).toUpperCase() + booking.serviceType.slice(1)}
           </span>
           <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-medium ${statusConfig.bg} ${statusConfig.text}`}>
-            <Icon name={statusConfig.icon} size={12} />
+            <Icon name={statusConfig.icon} size={12} className="flex-shrink-0" />
             {statusConfig.label}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-foreground">
-          <Icon name="Calendar" size={16} color="var(--color-foreground)" />
-          <span>{formatDate(booking.eventDate)} - {booking.eventTime}</span>
+        <div className="flex items-start gap-2 text-xs sm:text-sm text-foreground">
+          <Icon name="Calendar" size={16} color="var(--color-foreground)" className="flex-shrink-0 mt-0.5" />
+          <span className="break-words">{formatDate(booking.eventDate)} - {booking.eventTime}</span>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Icon name="MapPin" size={16} />
-          <span className="truncate">{booking.venue}</span>
+        <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+          <Icon name="MapPin" size={16} className="flex-shrink-0 mt-0.5" />
+          <span className="break-words">{booking.venue}</span>
         </div>
 
         {booking.totalAmount > 0 && (
           <div className="pt-2 border-t border-border">
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between text-xs sm:text-sm">
               <span className="text-muted-foreground">Total:</span>
-              <span className="font-semibold text-foreground">{formatCurrency(booking.totalAmount)}</span>
+              <span className="font-semibold text-foreground break-all">{formatCurrency(booking.totalAmount)}</span>
             </div>
             {booking.downPayment > 0 && (
-              <div className="flex justify-between text-sm mt-1">
+              <div className="flex justify-between text-xs sm:text-sm mt-1">
                 <span className="text-muted-foreground">DP:</span>
-                <span className="text-success">{formatCurrency(booking.downPayment)}</span>
+                <span className="text-success break-all">{formatCurrency(booking.downPayment)}</span>
               </div>
             )}
           </div>

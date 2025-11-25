@@ -108,26 +108,26 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-1">
-            <h3 className="text-sm sm:text-base font-heading font-semibold text-foreground truncate" title={client?.name}>
+            <h3 className="text-sm sm:text-base font-heading font-semibold text-foreground break-words flex-1" title={client?.name}>
               {client?.name}
             </h3>
             {client?.totalEvents > 1 && (
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted text-muted-foreground text-xs font-medium whitespace-nowrap">
-                <Icon name="Calendar" size={12} />
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted text-muted-foreground text-xs font-medium whitespace-nowrap flex-shrink-0">
+                <Icon name="Calendar" size={12} className="flex-shrink-0" />
                 {client?.totalEvents} Acara
               </span>
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-            <Icon name="Phone" size={14} />
-            <span className="font-mono">{client?.phone}</span>
+          <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground mb-2">
+            <Icon name="Phone" size={14} className="flex-shrink-0 mt-0.5" />
+            <span className="font-mono break-all">{client?.phone}</span>
           </div>
 
           {client?.location && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Icon name="MapPin" size={14} />
-              <span className="truncate">{client?.location}</span>
+            <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+              <Icon name="MapPin" size={14} className="flex-shrink-0 mt-0.5" />
+              <span className="break-words">{client?.location}</span>
             </div>
           )}
         </div>
@@ -145,24 +145,24 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
               </span>
             </div>
 
-            <div className="flex items-center gap-2 mb-2">
-              <Icon name="Calendar" size={14} color="var(--color-foreground)" />
-              <span className="text-sm font-medium text-foreground">
+            <div className="flex items-start gap-2 mb-2">
+              <Icon name="Calendar" size={14} color="var(--color-foreground)" className="flex-shrink-0 mt-0.5" />
+              <span className="text-xs sm:text-sm font-medium text-foreground break-words">
                 {formatDate(upcomingEvent?.eventDate)}
               </span>
             </div>
 
-            <div className="flex items-center gap-2 mb-2">
-              <Icon name="Clock" size={14} color="var(--color-muted-foreground)" />
-              <span className="text-sm text-muted-foreground font-mono">
+            <div className="flex items-start gap-2 mb-2">
+              <Icon name="Clock" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+              <span className="text-xs sm:text-sm text-muted-foreground font-mono">
                 {upcomingEvent?.eventTime}
               </span>
             </div>
 
             {upcomingEvent?.venue && (
-              <div className="flex items-center gap-2">
-                <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" />
-                <span className="text-sm text-muted-foreground truncate">
+              <div className="flex items-start gap-2">
+                <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+                <span className="text-xs sm:text-sm text-muted-foreground break-words">
                   {upcomingEvent?.venue}
                 </span>
               </div>
@@ -298,22 +298,22 @@ const ClientCard = ({ client, onEdit, onAddService, onSendReminder, onViewInvoic
                   </span>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Icon name="Calendar" size={14} color="var(--color-foreground)" />
-                    <span className="text-sm font-medium text-foreground">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Calendar" size={14} color="var(--color-foreground)" className="flex-shrink-0 mt-0.5" />
+                    <span className="text-xs sm:text-sm font-medium text-foreground break-words">
                       {formatDate(upcomingEvent?.eventDate)}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Icon name="Clock" size={14} color="var(--color-muted-foreground)" />
-                    <span className="text-sm text-muted-foreground font-mono">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Clock" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+                    <span className="text-xs sm:text-sm text-muted-foreground font-mono">
                       {upcomingEvent?.eventTime}
                     </span>
                   </div>
                   {upcomingEvent?.venue && (
-                    <div className="flex items-center gap-2">
-                      <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" />
-                      <span className="text-sm text-muted-foreground truncate">
+                    <div className="flex items-start gap-2">
+                      <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+                      <span className="text-xs sm:text-sm text-muted-foreground break-words">
                         {upcomingEvent?.venue}
                       </span>
                     </div>

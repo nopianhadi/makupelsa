@@ -32,8 +32,8 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
         className="bg-card border border-border rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto elevation-12 animate-in fade-in slide-in-from-bottom-4 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-6 border-b border-border">
-          <h2 className="text-xl font-heading font-bold text-foreground">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 sm:p-6 border-b border-border">
+          <h2 className="text-lg sm:text-xl font-heading font-bold text-foreground">
             Preview Invoice
           </h2>
           <div className="flex items-center gap-2">
@@ -43,25 +43,27 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
                 size="default"
                 iconName="Download"
                 onClick={onDownload}
+                className="text-xs sm:text-sm"
               >
-                Download PDF
+                <span className="hidden sm:inline">Download PDF</span>
+                <span className="sm:hidden">PDF</span>
               </Button>
             )}
-            <Button variant="ghost" size="icon" iconName="X" onClick={onClose} />
+            <Button variant="ghost" size="icon" iconName="X" onClick={onClose} className="flex-shrink-0" />
           </div>
         </div>
 
-        <div className="p-8" id="invoice-content">
+        <div className="p-3 sm:p-8" id="invoice-content">
           {/* Header dengan Logo */}
-          <div className="flex items-start justify-between mb-8">
-            <div className="flex items-start gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 sm:mb-8">
+            <div className="flex items-start gap-2 sm:gap-4 min-w-0 flex-1">
               {/* Logo */}
               {invoice.logoUrl && (
                 <div className="flex-shrink-0">
                   <img 
                     src={invoice.logoUrl} 
                     alt="Logo" 
-                    className="h-16 w-16 object-contain rounded-lg"
+                    className="h-12 w-12 sm:h-16 sm:w-16 object-contain rounded-lg"
                     onError={(e) => {
                       e.target.style.display = 'none';
                     }}
@@ -70,24 +72,24 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
               )}
               
               {/* Info Bisnis */}
-              <div>
+              <div className="min-w-0 flex-1">
                 {invoice.businessName && (
-                  <h1 className="text-2xl font-heading font-bold text-foreground mb-2">
+                  <h1 className="text-lg sm:text-2xl font-heading font-bold text-foreground mb-2 break-words">
                     {invoice.businessName}
                   </h1>
                 )}
                 {invoice.businessAddress && (
-                  <p className="text-sm text-muted-foreground mb-1">{invoice.businessAddress}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1 break-words">{invoice.businessAddress}</p>
                 )}
                 {invoice.businessContact && (
-                  <p className="text-sm text-muted-foreground mb-1">
-                    <Icon name="Phone" size={14} className="inline mr-1" />
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1 break-all">
+                    <Icon name="Phone" size={14} className="inline mr-1 flex-shrink-0" />
                     {invoice.businessContact}
                   </p>
                 )}
                 {invoice.businessEmail && (
-                  <p className="text-sm text-muted-foreground">
-                    <Icon name="Mail" size={14} className="inline mr-1" />
+                  <p className="text-xs sm:text-sm text-muted-foreground break-all">
+                    <Icon name="Mail" size={14} className="inline mr-1 flex-shrink-0" />
                     {invoice.businessEmail}
                   </p>
                 )}
@@ -95,10 +97,10 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
             </div>
             
             {/* Invoice Info */}
-            <div className="text-right flex-shrink-0">
-              <div className="text-3xl font-heading font-bold text-primary mb-2">INVOICE</div>
-              <div className="text-sm text-muted-foreground">
-                <p className="font-mono font-bold text-foreground">{invoice.invoiceNumber}</p>
+            <div className="text-left sm:text-right flex-shrink-0">
+              <div className="text-xl sm:text-3xl font-heading font-bold text-primary mb-2">INVOICE</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">
+                <p className="font-mono font-bold text-foreground break-all">{invoice.invoiceNumber}</p>
                 <p>Tanggal: {formatDate(invoice.date)}</p>
                 {invoice.dueDate && <p>Jatuh Tempo: {formatDate(invoice.dueDate)}</p>}
               </div>
@@ -106,31 +108,31 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
           </div>
 
           {/* Info Klien */}
-          <div className="mb-8 p-4 bg-muted/30 rounded-xl">
+          <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-muted/30 rounded-xl">
             <p className="text-xs font-medium text-muted-foreground mb-2">KEPADA:</p>
-            <p className="text-lg font-heading font-bold text-foreground">{invoice.client}</p>
+            <p className="text-base sm:text-lg font-heading font-bold text-foreground break-words">{invoice.client}</p>
           </div>
 
           {/* Tabel Item */}
-          <div className="mb-8">
-            <table className="w-full">
+          <div className="mb-6 sm:mb-8 overflow-x-auto">
+            <table className="w-full min-w-[500px]">
               <thead>
                 <tr className="border-b-2 border-border">
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-foreground">Deskripsi</th>
-                  <th className="text-center py-3 px-2 text-sm font-semibold text-foreground w-20">Qty</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-foreground w-32">Harga</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-foreground w-32">Total</th>
+                  <th className="text-left py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm font-semibold text-foreground">Deskripsi</th>
+                  <th className="text-center py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm font-semibold text-foreground w-16 sm:w-20">Qty</th>
+                  <th className="text-right py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm font-semibold text-foreground w-24 sm:w-32">Harga</th>
+                  <th className="text-right py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm font-semibold text-foreground w-24 sm:w-32">Total</th>
                 </tr>
               </thead>
               <tbody>
                 {invoice.items?.map((item, index) => (
                   <tr key={index} className="border-b border-border">
-                    <td className="py-3 px-2 text-sm text-foreground">{item.description}</td>
-                    <td className="py-3 px-2 text-sm text-center text-foreground">{item.quantity}</td>
-                    <td className="py-3 px-2 text-sm text-right text-foreground font-mono">
+                    <td className="py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm text-foreground break-words">{item.description}</td>
+                    <td className="py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm text-center text-foreground">{item.quantity}</td>
+                    <td className="py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm text-right text-foreground font-mono">
                       {formatCurrency(item.amount)}
                     </td>
-                    <td className="py-3 px-2 text-sm text-right text-foreground font-mono font-semibold">
+                    <td className="py-2 sm:py-3 px-1 sm:px-2 text-xs sm:text-sm text-right text-foreground font-mono font-semibold">
                       {formatCurrency(item.amount * item.quantity)}
                     </td>
                   </tr>
@@ -140,27 +142,27 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
           </div>
 
           {/* Total */}
-          <div className="flex justify-end mb-8">
-            <div className="w-80">
-              <div className="flex justify-between py-2 text-sm">
+          <div className="flex justify-end mb-6 sm:mb-8">
+            <div className="w-full sm:w-80">
+              <div className="flex justify-between py-2 text-xs sm:text-sm">
                 <span className="text-muted-foreground">Subtotal:</span>
-                <span className="font-mono text-foreground">{formatCurrency(invoice.subtotal)}</span>
+                <span className="font-mono text-foreground break-all">{formatCurrency(invoice.subtotal)}</span>
               </div>
               {invoice.tax > 0 && (
-                <div className="flex justify-between py-2 text-sm">
+                <div className="flex justify-between py-2 text-xs sm:text-sm">
                   <span className="text-muted-foreground">Pajak:</span>
-                  <span className="font-mono text-foreground">{formatCurrency(invoice.tax)}</span>
+                  <span className="font-mono text-foreground break-all">{formatCurrency(invoice.tax)}</span>
                 </div>
               )}
               {invoice.discount > 0 && (
-                <div className="flex justify-between py-2 text-sm">
+                <div className="flex justify-between py-2 text-xs sm:text-sm">
                   <span className="text-muted-foreground">Diskon:</span>
-                  <span className="font-mono text-success">-{formatCurrency(invoice.discount)}</span>
+                  <span className="font-mono text-success break-all">-{formatCurrency(invoice.discount)}</span>
                 </div>
               )}
               <div className="flex justify-between py-3 border-t-2 border-border">
-                <span className="font-bold text-foreground">TOTAL:</span>
-                <span className="font-mono font-bold text-xl text-primary">
+                <span className="font-bold text-sm sm:text-base text-foreground">TOTAL:</span>
+                <span className="font-mono font-bold text-lg sm:text-xl text-primary break-all">
                   {formatCurrency(invoice.grandTotal)}
                 </span>
               </div>
@@ -169,11 +171,11 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
 
           {/* Info Pembayaran */}
           {(invoice.bankName || invoice.paymentMethod) && (
-            <div className="mb-8 p-4 bg-muted/30 rounded-xl">
+            <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-muted/30 rounded-xl">
               <p className="text-xs font-medium text-muted-foreground mb-3">INFORMASI PEMBAYARAN:</p>
               {invoice.paymentMethod && (
                 <div className="mb-2">
-                  <span className="text-sm text-foreground truncate">
+                  <span className="text-xs sm:text-sm text-foreground break-words">
                     <span className="font-semibold">Metode: </span>
                     {invoice.paymentMethod === 'cash' ? 'Tunai' :
                      invoice.paymentMethod === 'transfer' ? 'Transfer Bank' :
@@ -184,7 +186,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
               )}
               {invoice.paymentReference && (
                 <div className="mb-2">
-                  <span className="text-sm text-foreground truncate">
+                  <span className="text-xs sm:text-sm text-foreground break-words">
                     <span className="font-semibold">Referensi: </span>
                     {invoice.paymentReference}
                   </span>
@@ -193,14 +195,14 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
               {invoice.bankName && (
                 <>
                   <div className="mb-2">
-                    <span className="text-sm text-foreground truncate">
+                    <span className="text-xs sm:text-sm text-foreground break-words">
                       <span className="font-semibold">Bank: </span>
                       {invoice.bankName}
                     </span>
                   </div>
                   {invoice.bankAccount && (
                     <div className="mb-2">
-                      <span className="text-sm text-foreground truncate">
+                      <span className="text-xs sm:text-sm text-foreground break-all">
                         <span className="font-semibold">No. Rekening: </span>
                         <span className="font-mono">{invoice.bankAccount}</span>
                       </span>
@@ -208,7 +210,7 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
                   )}
                   {invoice.bankAccountName && (
                     <div>
-                      <span className="text-sm text-foreground truncate">
+                      <span className="text-xs sm:text-sm text-foreground break-words">
                         <span className="font-semibold">Atas Nama: </span>
                         {invoice.bankAccountName}
                       </span>
@@ -234,9 +236,9 @@ const InvoicePreviewModal = ({ invoice, onClose, onDownload }) => {
 
           {/* Catatan */}
           {invoice.notes && (
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <p className="text-xs font-medium text-muted-foreground mb-2">CATATAN:</p>
-              <p className="text-sm text-foreground truncate">{invoice.notes}</p>
+              <p className="text-xs sm:text-sm text-foreground break-words">{invoice.notes}</p>
             </div>
           )}
 

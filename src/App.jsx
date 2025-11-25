@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import SidebarLayout from "./components/ui/SidebarLayout";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { runAllMigrations } from "./utils/migrateImageData";
 import "./utils/resetData"; // Import untuk expose ke window
-import { useDataValidation, useAutoSync } from "./hooks/useDataValidation";
-import DataValidationAlert from "./components/DataValidationAlert";
-import { autoFixAllData } from "./utils/dataValidation";
+
 import Dashboard from "./pages/dashboard";
 import CalendarScheduling from "./pages/calendar-scheduling";
 import ClientManagement from "./pages/client-management";
@@ -30,11 +28,9 @@ import PublicPackages from "./pages/service-packages/PublicPackages";
 import Team from "./pages/team";
 import Promotions from "./pages/promotions";
 import ClientKPI from "./pages/client-kpi";
-import KPIManagement from "./pages/client-kpi/KPIManagement";
 import PublicClient from "./pages/public-client";
 import ClientPortal from "./pages/client-management/ClientPortal";
 import Homepage from "./pages/homepage";
-import Testimonials from "./pages/testimonials";
 import PublicTestimonialForm from "./pages/testimonials/PublicTestimonialForm";
 import PublicTestimonials from "./pages/testimonials/PublicTestimonials";
 
@@ -50,47 +46,15 @@ const ProtectedLayout = () => {
 };
 
 function App() {
-    const { validationResults, isValidating, runValidation, hasIssues } = useDataValidation(false);
-    const [showValidationAlert, setShowValidationAlert] = useState(false);
-    
-    useAutoSync();
-
     // Run data migrations on app load
     useEffect(() => {
         runAllMigrations();
     }, []);
 
-    // Show validation alert if there are issues, hide when resolved
-    useEffect(() => {
-        if (hasIssues && !isValidating) {
-            setShowValidationAlert(true);
-        } else if (!hasIssues && !isValidating && validationResults) {
-            setShowValidationAlert(false);
-        }
-    }, [hasIssues, isValidating, validationResults]);
-
-    const handleRunFix = () => {
-        runValidation(true);
-    };
-
-    const handleCloseAlert = () => {
-        setShowValidationAlert(false);
-        setTimeout(() => {
-            runValidation(false);
-        }, 2000);
-    };
-
     return (
         <ErrorBoundary>
             <Router>
                 <div className="min-h-screen bg-background text-foreground font-sans">
-                    {showValidationAlert && validationResults && (
-                        <DataValidationAlert
-                            validationResults={validationResults}
-                            onClose={handleCloseAlert}
-                            onRunFix={handleRunFix}
-                        />
-                    )}
                     <Routes>
                     {/* Homepage */}
                     <Route path="/" element={<Homepage />} />
@@ -126,7 +90,6 @@ function App() {
                         <Route path="promotions" element={<Promotions />} />
                         <Route path="client-kpi" element={<ClientKPI />} />
                         <Route path="kpi-management" element={<ClientKPI />} />
-                        <Route path="testimonials" element={<Testimonials />} />
                     </Route>
 
                     {/* 404 Not Found */}

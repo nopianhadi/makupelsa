@@ -12,22 +12,6 @@ const ClientPortal = () => {
   const navigate = useNavigate();
   const [client, setClient] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [chatMessage, setChatMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
-  const [expandedSections, setExpandedSections] = useState({
-    payment: true,
-    events: true,
-    history: false,
-    communication: false
-  });
-
-  const toggleSection = (section) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
-  };
 
   useEffect(() => {
     // Load data klien dari localStorage berdasarkan clientId
@@ -69,6 +53,10 @@ const ClientPortal = () => {
         phone: "081234567890",
         email: "siti.nurhaliza@email.com",
         location: "Jakarta Selatan",
+        occupation: "Pengusaha",
+        company: "PT. Siti Fashion",
+        instagram: "sitinurhaliza",
+        referralSource: "Instagram",
         profileImage: "https://img.rocket.new/generatedImages/rocket_gen_img_196eda338-1763293740662.png",
         totalAmount: 5500000,
         paymentStatus: "partial",
@@ -81,7 +69,14 @@ const ClientPortal = () => {
             packageName: "Paket Premium Akad",
             totalAmount: 2500000,
             paymentStatus: "partial",
-            notes: "Klien menginginkan makeup natural dengan hijab syar'i"
+            notes: "Klien menginginkan makeup natural dengan hijab syar'i",
+            packageDetails: [
+              "Makeup pengantin (akad)",
+              "Hairdo dengan hijab syar'i",
+              "Touchup makeup",
+              "Aksesoris hijab premium",
+              "Free konsultasi makeup"
+            ]
           },
           {
             serviceType: "resepsi",
@@ -91,7 +86,16 @@ const ClientPortal = () => {
             packageName: "Paket Luxury Resepsi",
             totalAmount: 3000000,
             paymentStatus: "pending",
-            notes: "Tema resepsi modern elegant dengan warna gold dan putih"
+            notes: "Tema resepsi modern elegant dengan warna gold dan putih",
+            packageDetails: [
+              "Makeup pengantin (resepsi)",
+              "Hairdo glamour",
+              "Gaun pengantin premium",
+              "Aksesoris lengkap",
+              "Makeup keluarga (2 orang)",
+              "Touchup unlimited",
+              "Dokumentasi makeup process"
+            ]
           }
         ],
         paymentHistory: [
@@ -149,40 +153,165 @@ const ClientPortal = () => {
   const totalPaid = client?.paymentHistory?.reduce((sum, p) => sum + p.amount, 0) || 0;
   const remaining = (client?.totalAmount || 0) - totalPaid;
 
-  const handleSendMessage = () => {
-    if (!chatMessage.trim()) return;
-    
-    const newMessage = {
-      id: Date.now(),
-      sender: 'client',
-      message: chatMessage,
-      timestamp: new Date().toISOString()
-    };
-    
-    setChatHistory([...chatHistory, newMessage]);
-    setChatMessage('');
-    
-    // Simulasi auto-reply dari admin
-    setTimeout(() => {
-      const autoReply = {
-        id: Date.now() + 1,
-        sender: 'admin',
-        message: 'Terima kasih atas pesannya! Admin kami akan segera merespons.',
-        timestamp: new Date().toISOString()
-      };
-      setChatHistory(prev => [...prev, autoReply]);
-    }, 1000);
-  };
-
   const handleDownloadInvoice = (eventIndex) => {
-    // Simulasi download invoice
-    alert(`Download invoice untuk ${client.events[eventIndex].packageName}`);
-  };
+    const event = client.events[eventIndex];
+    
+    // Generate invoice HTML
+    const invoiceHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice - ${event.packageName}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; padding: 40px; color: #333; }
+    .invoice-container { max-width: 800px; margin: 0 auto; }
+    .header { border-bottom: 3px solid #e91e63; padding-bottom: 20px; margin-bottom: 30px; }
+    .header h1 { color: #e91e63; font-size: 32px; margin-bottom: 5px; }
+    .header p { color: #666; font-size: 14px; }
+    .info-section { display: flex; justify-content: space-between; margin-bottom: 30px; }
+    .info-box { flex: 1; }
+    .info-box h3 { font-size: 14px; color: #666; margin-bottom: 10px; text-transform: uppercase; }
+    .info-box p { margin: 5px 0; font-size: 14px; }
+    .invoice-details { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+    .invoice-details h2 { color: #e91e63; margin-bottom: 15px; font-size: 18px; }
+    .detail-row { display: flex; padding: 10px 0; border-bottom: 1px solid #e0e0e0; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { flex: 0 0 200px; font-weight: bold; color: #666; }
+    .detail-value { flex: 1; }
+    .package-details { margin-bottom: 30px; }
+    .package-details h3 { color: #333; margin-bottom: 15px; font-size: 16px; }
+    .package-details ul { list-style: none; }
+    .package-details li { padding: 8px 0; padding-left: 25px; position: relative; }
+    .package-details li:before { content: "✓"; position: absolute; left: 0; color: #4caf50; font-weight: bold; }
+    .payment-summary { background: #e91e63; color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+    .payment-row { display: flex; justify-content: space-between; padding: 10px 0; }
+    .payment-row.total { border-top: 2px solid rgba(255,255,255,0.3); margin-top: 10px; padding-top: 15px; font-size: 20px; font-weight: bold; }
+    .notes { background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 30px; }
+    .notes h4 { color: #856404; margin-bottom: 10px; }
+    .notes p { color: #856404; font-size: 14px; line-height: 1.6; }
+    .footer { text-align: center; padding-top: 30px; border-top: 2px solid #e0e0e0; color: #666; font-size: 12px; }
+    .status-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+    .status-paid { background: #4caf50; color: white; }
+    .status-partial { background: #ff9800; color: white; }
+    .status-pending { background: #f44336; color: white; }
+    @media print {
+      body { padding: 20px; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <div class="header">
+      <h1>🌸 INVOICE</h1>
+      <p>MUA Finance Management System</p>
+    </div>
 
-  const handleContactWhatsApp = () => {
-    const phone = '6281234567890'; // Nomor admin
-    const message = `Halo, saya ${client.name}. Saya ingin bertanya tentang acara saya.`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    <div class="info-section">
+      <div class="info-box">
+        <h3>Dari:</h3>
+        <p><strong>MUA Studio</strong></p>
+        <p>Jakarta, Indonesia</p>
+        <p>Email: admin@muafinance.com</p>
+        <p>Phone: +62 812-3456-7890</p>
+      </div>
+      <div class="info-box" style="text-align: right;">
+        <h3>Kepada:</h3>
+        <p><strong>${client.name}</strong></p>
+        <p>${client.location || '-'}</p>
+        <p>Email: ${client.email || '-'}</p>
+        <p>Phone: ${client.phone || '-'}</p>
+      </div>
+    </div>
+
+    <div class="invoice-details">
+      <h2>Detail Invoice</h2>
+      <div class="detail-row">
+        <div class="detail-label">Nomor Invoice:</div>
+        <div class="detail-value">INV-${Date.now()}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Tanggal:</div>
+        <div class="detail-value">${formatDate(new Date().toISOString())}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Jenis Acara:</div>
+        <div class="detail-value">${getServiceTypeLabel(event.serviceType)}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Tanggal Acara:</div>
+        <div class="detail-value">${formatDate(event.eventDate)} - ${event.eventTime}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Lokasi:</div>
+        <div class="detail-value">${event.venue}</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Status Pembayaran:</div>
+        <div class="detail-value">
+          <span class="status-badge status-${event.paymentStatus}">
+            ${event.paymentStatus === 'paid' ? 'Lunas' : event.paymentStatus === 'partial' ? 'Sebagian' : 'Belum Dibayar'}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="package-details">
+      <h3>📦 ${event.packageName}</h3>
+      ${event.packageDetails ? `
+        <ul>
+          ${event.packageDetails.map(detail => `<li>${detail}</li>`).join('')}
+        </ul>
+      ` : '<p>Detail paket tidak tersedia</p>'}
+    </div>
+
+    ${event.notes ? `
+      <div class="notes">
+        <h4>📝 Catatan Khusus:</h4>
+        <p>${event.notes}</p>
+      </div>
+    ` : ''}
+
+    <div class="payment-summary">
+      <div class="payment-row">
+        <span>Subtotal:</span>
+        <span>${formatCurrency(event.totalAmount)}</span>
+      </div>
+      <div class="payment-row">
+        <span>Pajak (0%):</span>
+        <span>${formatCurrency(0)}</span>
+      </div>
+      <div class="payment-row total">
+        <span>TOTAL:</span>
+        <span>${formatCurrency(event.totalAmount)}</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Terima kasih atas kepercayaan Anda!</p>
+      <p>Invoice ini dibuat secara otomatis oleh sistem MUA Finance</p>
+      <p style="margin-top: 10px;">© ${new Date().getFullYear()} MUA Studio. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
+    `;
+
+    // Create blob and download
+    const blob = new Blob([invoiceHTML], { type: 'text/html' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Invoice-${client.name.replace(/\s+/g, '-')}-${event.serviceType}-${Date.now()}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+    
+    // Show success message
+    alert(`✅ Invoice berhasil didownload!\n\nFile: ${link.download}\n\nAnda dapat membuka file HTML ini di browser dan mencetak sebagai PDF.`);
   };
 
   if (loading) {
@@ -248,38 +377,53 @@ const ClientPortal = () => {
 
         {/* Content */}
         <div className="max-w-4xl mx-auto px-4 py-8">
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            <button
-              onClick={handleContactWhatsApp}
-              className="bg-green-500 hover:bg-green-600 text-white rounded-lg p-4 flex items-center gap-3 transition-colors"
-            >
-              <Icon name="MessageCircle" size={24} />
-              <div className="text-left">
-                <p className="font-semibold">Hubungi Admin</p>
-                <p className="text-xs opacity-90">via WhatsApp</p>
+          {/* Informasi Klien */}
+          <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
+            <h2 className="text-lg font-heading font-bold text-foreground mb-4">
+              Informasi Pribadi
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Nama Lengkap</p>
+                <p className="text-base font-medium text-foreground">{client.name}</p>
               </div>
-            </button>
-            <button
-              onClick={() => setIsChatOpen(true)}
-              className="bg-primary hover:bg-primary/90 text-white rounded-lg p-4 flex items-center gap-3 transition-colors"
-            >
-              <Icon name="MessageSquare" size={24} />
-              <div className="text-left">
-                <p className="font-semibold">Chat Admin</p>
-                <p className="text-xs opacity-90">Kirim pesan</p>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Email</p>
+                <p className="text-base font-medium text-foreground">{client.email || '-'}</p>
               </div>
-            </button>
-            <button
-              onClick={() => window.print()}
-              className="bg-secondary hover:bg-secondary/90 text-white rounded-lg p-4 flex items-center gap-3 transition-colors"
-            >
-              <Icon name="Printer" size={24} />
-              <div className="text-left">
-                <p className="font-semibold">Cetak</p>
-                <p className="text-xs opacity-90">Print halaman ini</p>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">No. Telepon</p>
+                <p className="text-base font-medium text-foreground font-mono">{client.phone || '-'}</p>
               </div>
-            </button>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Lokasi</p>
+                <p className="text-base font-medium text-foreground">{client.location || '-'}</p>
+              </div>
+              {client.occupation && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Pekerjaan</p>
+                  <p className="text-base font-medium text-foreground">{client.occupation}</p>
+                </div>
+              )}
+              {client.company && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Perusahaan</p>
+                  <p className="text-base font-medium text-foreground">{client.company}</p>
+                </div>
+              )}
+              {client.instagram && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Instagram</p>
+                  <p className="text-base font-medium text-foreground">@{client.instagram}</p>
+                </div>
+              )}
+              {client.referralSource && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Sumber Referral</p>
+                  <p className="text-base font-medium text-foreground">{client.referralSource}</p>
+                </div>
+              )}
+            </div>
           </div>
           {/* Ringkasan Pembayaran */}
           <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
@@ -318,7 +462,7 @@ const ClientPortal = () => {
           {/* Acara */}
           <div className="bg-card border border-border rounded-lg overflow-hidden p-6 mb-6">
             <h2 className="text-lg font-heading font-bold text-foreground mb-4">
-              Detail Acara
+              Detail Acara & Paket
             </h2>
             <div className="space-y-4">
               {client.events.map((event, index) => (
@@ -352,8 +496,25 @@ const ClientPortal = () => {
                       <Icon name="DollarSign" size={16} />
                       <span className="font-semibold font-mono">{formatCurrency(event.totalAmount)}</span>
                     </div>
+                    
+                    {/* Detail Paket */}
+                    {event.packageDetails && (
+                      <div className="mt-3 pt-3 border-t border-border">
+                        <p className="text-sm font-semibold text-foreground mb-2">Detail Paket:</p>
+                        <ul className="space-y-1">
+                          {event.packageDetails.map((detail, idx) => (
+                            <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                              <Icon name="Check" size={14} className="mt-0.5 flex-shrink-0" color="var(--color-success)" />
+                              <span>{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
                     {event.notes && (
                       <div className="mt-3 pt-3 border-t border-border">
+                        <p className="text-sm font-semibold text-foreground mb-1">Catatan:</p>
                         <p className="text-sm text-muted-foreground">{event.notes}</p>
                       </div>
                     )}
@@ -462,103 +623,7 @@ const ClientPortal = () => {
           </div>
         </div>
 
-        {/* Floating Chat Button */}
-        {!isChatOpen && (
-          <button
-            onClick={() => setIsChatOpen(true)}
-            className="fixed bottom-6 right-6 w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 z-40"
-            aria-label="Buka chat"
-          >
-            <Icon name="MessageCircle" size={24} />
-            {chatHistory.length > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                {chatHistory.filter(m => m.sender === 'admin').length}
-              </span>
-            )}
-          </button>
-        )}
 
-        {/* Chat Box */}
-        {isChatOpen && (
-          <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-3rem)] bg-card border border-border rounded-lg overflow-hidden shadow-2xl z-50 flex flex-col max-h-[600px]">
-            {/* Chat Header */}
-            <div className="bg-primary text-white p-4 rounded-t-lg flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Icon name="Headphones" size={20} />
-                </div>
-                <div>
-                  <p className="font-semibold">Admin Support</p>
-                  <p className="text-xs opacity-90">Online</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsChatOpen(false)}
-                className="hover:bg-white/20 rounded-full p-1 transition-colors"
-              >
-                <Icon name="X" size={20} />
-              </button>
-            </div>
-
-            {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-surface">
-              {chatHistory.length === 0 ? (
-                <div className="text-center py-8">
-                  <Icon name="MessageSquare" size={48} color="var(--color-muted-foreground)" className="mx-auto mb-3 opacity-50" />
-                  <p className="text-sm text-muted-foreground">
-                    Mulai percakapan dengan admin
-                  </p>
-                </div>
-              ) : (
-                chatHistory.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex ${msg.sender === 'client' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-[80%] rounded-lg p-3 ${
-                        msg.sender === 'client'
-                          ? 'bg-primary text-white'
-                          : 'bg-card border border-border text-foreground'
-                      }`}
-                    >
-                      <p className="text-sm">{msg.message}</p>
-                      <p className={`text-xs mt-1 ${
-                        msg.sender === 'client' ? 'text-white/70' : 'text-muted-foreground'
-                      }`}>
-                        {new Date(msg.timestamp).toLocaleTimeString('id-ID', {
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-
-            {/* Chat Input */}
-            <div className="p-4 border-t border-border bg-card rounded-b-lg">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatMessage}
-                  onChange={(e) => setChatMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Ketik pesan..."
-                  className="flex-1 bg-surface border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <button
-                  onClick={handleSendMessage}
-                  disabled={!chatMessage.trim()}
-                  className="bg-primary hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed text-white rounded-lg px-4 py-2 transition-colors"
-                >
-                  <Icon name="Send" size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

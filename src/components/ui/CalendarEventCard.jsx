@@ -67,11 +67,11 @@ const CalendarEventCard = ({
             bg-current
           `} />
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-foreground truncate">
+            <p className="text-xs font-medium text-foreground break-words line-clamp-1">
               {clientName}
             </p>
-            <div className="flex items-center gap-1 mt-0.5">
-              <span className={`text-[10px] font-caption ${config?.textColor}`}>
+            <div className="flex items-center gap-1 mt-0.5 flex-wrap">
+              <span className={`text-[10px] font-caption ${config?.textColor} flex-shrink-0`}>
                 {config?.label}
               </span>
               {time && (
@@ -101,22 +101,22 @@ const CalendarEventCard = ({
       role={onClick ? 'button' : 'article'}
       aria-label={`Event: ${clientName} - ${config?.label}`}
     >
-      <div className="flex items-start justify-between gap-2 mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
         <div className="flex-1 min-w-0">
-          <h4 className="text-sm font-heading font-semibold text-foreground truncate">
+          <h4 className="text-xs sm:text-sm font-heading font-semibold text-foreground break-words">
             {clientName}
           </h4>
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex flex-wrap items-center gap-2 mt-1">
             <span className={`
               inline-flex items-center gap-1 px-2 py-0.5 rounded-md
-              text-xs font-medium font-caption
+              text-xs font-medium font-caption flex-shrink-0
               ${config?.bgColor} ${config?.textColor}
             `}>
               {config?.label}
             </span>
             {time && (
               <span className="flex items-center gap-1 text-xs font-mono text-muted-foreground">
-                <Icon name="Clock" size={12} />
+                <Icon name="Clock" size={12} className="flex-shrink-0" />
                 {formatTime(time)}
               </span>
             )}
@@ -128,31 +128,32 @@ const CalendarEventCard = ({
             type="badge"
             showIcon={false}
             amount={amount}
+            className="flex-shrink-0"
           />
         )}
       </div>
       {location && (
         <div className="flex items-start gap-1.5 mb-2">
-          <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" />
-          <p className="text-xs text-muted-foreground line-clamp-1">
+          <Icon name="MapPin" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-muted-foreground break-words">
             {location}
           </p>
         </div>
       )}
       {notes && (
         <div className="flex items-start gap-1.5 mb-2">
-          <Icon name="FileText" size={14} color="var(--color-muted-foreground)" />
-          <p className="text-xs text-muted-foreground line-clamp-2">
+          <Icon name="FileText" size={14} color="var(--color-muted-foreground)" className="flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-muted-foreground break-words line-clamp-2">
             {notes}
           </p>
         </div>
       )}
       {amount && (
-        <div className="flex items-center justify-between pt-2 border-t border-border">
+        <div className="flex items-center justify-between gap-2 pt-2 border-t border-border">
           <span className="text-xs font-caption text-muted-foreground">
             Total Pembayaran
           </span>
-          <span className="text-sm font-mono font-semibold text-foreground">
+          <span className="text-xs sm:text-sm font-mono font-semibold text-foreground break-all">
             {new Intl.NumberFormat('id-ID', {
               style: 'currency',
               currency: 'IDR',

@@ -54,12 +54,12 @@ const PackageCard = ({
     `}>
       {/* Header */}
       <div className={`p-4 ${config?.bgColor} border-b ${config?.borderColor}`}>
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
               <span className={`
                 inline-flex items-center gap-1 px-2 py-0.5 rounded-md
-                text-xs font-medium font-caption
+                text-xs font-medium font-caption flex-shrink-0
                 ${config?.bgColor} ${config?.textColor}
               `}>
                 {config?.label}
@@ -67,17 +67,17 @@ const PackageCard = ({
               {!packageData?.isActive && (
                 <span className="
                   inline-flex items-center gap-1 px-2 py-0.5 rounded-md
-                  text-xs font-medium font-caption
+                  text-xs font-medium font-caption flex-shrink-0
                   bg-muted text-muted-foreground
                 ">
                   Nonaktif
                 </span>
               )}
             </div>
-            <h3 className="text-lg font-heading font-bold text-foreground mb-1">
+            <h3 className="text-base sm:text-lg font-heading font-bold text-foreground mb-1 break-words">
               {packageData?.name}
             </h3>
-            <p className="text-sm text-muted-foreground line-clamp-2">
+            <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
               {packageData?.description}
             </p>
           </div>
@@ -104,21 +104,21 @@ const PackageCard = ({
       {/* Content */}
       <div className="p-4">
         {/* Pricing */}
-        <div className="flex items-baseline gap-2 mb-4">
-          <span className="text-2xl font-heading font-bold text-foreground">
+        <div className="flex flex-wrap items-baseline gap-2 mb-4">
+          <span className="text-xl sm:text-2xl font-heading font-bold text-foreground break-all">
             {formatCurrency(packageData?.basePrice)}
           </span>
           {packageData?.originalPrice && packageData?.originalPrice > packageData?.basePrice && (
-            <span className="text-sm text-muted-foreground line-through">
+            <span className="text-xs sm:text-sm text-muted-foreground line-through break-all">
               {formatCurrency(packageData?.originalPrice)}
             </span>
           )}
         </div>
 
         {/* Duration */}
-        <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
-          <Icon name="Clock" size={16} />
-          <span>{packageData?.duration}</span>
+        <div className="flex items-start gap-2 mb-4 text-xs sm:text-sm text-muted-foreground">
+          <Icon name="Clock" size={16} className="flex-shrink-0 mt-0.5" />
+          <span className="break-words">{packageData?.duration}</span>
         </div>
 
         {/* Included Services Preview */}
@@ -135,7 +135,7 @@ const PackageCard = ({
                   color="var(--color-success)" 
                   className="mt-0.5 flex-shrink-0"
                 />
-                <span className="text-sm text-foreground truncate">{service}</span>
+                <span className="text-xs sm:text-sm text-foreground break-words">{service}</span>
               </div>
             ))}
           </div>
@@ -164,16 +164,16 @@ const PackageCard = ({
         )}
 
         {/* Stats */}
-        <div className="grid grid-cols- w-full 2 gap-3 mb-4 pt-4 border-t border-border">
+        <div className="grid grid-cols-2 gap-3 mb-4 pt-4 border-t border-border">
           <div className="text-center">
             <p className="text-xs font-caption text-muted-foreground mb-1">Total Booking</p>
-            <p className="text-lg font-heading font-bold text-foreground">
+            <p className="text-base sm:text-lg font-heading font-bold text-foreground">
               {packageData?.totalBookings || 0}
             </p>
           </div>
           <div className="text-center">
             <p className="text-xs font-caption text-muted-foreground mb-1">Pendapatan</p>
-            <p className="text-lg font-heading font-bold text-success">
+            <p className="text-sm sm:text-lg font-heading font-bold text-success break-all">
               {formatCurrency(packageData?.totalRevenue || 0)}
             </p>
           </div>
