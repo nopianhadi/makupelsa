@@ -24,7 +24,6 @@ const ExpenseEntryForm = ({ onSubmit, onCancel }) => {
 
   const loadCategories = () => {
     const categories = dataStore.getExpenseCategories();
-    ];
     setCategoryOptions([
       { value: '', label: 'Pilih Kategori Pengeluaran' },
       ...categories.map(cat => ({ value: cat.id, label: cat.name }))
