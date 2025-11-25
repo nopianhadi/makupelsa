@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Icon from '../../components/AppIcon';
+import { dataStore } from '../../utils/dataStore';
 
 const PublicLeadForm = () => {
     const [submitted, setSubmitted] = useState(false);
@@ -9,18 +10,16 @@ const PublicLeadForm = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = {
-            id: Date.now(),
             name: formData.get('name'),
             phone: formData.get('phone'),
             source: 'Website Form',
             status: 'New',
             notes: formData.get('notes'),
-            date: new Date().toISOString()
+            createdAt: new Date().toISOString()
         };
 
-        // Save to localStorage (simulation of backend)
-        const existingLeads = JSON.parse(localStorage.getItem('leads') || '[]');
-        localStorage.setItem('leads', JSON.stringify([...existingLeads, data]));
+        // Save using dataStore
+        dataStore.addLead(data);
 
         setSubmitted(true);
     };

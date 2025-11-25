@@ -139,9 +139,9 @@ const KPIPage = () => {
 
   // Load Management KPIs
   const loadKPIs = () => {
-    const stored = localStorage.getItem('kpi_data');
-    if (stored) {
-      setKpis(JSON.parse(stored));
+    const stored = dataStore.getKPIData();
+    if (stored && stored.length > 0) {
+      setKpis(stored);
     } else {
       const defaultKPIs = [
         { id: 1, title: 'Total Klien', value: 156, target: 200, unit: 'klien', category: 'client', period: 'monthly', createdAt: new Date().toISOString() },
@@ -149,13 +149,13 @@ const KPIPage = () => {
         { id: 3, title: 'Retention Rate', value: 68, target: 75, unit: '%', category: 'client', period: 'monthly', createdAt: new Date().toISOString() }
       ];
       setKpis(defaultKPIs);
-      localStorage.setItem('kpi_data', JSON.stringify(defaultKPIs));
+      dataStore.setKPIData(defaultKPIs);
     }
   };
 
   // Save Management KPIs
   const saveKPIs = (data) => {
-    localStorage.setItem('kpi_data', JSON.stringify(data));
+    dataStore.setKPIData(data);
   };
 
   // Management KPI Handlers

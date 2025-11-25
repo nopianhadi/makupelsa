@@ -1,26 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../components/AppIcon';
+import { dataStore } from '../../utils/dataStore';
 
 const WhatsAppTemplates = () => {
     const [templates, setTemplates] = useState(() => {
-        const saved = localStorage.getItem('whatsapp_templates');
-        return saved ? JSON.parse(saved) : [
-            { id: 1, name: 'Salam Pembuka', category: 'general', content: 'Halo [Nama], terima kasih sudah menghubungi kami. Ada yang bisa kami bantu untuk rencana makeup Anda?' },
-            { id: 2, name: 'Follow Up Prospek', category: 'followup', content: 'Halo [Nama], bagaimana kabar Anda? Apakah masih berminat dengan layanan makeup kami?' },
-            { id: 3, name: 'Konfirmasi Booking', category: 'general', content: 'Halo [Nama], ini konfirmasi untuk booking makeup pada tanggal [Tanggal]. Mohon segera melakukan DP ya.' },
-            { id: 4, name: '💰 Kirim Pengingat DP', category: 'payment', content: '🔔 *PENGINGAT PEMBAYARAN DP*\n\nHalo Kak [Nama],\n\nIni pengingat untuk pembayaran DP sebesar *Rp [Jumlah]* untuk booking tanggal *[Tanggal]*.\n\nMohon segera melakukan pembayaran agar slot tetap terjaga ya kak 🙏\n\nTerima kasih! 💕' },
-            { id: 5, name: '💰 Kirim Pengingat Pelunasan', category: 'payment', content: '🔔 *PENGINGAT PELUNASAN*\n\nHalo Kak [Nama],\n\nMengingatkan untuk pelunasan pembayaran sebesar *Rp [Jumlah]* untuk acara tanggal *[Tanggal]*.\n\nMohon dilunasi H-3 sebelum acara ya kak 🙏\n\nTerima kasih! 💕' },
-            { id: 6, name: '⚠️ Kirim Pengingat Pembayaran Tertunda', category: 'payment', content: '⚠️ *PENGINGAT PEMBAYARAN TERTUNDA*\n\nHalo Kak [Nama],\n\nKami ingin mengingatkan bahwa pembayaran untuk booking Anda masih tertunda.\n\nMohon segera melakukan pembayaran agar tidak terjadi pembatalan otomatis.\n\nJika ada kendala, silakan hubungi kami ya kak 🙏\n\nTerima kasih!' },
-            { id: 7, name: '✅ Kirim Pengingat H-7', category: 'payment', content: '📅 *PENGINGAT H-7*\n\nHalo Kak [Nama],\n\n7 hari lagi menuju acara Anda pada tanggal *[Tanggal]*! 🎉\n\nPastikan pelunasan sudah dilakukan ya kak.\n\nSampai jumpa! 💕' },
-            { id: 8, name: '✅ Kirim Pengingat H-1', category: 'payment', content: '⏰ *PENGINGAT H-1*\n\nHalo Kak [Nama],\n\nBesok adalah hari spesial Anda! 🎉\n\nPastikan semua sudah siap ya kak.\nKami akan datang tepat waktu.\n\nSampai jumpa besok! 💕✨' }
-        ];
+        return dataStore.getWhatsAppTemplates();
     });
 
     const [isEditing, setIsEditing] = useState(false);
     const [currentTemplate, setCurrentTemplate] = useState(null);
 
     useEffect(() => {
-        localStorage.setItem('whatsapp_templates', JSON.stringify(templates));
+        dataStore.setWhatsAppTemplates(templates);
     }, [templates]);
 
     const handleSave = (e) => {

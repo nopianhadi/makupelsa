@@ -4,6 +4,7 @@ import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
 import Button from '../../../components/ui/Button';
 import { subscribeToStorageEvent, STORAGE_EVENTS } from '../../../utils/storageEvents';
+import { dataStore } from '../../../utils/dataStore';
 
 const ExpenseEntryForm = ({ onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -22,14 +23,7 @@ const ExpenseEntryForm = ({ onSubmit, onCancel }) => {
   const [paymentMethodOptions, setPaymentMethodOptions] = useState([]);
 
   const loadCategories = () => {
-    const savedCategories = localStorage.getItem('expense_categories');
-    const categories = savedCategories ? JSON.parse(savedCategories) : [
-      { id: 'cosmetics', name: 'Pembelian Kosmetik' },
-      { id: 'salary', name: 'Gaji Asisten' },
-      { id: 'transport', name: 'Biaya Transportasi' },
-      { id: 'equipment', name: 'Peralatan Makeup' },
-      { id: 'marketing', name: 'Marketing & Promosi' },
-      { id: 'other', name: 'Lainnya' }
+    const categories = dataStore.getExpenseCategories();
     ];
     setCategoryOptions([
       { value: '', label: 'Pilih Kategori Pengeluaran' },
@@ -38,13 +32,7 @@ const ExpenseEntryForm = ({ onSubmit, onCancel }) => {
   };
 
   const loadPaymentMethods = () => {
-    const savedMethods = localStorage.getItem('payment_methods');
-    const methods = savedMethods ? JSON.parse(savedMethods) : [
-      { id: 'transfer', name: 'Transfer Bank' },
-      { id: 'cash', name: 'Tunai' },
-      { id: 'ewallet', name: 'E-Wallet' },
-      { id: 'debit', name: 'Kartu Debit' }
-    ];
+    const methods = dataStore.getPaymentMethods();
     setPaymentMethodOptions([
       { value: '', label: 'Pilih Metode Pembayaran' },
       ...methods.map(method => ({ value: method.id, label: method.name }))

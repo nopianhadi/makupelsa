@@ -12,22 +12,17 @@ const PublicPackages = () => {
 
   useEffect(() => {
     // Load profile data
-    const savedProfile = localStorage.getItem('user_profile');
-    if (savedProfile) {
-      try {
-        setProfileData(JSON.parse(savedProfile));
-      } catch (e) {
-        console.error('Error parsing profile:', e);
-      }
+    const savedProfile = dataStore.getUserProfile();
+    if (savedProfile && savedProfile.businessName) {
+      setProfileData(savedProfile);
     }
 
-    // Load packages from localStorage
-    const savedPackages = localStorage.getItem('service_packages');
-    let loadedPackages = [];
+    // Load packages from dataStore
+    let loadedPackages = dataStore.getServicePackages();
     
-    if (savedPackages) {
+    if (loadedPackages && loadedPackages.length > 0) {
       try {
-        const parsed = JSON.parse(savedPackages);
+        const parsed = loadedPackages;
         loadedPackages = parsed.filter(pkg => pkg.isActive);
       } catch (e) {
         console.error('Error parsing packages:', e);

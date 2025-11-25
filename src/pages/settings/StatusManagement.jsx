@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../components/AppIcon';
+import { dataStore } from '../../utils/dataStore';
 
 const StatusManagement = () => {
     const [leadStatuses, setLeadStatuses] = useState(() => {
-        const saved = localStorage.getItem('lead_statuses');
-        return saved ? JSON.parse(saved) : ['New', 'Contacted', 'Interested', 'Booked', 'Lost'];
+        return dataStore.getLeadStatuses();
     });
 
     const [newStatus, setNewStatus] = useState('');
 
     useEffect(() => {
-        localStorage.setItem('lead_statuses', JSON.stringify(leadStatuses));
+        dataStore.setLeadStatuses(leadStatuses);
     }, [leadStatuses]);
 
     const handleAddStatus = (e) => {

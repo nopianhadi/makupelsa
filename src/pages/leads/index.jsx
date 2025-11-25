@@ -185,8 +185,7 @@ const LeadCard = ({ lead, onFollowUp, onConvert, onEdit, onDelete }) => {
 const Leads = () => {
     const [activeTab, setActiveTab] = useState('list'); // list, form, templates
     const [leads, setLeads] = useState(() => {
-        const saved = localStorage.getItem('leads');
-        return saved ? JSON.parse(saved) : [
+        return dataStore.getLeads().length > 0 ? dataStore.getLeads() : [
             { id: 1, name: 'Budi Santoso', phone: '08123456789', status: 'New', source: 'Instagram', notes: '', followUpDate: null, createdAt: new Date().toISOString() },
             { id: 2, name: 'Ani Wijaya', phone: '08987654321', status: 'Contacted', source: 'Referral', notes: '', followUpDate: null, createdAt: new Date().toISOString() },
         ];
@@ -209,7 +208,7 @@ const Leads = () => {
     });
 
     useEffect(() => {
-        localStorage.setItem('leads', JSON.stringify(leads));
+        dataStore.setLeads(leads);
     }, [leads]);
 
     const handleSaveLead = (leadData) => {

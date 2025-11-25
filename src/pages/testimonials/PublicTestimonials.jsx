@@ -8,9 +8,8 @@ const PublicTestimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('testimonials');
-    if (stored) {
-      const all = JSON.parse(stored);
+    const all = dataStore.getTestimonials();
+    if (all && all.length > 0) {
       const approved = all.filter(t => t.status === 'approved');
       setTestimonials(approved);
     }

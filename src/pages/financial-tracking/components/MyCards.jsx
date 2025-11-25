@@ -1,28 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import { dataStore } from '../../../utils/dataStore';
 
 const MyCards = ({ cashBalance = 0, bankBalance = 0 }) => {
     const [cards, setCards] = useState(() => {
-        const saved = localStorage.getItem('my_cards');
-        return saved ? JSON.parse(saved) : [
-            {
-                id: 'cash',
-                label: 'Tunai',
-                icon: 'Banknote',
-                color: 'bg-emerald-500',
-                textColor: 'text-white',
-                number: '**** **** **** CASH'
-            },
-            {
-                id: 'bank',
-                label: 'Bank',
-                icon: 'CreditCard',
-                color: 'bg-blue-600',
-                textColor: 'text-white',
-                number: '**** **** **** 4582'
-            }
-        ];
+        return dataStore.getMyCards();
     });
 
     // Use real balance calculation
@@ -60,7 +43,7 @@ const MyCards = ({ cashBalance = 0, bankBalance = 0 }) => {
     ];
 
     useEffect(() => {
-        localStorage.setItem('my_cards', JSON.stringify(cards));
+        dataStore.setMyCards(cards);
     }, [cards]);
 
     const formatCurrency = (amount) => {

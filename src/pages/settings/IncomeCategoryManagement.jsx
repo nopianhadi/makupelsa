@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../components/AppIcon';
 import { dispatchStorageEvent, STORAGE_EVENTS } from '../../utils/storageEvents';
+import { dataStore } from '../../utils/dataStore';
 
 const IncomeCategoryManagement = () => {
   const [categories, setCategories] = useState(() => {
-    const saved = localStorage.getItem('income_categories');
-    return saved ? JSON.parse(saved) : [
-      { id: 'makeup_service', name: 'Jasa Makeup', icon: 'Sparkles' },
-      { id: 'wedding', name: 'Wedding', icon: 'Heart' },
-      { id: 'prewedding', name: 'Prewedding', icon: 'Camera' },
-      { id: 'graduation', name: 'Wisuda', icon: 'GraduationCap' },
-      { id: 'photoshoot', name: 'Photoshoot', icon: 'Camera' },
-      { id: 'consultation', name: 'Konsultasi', icon: 'MessageCircle' },
-      { id: 'other', name: 'Lainnya', icon: 'MoreHorizontal' }
-    ];
+    return dataStore.getIncomeCategories();
   });
 
   const [newCategory, setNewCategory] = useState({ name: '', icon: 'Tag' });
@@ -27,8 +19,7 @@ const IncomeCategoryManagement = () => {
   ];
 
   useEffect(() => {
-    localStorage.setItem('income_categories', JSON.stringify(categories));
-    dispatchStorageEvent(STORAGE_EVENTS.INCOME_CATEGORIES_UPDATED, categories);
+    dataStore.setIncomeCategories(categories);
   }, [categories]);
 
   const handleAddCategory = (e) => {

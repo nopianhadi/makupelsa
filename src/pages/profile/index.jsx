@@ -10,21 +10,7 @@ import { mobileClasses, cn } from '../../utils/mobileOptimization';
 const Profile = () => {
     const { user, signOut } = useAuth();
     const [profileData, setProfileData] = useState(() => {
-        const saved = localStorage.getItem('user_profile');
-        return saved ? JSON.parse(saved) : {
-            name: '',
-            email: '',
-            contact: '',
-            address: '',
-            city: '',
-            website: '',
-            instagram: '',
-            logoUrl: '',
-            signatureUrl: '',
-            bankName: '',
-            bankAccount: '',
-            bankAccountName: ''
-        };
+        return dataStore.getUserProfile();
     });
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
@@ -45,7 +31,7 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        localStorage.setItem('user_profile', JSON.stringify(profileData));
+        dataStore.setUserProfile(profileData);
     }, [profileData]);
 
     const handleChange = (e) => {

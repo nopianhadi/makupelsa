@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../components/AppIcon';
 import { dispatchStorageEvent, STORAGE_EVENTS } from '../../utils/storageEvents';
+import { dataStore } from '../../utils/dataStore';
 
 const PaymentMethodManagement = () => {
   const [paymentMethods, setPaymentMethods] = useState(() => {
-    const saved = localStorage.getItem('payment_methods');
-    return saved ? JSON.parse(saved) : [
-      { id: 'transfer', name: 'Transfer Bank', icon: 'Building' },
-      { id: 'cash', name: 'Tunai', icon: 'Banknote' },
-      { id: 'ewallet', name: 'E-Wallet', icon: 'Smartphone' },
-      { id: 'debit', name: 'Kartu Debit', icon: 'CreditCard' }
-    ];
+    return dataStore.getPaymentMethods();
   });
 
   const [newMethod, setNewMethod] = useState({ name: '', icon: 'CreditCard' });
@@ -23,8 +18,7 @@ const PaymentMethodManagement = () => {
   ];
 
   useEffect(() => {
-    localStorage.setItem('payment_methods', JSON.stringify(paymentMethods));
-    dispatchStorageEvent(STORAGE_EVENTS.PAYMENT_METHODS_UPDATED, paymentMethods);
+    dataStore.setPaymentMethods(paymentMethods);
   }, [paymentMethods]);
 
   const handleAddMethod = (e) => {

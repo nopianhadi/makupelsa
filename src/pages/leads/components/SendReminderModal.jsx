@@ -15,8 +15,7 @@ const SendReminderModal = ({ lead, onClose, onSubmit }) => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    const saved = localStorage.getItem('whatsapp_templates');
-    const allTemplates = saved ? JSON.parse(saved) : [];
+    const allTemplates = dataStore.getWhatsAppTemplates();
     setTemplates(allTemplates);
   }, []);
 

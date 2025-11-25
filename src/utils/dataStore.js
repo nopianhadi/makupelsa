@@ -470,5 +470,113 @@ export const dataStore = {
     dataStore.setTestimonials(filtered);
     window.dispatchEvent(new CustomEvent('testimonialDeleted', { detail: { id } }));
     return true;
-  }
+  },
+
+  // Settings management
+  getLeadStatuses: () => dataStore.get('lead_statuses', ['New', 'Contacted', 'Interested', 'Booked', 'Lost']),
+  setLeadStatuses: (statuses) => dataStore.set('lead_statuses', statuses),
+
+  getServiceTypes: () => dataStore.get('service_types', [
+    { id: 'akad', name: 'Akad', icon: 'Heart' },
+    { id: 'resepsi', name: 'Resepsi', icon: 'Users' },
+    { id: 'prewedding', name: 'Prewedding', icon: 'Camera' },
+    { id: 'engagement', name: 'Engagement', icon: 'Gift' },
+    { id: 'wisuda', name: 'Wisuda', icon: 'GraduationCap' },
+    { id: 'other', name: 'Lainnya', icon: 'Sparkles' }
+  ]),
+  setServiceTypes: (types) => {
+    dataStore.set('service_types', types);
+    window.dispatchEvent(new CustomEvent('serviceTypesUpdated', { detail: types }));
+  },
+
+  getPaymentMethods: () => dataStore.get('payment_methods', [
+    { id: 'transfer', name: 'Transfer Bank', icon: 'Building' },
+    { id: 'cash', name: 'Cash', icon: 'Wallet' },
+    { id: 'qris', name: 'QRIS', icon: 'QrCode' },
+    { id: 'ewallet', name: 'E-Wallet', icon: 'Smartphone' },
+    { id: 'credit_card', name: 'Kartu Kredit', icon: 'CreditCard' }
+  ]),
+  setPaymentMethods: (methods) => {
+    dataStore.set('payment_methods', methods);
+    window.dispatchEvent(new CustomEvent('paymentMethodsUpdated', { detail: methods }));
+  },
+
+  getExpenseCategories: () => dataStore.get('expense_categories', [
+    { id: 'cosmetics', name: 'Pembelian Kosmetik', icon: 'Sparkles' },
+    { id: 'tools', name: 'Alat Makeup', icon: 'Wrench' },
+    { id: 'transport', name: 'Transportasi', icon: 'Car' },
+    { id: 'marketing', name: 'Marketing', icon: 'Megaphone' },
+    { id: 'operational', name: 'Operasional', icon: 'Settings' },
+    { id: 'other', name: 'Lainnya', icon: 'MoreHorizontal' }
+  ]),
+  setExpenseCategories: (categories) => {
+    dataStore.set('expense_categories', categories);
+    window.dispatchEvent(new CustomEvent('expenseCategoriesUpdated', { detail: categories }));
+  },
+
+  getIncomeCategories: () => dataStore.get('income_categories', [
+    { id: 'makeup_service', name: 'Jasa Makeup', icon: 'Sparkles' },
+    { id: 'consultation', name: 'Konsultasi', icon: 'MessageCircle' },
+    { id: 'product_sales', name: 'Penjualan Produk', icon: 'ShoppingBag' },
+    { id: 'workshop', name: 'Workshop/Kelas', icon: 'BookOpen' },
+    { id: 'collaboration', name: 'Kolaborasi', icon: 'Users' },
+    { id: 'other', name: 'Lainnya', icon: 'MoreHorizontal' }
+  ]),
+  setIncomeCategories: (categories) => {
+    dataStore.set('income_categories', categories);
+    window.dispatchEvent(new CustomEvent('incomeCategoriesUpdated', { detail: categories }));
+  },
+
+  // WhatsApp Templates
+  getWhatsAppTemplates: () => dataStore.get('whatsapp_templates', [
+    { id: 1, name: 'Salam Pembuka', category: 'general', content: 'Halo [Nama], terima kasih sudah menghubungi kami. Ada yang bisa kami bantu untuk rencana makeup Anda?' },
+    { id: 2, name: 'Follow Up', category: 'followup', content: 'Halo [Nama], bagaimana kabarnya? Masih tertarik dengan layanan makeup kami?' },
+    { id: 3, name: 'Konfirmasi Booking', category: 'booking', content: 'Halo [Nama], booking Anda untuk tanggal [Tanggal] sudah dikonfirmasi. Terima kasih!' }
+  ]),
+  setWhatsAppTemplates: (templates) => dataStore.set('whatsapp_templates', templates),
+
+  // User Profile
+  getUserProfile: () => dataStore.get('user_profile', {
+    name: '',
+    businessName: '',
+    email: '',
+    phone: '',
+    address: '',
+    logo: '',
+    instagram: '',
+    website: '',
+    bankName: '',
+    accountNumber: '',
+    accountName: ''
+  }),
+  setUserProfile: (profile) => dataStore.set('user_profile', profile),
+
+  // My Cards (Financial)
+  getMyCards: () => dataStore.get('my_cards', [
+    {
+      id: 1,
+      name: 'Kas Tunai',
+      type: 'cash',
+      balance: 0,
+      icon: 'Wallet',
+      color: 'bg-success'
+    },
+    {
+      id: 2,
+      name: 'Bank BCA',
+      type: 'bank',
+      balance: 0,
+      icon: 'Building',
+      color: 'bg-primary'
+    }
+  ]),
+  setMyCards: (cards) => dataStore.set('my_cards', cards),
+
+  // KPI Data
+  getKPIData: () => dataStore.get('kpi_data', []),
+  setKPIData: (kpis) => dataStore.set('kpi_data', kpis),
+
+  // Archived Projects
+  getArchivedProjects: () => dataStore.get('archivedProjects', []),
+  setArchivedProjects: (projects) => dataStore.set('archivedProjects', projects)
 };

@@ -74,7 +74,7 @@ const RecordPaymentModal = ({ client, onClose, onSubmit }) => {
       };
 
       // Otomatis buat invoice
-      const profile = JSON.parse(localStorage.getItem('user_profile') || '{}');
+      const profile = dataStore.getUserProfile();
       const invoiceNumber = `INV-${Date.now()}`;
       
       const invoice = {

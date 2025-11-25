@@ -4,6 +4,7 @@ import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
 import Button from '../../../components/ui/Button';
 import { subscribeToStorageEvent, STORAGE_EVENTS } from '../../../utils/storageEvents';
+import { dataStore } from '../../../utils/dataStore';
 
 const IncomeEntryForm = ({ onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -28,12 +29,7 @@ const IncomeEntryForm = ({ onSubmit, onCancel }) => {
   ];
 
   const loadServiceTypes = () => {
-    const savedServiceTypes = localStorage.getItem('service_types');
-    const serviceTypes = savedServiceTypes ? JSON.parse(savedServiceTypes) : [
-      { id: 'akad', name: 'Akad' },
-      { id: 'resepsi', name: 'Resepsi' },
-      { id: 'wisuda', name: 'Wisuda' }
-    ];
+    const serviceTypes = dataStore.getServiceTypes();
     setServiceTypeOptions([
       { value: '', label: 'Pilih Jenis Layanan' },
       ...serviceTypes.map(st => ({ value: st.id, label: st.name }))
@@ -41,12 +37,7 @@ const IncomeEntryForm = ({ onSubmit, onCancel }) => {
   };
 
   const loadPaymentMethods = () => {
-    const savedMethods = localStorage.getItem('payment_methods');
-    const methods = savedMethods ? JSON.parse(savedMethods) : [
-      { id: 'transfer', name: 'Transfer Bank' },
-      { id: 'cash', name: 'Tunai' },
-      { id: 'ewallet', name: 'E-Wallet' }
-    ];
+    const methods = dataStore.getPaymentMethods();
     setPaymentMethodOptions([
       { value: '', label: 'Pilih Metode Pembayaran' },
       ...methods.map(method => ({ value: method.id, label: method.name }))

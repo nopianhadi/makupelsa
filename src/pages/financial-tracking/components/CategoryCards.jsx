@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import { mobileClasses, cn } from '../../../utils/mobileOptimization';
 import { subscribeToStorageEvent, STORAGE_EVENTS } from '../../../utils/storageEvents';
+import { dataStore } from '../../../utils/dataStore';
 
 const CategoryCards = ({ incomes = [], expenses = [], onCategoryFilter }) => {
   const [activeType, setActiveType] = useState('expense'); // 'expense' or 'income'
@@ -35,17 +36,9 @@ const CategoryCards = ({ incomes = [], expenses = [], onCategoryFilter }) => {
     other: { icon: 'Briefcase', color: 'text-warning', bgColor: 'bg-warning/10', borderColor: 'border-warning/20' }
   };
 
-  // Load expense categories from localStorage
+  // Load expense categories from dataStore
   const loadExpenseCategories = () => {
-    const savedCategories = localStorage.getItem('expense_categories');
-    const categories = savedCategories ? JSON.parse(savedCategories) : [
-      { id: 'cosmetics', name: 'Pembelian Kosmetik' },
-      { id: 'salary', name: 'Gaji Asisten' },
-      { id: 'transport', name: 'Biaya Transportasi' },
-      { id: 'equipment', name: 'Peralatan Makeup' },
-      { id: 'marketing', name: 'Marketing & Promosi' },
-      { id: 'other', name: 'Lainnya' }
-    ];
+    const categories = dataStore.getExpenseCategories();
 
     const categoriesConfig = {};
     categories.forEach(cat => {

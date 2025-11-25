@@ -233,7 +233,7 @@ const ProjectManagement = () => {
     saveProjects(updatedProjects);
     setShowArchiveModal(false);
     
-    localStorage.setItem('archivedProjects', JSON.stringify([...archivedProjects, ...archived]));
+    dataStore.setArchivedProjects([...archivedProjects, ...archived]);
   };
 
   const stats = {

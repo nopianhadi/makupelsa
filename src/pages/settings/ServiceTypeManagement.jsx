@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../components/AppIcon';
 import { dispatchStorageEvent, STORAGE_EVENTS } from '../../utils/storageEvents';
+import { dataStore } from '../../utils/dataStore';
 
 const ServiceTypeManagement = () => {
   const [serviceTypes, setServiceTypes] = useState(() => {
-    const saved = localStorage.getItem('service_types');
-    return saved ? JSON.parse(saved) : [
-      { id: 'akad', name: 'Akad', icon: 'Heart' },
-      { id: 'resepsi', name: 'Resepsi', icon: 'Sparkles' },
-      { id: 'wisuda', name: 'Wisuda', icon: 'GraduationCap' }
-    ];
+    return dataStore.getServiceTypes();
   });
 
   const [newServiceType, setNewServiceType] = useState({ name: '', icon: 'Star' });
@@ -23,8 +19,7 @@ const ServiceTypeManagement = () => {
   ];
 
   useEffect(() => {
-    localStorage.setItem('service_types', JSON.stringify(serviceTypes));
-    dispatchStorageEvent(STORAGE_EVENTS.SERVICE_TYPES_UPDATED, serviceTypes);
+    dataStore.setServiceTypes(serviceTypes);
   }, [serviceTypes]);
 
   const handleAddServiceType = (e) => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../../components/AppIcon';
+import { dataStore } from '../../utils/dataStore';
 
 const PublicTestimonialForm = () => {
   const navigate = useNavigate();
@@ -23,17 +24,8 @@ const PublicTestimonialForm = () => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const testimonial = {
-      id: Date.now(),
-      ...formData,
-      status: 'pending',
-      createdAt: new Date().toISOString()
-    };
-
-    // Save to localStorage
-    const existing = JSON.parse(localStorage.getItem('testimonials') || '[]');
-    existing.push(testimonial);
-    localStorage.setItem('testimonials', JSON.stringify(existing));
+    // Save using dataStore
+    dataStore.addTestimonial(formData);
 
     setIsSubmitting(false);
     setIsSuccess(true);
